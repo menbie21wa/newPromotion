@@ -2,10 +2,9 @@ import React,{useEffect, useState} from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "./loading";
-import DropDown from "./DropDown"
 // import { viewProducts } from "../../actions/productAction";
 import { useForm } from "react-hook-form";
-import  { dataProducts } from "./data";
+import {dataVacancy} from '../vacaData';
 import samrtPc from '../../img/promotion-lg.png';
 import { HiOutlineX } from "react-icons/hi";
 import { louberDetail} from "../../actions/louberDetail";
@@ -48,18 +47,21 @@ useEffect(() =>{
     //     );
         // console.log("all products are1 ", product);
 
-const [data, setData] =useState(dataProducts || '');
+const [data, setData] =useState(dataVacancy || '');
 
 // useEffect(()=>{
 //     dispatch(viewProducts());
 //   },[]);
 //change useselector data to useState states with react js
   useEffect(() => {
-    setData(dataProducts);
-  }, [dataProducts])
+    setData(dataVacancy);
+  }, [dataVacancy])
   const VacancieDetail = (data) =>{
     dispatch(louberDetail(data));
     setVacancieDel(true);
+  }
+  const likeProduct =()=>{
+    alert("Thank you")
   }
   const louberWorkDetail = localStorage.getItem("louberWorkDetail")
   ? JSON.parse(localStorage.getItem("louberWorkDetail"))
@@ -116,47 +118,61 @@ return(
       </form>
      </div>
     </div>
-
-  <div class="grid lg:grid-cols-3 xl:gap-5 md:gap-6 xl:gap-x-12">
+    
+  <div class="grid lg:grid-cols-4 xl:gap-5 md:gap-6 xl:gap-x-14">
         {
           (loubers?.vacancies?.length)>0
             ?(
-              loubers?.vacancies?.slice(0, 3).map((values,index) =>{
+              loubers?.vacancies?.slice(0, 4).map((values,index) =>{
              return(
                <>
-                <div key={index} className="mb-6 lg:mb-0 ">
-                 <div className="relative bg-neutral-300">
-                  <div className="flex border-solid border-slate-800">
+                <div key={index} className="">
+                  <div className=" products">
                    <div
-                    className="p-2 relative overflow-hidden bg-no-repeat bg-cover relative overflow-hidden bg-no-repeat bg-cover rounded-lg"
+                    className=" products__single relative border-gray-600 
+                                shadow-lg shadow-neutral-900 bg-cover bg-no-repeat"
                     data-mdb-ripple="true"
                     data-mdb-ripple-color="light"
                   >
                     <img
-                      onClick={() => VacancieDetail(values) }
-                      className="w-screen h-52 transition cursor-pointer duration-700"
-                      src={`${AddressBaseUrl}/images/${values.image}`}
-                      // src={samrtPc}
-                    
+                      className=" w-screen h-52 transition cursor-pointer duration-700 rounded-xl"
+                      src={`${AddressBaseUrl}/images/${values.image}`} 
                       alt="product img not found"
                       onError={event => {
                       event.target.src = `${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`
                         event.onerror = null
                       }}
                     />
+                    <div class="absolute bottom-0 left-0 right-0 top-0 h-full w-full rounded-xl 
+                    justify-center overflow-hidden bg-gradient-to-r from-indigo-600 via-purple-600
+                    to-pink-600 opacity-0 transition duration-300 ease-in-out hover:opacity-70"
+                    onClick={() => VacancieDetail(values) }>
+                    <button className=" h-12 w-28 rounded-3xl mt-20 text-slate-100 border border-none
+                    bg-blue-950">View Detail</button>
+                    </div>
+                    <div className="mt-4 float-left flex">
+                    <ul className='  mt-3 flex'>
+                        <img className=' w-7 h-6 rounded-2xl' 
+                        src={`${AddressBaseUrl}/images/${values.image}`} 
+                        alt='Noimage'/>
+                    </ul>
+                    <span className="mt-1 ml-2">{values.title}<br /><p className=" font-thin border text-sm">{values.type}</p></span><br />
                   </div>
+                  <div className="mt-4 float-right flex">
+                  <span onClick={() => likeProduct(values) }>Like</span>
+                 </div>
+                 </div>
                 </div>
                <div className="p-0">
                 <p className="text-sm font-bold  mt-4 text-center">{values?.title.substring(0,24)}</p>      
                 {/* <p className="text-lg font-bold">{values?.description.substring(0,50)+"..."}</p>   */}
                </div>
-              </div>
             </div>
-          
-        </>
-       )}
-      )
-     ):(<><div><Loading/></div></>) }
+          </>
+         )})):
+     (<><div><Loading/></div></>) }
+
+
      {vacancieDel && (
           <> 
             <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none -mt-6 border border-grey-100">
@@ -267,7 +283,6 @@ return(
     {/* <button onClick={nextSlide}>perv_page</button>
     <button>next_page</button> */}
   </section>
-  <DropDown />
  </div>
 </div> 
 </>

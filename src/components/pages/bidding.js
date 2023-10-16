@@ -11,7 +11,7 @@ import { viewVacancie2 } from '../../actions/biddingAction';
 import { addToDetail } from '../../actions/detail';
 import Loading from './loading'; 
 import { HiOutlineX } from "react-icons/hi";
-import { dataProducts } from './data';
+import { dataProducts } from '../data';
 import samrtPc from '../../img/computerimge/mouse.jpg';
 
 const Bidding = (props) =>{
@@ -26,6 +26,9 @@ const Bidding = (props) =>{
  useEffect(()=>{
    dispatch(viewOrganization());
     },[]);
+    useEffect(()=>{
+      setData(dataProducts);
+       },[dataProducts]);
     const VacancieDetail = (data) =>{
         dispatch(addToDetail(data));
         setVacancieDel(true);
@@ -68,35 +71,32 @@ const Bidding = (props) =>{
         console.log("term : ",term);
         //setTerm("");
       };
+      const likeProduct =()=>{
+       alert("Thank you") 
+      }
 
  return(
 <>
-  <div className="w-11/12 xl:w-11/12 mx-auto pb-6">
-      <div className="hidden md:flex items-center py-3 mb-4 ">
-      <button
+   <div className="w-11/12 xl:w-11/12 mx-auto pb-6">
+     <div className="hidden md:flex items-center py-3 mb-4 ">
+       <button
         className=" text-lg font-display text-black font-medium hover:text-[#0397FF]"
-      >
+       >
         <span className="mr-2 underline decoration-pink-800 decoration-4 underline-offset-8">የጨረታ</span>ማስታዎቂያ
-      </button>
-      <form onSubmit={submitHandler}>
+       </button>
+       <form onSubmit={submitHandler}>
          <div class=" mb-4 flex flex-wrap items-stretch absolute right-5">
-          <input className="bg-[#E3E6E6] z-50" 
+          <input className="bg-[#E3E6E6]" 
              type="date"
              aria-label="Search"
              aria-describedby="button-addon1"
              value={term}
              onChange={(e) => setTerm(e.target.value)}/>
-    
-      {/* <input
-        type="search"
-        class="relative m-0 -mr-px block w-[1%] min-w-0 flex-auto rounded-l border border-solid border-neutral-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-neutral-700 outline-none transition duration-300 ease-in-out focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:text-neutral-200 dark:placeholder:text-neutral-200 z-50"
-        
-        aria-label="Search"
-        aria-describedby="button-addon1" 
-        value={term}
-        onChange={(e) => setTerm(e.target.value)}/> */}
-              <button
-        class="relative z-50 flex items-center rounded-r bg-secondary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
+             <button
+        class="relative -mt-2 z-50 flex items-center rounded-r bg-secondary px-6 py-2.5 text-xs font-medium
+         uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 
+         hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 
+         active:shadow-lg"
         type="submit"
         data-te-ripple-init
         data-te-ripple-color="light">
@@ -111,43 +111,55 @@ const Bidding = (props) =>{
             clip-rule="evenodd" />
         </svg>
        </button>
-       
+
         </div>
       </form>
     </div>
-    <div className='relative bg-white md:flex lg:flex'>    
-     <div className='relative m-8 md:w-6/12'>
-     <div class="grid lg:grid-cols-2 xl:gap-5 md:gap-6 xl:gap-x-6">
+    <div className='relative p-10 bg-white md:flex lg:flex'>    
+     <div className='relative m-8 md:w-7/12'>
+     <div class="grid lg:grid-cols-2 xl:gap-20 md:gap-6 xl:gap-x-6">
         {
           (bidding?.vacancies?.length)>0
             ?(
               bidding?.vacancies?.slice(0, 4).map((bidding,index) =>{
              return(
                <>
-                <div key={index} className="mb-6 lg:mb-0">
-                <div className='w-full h-full rounded-2xl bg-center bg-cover duration-500' >
+                <div key={index} className="products mb-6 lg:mb-0">
+                 <div className="products__single relative border-gray-600 
+                   shadow-lg shadow-neutral-900 bg-cover bg-no-repeat" key={bidding.id}> 
                  <div className="flex justify-center items-center h-full">
                   <img
                    onClick={() => VacancieDetail(bidding)}
-                   src={`${AddressBaseUrl}/images/${bidding?.image}`}
-                   className='h-32 md:h-32 lg:h-32 w-48 md:w-48 lg:w-48 rounded-sm' alt='images not found'/> 
+                   src={`${AddressBaseUrl}/images/${bidding.image}`} 
+                   className="transition cursor-pointer duration-700 rounded-xl border-2 border-b-2 border-gray-600"
+                    alt='images not found'/> 
                 </div>
-       {/* <div className="flex justify-center items-center h-full"> */}
-        <div className="text-center text-black">
-          <h1 className="text-[#F49F08]">
-            {bidding?.title}
-          </h1>
-        </div>
-       {/* </div> */}
-      </div>
-    </div>
-          
-        </>
-       )}
-      )
-     ):(<><div><Loading/></div></>) }
-     {vacancieDel && (
-          <> 
+                {/* <div className="flex justify-center items-center h-full"> */}
+                <div class="absolute bottom-0 left-0 right-0 top-0 h-full w-full rounded-xl 
+                    justify-center overflow-hidden bg-gradient-to-r from-indigo-600 via-purple-600
+                    to-pink-600 opacity-0 transition duration-300 ease-in-out hover:opacity-70"
+                    onClick={() => VacancieDetail(bidding) }>
+                    <button className=" h-12 w-28 rounded-3xl mt-20 text-slate-100 border border-none
+                    bg-blue-950">View Detail</button>
+                    </div>
+                    <div className="mt-4 float-left flex">
+                    <ul className=' mt-4 flex'>
+                        <img className=' w-7 h-6 rounded-2xl' 
+                        src={`${AddressBaseUrl}/images/${bidding.image}`} 
+                        alt='Noimage'/>
+                    </ul>
+                    <span className="mt-3 w-64">{bidding.name}<br /><p className=" font-thin  text-sm">{bidding.type}</p></span>
+                  </div>
+                  <div className="mt-4 float-right w-7.5 flex">
+                  <span onClick={() => likeProduct(bidding) }>Like</span>
+                </div>
+                  {/* </div> */}
+                </div>
+              </div>
+                  </>
+                )})):(<><div><Loading/></div></>) }
+              {vacancieDel && (
+             <> 
             <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none -mt-6 border border-grey-100">
               <div className="relative w-auto my-6 mx-auto max-w-2xl">
                 {/*content*/}
@@ -192,8 +204,7 @@ const Bidding = (props) =>{
     </div>
       <div
         // style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
-        className='md:w-5/12 h-full rounded-2xl bg-center bg-cover duration-500 pt-4'
-      >
+        className='md:w-5/12 h-full rounded-2xl bg-center bg-cover duration-500 pt-4'>
         <div className="flex justify-center items-center h-full">
         <img src={`${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`} className='h-32 md:h-48 lg:h-52 w-32 md:w-48 lg:w-52 rounded-lg' alt='images not found'
         /> 

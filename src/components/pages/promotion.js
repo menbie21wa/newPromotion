@@ -8,7 +8,7 @@ import {getProduct, viewProducts} from "../../actions/productAction";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "./loading";
 import { NavLink, useNavigate } from "react-router-dom";
-import  { dataProducts } from "./data";
+import  { dataProducts } from "../data";
 import { viewOrganization } from "../../actions/orgAction";
 import { viewVacancie2 } from "../../actions/vacanciesAction";
 import Orgdetail from "./orgdetail";
@@ -93,22 +93,22 @@ const user = localStorage.getItem("userInfo")
    </>
   )}
 
-      <div className="md:pt-0 lg:pt-0 pt-12">
+      <div className="md:pt-0 lg:pt-0 pt-12 -ml-8">
         <Fristpage />
      </div>
-      <div className="md:pt-6 lg:pt-6 pt-2 pb-2" ref={vacancieSection}>
+      <div className="md:pt-6 lg:pt-6 pt-2 pb-2 -ml-8" ref={vacancieSection}>
         <Vacancie />
       </div>
-      <div className="pt-10" ref= {biddingSection}>
+      <div className="md:pt-6 lg:pt-6 pt-2 pb-2 -ml-8" ref={vacancieSection}>
        <LouberWork />
      </div>
-      <div className="" ref={orgSection}>
+      <div className="-ml-8" ref={orgSection}>
         <Orgdetail />
       </div>
-      <div className="pt-10" ref= {productSection}>
+      <div className="pt-10 -ml-8" ref= {productSection}>
        <Allproducts />
      </div>
-     <div className="pt-10" ref= {biddingSection}>
+     <div className="pt-10 -ml-8" ref= {biddingSection}>
        <Bidding />
      </div>
      <div>

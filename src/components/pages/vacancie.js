@@ -1,26 +1,24 @@
 import React, {useEffect, useState} from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import {useParams,useNavigate } from "react-router-dom";
+import {useDispatch,useSelector } from "react-redux";
 import Loading from "./loading";
-import { viewProducts } from "../../actions/productAction";
-import { useForm } from "react-hook-form";
-import  { dataProducts } from "./data";
+import {viewProducts } from "../../actions/productAction";
+import {useForm } from "react-hook-form";
+import {dataProducts } from "../data";
 import samrtPc from '../../img/promotion-lg.png';
-import { HiOutlineX } from "react-icons/hi";
-import { addToDetail} from "../../actions/detail";
-import { viewVacancies, searchVacancies } from "../../actions/vacanciesAction";
+import {HiOutlineX } from "react-icons/hi";
+import {addToDetail} from "../../actions/detail";
+import {viewVacancies, searchVacancies } from "../../actions/vacanciesAction";
 import  AddressBaseUrl from "../../utils/BaseUrl";
-import { getOrganization } from '../../actions/orgAction';
-// import DatePicker from 'react-date-picker';
+import {getOrganization } from '../../actions/orgAction';
+import {dataVacancy} from '../vacaData';
 import '../../App.css'
 
-const Vacancie = () =>{
-
+ const Vacancie = () =>{
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [seeMore, setSeeMore] = useState(false);
     const [vacancieDel, setVacancieDel] = useState(false);
-
     const {
       handleSubmit,
       register,
@@ -60,20 +58,23 @@ useEffect(() =>{
         );
         // console.log("all products are1 ", product);
 
-const [data, setData] =useState(dataProducts || '');
-
+const [data, setData] =useState(dataVacancy || '');
+// console.log("all vacancies are : ", data[0]);
 useEffect(()=>{
     dispatch(viewProducts());
   },[]);
 //change useselector data to useState states with react js
   useEffect(() => {
-    setData(dataProducts);
-  }, [dataProducts])
+    setData(dataVacancy);
+  }, [dataVacancy])
 
   const VacancieDetail = (data) =>{
     dispatch(addToDetail(data));
     setVacancieDel(true);
   }
+ const likeProduct=()=>{
+  alert("like")
+ } 
   const detailInfo = localStorage.getItem("detailInfo")
   ? JSON.parse(localStorage.getItem("detailInfo"))
   : null;
@@ -157,29 +158,49 @@ return(
      </form>
     </div>
   </div>
-
-   <div >
-      {vacancies?.vacancies?.length > 0 && <div className="products">
+   {/*  {vacancies?.vacancies?.length > 0 && <div className="products">
         {vacancies?.vacancies?.slice(page * 3 - 3, page * 3).map((vacancie) => {
-          return <span className="products__single" key={vacancie.id}>
-            {/* <img src={`${AddressBaseUrl}/images/${vacancie.image}`} /> */}
+   */}
+   <div className="" >
+   {vacancies?.vacancies?.length > 0 && <div className="products">
+        {vacancies?.vacancies?.slice(page * 3 - 3, page * 3).map((vacancie) => {    
+
+          return <div className="products__single relative border-gray-600 
+             shadow-lg shadow-neutral-900 bg-cover bg-no-repeat" key={vacancie.id}>
+            {/*             src={`/img/${vacancie.featureImage}`} */}
             <img 
-            className="w-32 h-28 transition cursor-pointer duration-700"
+            className="transition cursor-pointer duration-700 rounded-xl border-2 border-b-2 border-gray-600"
             alt="product img not found"
-            src={`${AddressBaseUrl}/images/${vacancie.image}`}
+            src={`${AddressBaseUrl}/images/${vacancie.image}`} 
             onError={event => {
-            event.target.src = `${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`
+            event.target.src = `${AddressBaseUrl}/images/${org?.promotedOrgs && 
+            org?.promotedOrgs[currentIndex]?.logo}`
             event.onerror = null
                 }}
-            onClick={() => VacancieDetail(vacancie) }/>
-            <span>
-              {vacancie.title}
-            </span>
-          </span>
+            />
+      <div class="absolute bottom-0 left-0 right-0 top-0 h-full w-full rounded-xl 
+          justify-center overflow-hidden bg-gradient-to-r from-indigo-600 via-purple-600
+           to-pink-600 opacity-0 transition duration-300 ease-in-out hover:opacity-70"
+           onClick={() => VacancieDetail(vacancie) }>
+          <button className=" h-12 w-28 rounded-3xl mt-20 text-slate-100 border border-none
+           bg-blue-950">View Detail</button>
+          </div>
+          <div className="mt-4 float-left flex">
+          <ul className='  mt-3 flex'>
+              <img className=' w-7 h-6 rounded-2xl' 
+              src={`${AddressBaseUrl}/images/${vacancie.image}`} 
+              alt='Noimage'/>
+          </ul>
+          <span className="mt-1 ml-2">{vacancie.title}<br /><p className=" font-thin border text-sm">{vacancie.type}</p></span><br />
+        </div>
+       <div className="mt-4 float-right flex">
+        <span onClick={() => likeProduct(vacancie) }>Like</span>
+      </div>
+     </div>
         })}
-      </div>}
-
-      {vacancies?.vacancies?.length > 0 && <div className="pagination">
+      </div>
+      }
+    {vacancies?.vacancies?.length > 0 && <div className="pagination">
         <span onClick={() => selectPageHandler(page - 1)} className={page > 1 ? "" : "pagination__disable"}>◀</span>
 
         {[...Array(vacancies?.vacancies?.length / 2)].map((_, i) => {
@@ -188,7 +209,6 @@ return(
 
         <span onClick={() => selectPageHandler(page + 1)} className={page < vacancies?.vacancies?.length / 3? "" : "pagination__disable"}>▶</span>
       </div>}
-
       {vacancieDel && (
           <> 
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none -mt-6 border border-grey-100">
@@ -207,8 +227,11 @@ return(
                   </div>
                   <div className="w-full flex">
                     <div className="p-4">
+                    {/* src={`/img/${detailInfo.featureImage}`} */}
+
                     <img
                     className="w-48 h-32 transition cursor-pointer duration-700"
+                     
                       src={`${AddressBaseUrl}/images/${detailInfo.image}`}
                       alt="product img not found"
                     /> 
@@ -234,103 +257,10 @@ return(
                </div>
               </>
              )} 
-           </div>
-
-      {/* <div class="grid lg:grid-cols-3 xl:gap-5 md:gap-6 xl:gap-x-12">
-        {
-          (vacancies?.vacancies?.length)>0
-            ?(
-            vacancies?.vacancies?.slice(0, 3).map((values,index) =>{
-             return(
-               <>
-                <div key={index} className="mb-6 lg:mb-0">
-                 <div className="relative bg-white">
-                  <div className="flex">
-                   <div
-                    className="relative overflow-hidden bg-no-repeat bg-cover relative overflow-hidden bg-no-repeat bg-cover rounded-lg"
-                    data-mdb-ripple="true"
-                    data-mdb-ripple-color="light"
-                  >
-                    <img
-                      className="w-full h-52 transition cursor-pointer duration-700"
-                      src={`${AddressBaseUrl}/images/${values.image}`}
-                      alt="product img not found"
-                    />
-                  </div>
-                </div>
-               <div className="">
-                <p className="text-sm font-bold  mt-4 text-center">{values?.title.substring(0,24)}</p>      
-                <p className="text-lg font-bold">{values?.description.substring(0,50)+"..."}</p>  
-               </div>
-              </div>
-            </div>
-        </>
-       )}
-      )
-     ):(<><div><Loading/></div></>) }
-
-    { seeMore && (
-      <>
-        {
-          (vacancies?.vacancies?.length)>0
-            ?(
-            vacancies?.vacancies?.slice(3, 100).map((values,index) =>{
-             return(
-               <>
-                <div key={index} className="mb-6 lg:mb-0">
-                 <div className="relative group block bg-white">
-                  <div className="flex">
-                   <div
-                    className="p-2 relative overflow-hidden bg-no-repeat bg-cover relative overflow-hidden bg-no-repeat bg-cover rounded-lg"
-                    data-mdb-ripple="true"
-                    data-mdb-ripple-color="light"
-                  >
-                    <img
-                      className="w-screen h-52 transition cursor-pointer duration-700"
-                      src={`${AddressBaseUrl}/images/${values.image}`}
-                      onClick={() => VacancieDetail(values) } 
-                      alt="product img not found"
-                    />
-                  </div>
-                </div>
-               <div className="p-0">
-                  <p className="text-sm font-bold  mt-4 text-center">{values?.title.substring(0,24)}</p>      
-                  <p className="text-lg font-bold">{values?.description.substring(0,50)+"..."}</p>  
-                </div>
-              </div>
-            </div>
-            </>
-         )}
-      )):(<><div><Loading/></div></>) 
-    }  
-  </>
- )}
-</div> 
-
-   { seeMore? (
-      <button
-        className=" text-lg font-display text-[#F49F08] font-medium hover:text-[#0397FF] absolute right-20"
-        onClick={() => setSeeMore(false)}
-      >
-        ዝግት
-      </button>
-   ):(
-      <button
-        className=" text-lg font-display text-[#F49F08] font-medium hover:text-[#0397FF] absolute right-20"
-        onClick={() => setSeeMore(true)}
-      >
-        ሁሉም ማስታወቂያዎች
-      </button>
-    )}
-
-  <div className="absolute right-20 hidden group-hover:block">
-    <button onClick={prevSlide} className=" text-lg font-display text-[#F49F08] font-medium hover:text-[#0397FF] pr-2">perv</button>
-    <button onClick={nextSlide}className=" text-lg font-display text-[#F49F08] font-medium hover:text-[#0397FF]">next</button>
-  </div> */}
-    </section>
-   </div>
-  </div> 
+          </div>
+      </section>
+     </div>
+   </div> 
 </>
-);
-}
+);}
 export default Vacancie;

@@ -3,7 +3,7 @@ import Layout from "../layout/layout";
 import Contact from "./contactus";
 import Loading from "./loading";
 import defualtImg from '../../img/img1.jpg'
-import  { dataProducts } from "./data";
+import  { dataProducts } from "../data";
 import Fristpage from "./fristpage";
 import logos from '../../img/img1.jpg'
 import education from '../../img/sun_icon3.jpg';
