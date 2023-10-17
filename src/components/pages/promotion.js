@@ -7,7 +7,7 @@ import LouberWork from "./louberWork";
 import {getProduct, viewProducts} from "../../actions/productAction";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "./loading";
-import { NavLink, useNavigate } from "react-router-dom";
+import { button, useNavigate } from "react-router-dom";
 import  { dataProducts } from "../data";
 import { viewOrganization } from "../../actions/orgAction";
 import { viewVacancie2 } from "../../actions/vacanciesAction";
@@ -15,6 +15,8 @@ import Orgdetail from "./orgdetail";
 import Bidding from "./bidding";
 import { RiMenuLine } from "react-icons/ri";
 import BackTotop from "./backTOtop";
+import Logue from '../../img/logobg2.png';
+import '../../App.css';
 
 const Promotion = () =>{
 
@@ -51,11 +53,12 @@ const setmenu = () =>{
     setMenu(false);
   }
 }
+
 // get user
 const user = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))
   : null;
-
+  const firstSection = useRef();
   const productSection = useRef();
   const orgSection = useRef();
   const vacancieSection = useRef();
@@ -70,13 +73,13 @@ const user = localStorage.getItem("userInfo")
  return(
   <Layout>
    <div className="bg-[#E3E6E6]">
-{/* menuBar */}
-<div className='fixed top-3 -translate-x-0 translate-y-[50%] left-2 text-2xl bg-white/20 hover:bg-white/40 text-black cursor-pointer duration-300 z-10'>
+
+{/* <div className='fixed top-3 mt-24 lg:flex hidden  -translate-x-0 translate-y-[50%] left-2 text-2xl bg-white/20 hover:bg-white/40 text-black cursor-pointer duration-300 z-10'>
       <RiMenuLine size={24} onClick={setmenu}/>
-  </div>
-  {menu && (
+  </div> */}
+  {/* {menu && (
     <>
-    <div className='fixed bg-[#E4E4E4] w-52 h-48 top-10 -translate-x-2 translate-y-[10%] left-2 opacity-100 duration-300 inset-0 text-xl text-[#F49F08] font-semibold italic space-y-2 z-10'>
+    <div className='fixed bg-[#E4E4E4] w-52 h-48 top-10 mt-28 -translate-x-2 translate-y-[10%] left-2 opacity-100 duration-300 inset-0 text-xl text-[#F49F08] font-semibold italic space-y-2 z-10'>
      <div className='motion-safe:hover:translate-x-2 duration-700'>
       <button onClick={()=>scrollToAll(orgSection)}>ድርጅቶች</button>
      </div>
@@ -91,9 +94,88 @@ const user = localStorage.getItem("userInfo")
      </div>
     </div>
    </>
-  )}
+  )} */}
+   <div className="md:pt-0 lg:pt-0 ">
+   <>
+  {/* <div className='w-full h-10 text-center bg-slate-400 mt-2 text-white p-2'>
+   This is my try from nave bar
+  </div> */}
+<nav className=' z-10 fixed top-0 overflow-hidden justify-between list-none font-serif uppercase font-medium xl:text-xl 
+md:text-xl xs:text-xs text-justify-center w-full lg:h-24 md:h-28 sm:h-20 shadow-xl sm:flex bg-white items-center '>
+<div>
+<button className='ml-1 w-96 p-5 '  
+to ="/"> 
+<img className=' md:w-32 md:h-20 w-20 h-10  -mt-3 lg:ml-12 sm:ml-5 rounded-2xl' src={Logue} alt='Noimage'/>
+</button>
+</div>
+<div className='text-3xl absolute right-8 top-3 cursor-pointer md:hidden'>
+          <RiMenuLine size={24} onClick={setmenu}/>
+          {/* <ion-icon name={!menu?'close':'menu'}></ion-icon> */}
+</div>
 
-      <div className="md:pt-0 lg:pt-0 pt-12 -ml-8">
+<ul className=' mt-3 lg:flex md:flex bg-white  left-0 w-full md:w-auto
+ sm:hidden absolute md:static justify-end items-center flex-1 list-none z-10 '>
+<li className='mx-6'><button  onClick={()=> scrollToAll(firstSection)}
+className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'
+to ="/">ስለ ኢጵላሣጵ</button></li>
+<li className='mx-6'><button onClick={()=> scrollToAll(orgSection)}
+className='  transition duration-700 transform hover:-translate-y-1 hover:scale-110' 
+    > ድርጅቶች </button></li>
+<li className='mx-6'><button onClick={()=> scrollToAll(productSection)}
+className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'>
+ምርቶች</button></li>
+ <li className='mx-6'><button onClick={()=> scrollToAll(vacancieSection)}
+ className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'>
+ የስራ ማስታዎቂያ</button></li>
+ <li className='mx-6'><button onClick={()=> scrollToAll(biddingSection)}
+  className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex' 
+    >   
+    የጨረታ ማስታዎቂያ </button></li>
+ {/* <li><button className=' transition duration-700 transform hover:-translate-y-1 hover:scale-110 ml-12 flex' 
+    >  ግብት </button></li> */}
+ <li className='mx-8'><button onClick={()=> scrollToAll(firstSection)}
+   className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'
+  to ="/About"> ውጥት</button></li>
+</ul>
+</nav>
+{/* Mobile Navigation */}
+<ul className={` ${!menu ? "left-0 opacity-100" :"left-[-750px] md:opacity-0"}
+                    sm:flex lg:hidden flex-1  list-none flex flex-col
+                    p-6 bg-black-gradient fixed w-full right-0  ml-0 my-2 top-14
+                    sidebar bg-white transition-all duration-500 ease-in z-10
+                    `}>
+  <li className='mx-6 font-serif uppercase font-medium text-xl'>
+                <button onClick={()=> scrollToAll(firstSection)}
+                 className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'
+                to ="/">ስለ ኢጵላሣጵ</button></li>
+ <li className='mx-6 py-3 font-serif uppercase font-medium text-xl '>
+      <button onClick={()=> scrollToAll(orgSection)}
+       className='transition duration-700 transform hover:-translate-y-1 hover:scale-110' 
+        > ድርጅቶች </button></li>
+ <li className='mx-6 py-2 font-serif uppercase font-medium text-xl '>
+      <button onClick={()=> scrollToAll(productSection)}
+      className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'>
+    ምርቶች</button></li>
+ <li className='mx-6 py-2 font-serif uppercase font-medium text-xl '>
+      <button onClick={()=> scrollToAll(vacancieSection)}
+      className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'>
+    የስራ ማስታዎቂያ</button></li>
+<li className='mx-6 py-2 font-serif uppercase font-medium text-xl '>
+     <button onClick={()=> scrollToAll(biddingSection)}
+      className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex' 
+        >   
+        የጨረታ ማስታዎቂያ </button></li>
+    {/* <li><button className=' transition duration-700 transform hover:-translate-y-1 hover:scale-110 ml-12 flex' 
+        >  ግብት </button></li> */}
+<li className='mx-6 py-2 font-serif uppercase font-medium  text-xl '>
+      <button onClick={()=> scrollToAll(firstSection)}
+       className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'
+    to ="/About"> ውጥት</button></li>
+    
+</ul>
+
+ </>     </div>
+      <div className="md:pt-24 lg:pt-24  pt-18 -ml-8" ref={firstSection}>
         <Fristpage />
      </div>
       <div className="md:pt-6 lg:pt-6 pt-2 pb-2 -ml-8" ref={vacancieSection}>
