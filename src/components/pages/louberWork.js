@@ -84,22 +84,22 @@ return(
      <section className="mb-6 text-gray-800 text-center ">
       <div style={{
         }} className=" md:flex flex-wrap justify-between items-center mx-auto md:px-6 lg:px-6 px-1">
-        <div className="hidden md:flex items-center py-3 mb-4 ">
+        <div className="flex items-center py-3 mt-8 mb-4 ">
          <button
           className=" text-lg font-display text-black font-medium hover:text-[#0397FF]"
          >
-          <span className="mr-2 underline decoration-pink-800 decoration-4 underline-offset-8">የቀን ስራ</span>ማስታዎቂያ
+          <span className="mr-2 md:ml-0 ml-5 underline decoration-pink-800 decoration-4 underline-offset-8">የቀን ስራ</span>ማስታዎቂያ
          </button>
          <form onSubmit={submitHandler}>
-         <div class=" mb-4 flex flex-wrap items-stretch absolute right-5">
-          <input className="bg-[#E3E6E6] z-50" 
+         <div class=" mb-4 md:mt-0 mt-6 flex flex-wrap items-stretch absolute right-5">
+          <input className="bg-[#E3E6E6] z-20" 
              type="date"
              aria-label="Search"
              aria-describedby="button-addon1"
              value={term}
              onChange={(e) => setTerm(e.target.value)}/>
       <button
-        class="relative z-50 flex items-center rounded-r bg-secondary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
+        class="relative z-20 flex items-center rounded-r bg-secondary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
         type="submit"
         data-te-ripple-init
         data-te-ripple-color="light">
@@ -121,12 +121,12 @@ return(
     
   <div class="grid lg:grid-cols-4 xl:gap-5 md:gap-6 xl:gap-x-14">
         {
-          (loubers?.vacancies?.length)>0
+          (data?.length)>0
             ?(
-              loubers?.vacancies?.slice(0, 4).map((values,index) =>{
+              data?.slice(0, 4).map((values,index) =>{
              return(
                <>
-                <div key={index} className="">
+                <div key={index} className="md:my-0 my-9 md:ml-0 ml-8">
                   <div className=" products">
                    <div
                     className=" products__single relative border-gray-600 
@@ -136,7 +136,7 @@ return(
                   >
                     <img
                       className=" w-screen h-52 transition cursor-pointer duration-700 rounded-xl"
-                      src={`${AddressBaseUrl}/images/${values.image}`} 
+                      src={`/img/${values.featureImage}`} 
                       alt="product img not found"
                       onError={event => {
                       event.target.src = `${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`
@@ -151,28 +151,28 @@ return(
                     bg-blue-950">View Detail</button>
                     </div>
                     <div className="mt-4 float-left flex">
-                    <ul className='  mt-3 flex'>
-                        <img className=' w-7 h-6 rounded-2xl' 
-                        src={`${AddressBaseUrl}/images/${values.image}`} 
-                        alt='Noimage'/>
-                    </ul>
-                    <span className="mt-1 ml-2">{values.title}<br /><p className=" font-thin border text-sm">{values.type}</p></span><br />
-                  </div>
-                  <div className="mt-4 float-right flex">
+                        <ul  className='  mt-3 flex'>
+                         <img className=' w-7 h-6 rounded-2xl' 
+                              src={`${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`}
+                              alt='Noimage'/>
+                         </ul>
+                           {/* src={`${AddressBaseUrl}/images/${vacancie.image}`}  */}
+                        <span className="mt-1 ml-2">{values.title}<br />
+                       <p className=" font-thin border text-sm">{`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.name}`}
+                      </p></span><br />
+                    </div>
+                  {/* <div className="mt-4 float-right flex">
                   <span onClick={() => likeProduct(values) }>Like</span>
-                 </div>
+                 </div> */}
                  </div>
                 </div>
-               <div className="p-0">
+               {/* <div className="p-0">
                 <p className="text-sm font-bold  mt-4 text-center">{values?.title.substring(0,24)}</p>      
-                {/* <p className="text-lg font-bold">{values?.description.substring(0,50)+"..."}</p>   */}
-               </div>
+               </div> */}
             </div>
           </>
          )})):
      (<><div><Loading/></div></>) }
-
-
      {vacancieDel && (
           <> 
             <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none -mt-6 border border-grey-100">
@@ -205,11 +205,11 @@ return(
                    {/* <p className="text-lg font-bold">{louberWorkDetail?.name}</p>  */}
                     <div class="bg-white rounded-md max-w-4xl mx-auto p-2 space-y-2 -mt-2 shadow-lg">
                     <h3 class="border-t mb-2 pt-3 font-semibold underline">Name: <span >EplusApp</span></h3> 
-                    <h3 className="flex"><h3 class="mb-1 font-semibold underline">የስራው አይነት:</h3> <span >{louberWorkDetail?.type}</span></h3>
                     <h3 className="flex"><h3 class="mb-1 font-semibold underline">የስራው መጠሪያ: </h3> <span >{louberWorkDetail?.title}</span></h3>
+                    <h3 className="flex"><h3 class="mb-1 font-semibold underline">የስራው አይነት:</h3> <span >{louberWorkDetail?.type}</span></h3>
+                    <h3 className="flex"><h3 class="mb-1 font-semibold underline">የስራ ቀን/ስአት:</h3><span >ሙሉ ቀን</span></h3>
                     <h3 className="flex"><h3 class="mb-1 font-semibold underline">የቀን ክፍያ: </h3><span> {louberWorkDetail?.price}</span></h3>
                     <h3 className="flex"><h3 class="mb-1 font-semibold underline">የምዝገባ ማብቂያ ቀን: </h3><span >{louberWorkDetail?.closingDate?.split('T')[0]}-{louberWorkDetail?.closingDate?.split('T')[0]}</span></h3>
-                    <h3 className="flex"><h3 class="mb-1 font-semibold underline">የስራ ቀን/ስአት:</h3><span >ሙሉ ቀን</span></h3>
                         <div class="pt-2">
                           <h3 class="font-semibold -ml-56 underline"> ማብራሪያ:</h3>
                             <p class=" mt-2">{louberWorkDetail?.description}</p>
@@ -226,47 +226,66 @@ return(
 
     { seeMore && (
       <>
-        {
+      {
           (loubers?.vacancies?.length)>0
             ?(
-              loubers?.vacancies?.slice(3, 100).map((values,index) =>{
-                
+              loubers?.vacancies?.map((values,index) =>{
              return(
                <>
-                  <div key={index} className="mb-6 lg:mb-0 ">
-                 <div className="relative group bg-neutral-300">
-                  <div className="flex border-solid border-slate-800">
-
+                <div key={index} className=" mt-3">
+                  <div className=" products">
                    <div
-                    className="p-2 relative overflow-hidden bg-no-repeat bg-cover relative overflow-hidden bg-no-repeat bg-cover rounded-lg"
+                    className=" products__single relative border-gray-600 
+                                shadow-lg shadow-neutral-900 bg-cover bg-no-repeat"
                     data-mdb-ripple="true"
                     data-mdb-ripple-color="light"
                   >
                     <img
-                      className="w-screen h-52 transition cursor-pointer duration-700"
-                      src={`${AddressBaseUrl}/images/${values.image}`}
-                      onClick={() => VacancieDetail(values) }
-                      // src={samrtPc} 
+                      className=" w-screen h-52 transition cursor-pointer duration-700 rounded-xl"
+                      src={`${AddressBaseUrl}/images/${values.image}`} 
                       alt="product img not found"
+                      onError={event => {
+                      event.target.src = `${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`
+                        event.onerror = null
+                      }}
                     />
-                  </div>
+                    <div class="absolute bottom-0 left-0 right-0 top-0 h-full w-full rounded-xl 
+                    justify-center overflow-hidden bg-gradient-to-r from-indigo-600 via-purple-600
+                    to-pink-600 opacity-0 transition duration-300 ease-in-out hover:opacity-70"
+                    onClick={() => VacancieDetail(values) }>
+                    <button className=" h-12 w-28 rounded-3xl mt-20 text-slate-100 border border-none
+                    bg-blue-950">View Detail</button>
+                    </div>
+                    <div className="mt-4 float-left flex">
+                      <ul  className='  mt-3 flex'>
+                      <img className=' w-7 h-6 rounded-2xl' 
+                           src={`${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`}
+                           alt='Noimage'/>
+                      </ul>
+                       {/* src={`${AddressBaseUrl}/images/${vacancie.image}`}  */}
+                      <span className="mt-1 ml-2">{values.title}<br />
+                      <p className=" font-thin border text-sm">{`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.name}`}
+                      </p></span><br />
+                    </div>
+                  {/* <div className="mt-4 float-right flex">
+                  <span onClick={() => likeProduct(values) }>Like</span>
+                 </div> */}
+                 </div>
                 </div>
                <div className="p-0">
-                  <p className="text-sm font-bold  mt-4 text-center">{values?.title.substring(0,24)}</p>      
-                  {/* <p className="text-lg font-bold">{values?.description.substring(0,50)+"..."}</p>   */}
-                </div>
-              </div>
+                <p className="text-sm font-bold  mt-4 text-center">{values?.title.substring(0,24)}</p>      
+                {/* <p className="text-lg font-bold">{values?.description.substring(0,50)+"..."}</p>   */}
+               </div>
             </div>
-            </>
-         )}
-      )):(<><div><Loading/></div></>) 
-    }  
+          </>
+         )})):
+     (<><div><Loading/></div></>) } 
   </>
  )}
 </div>
    {seeMore? (
       <button
-        className=" text-lg font-display text-[#F49F08] font-medium hover:text-[#0397FF] absolute right-20"
+        className=" text-lg font-display text-[#F49F08] mt-10 font-medium hover:text-[#0397FF] absolute right-20"
         onClick={() => setSeeMore(false)
         }
       >
@@ -274,7 +293,7 @@ return(
       </button>
    ):(
       <button
-        className=" text-lg font-display text-[#F49F08] font-medium hover:text-[#0397FF] absolute right-20"
+        className=" text-lg font-display text-[#F49F08] mt-10 font-medium hover:text-[#0397FF] absolute right-20"
         onClick={() => setSeeMore(true)}
       >
         ሁሉም ማስታወቂያዎች

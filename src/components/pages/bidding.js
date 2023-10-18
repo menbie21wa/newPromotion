@@ -12,8 +12,7 @@ import { addToDetail } from '../../actions/detail';
 import Loading from './loading'; 
 import { HiOutlineX } from "react-icons/hi";
 import { dataProducts } from '../data';
-import samrtPc from '../../img/computerimge/mouse.jpg';
-
+import show from '../../icons/show.png';
 const Bidding = (props) =>{
     const [data, setData] =useState(dataProducts || '');
   const dispatch = useDispatch();
@@ -93,7 +92,7 @@ const Bidding = (props) =>{
              value={term}
              onChange={(e) => setTerm(e.target.value)}/>
              <button
-        class="relative -mt-2 z-50 flex items-center rounded-r bg-secondary px-6 py-2.5 text-xs font-medium
+        class="relative -mt-2 z-20 flex items-center rounded-r bg-secondary px-6 py-2.5 text-xs font-medium
          uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 
          hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 
          active:shadow-lg"
@@ -119,18 +118,18 @@ const Bidding = (props) =>{
      <div className='relative m-8 md:w-7/12'>
      <div class="grid lg:grid-cols-2 xl:gap-20 md:gap-6 xl:gap-x-6">
         {
-          (bidding?.vacancies?.length)>0
+          (data?.length)>0
             ?(
-              bidding?.vacancies?.slice(0, 4).map((bidding,index) =>{
+              data?.slice(0, 4).map((bidding,index) =>{
              return(
                <>
-                <div key={index} className="products mb-6 lg:mb-0">
+                <div key={index} className="products md:ml-0 -ml-7 mb-24 md:mb-0">
                  <div className="products__single relative border-gray-600 
                    shadow-lg shadow-neutral-900 bg-cover bg-no-repeat" key={bidding.id}> 
                  <div className="flex justify-center items-center h-full">
                   <img
                    onClick={() => VacancieDetail(bidding)}
-                   src={`${AddressBaseUrl}/images/${bidding.image}`} 
+                   src={`img/${bidding.featureImage}`} 
                    className="transition cursor-pointer duration-700 rounded-xl border-2 border-b-2 border-gray-600"
                     alt='images not found'/> 
                 </div>
@@ -145,13 +144,13 @@ const Bidding = (props) =>{
                     <div className="mt-4 float-left flex">
                     <ul className=' mt-4 flex'>
                         <img className=' w-7 h-6 rounded-2xl' 
-                        src={`${AddressBaseUrl}/images/${bidding.image}`} 
+                        src={`/img/${bidding.featureImage}`} 
                         alt='Noimage'/>
                     </ul>
                     <span className="mt-3 w-64">{bidding.name}<br /><p className=" font-thin  text-sm">{bidding.type}</p></span>
                   </div>
                   <div className="mt-4 float-right w-7.5 flex">
-                  <span onClick={() => likeProduct(bidding) }>Like</span>
+                  <span ><img className=' w-6 h-5 mx-4 ' src={show} alt='Noicon'/></span>
                 </div>
                   {/* </div> */}
                 </div>
@@ -182,16 +181,16 @@ const Bidding = (props) =>{
                       src={`${AddressBaseUrl}/images/${detailInfo.image}`}
                      // src={samrtPc} 
                       alt="product img not found"
-                    /> 
-                    </div>
-                   <div className="m-4">
-                   <p className="text-lg font-bold">{detailInfo?.title}</p> 
-                   <div class="pt-2">
-                    <p className="text-sm font-bold  mt-4 text-center">{detailInfo?.description}</p>  
-                    </div>
-                    <h3 class="border-t mb-2 pt-3 font-semibold underline">phone: <span class="font-thin">0984008445</span>
-                    <br />
-                    Email: <span class="font-thin">EplusApp88@gmail.com</span>
+                      /> 
+                      </div>
+                     <div className="m-4">
+                     <p className="text-lg font-bold">{detailInfo?.title}</p> 
+                     <div class="pt-2">
+                     <p className="text-sm font-bold  mt-4 text-center">{detailInfo?.description}</p>  
+                     </div>
+                     <h3 class="border-t mb-2 pt-3 font-semibold underline">phone: <span class="font-thin">0984008445</span>
+                     <br />
+                     Email: <span class="font-thin">EplusApp88@gmail.com</span>
                     </h3> 
                    </div>
                   </div>
