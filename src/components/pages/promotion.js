@@ -180,22 +180,22 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
     </ul>
    </>    
   </div>
-     <div className="md:pt-24 lg:pt-24  pt-18 -ml-8" ref={firstSection}>
+     <div className="md:pt-24 lg:pt-24  pt-18 -ml-8 border-b mb-10 border-t border-gray-400" ref={firstSection}>
         <Fristpage />
      </div>
-     <div className="md:pt-6 lg:pt-6 pt-2 pb-2 -ml-8" ref={vacancieSection}>
+     <div className="md:pt-6 lg:pt-6 pt-2 pb-10 ml-5 mr-7 mb-10 bg-white" ref={vacancieSection}>
         <Vacancie />
       </div>
-      <div className="md:pt-6 lg:pt-6 pt-2 pb-2 -ml-8" ref={dayworkSection}>
+      <div className="md:pt-6 lg:pt-6 pt-2  ml-3 border-t border-gray-400 mb-7 pb-10" ref={dayworkSection}>
        <LouberWork />
      </div>
-      <div className="-ml-8" ref={orgSection}>
+      <div className="-ml-8 border-t border-gray-400 mb-7 p-5" ref={orgSection}>
         <Orgdetail />
       </div>
-      <div className="pt-10 -ml-8" ref= {productSection}>
+      <div className="pt-10 ml-3 border-t border-gray-400 mb-7 p-5" ref= {productSection}>
        <Allproducts />
      </div>
-     <div className="pt-10 -ml-8" ref= {biddingSection}>
+     <div className="pt-10 -ml-6 border-t border-gray-400 m-7 p-5" ref= {biddingSection}>
        <Bidding />
      </div>
      <div>

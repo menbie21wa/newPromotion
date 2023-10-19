@@ -114,8 +114,8 @@ const Bidding = (props) =>{
         </div>
       </form>
     </div>
-    <div className='relative p-10 bg-white md:flex lg:flex'>    
-     <div className='relative m-8 md:w-7/12'>
+    <div className='relative p-10 bg-white md:flex lg:flex pb-10'>    
+     <div className='relative m-8 md:w-7/12 w-64 mx-auto'>
      <div class="grid lg:grid-cols-2 xl:gap-20 md:gap-6 xl:gap-x-6">
         {
           (data?.length)>0
@@ -123,7 +123,7 @@ const Bidding = (props) =>{
               data?.slice(0, 4).map((bidding,index) =>{
              return(
                <>
-                <div key={index} className="products md:ml-0 -ml-7 mb-24 md:mb-0">
+                <div key={index} className="products md:ml-0 -ml-12 mb-24 md:mb-0">
                  <div className="products__single relative border-gray-600 
                    shadow-lg shadow-neutral-900 bg-cover bg-no-repeat" key={bidding.id}> 
                  <div className="flex justify-center items-center h-full">
@@ -142,14 +142,14 @@ const Bidding = (props) =>{
                     bg-blue-950">View Detail</button>
                     </div>
                     <div className="mt-4 float-left flex">
-                    <ul className=' mt-4 flex'>
+                    <ul className=' mt-1 flex'>
                         <img className=' w-7 h-6 rounded-2xl' 
                         src={`/img/${bidding.featureImage}`} 
                         alt='Noimage'/>
                     </ul>
-                    <span className="mt-3 w-64">{bidding.name}<br /><p className=" font-thin  text-sm">{bidding.type}</p></span>
+                    <span className="mt-2 w-64">{bidding.name}<br /><p className=" font-thin  text-sm">{bidding.type}</p></span>
                   </div>
-                  <div className="mt-4 float-right w-7.5 flex">
+                  <div className="mt-5 float-right w-7.5 flex">
                   <span ><img className=' w-6 h-5 mx-4 ' src={show} alt='Noicon'/></span>
                 </div>
                   {/* </div> */}

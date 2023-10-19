@@ -109,7 +109,7 @@ const selectPageHandler = (selectedPage) => {
 
 return(
   <>
-   <div className="bg-[#E3E6E6]">
+   <div className=" bg-white pb-10">
     <div className="w-11/12 mx-auto">
      <section className="mb-6 text-gray-800 text-center group">
       <div style={{
@@ -121,8 +121,8 @@ return(
           <span className="mr-2 md:ml-0 ml-5 underline decoration-pink-800 decoration-4 underline-offset-8">የስራ</span>ማስታዎቂያ
          </button>
          <form onSubmit={submitHandler}>
-         <div class=" mb-4 flex flex-wrap items-stretch absolute md:mt-0 mt-6 right-5">
-          <input className="bg-[#E3E6E6] z-20 " 
+         <div class=" mb-4 flex flex-wrap items-stretch absolute md:mt-0 mt-6 md:right-16 right-10">
+          <input className="bg-[#E3E6E6] p-3 rounded-md md:-mt-5 ml mt-0 z-20 " 
              type="date"
              aria-label="Search"
              aria-describedby="button-addon1"
@@ -138,7 +138,7 @@ return(
         value={term}
         onChange={(e) => setTerm(e.target.value)}/> */}
       <button
-        class="relative z-20 flex items-center rounded-r bg-secondary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
+        class="relative bg-[#E3E6E6] rounded-md md:-mt-5 mt-0 z-20 flex items-center rounded-r bg-secondary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
         type="submit"
         data-te-ripple-init
         data-te-ripple-color="light">
@@ -160,12 +160,25 @@ return(
    {/*  {vacancies?.vacancies?.length > 0 && <div className="products">
         {vacancies?.vacancies?.slice(page * 3 - 3, page * 3).map((vacancie) => {
    */}
-   <div className="" >
-      {data?.length > 0 && <div className="products ">
-        {data?.slice(page * 3 - 3, page * 3).map((vacancie) => {    
+   <div class="grid lg:grid-cols-3 xl:gap-5 md:gap-6 xl:gap-x-14">
+    {(data?.length > 0)
+      ?(
+      data?.slice(page * 3 - 3, page * 3).map((vacancie,index) => {    
 
-          return <div className="products__single relative border-gray-600 
-             shadow-lg shadow-neutral-900 bg-cover bg-no-repeat "  key={vacancie.id}>
+          return(
+           <>
+           
+            <div key={index} className="md:my-10 my-12 md:ml-0 -ml-1">
+            <div className=" products">
+                   <div
+                    className=" products__single relative border-gray-600 
+                                shadow-lg shadow-neutral-900 bg-cover bg-no-repeat"
+                    data-mdb-ripple="true"
+                    data-mdb-ripple-color="light"
+                  >
+          
+           {/* <div className="products__single relative border-gray-600 
+             shadow-lg shadow-neutral-900 bg-cover bg-no-repeat "  key={index}> */}
             {/*             ${AddressBaseUrl}/images/${vacancie.image} */}
             <img 
             className="transition cursor-pointer duration-700 rounded-xl border-2 border-b-2 border-gray-600"
@@ -199,18 +212,19 @@ return(
         <span onClick={() => likeProduct(vacancie) }>Like</span>
       </div> */}
      </div>
-        })}
-      </div>
-      }
-    {vacancies?.vacancies?.length > 0 && <div className="pagination">
-        <span onClick={() => selectPageHandler(page - 1)} className={page > 1 ? "" : "pagination__disable"}>◀</span>
+     </div>
+     </div>
+    </>
+    )})):(<><div><Loading/></div></>) }
 
+     {vacancies?.vacancies?.length > 0 && <div className="pagination">
+        <span onClick={() => selectPageHandler(page - 1)} className={page > 1 ? "" : "pagination__disable"}>◀</span>
         {[...Array(vacancies?.vacancies?.length / 2)].map((_, i) => {
           return <span key={i} className={page === i + 1 ? "pagination__selected" : ""} onClick={() => selectPageHandler(i + 1)}>{i + 1}</span>
         })}
-
-        <span onClick={() => selectPageHandler(page + 1)} className={page < vacancies?.vacancies?.length / 3? "" : "pagination__disable"}>▶</span>
+      <span onClick={() => selectPageHandler(page + 1)} className={page < vacancies?.vacancies?.length / 3? "" : "pagination__disable"}>▶</span>
       </div>}
+
       {vacancieDel && (
           <> 
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none -mt-6 border border-grey-100">

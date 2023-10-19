@@ -23,6 +23,14 @@ const Allproducts = () => {
     formState: { errors },
   } = useForm();
   const [product, setData] =useState(dataProducts || '');
+  const [term, setTerm] = useState("");
+  const submitHandler = (e) => {
+    e.preventDefault();
+     if (term === "") return alert("Please enter search term!");
+    // dispatch(searchVacancies(term));
+    console.log("term : ",term);
+    //setTerm("");
+  };
   const dispatch = useDispatch();
   useEffect(() => {
     setData(dataProducts);
@@ -50,19 +58,51 @@ const Allproducts = () => {
      <section className="mb-6 text-gray-800 text-center ">
      <div style={{
             }} className=" md:flex flex-wrap justify-between items-center ml-20">
+    <div className="flex items-center py-3 mt-8 mb-4 ">
         <button
-          className="text-lg font-display text-black font-medium hover:text-[#0397FF] ">
-          <span className=" underline decoration-pink-800 decoration-4 underline-offset-8">ሁሉም</span> ምርቶች
+        className=" text-lg font-display text-black font-medium hover:text-[#0397FF]">
+          <span className="mr-2 md:ml-0 -ml-4 underline decoration-pink-800 decoration-4 underline-offset-8">ሁሉም</span> ምርቶች
         </button>
+        <form onSubmit={submitHandler}>
+        <div class=" mb-4 flex flex-wrap items-stretch absolute md:mt-0 mt-6 md:right-16 right-4">
+          <input className="bg-[#E3E6E6] z-20"  
+             type="date"
+             aria-label="Search"
+             aria-describedby="button-addon1"
+             value={term}
+             onChange={(e) => setTerm(e.target.value)}/>
+             <button
+             class="relative z-20 flex items-center rounded-r bg-secondary px-6 py-2.5 text-xs 
+             font-medium uppercase leading-tight text-white shadow-md transition duration-150 
+             ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg
+              focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
+        type="submit"
+        data-te-ripple-init
+        data-te-ripple-color="light">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="h-5 w-5">
+          <path
+            fill-rule="evenodd"
+            d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+            clip-rule="evenodd" />
+        </svg>
+       </button>
+
+        </div>
+      </form>
       </div>
-    <div className="grid lg:grid-cols-4 xl:gap-5 md:gap-6 xl:gap-x-14">
+      </div>
+    <div className="grid lg:grid-cols-3 xl:gap-5 md:gap-6 xl:gap-x-14">
       {
       (product?.length)>0
         ?(
           product?.slice(0, 4).map((item, index) => (
            <div className=" md:ml-0 ml-5">
             {/* <div  className="  lg:mb-0 md:pt-4 lg:pt-4 pt-2 flex bg-slate-600"> */}
-              <div key={index} className=" products lg:ml-14 md:ml-12 ml-6 relative  ">
+              <div key={index} className=" products md:my-10 my-9 lg:ml-14 md:ml-12 -ml-6 relative  ">
                   <div className=" products__single  relative overflow-hidden bg-no-repeat bg-cover rounded-lg"
                        data-mdb-ripple="true"
                        data-mdb-ripple-color="light"
@@ -85,21 +125,21 @@ const Allproducts = () => {
           <p className="text-sm">{item.description.substring(0,48)+"..."}</p>
          </div>
         </div> */}
-         <div className="flex">         
-           <div className="mt-3 md:ml-12 md-4  float-left flex">
-          <ul className='  mt-3 md:ml-0 ml-7 md:mb-0 mb-5 flex'>
-              <img className=' w-12 h-6 rounded-2xl' 
+         <div className=" flex-row">         
+           <div className="md:-mt-3 mt-0 w-72 -pl-2 md:ml-14 ml-0 float-left flex">
+          <ul className='   md:ml-0 -ml-3 md:mb-0 '>
+              <img className=' w-10 h-6 rounded-2xl' 
               src={`${AddressBaseUrl}/images/${item.image}`} 
               alt='Noimage'/> 
           </ul>
-          <p className=" float-left  text-sm w-60">{item.name.substring(0,6)}<br />
+          <p className=" float-left  text-sm ">{item.name.substring(0,6)}<br />
           {item.description.substring(0,48)+"..."}</p>
         </div>
-         <div className="mt-4  md:ml-16  right-3 flex w-7">
+         <div className="md:mt-0 mt-0 float-right md:mr-1 mr-9 flex w-7">
          {/* <span onClick={() => likeProduct(item) } className=" cursor-pointer"> <img className=' w-4 h-4 cursor-pointer mx-[-3] ' 
          src={like} alt='Noicon'/></span> */}
          <span onClick={() => likeProduct(item) }>
-         <img className=' w-4 h-4 md:ml-80 ml-5  cursor-pointer' src={like} alt='Noicon'/></span>
+         <img className=' w-4 h-4 md:ml-0   cursor-pointer' src={like} alt='Noicon'/></span>
       </div>
     </div>
     </div>

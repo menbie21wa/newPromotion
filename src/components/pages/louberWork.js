@@ -91,7 +91,7 @@ return(
           <span className="mr-2 md:ml-0 ml-5 underline decoration-pink-800 decoration-4 underline-offset-8">የቀን ስራ</span>ማስታዎቂያ
          </button>
          <form onSubmit={submitHandler}>
-         <div class=" mb-4 md:mt-0 mt-6 flex flex-wrap items-stretch absolute right-5">
+         <div class=" mb-4 flex flex-wrap items-stretch absolute md:mt-0 mt-6 md:right-16 right-5">
           <input className="bg-[#E3E6E6] z-20" 
              type="date"
              aria-label="Search"
@@ -119,14 +119,14 @@ return(
      </div>
     </div>
     
-  <div class="grid lg:grid-cols-4 xl:gap-5 md:gap-6 xl:gap-x-14">
+  <div class="grid lg:grid-cols-3 xl:gap-5 md:gap-6 xl:gap-x-14">
         {
           (data?.length)>0
             ?(
               data?.slice(0, 4).map((values,index) =>{
              return(
                <>
-                <div key={index} className="md:my-0 my-9 md:ml-0 ml-8">
+                <div key={index} className="md:my-10 my-12 md:ml-0 ml-0">
                   <div className=" products">
                    <div
                     className=" products__single relative border-gray-600 
@@ -190,9 +190,7 @@ return(
                       <HiOutlineX className="w-6 h-6" />
                     </button>
                   </div>
-                  
                   <div className="w-full flex">
-
                     <div className="p-4">
                     <img
                     className="w-48 h-32 transition cursor-pointer duration-700"
