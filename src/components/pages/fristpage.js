@@ -60,7 +60,11 @@ useEffect(() => {
           // style={{ backgroundImage: `url(${org && org[currentIndex]?.url})` }}
           className=' float-right mt-20 md:mr-20 ml-16 rounded-2xl w-1/3 h-5/6 bg-center duration-700 relative overflow-hidden bg-cover bg-no-repeat'
           >
-          <img src={`/img/telegramecomerece.jpg`}/>
+          <img 
+          //src={`/img/telegramecomerece.jpg`}
+          src={`${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`}
+
+          />
             {/* <img src={`${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`}  className='w-full h-full'/> */}
          </div>
                  {/* <div className="mb-6 lg:mb-0">

@@ -22,7 +22,7 @@ const Allproducts = () => {
     register,
     formState: { errors },
   } = useForm();
-  const [product, setData] =useState(dataProducts || '');
+ // const [product, setData] =useState(dataProducts || '');
   const [term, setTerm] = useState("");
   const submitHandler = (e) => {
     e.preventDefault();
@@ -32,13 +32,13 @@ const Allproducts = () => {
     //setTerm("");
   };
   const dispatch = useDispatch();
-  useEffect(() => {
-    setData(dataProducts);
-  }, [dataProducts])
+  // useEffect(() => {
+  //   setData(dataProducts);
+  // }, [dataProducts])
 
-  // const {product} = useSelector(
-  //   (state)=> state.product
-  // );
+  const {product} = useSelector(
+    (state)=> state.product
+  );
 // console.log("all products are : ", product);
   const VacancieDetail = (data) =>{
     dispatch(addToDetail(data));
@@ -107,10 +107,10 @@ const Allproducts = () => {
                        data-mdb-ripple="true"
                        data-mdb-ripple-color="light"
                         >
-                  {/* src={`${AddressBaseUrl}/images/${item.featureImage}`}  */}
                     <img
                       className="w-full h-full transition cursor-pointer duration-700 rounded-lg hover:scale-125"
-                      src={`/img/${item.featureImage}`} 
+                    //  src={`/img/${item.featureImage}`} 
+                    src={`${AddressBaseUrl}/images/${item.image}`}
                       onClick={ () => VacancieDetail(item)}
                      // src={smartPhone}
                       alt="product img not found"

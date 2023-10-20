@@ -158,17 +158,18 @@ return(
     </div>
   </div>
    {/*  {vacancies?.vacancies?.length > 0 && <div className="products">
-        {vacancies?.vacancies?.slice(page * 3 - 3, page * 3).map((vacancie) => {
+        data?.slice(page * 3 - 3, page * 3).map((vacancie,index) => {  
    */}
    <div class="grid lg:grid-cols-3 xl:gap-5 md:gap-6 xl:gap-x-14">
-    {(data?.length > 0)
+    {(vacancies?.vacancies?.length > 0)
       ?(
-      data?.slice(page * 3 - 3, page * 3).map((vacancie,index) => {    
+       
+        vacancies?.vacancies?.slice(page * 3 - 3, page * 3).map((vacancie,index) => { 
 
           return(
            <>
            
-            <div key={index} className="md:my-10 my-12 md:ml-0 -ml-1">
+            <div key={index} className=" relative md:my-10 my-12 md:ml-0 -ml-1">
             <div className=" products">
                    <div
                     className=" products__single relative border-gray-600 
@@ -183,7 +184,8 @@ return(
             <img 
             className="transition cursor-pointer duration-700 rounded-xl border-2 border-b-2 border-gray-600"
             alt="product img not found"
-            src={`/img/${vacancie.featureImage}`} 
+           src={`${AddressBaseUrl}/images/${vacancie.image}`} 
+            //${AddressBaseUrl}/images/${vacancie.image}
             onError={event => {
             event.target.src = `${AddressBaseUrl}/images/${org?.promotedOrgs && 
             org?.promotedOrgs[currentIndex]?.logo}`
@@ -205,8 +207,8 @@ return(
           </ul>
            {/* src={`${AddressBaseUrl}/images/${vacancie.image}`}  */}
           <span className="mt-1 ml-2">{vacancie.title}<br />
-          <p className=" font-thin border text-sm">{`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.name}`}
-          </p></span><br />
+          <p className=" font-thin border text-sm">{`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.name}`}</p>
+          </span><br />
         </div>
        {/* <div className="mt-4 float-right flex">
         <span onClick={() => likeProduct(vacancie) }>Like</span>

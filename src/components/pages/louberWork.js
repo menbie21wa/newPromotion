@@ -82,8 +82,7 @@ return(
    <div className="bg-[rgb(227,230,230)]">
     <div className="w-11/12 xl:w-11/12 mx-auto pb-6">
      <section className="mb-6 text-gray-800 text-center ">
-      <div style={{
-        }} className=" md:flex flex-wrap justify-between items-center mx-auto md:px-6 lg:px-6 px-1">
+      <div className=" md:flex flex-wrap justify-between items-center mx-auto md:px-6 lg:px-6 px-1">
         <div className="flex items-center py-3 mt-8 mb-4 ">
          <button
           className=" text-lg font-display text-black font-medium hover:text-[#0397FF]"
@@ -118,12 +117,12 @@ return(
       </form>
      </div>
     </div>
-    
+
   <div class="grid lg:grid-cols-3 xl:gap-5 md:gap-6 xl:gap-x-14">
         {
-          (data?.length)>0
+          (loubers?.vacancies?.length)>0
             ?(
-              data?.slice(0, 4).map((values,index) =>{
+              loubers?.vacancies?.slice(0, 4).map((values,index) =>{
              return(
                <>
                 <div key={index} className="md:my-10 my-12 md:ml-0 ml-0">
@@ -136,7 +135,8 @@ return(
                   >
                     <img
                       className=" w-screen h-52 transition cursor-pointer duration-700 rounded-xl"
-                      src={`/img/${values.featureImage}`} 
+                     // src={`/img/${values.featureImage}`} 
+                     src={`${AddressBaseUrl}/images/${values.image}`} 
                       alt="product img not found"
                       onError={event => {
                       event.target.src = `${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`
@@ -172,8 +172,8 @@ return(
             </div>
           </>
          )})):
-     (<><div><Loading/></div></>) }
-     {vacancieDel && (
+       (<><div><Loading/></div></>) }
+        {vacancieDel && (
           <> 
             <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none -mt-6 border border-grey-100">
               <div className="relative w-auto my-6 mx-auto max-w-2xl">
@@ -208,11 +208,11 @@ return(
                     <h3 className="flex"><h3 class="mb-1 font-semibold underline">የስራ ቀን/ስአት:</h3><span >ሙሉ ቀን</span></h3>
                     <h3 className="flex"><h3 class="mb-1 font-semibold underline">የቀን ክፍያ: </h3><span> {louberWorkDetail?.price}</span></h3>
                     <h3 className="flex"><h3 class="mb-1 font-semibold underline">የምዝገባ ማብቂያ ቀን: </h3><span >{louberWorkDetail?.closingDate?.split('T')[0]}-{louberWorkDetail?.closingDate?.split('T')[0]}</span></h3>
-                        <div class="pt-2">
-                          <h3 class="font-semibold -ml-56 underline"> ማብራሪያ:</h3>
-                            <p class=" mt-2">{louberWorkDetail?.description}</p>
-                        </div>
-                        <h3 class="border-t mb-2 pt-3 font-semibold underline">Email: <span class="font-thin">EplusApp88@gmail.com</span></h3> 
+                     <div class="pt-2">
+                     <h3 class="font-semibold -ml-56 underline"> ማብራሪያ:</h3>
+                     <p class=" mt-2">{louberWorkDetail?.description}</p>
+                    </div>
+                     <h3 class="border-t mb-2 pt-3 font-semibold underline">Email: <span class="font-thin">EplusApp88@gmail.com</span></h3> 
                      </div>
                     </div>
                    </div>
@@ -223,8 +223,8 @@ return(
           )} 
 
     { seeMore && (
-      <>
-      {
+        <>
+          {
           (loubers?.vacancies?.length)>0
             ?(
               loubers?.vacancies?.map((values,index) =>{

@@ -118,9 +118,9 @@ const Bidding = (props) =>{
      <div className='relative m-8  mx-auto'>
      <div class="grid lg:grid-cols-2 xl:gap-20 md:gap-8 gap-8  md:gap-x-6">
         {
-          (data?.length)>0
+          (bidding?.bidding?.length)>0
             ?(
-              data?.slice(0, 4).map((bidding,index) =>{
+              bidding?.bidding?.slice(0, 4).map((bidding,index) =>{
              return(
                <>
                 <div key={index} className="products md:ml-0 -ml-12 mb-24 md:mb-0">
@@ -129,7 +129,8 @@ const Bidding = (props) =>{
                  <div className="flex justify-center items-center h-full">
                   <img
                    onClick={() => VacancieDetail(bidding)}
-                   src={`img/${bidding.featureImage}`} 
+                  // src={`img/${bidding.featureImage}`} 
+                  src={`${AddressBaseUrl}/images/${bidding.image}`} 
                    className="transition cursor-pointer duration-700 rounded-xl border-2 border-b-2 border-gray-600"
                     alt='images not found'/> 
                 </div>
@@ -144,10 +145,13 @@ const Bidding = (props) =>{
                     <div className="mt-4 float-left flex">
                     <ul className=' mt-1 flex'>
                         <img className=' w-7 h-6 rounded-2xl' 
-                        src={`/img/${bidding.featureImage}`} 
+                        //src={`/img/${bidding.featureImage}`} 
+                        src={`${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`}
                         alt='Noimage'/>
                     </ul>
-                    <span className="mt-2 w-64">{bidding.name}<br /><p className=" font-thin  text-sm">{bidding.type}</p></span>
+                    <span className="mt-2 w-64">{bidding.name}<br />
+                    <p className=" font-thin border text-sm">{`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.name}`}</p>
+                    </span>
                   </div>
                   <div className="mt-5 float-right w-7.5 flex">
                   <span ><img className=' w-6 h-5 mx-4 ' src={show} alt='Noicon'/></span>
