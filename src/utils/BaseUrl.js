@@ -1,2 +1,2 @@
-const AddressBaseUrl ="http://192.168.0.111:11215";
+const AddressBaseUrl ="http://196.189.126.180:11215";
 export default AddressBaseUrl;

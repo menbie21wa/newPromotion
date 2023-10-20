@@ -115,8 +115,8 @@ const Bidding = (props) =>{
       </form>
     </div>
     <div className='relative p-10 bg-white md:flex lg:flex pb-10'>    
-     <div className='relative m-8 md:w-7/12 w-64 mx-auto'>
-     <div class="grid lg:grid-cols-2 xl:gap-20 md:gap-6 xl:gap-x-6">
+     <div className='relative m-8  mx-auto'>
+     <div class="grid lg:grid-cols-2 xl:gap-20 md:gap-8 gap-8  md:gap-x-6">
         {
           (data?.length)>0
             ?(
