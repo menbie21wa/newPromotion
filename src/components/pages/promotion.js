@@ -145,7 +145,7 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
 </ul>
 </nav>
 {/* Mobile Navigation */}
-<ul className={` ${!menu ? "left-0 opacity-100" :"left-[-750px] md:opacity-0"}
+<ul className={` ${menu ? "left-0 opacity-100" :"left-[-750px] md:opacity-0"}
                     sm:flex lg:hidden flex-1  list-none flex flex-col
                     p-6 bg-black-gradient fixed w-full right-0  ml-0 my-2 top-14
                     sidebar bg-white transition-all duration-500 ease-in z-50

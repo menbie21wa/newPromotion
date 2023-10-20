@@ -259,7 +259,7 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
     <section className="mb-12 text-gray-800 text-center ">
     {/* job_vacancies */}
     {/* (org?.job_vacancies?.length)>0 */}
-    {/* { 
+    { 
      (data[0]?.job_vacancies?.length)>0
       ?(
         <div className="items-center py-3 mb-4">
@@ -268,7 +268,7 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
          </button>
         </div>
       ):(null)
-    } */}
+    }
       <div class="grid lg:grid-cols-3 xl:gap-10 md:gap-6 xl:gap-x-4" ref={vacancieSection}>
       {
         (data[0].job_vacancies.length)>0

@@ -3,8 +3,8 @@ import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Footer from "../navigation/footers";
 import Sidebar from "../navigation/sidebar";
-
-const Layout = ({ children, title, description, keywords, author }) => {
+const title="promotion"
+const Layout = ({ children, description, keywords, author }) => {
   const location = useLocation();
 
   const protectedFooter = () => {
