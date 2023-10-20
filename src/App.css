@@ -39,7 +39,7 @@
   list-style-type: none;
   display: grid;
   gap: 14px;
-  grid-template-columns: 0fr 0fr 0fr 0fr;
+  grid-template-columns: 0fr 0fr 0fr;
 }
 
 .products__single {

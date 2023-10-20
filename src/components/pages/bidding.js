@@ -114,23 +114,22 @@ const Bidding = (props) =>{
         </div>
       </form>
     </div>
-    <div className='relative p-10 bg-white md:flex lg:flex pb-10'>    
-     <div className='relative m-8  mx-auto'>
-     <div class="grid lg:grid-cols-2 xl:gap-20 md:gap-8 gap-8  md:gap-x-6">
+    <div className='relative p-10 bg-white md:flex lg:flex pb-20'>    
+     <div class="relative mr-6 grid lg:grid-cols-2 xl:gap-20 md:gap-20 gap-20 xl:gap-x-6 md:gap-x-10">
         {
           (bidding?.bidding?.length)>0
             ?(
               bidding?.bidding?.slice(0, 4).map((bidding,index) =>{
              return(
                <>
-                <div key={index} className="products md:ml-0 -ml-12 mb-24 md:mb-0">
+                <div key={index} className="products relative md:ml-0 -ml-12 mb-24 md:mb-0">
                  <div className="products__single relative border-gray-600 
                    shadow-lg shadow-neutral-900 bg-cover bg-no-repeat" key={bidding.id}> 
-                 <div className="flex justify-center items-center h-full">
+                 <div className="relative flex justify-center items-center h-full">
                   <img
                    onClick={() => VacancieDetail(bidding)}
-                  // src={`img/${bidding.featureImage}`} 
-                  src={`${AddressBaseUrl}/images/${bidding.image}`} 
+                   //src={`img/${bidding.featureImage}`} 
+                   src={`${AddressBaseUrl}/images/${bidding.image}`} 
                    className="transition cursor-pointer duration-700 rounded-xl border-2 border-b-2 border-gray-600"
                     alt='images not found'/> 
                 </div>
@@ -145,13 +144,11 @@ const Bidding = (props) =>{
                     <div className="mt-4 float-left flex">
                     <ul className=' mt-1 flex'>
                         <img className=' w-7 h-6 rounded-2xl' 
-                        //src={`/img/${bidding.featureImage}`} 
-                        src={`${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`}
+                       // src={`/img/${bidding.featureImage}`} 
+                       src={`${AddressBaseUrl}/images/${bidding.image}`} 
                         alt='Noimage'/>
                     </ul>
-                    <span className="mt-2 w-64">{bidding.name}<br />
-                    <p className=" font-thin border text-sm">{`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.name}`}</p>
-                    </span>
+                    <span className="mt-2 w-64">{bidding.name}<br /><p className=" font-thin  text-sm">{bidding.type}</p></span>
                   </div>
                   <div className="mt-5 float-right w-7.5 flex">
                   <span ><img className=' w-6 h-5 mx-4 ' src={show} alt='Noicon'/></span>
@@ -160,7 +157,10 @@ const Bidding = (props) =>{
                 </div>
               </div>
                   </>
-                )})):(<><div><Loading/></div></>) }
+                )})):(<><div><Loading/></div></>) 
+                }
+                </div>
+
               {vacancieDel && (
              <> 
             <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none -mt-6 border border-grey-100">
@@ -203,11 +203,10 @@ const Bidding = (props) =>{
                </div>
             </>
           )} 
-     </div>
-    </div>
+
       <div
         // style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
-        className='md:w-5/12 h-full rounded-2xl bg-center bg-cover duration-500 pt-4'>
+        className='md:w-1/4 ml-10 h-full rounded-2xl bg-center bg-cover duration-500 pt-2'>
         <div className="flex justify-center items-center h-full">
         <img src={`${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`} className='h-32 md:h-48 lg:h-52 w-32 md:w-48 lg:w-52 rounded-lg' alt='images not found'
         /> 
