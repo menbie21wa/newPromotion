@@ -144,11 +144,11 @@ return(
                       }}
                     />
                     <div class="absolute bottom-0 left-0 right-0 top-0 h-full w-full rounded-xl 
-                    justify-center overflow-hidden bg-gradient-to-r from-indigo-600 via-purple-600
+                    justify-center overflow-hidden bg-gradient-to-r from-green-500 via-amber-300
                     to-pink-600 opacity-0 transition duration-300 ease-in-out hover:opacity-70"
                     onClick={() => VacancieDetail(values) }>
                     <button className=" h-12 w-28 rounded-3xl mt-20 text-slate-100 border border-none
-                    bg-blue-950">View Detail</button>
+                    bg-black">View Detail</button>
                     </div>
                     <div className="mt-4 float-left flex">
                         <ul  className='  mt-3 flex'>
@@ -248,11 +248,11 @@ return(
                       }}
                     />
                     <div class="absolute bottom-0 left-0 right-0 top-0 h-full w-full rounded-xl 
-                    justify-center overflow-hidden bg-gradient-to-r from-indigo-600 via-purple-600
+                    justify-center overflow-hidden bg-gradient-to-r from-green-500 via-amber-300
                     to-pink-600 opacity-0 transition duration-300 ease-in-out hover:opacity-70"
                     onClick={() => VacancieDetail(values) }>
                     <button className=" h-12 w-28 rounded-3xl mt-20 text-slate-100 border border-none
-                    bg-blue-950">View Detail</button>
+                    bg-black">View Detail</button>
                     </div>
                     <div className="mt-4 float-left flex">
                       <ul  className='  mt-3 flex'>
@@ -261,7 +261,11 @@ return(
                            alt='Noimage'/>
                       </ul>
                        {/* src={`${AddressBaseUrl}/images/${vacancie.image}`}  */}
-                      <span className="mt-1 ml-2">{values.title}<br />
+                       <div className="p-0">
+                   <p className="text-sm font-bold  mt-4 text-center">{values?.title.substring(0,24)}</p>      
+                    {/* <p className="text-lg font-bold">{values?.description.substring(0,50)+"..."}</p>   */}
+                    </div>
+                      <span className="mt-1 ml-2">
                       <p className=" font-thin border text-sm">{`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.name}`}
                       </p></span><br />
                     </div>
@@ -270,10 +274,6 @@ return(
                  </div> */}
                  </div>
                 </div>
-               <div className="p-0">
-                <p className="text-sm font-bold  mt-4 text-center">{values?.title.substring(0,24)}</p>      
-                {/* <p className="text-lg font-bold">{values?.description.substring(0,50)+"..."}</p>   */}
-               </div>
             </div>
           </>
          )})):

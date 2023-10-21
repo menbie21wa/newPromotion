@@ -26,6 +26,7 @@ import building from "../../icons/office-building.png";
 import producticon from "../../icons/new-product.png";
 import bidding from "../../icons/bidding.png";
 import { louberDetail} from "../../actions/louberDetail";
+
 const Manufacture = () =>{
  // window.scrollTo(0, 0);
  const dispatch = useDispatch();
@@ -56,6 +57,7 @@ const { org } = useSelector(
 //Products
  console.log("yibe",org?.Products?.length)
 console.log("organization detail now : ", org);
+const firstSection = useRef();
 const productSection = useRef();
 const vacancieSection = useRef();
 const dayworkSection = useRef();
@@ -63,8 +65,20 @@ const biddingSection = useRef();
 // const [start, setStart] = useState(false);
 // const secRef = useRef();
  const getHome=()=>{
-  window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+  window.scrollTo({top: 0, 
+    left: 0, 
+    behavior: 'auto'
+   // behavior: 'smooth'
+  });
     }
+    const getFooter=()=>{
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,  
+        left: 0,
+        behavior: 'auto'
+        //behavior: 'smooth'
+         });
+        }
 const scrollToAll = (elmRef) =>{
   window.scrollTo({
       top : elmRef.current.offsetTop,
@@ -78,8 +92,6 @@ useEffect(() => {
 const louberWorkDetail = localStorage.getItem("louberWorkDetail")
 ? JSON.parse(localStorage.getItem("louberWorkDetail"))
 : null;
-
-
 const VacancieDetail = (data) =>{
   dispatch(addToDetail(data));
   setVacancieDel(true);
@@ -106,19 +118,16 @@ const detailInfo = localStorage.getItem("detailInfo")
   {url: education},
   ];
   const [currentIndex, setCurrentIndex] = useState(0);
-
   const prevSlide = () => {
     const isFirstSlide = currentIndex === 0;
     const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
   };
-
   const nextSlide = () => {
     const isLastSlide = currentIndex === slides.length - 1;
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
   };
-
   const goToSlide = (slideIndex) => {
     setCurrentIndex(slideIndex);
   };
@@ -130,13 +139,13 @@ const detailInfo = localStorage.getItem("detailInfo")
   };
     return(
         <Layout>
-             <div className="md:pt-0 lg:pt-0 ">
+ <div className="md:pt-0 lg:pt-0 ">
    <>
   {/* <div className='w-full h-10 text-center bg-slate-400 mt-2 text-white p-2'>
    This is my try from nave bar
   </div> */}
-<nav className=' z-50 fixed  top-0 overflow-hidden justify-between list-none font-serif uppercase font-medium xl:text-xl 
-md:text-xl xs:text-xs text-justify-center w-full lg:h-24 md:h-28 sm:h-20 shadow-xl sm:flex bg-white items-center '>
+ <nav className=' z-50 fixed  top-0 overflow-hidden justify-between list-none font-serif uppercase font-medium xl:text-xl 
+ md:text-xl xs:text-xs text-justify-center w-full lg:h-24 md:h-28 sm:h-20 shadow-xl sm:flex bg-white items-center '>
 <div>
 <button className='ml-1 w-96 p-5 md:flex block '  
 to ="/"> 
@@ -148,12 +157,14 @@ to ="/">
           <RiMenuLine size={24} onClick={setmenu}/>
           {/* <ion-icon name={!menu?'close':'menu'}></ion-icon> */}
 </div>
-
 <ul className=' mt-3 lg:flex md:flex bg-white  left-0 w-full md:w-auto
  sm:hidden absolute md:static justify-end items-center flex-1 list-none z-20 '>
 <li className='mx-6'><button  onClick={()=> getHome()}
 className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'
 to ="/">ስለ ድርጅቱ</button></li>
+<li className='mx-6'><button  onClick={()=> scrollToAll(firstSection)}
+className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'
+to ="/">አግኙን</button></li>
 <li className='mx-6'><button onClick={()=> scrollToAll(productSection)}
 className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'>
 ምርቶች</button></li>
@@ -168,7 +179,7 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
     >  ግብት </button></li> */}
  <li className='mx-8'><button onClick={()=> getHome()}
    className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'
-  to ="/About"> ውጥት</button></li>
+  to ="/About"> መግቢያ</button></li>
 </ul>
 </nav>
 {/* Mobile Navigation */}
@@ -180,7 +191,11 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
   <li className='mx-6 font-serif uppercase font-medium text-xl'>
                 <button onClick={()=> getHome()}
                  className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'
-                to ="/"> <img className=' w-6 h-5 mx-4 ' src={img1} alt='Noicon'/>ስለድርጅቱ</button></li>
+                to ="/"> <img className=' w-6 h-5 mx-4 ' src={img1} alt='Noicon'/>ስለ ድርጅቱ</button></li>
+                <li className='mx-6 font-serif uppercase font-medium text-xl'>
+                <button onClick={()=> getFooter()}
+                 className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'
+                to ="/"> <img className=' w-6 h-5 mx-4 ' src={img1} alt='Noicon'/>አግኙን</button></li>
  <li className='mx-6 py-2 font-serif uppercase font-medium text-xl '>
       <button onClick={()=> scrollToAll(productSection)}
       className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'>
@@ -199,38 +214,38 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
    <li className='mx-6 py-2 font-serif uppercase font-medium  text-xl '>
        <button onClick={()=> getHome()}
         className='transition duration-700 bg-red-400 rounded py-1 px-3 transform hover:-translate-y-1 hover:scale-110 flex'
-     to ="/About"> ውጥት</button></li>
+     to ="/About"> መግቢያ</button></li>
     </ul>
    </>    
   </div>
-          
    <div className="bg-[#E3E6E6] mt-24">
-        {/*defualt home page image */}
-        <div className="relative overflow-hidden bg-no-repeat bg-contain">
-          <img
-            className="w-full h-screen object-cover"featureImage
-            //src={`${AddressBaseUrl}/images/${org?.org?.logo}`}
-            src={`/img/${data[0].logo}`}
-            alt="eplus img"
-          />
+        <div className="md:pt-24 lg:pt-24  pt-24 h-screen md:h-screen w-full border-b mb-10">
+          <div className='h-52 md:flex block md:h-screen w-full -mt-20 rounded p-10'> 
           <div
-            className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed"
-            style={{ backgroundColor: "rgba(0, 0, 0, 0.40)" }}
-          >
-            <div className="w-full xl:w-10/12 lg:w-10/12 md:w-11/12 mx-auto xl:mt-40 md:mt-32 mt-20">
-              <div className="flex  justify-center items-center h-full">
-                <div className="text-center text-white">
-                  <h1 className="text-4xl md:text-4xl xl:text-5xl text-[#F49F08] font-bold font-display tracking-tight leading-tight italic">
-                    {org?.org?.name}
+            className=" w-1/2 md:mr-36 h-full flex md:ml-10 ml-5 flex-col p-20 justify-center items-center">
+               <h1 className="text-4xl md:text-4xl xl:text-5xl text-[#F49F08] font-bold font-display tracking-tight leading-tight italic">
+                  {`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.name}`}
                   </h1>
                   <p className="text-2xl md:text-2xl xl:text-3xl text-[#F49F08] font-bold font-display tracking-tight leading-tight">
-                    {org?.org?.businessSector}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+                  {`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.businessSector}`}
+
+                </p>
+         </div>
+        
+        <div
+          // style={{ backgroundImage: `url(${org && org[currentIndex]?.url})` }}
+          className=' md:ml-10 rounded-2xl w-1/3 h-5/6 bg-center duration-700 relative bg-cover bg-no-repeat'
+          >
+          <img 
+          className="w-full h-3/4 rounded-lg "
+          //src={`/img/Eplusapp1.png`} 
+          src={`/img/bossweb.png`} 
+        //  src={`${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`}
+          alt=""
+          />
+         </div>
+       </div>
+     </div>
  {/* home page end */}
 {/* menuBar */}
   {/* <div className='fixed top-3 -translate-x-0 translate-y-[50%] left-2 text-2xl bg-white/20 hover:bg-white/40 text-black cursor-pointer duration-300'>
@@ -549,9 +564,9 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
           <span className="mr-2 underline decoration-pink-800 decoration-4 underline-offset-8">የጨረታ ማስታዎቂያ </span>
          </button>
         </div>
-      ):(null)
-    }
-      <div class="grid lg:grid-cols-3 xl:gap-10 md:gap-6 xl:gap-x-4">
+       ):(null)
+     }
+   <div class="grid lg:grid-cols-3 xl:gap-10 md:gap-6 xl:gap-x-4">
       {
         (data[0]?.bids?.length)>0
           ?(
@@ -633,7 +648,7 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
           )} 
    </section>
   </div>
-      <div className="w-11/12 mx-auto border-t border-gray-500">
+      <div className="w-11/12 mx-auto border-t border-gray-500" ref={firstSection}>
        <div class="grid lg:grid-cols-2 xl:gap-10 md:gap-6 xl:gap-x-4">
         <div className="flex items-center justify-center md:justify-start">
          <NavLink onClick={() => setOpen(true)} className="text-xl text-[#F49F08]" style={navLinkStyles}> ለበለጠ መረጃ </NavLink>
@@ -655,22 +670,24 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
           <div className="flex flex-wrap items-center rounded-lg mx-auto">
             <div data-aos="fade-up-right" className="grow-0 shrink-0 basis-auto w-full  md:w-4/12 xl:w-4/12 h-[401px]">
               <img
-                //src={`${AddressBaseUrl}/images/${org?.org?.logo}`}
-                src={smartDesktop}
+                src={`${AddressBaseUrl}/images/${org?.org?.logo}`}
+                //src={smartDesktop}
                 alt="img of eplus img"
                 className="w-full rounded-lg h-[350px] mt-6"
               />
             </div>
-            <div data-aos="fade-up" className="grow-0 shrink-0 basis-auto w-full  md:w-6/12 xl:w-6/12">
+            <div data-aos="fade-up" className="grow-0 shrink-0 basis-auto w-full  md:w-6/12 xl:w-6/12" >
               <div className="pl-5 xl:pl-10 mt-4 select-none">
                 <p className="text-textColor font-display xl:text-lg md:text-lg leading-8 text-left tracking-tight pb-2">
                 {org?.promotedOrgs?.name}
                 </p>
                 <p className="text-textColor font-display xl:text-lg md:text-lg leading-8 text-left tracking-tight pb-2">
-                  ኢጵላሣጵ ንግድ ስራዎች አክሲዮን ማህበር በኢትዮጵያ አዲሱ የንግድ ፈቃድ መስጫ መደብ መሠረት ረቂቅ
+                  {/* ኢጵላሣጵ ንግድ ስራዎች አክሲዮን ማህበር በኢትዮጵያ አዲሱ የንግድ ፈቃድ መስጫ መደብ መሠረት ረቂቅ
                   መረጃ ወይም ሶፍትዌር ፍብርክ (ንድፍ፣ ምርት፣ ብልጽግ፣ ትግብር፣ ድር ንድፍና ዝርግት አካቶ) እና
                   መረጃ የማቀነባበርና የመረጃ ቋት የማደራጀት ስራዎች ረቂቅ የመረጃ ምጥቀቶችን ማዘጋጀት፣ የመረጃ
-                  ቋት ማዘጋጀት፣ በቀላሉ እንዲፈለጉ ማድረግ፣ ወቅቱን ጠብቆ የማሻሻል፣ የሶፍትዌር ዲዛይን፣ ልማት፣
+                  ቋት ማዘጋጀት፣ በቀላሉ እንዲፈለጉ ማድረግ፣ ወቅቱን ጠብቆ የማሻሻል፣ የሶፍትዌር ዲዛይን፣ ልማት፣ */}
+                  {org?.promotedOrgs?.description}
+
                 </p>
               </div>
             </div>

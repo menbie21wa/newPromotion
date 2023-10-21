@@ -5,11 +5,34 @@ import axios from "axios";
 import { handleError } from "../utils/toast";
 import  BaseUrl from "../utils/BaseUrl";
 
+// export const viewProducts = createAsyncThunk(
+//   "product",
+//   async (thunkAPI) => {
+//     try {
+//       let URL = `${BaseUrl}/addressapi/products/all`;
+//       // let response = await createContact(message);
+//       let response = await axios.get(URL);
+
+//       // console.log(response);
+
+//       if (response.status === 200) {
+//         return response.data;
+//       } else {
+//         handleError(response.message);
+//         return thunkAPI.rejectWithValue(response.data);
+//       }
+//     } catch (e) {
+//        console.log("Error", e.response.data);
+//       handleError("loading...");
+//       return thunkAPI.rejectWithValue(e.response.data);
+//     }
+//   }
+// );
 export const viewProducts = createAsyncThunk(
   "product",
   async (thunkAPI) => {
     try {
-      let URL = `${BaseUrl}/addressapi/products/all`;
+      let URL = `${BaseUrl}/addressapi/products/all?for_promotion=true`;
       // let response = await createContact(message);
       let response = await axios.get(URL);
 

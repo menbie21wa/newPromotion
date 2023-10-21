@@ -99,7 +99,10 @@ useEffect(() =>{
   dispatch(viewVacancies());
   setProducts(vacancies?.vacancies)
 },[]);
-
+const orgHandler=()=>{
+    // navigate("org/"+id)
+    navigate("org")
+}
 const selectPageHandler = (selectedPage) => {
   console.log("next button cliked : ",selectedPage);
   if (selectedPage >= 1 && selectedPage <= vacancies?.vacancies?.length / 1 && selectedPage !== page) {
@@ -112,8 +115,7 @@ return(
    <div className=" bg-white pb-10">
     <div className="w-11/12 mx-auto">
      <section className="mb-6 text-gray-800 text-center group">
-      <div style={{
-        }} className=" md:flex block flex-wrap justify-between items-center mx-auto md:px-6 lg:px-6 px-1">
+      <div className=" md:flex block flex-wrap justify-between items-center mx-auto md:px-6 lg:px-6 px-1">
         <div className="flex items-center py-3 mb-4 ">
          <button
           className=" text-lg font-display text-black font-medium hover:text-[#0397FF]"
@@ -193,11 +195,11 @@ return(
            }}
             />
       <div class="absolute bottom-0 left-0 right-0 top-0 h-full w-full rounded-xl 
-          justify-center overflow-hidden bg-gradient-to-r from-indigo-600 via-purple-600
+          justify-center overflow-hidden bg-gradient-to-r from-green-500 via-amber-300
            to-pink-600 opacity-0 transition duration-300 ease-in-out hover:opacity-70"
            onClick={() => VacancieDetail(vacancie) }>
           <button className=" h-12 w-28 rounded-3xl mt-20 text-slate-100 border border-none
-           bg-blue-950">View Detail</button>
+            bg-black">View Detail</button>
           </div>
           <div className="mt-4 float-left flex">
           <ul  className='  mt-3 flex'>
@@ -206,9 +208,18 @@ return(
                alt='Noimage'/>
           </ul>
            {/* src={`${AddressBaseUrl}/images/${vacancie.image}`}  */}
-          <span className="mt-1 ml-2">{vacancie.title}<br />
-          <p className=" font-thin border text-sm">{`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.name}`}</p>
-          </span><br />
+          <a>
+
+            <button 
+             onClick={() => orgHandler()}
+            // onClick={() => orgHandler(`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.id}`)}
+             >
+             <span className="mt-1 ml-2">{vacancie.title}<br />
+             <p className=" font-thin text-sm">{`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.name}`}</p>             
+             </span><br />
+             </button>
+          </a>  
+
         </div>
        {/* <div className="mt-4 float-right flex">
         <span onClick={() => likeProduct(vacancie) }>Like</span>
@@ -219,12 +230,16 @@ return(
     </>
     )})):(<><div><Loading/></div></>) }
 
-     {vacancies?.vacancies?.length > 0 && <div className="pagination">
-        <span onClick={() => selectPageHandler(page - 1)} className={page > 1 ? "" : "pagination__disable"}>◀</span>
+     {vacancies?.vacancies?.length > 0 && 
+     <div className="pagination">
+        <span onClick={() => selectPageHandler(page - 1)}
+           className={page > 1 ? "" : "pagination__disable"}>◀</span>
         {[...Array(vacancies?.vacancies?.length / 2)].map((_, i) => {
-          return <span key={i} className={page === i + 1 ? "pagination__selected" : ""} onClick={() => selectPageHandler(i + 1)}>{i + 1}</span>
+             return <span key={i} className={page === i + 1 ? "pagination__selected" : ""} 
+             onClick={() => selectPageHandler(i + 1)}>{i + 1}</span>
         })}
-      <span onClick={() => selectPageHandler(page + 1)} className={page < vacancies?.vacancies?.length / 3? "" : "pagination__disable"}>▶</span>
+      <span onClick={() => selectPageHandler(page + 1)}
+         className={page < vacancies?.vacancies?.length / 3? "" : "pagination__disable"}>▶</span>
       </div>}
 
       {vacancieDel && (

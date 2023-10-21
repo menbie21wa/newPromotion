@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { useForm } from "react-hook-form";
+import {useParams,useNavigate } from "react-router-dom";
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -12,6 +13,7 @@ import { addToDetail } from "../../actions/detail";
 import { HiOutlineX } from "react-icons/hi";
 import AddressBaseUrl from "../../utils/BaseUrl";
 import like from '../../icons/like.png';
+import {getOrganization } from '../../actions/orgAction';
 const Allproducts = () => {
   const [seeMore, setSeeMore] = useState(false);
   const [vacancieDel, setVacancieDel] = useState(false);
@@ -35,7 +37,19 @@ const Allproducts = () => {
   // useEffect(() => {
   //   setData(dataProducts);
   // }, [dataProducts])
-
+  const { org } = useSelector(
+    (state) => state.org )
+  //console.log("all vacancies are : ", vacancies);
+// const pages = 1;
+const navigate =useNavigate()
+const orgHandler=()=>{
+  // navigate("org/"+id)
+  navigate("org")
+}
+useEffect(() =>{
+  dispatch(getOrganization());
+},[]);
+  const [currentIndex, setCurrentIndex] = useState(1);
   const {product} = useSelector(
     (state)=> state.product
   );
@@ -129,18 +143,28 @@ const Allproducts = () => {
            <div className="md:-mt-3 mt-0 w-72 -pl-2 md:ml-14 ml-0 float-left flex">
           <ul className='   md:ml-0 -ml-3 md:mb-0 '>
               <img className=' w-10 h-6 rounded-2xl' 
-              src={`${AddressBaseUrl}/images/${item.image}`} 
+             // src={`${AddressBaseUrl}/images/${item.image}`} 
+             src={`${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`}
               alt='Noimage'/> 
           </ul>
-          <p className=" float-left  text-sm ">{item.name.substring(0,6)}<br />
-          {item.description.substring(0,48)+"..."}</p>
+          <a>
+            <button 
+             onClick={() => orgHandler()}
+            // onClick={() => orgHandler(`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.id}`)}
+             >
+             <span className="mt-1 ml-2">
+              <p className=" float-left  text-sm ">{item.name.substring(0,6)}<br />
+             {item.description.substring(0,48)+"..."}</p><br />
+             <p className=" font-thin text-sm">{`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.name}`}</p>             
+             </span><br />
+             </button>
+          </a>  
         </div>
-         <div className="md:mt-0 mt-0 float-right md:mr-1 mr-9 flex w-7">
-         {/* <span onClick={() => likeProduct(item) } className=" cursor-pointer"> <img className=' w-4 h-4 cursor-pointer mx-[-3] ' 
-         src={like} alt='Noicon'/></span> */}
+         {/* <div className="md:mt-0 mt-0 float-right md:mr-1 mr-9 flex w-7">
+     
          <span onClick={() => likeProduct(item) }>
          <img className=' w-4 h-4 md:ml-0   cursor-pointer' src={like} alt='Noicon'/></span>
-      </div>
+      </div> */}
     </div>
     </div>
   ))):(<></>)}
