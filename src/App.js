@@ -10,8 +10,8 @@ function App() {
   <Routes>
         <Route path="/" element={<Promotion/>}></Route>
         <Route path="/productCategory" element={ <Vacancie/> }></Route>
-        {/* <Route path="/org/:id" element={<Manufacture/>}></Route> */}
-        <Route path="/org" element={<Manufacture/>}></Route>
+        <Route path="/org/:id" element={<Manufacture/>}></Route>
+        {/* <Route path="/org" element={<Manufacture/>}></Route> */}
 
         
   </Routes>

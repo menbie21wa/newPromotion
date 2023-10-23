@@ -40,8 +40,8 @@
     setCurrentIndex(slideIndex);
   };
   const orgHandler = (id) =>{
-    // navigate("org/"+id)
-     navigate("org")
+    navigate("org/"+id)
+    //  navigate("org")
   }
   return (
    <div className='w-11/12 xl:w-11/12 m-auto '>
@@ -54,17 +54,16 @@
     <div className='relative bg-white md:flex lg:flex'>    
        <div className='relative m-8 md:w-6/12'>
          <h1 className='md:text-3xl text-lg italic'>{`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.name}`}</h1>
-         <h1 className='md:flex pt-0 md:pt-6 lg:pt-6'  onClick={() => orgHandler(`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.id}`)}>ኢጵላሣጵ አድራሻ ዘመናዊ የሆኑ የካርታ ላይ አድራሻዎችን ልዩ ቦታዎችን መንገዶችን እና የአደባባዮችን 
-           ስያሜ በመጠቀም የእያንዳንዱን ቦታ በቀላሉ በተሰጠው መለያ ካርታን መሰርት አድርጎ በተሰራው ገጽ ላይ ፍልግ ነው። ኢጵላሣጵ አድራሻ ልዩ እና ትክክለኛ የሆነ የግለሰብ 
-           የመንግስት መስሪያ ቤቶችን የንግድ ተቋማትን፡እንዲሁም የተለያዪ በከተማው ውስጥ የሚገኙ የግለሰብ ቦታወችን መገኛ በቀላሉ ካርታ ላይ ለይቶ ለማወቅ እና በእያንዳንዱን 
-           ቦታ ልዩ መለያ የተለያዩ አገልግሎቶችን ቅርብ ነው፡ ኢጵላሣጵ ገበያን በመጠቀም የሚፈልጉትን እቃ በቀላሉ ኢጵላሣጵአድራሻን በማጋራት ከኢጵላሣጵ ገበያ የገዙትን እቃ ቅብል ነው</h1>
+         <h1 className='md:flex pt-0 md:pt-6 lg:pt-6'  onClick={() => orgHandler(`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.id}`)}>
+         {`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.description}`}
+         </h1>
         <div className='pt-0 md:pt-4 lg:pt-4'>
-          {/* <a>
-            <button className='bg-[#0397FF] text-white font-semibold md:py-1 lg:py-1 lg:px-12 md:px-12 px-2 h-full'  onClick={() => orgHandler(`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.id}`)}>ዝርዝር መረጃ</button>
-          </a>            */}
           <a>
+            <button className='bg-[#0397FF] text-white font-semibold md:py-1 lg:py-1 lg:px-12 md:px-12 px-2 h-full'  onClick={() => orgHandler(`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.id}`)}>ዝርዝር መረጃ</button>
+          </a>           
+          {/* <a>
             <button className='bg-[#0397FF] text-white font-semibold md:py-1 lg:py-1 lg:px-12 md:px-12 px-2 h-full'  onClick={() => orgHandler()}>ዝርዝር መረጃ</button>
-          </a>  
+          </a>   */}
         </div>
       {/* Left Arrow */}
       <div className='hover:bg-zinc-950 md:m-6 lg:m-6 m-1 absolute text-2xl p-0 md:p-2 lg:p-2 bg-blackl text-black hover:text-white cursor-pointer border-2 border-zinc-950 duration-700'>

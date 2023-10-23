@@ -10,9 +10,9 @@ import {dataVacancy} from '../vacaData';
 import { useNavigate } from 'react-router-dom';
 const Fristpage = (props) =>{
   const navigate=useNavigate()
-const orgHandler =()=>{
-  // navigate("org/"+id)
-  navigate("org")
+const orgHandler =(id)=>{
+  navigate("org/"+id)
+  // navigate("org")
 }
   const dispatch = useDispatch();
   useEffect(()=>{
@@ -64,9 +64,7 @@ useEffect(() => {
                   <p className="text-2xl md:text-2xl mt-4 xl:text-3xl text-[#F49F08] font-bold font-display tracking-tight leading-tight">
                   {`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.businessSector}`}</p>
                   <p className='mt-7'>
-                  ኢጵላሣጵ አድራሻ ዘመናዊ የሆኑ የካርታ ላይ አድራሻዎችን ልዩ ቦታዎችን መንገዶችን እና የአደባባዮችን ስያሜ በመጠቀም የእያንዳንዱን ቦታ 
-                  በቀላሉ በተሰጠው መለያ ካርታን መሰርት አድርጎ በተሰራው ገጽ ላይ ፍልግ ነው። ኢጵላሣጵ አድራሻ ልዩ እና ትክክለኛ የሆነ የግለሰብ የመንግስት 
-                  መስሪያ ቤቶችን የንግድ ተቋማትን፡እንዲሁም የተለያዪ በከተማው ውስጥ የሚገኙ የግለሰብ ቦታወችን መገኛ በቀላሉ ካርታ ላይ ለይቶ ለማወቅ 
+                  {/* { org?.promotedOrgs[currentIndex]?.description?.substring(0,300)} . . . */}
                   </p>
          </div>
         <div
@@ -84,20 +82,13 @@ useEffect(() => {
        </div>
        <div className=' md:text-lg text-xs md:ml-20 ml-9 -mt-16 w-full z-30 '>
         <a ><button 
-       // onClick={() => orgHandler(`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.id}`)}
-        onClick={() => orgHandler()} className='animate-pulse font-semibold text-sky-500'>
-        <i>{descrip.substring(0,100)}   .  .  .</i>
+       onClick={() => orgHandler(`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.id}`)}
+      className='animate-pulse font-semibold text-sky-500'>
+        {/* <i>{ org?.promotedOrgs[currentIndex]?.description?.substring(0,100)} .  .  .</i> */}
           </button></a>
        </div>
      </div>
 </div>
-
-
-
-
-
-
-
 
 
 
@@ -126,14 +117,13 @@ useEffect(() => {
           alt=''
           />
          </div> */}
-
-
-                 {/* <div className="mb-6 lg:mb-0">
-                  <div className='lg:w-6/12 md:w-5/12 opacity-100 duration-300 absolute inset-0 left-[30%] top-[30%] justify-center items-center text-3xl text-black font-semibold italic m-2 mx-2 mb-4'>
-                  <h1 className=' text-[#1390D0]'>{`${org?.[currentIndex]?.name}`}</h1>
-                   <h1 className='py-2 pl-4 text-[#F49F08]'>{`${org?.[currentIndex]?.businessSector}`}</h1>
-                  </div>    
-                 </div> */}
+      
+        {/* <div className="mb-6 lg:mb-0">
+          <div className='lg:w-6/12 md:w-5/12 opacity-100 duration-300 absolute inset-0 left-[30%] top-[30%] justify-center items-center text-3xl text-black font-semibold italic m-2 mx-2 mb-4'>
+          <h1 className=' text-[#1390D0]'>{`${org?.[currentIndex]?.name}`}</h1>
+          <h1 className='py-2 pl-4 text-[#F49F08]'>{`${org?.[currentIndex]?.businessSector}`}</h1>
+          </div>    
+        </div> */}
           {/* <div
             className="absolute top-0 right-0 bottom-0 left-0  md:ml-0 ml-20  w-full h-full overflow-hidden bg-fixed"
             style={{ backgroundColor: "rgba(0, 0,0,0)" }}

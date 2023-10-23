@@ -37,8 +37,8 @@ export const viewOrganization = createAsyncThunk(
         // let URL = `${BaseUrl}/addressapi/organizations/${id}`;      
           // let response = await createContact(message);
         let response = await axios.get(URL);
-  
-        // console.log("single organization : ",response);
+
+         console.log("single organization : ",response);
   
         if (response.status === 200) {
           return response.data;
@@ -50,6 +50,4 @@ export const viewOrganization = createAsyncThunk(
          console.log("Error", e.response.data);
         handleError("loading...");
         return thunkAPI.rejectWithValue(e.response.data);
-      }
-    }
-  );
+      }});

@@ -49,14 +49,19 @@ const setmenu = () =>{
     setMenu(true);
   }
 }
-const {id} = useParams();
 
-const { org } = useSelector(
+//Products
+const {id} = useParams();
+useEffect(() => {
+   dispatch(getOrganization(id));
+},[]);
+
+const  {org}  = useSelector(
   (state) => state.org
 )
-//Products
- console.log("yibe",org?.Products?.length)
-console.log("organization detail now : ", org);
+ console.log("yibe",org?.job_vacancies
+ )
+console.log("organization detail now : ", org?.job_vacancies?.job_vacancies[0].title);
 const firstSection = useRef();
 const productSection = useRef();
 const vacancieSection = useRef();
@@ -85,9 +90,6 @@ const scrollToAll = (elmRef) =>{
       behavior: "smooth"
   })
 }
-useEffect(() => {
-   dispatch(getOrganization(id));
-},[]);
 
 const louberWorkDetail = localStorage.getItem("louberWorkDetail")
 ? JSON.parse(localStorage.getItem("louberWorkDetail"))
@@ -168,13 +170,13 @@ to ="/">አግኙን</button></li>
 <li className='mx-6'><button onClick={()=> scrollToAll(productSection)}
 className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'>
 ምርቶች</button></li>
- <li className='mx-6'><button onClick={()=> scrollToAll(vacancieSection)}
- className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'>
- የስራ ማስታዎቂያ</button></li>
- <li className='mx-6'><button onClick={()=> scrollToAll(biddingSection)}
+<li className='mx-6'><button onClick={()=> scrollToAll(biddingSection)}
   className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex' 
     >   
     የጨረታ ማስታዎቂያ </button></li>
+ <li className='mx-6'><button onClick={()=> scrollToAll(vacancieSection)}
+ className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'>
+ የስራ ማስታዎቂያ</button></li>
  {/* <li><button className=' transition duration-700 transform hover:-translate-y-1 hover:scale-110 ml-12 flex' 
     >  ግብት </button></li> */}
  <li className='mx-8'><button onClick={()=> getHome()}
@@ -200,15 +202,15 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
       <button onClick={()=> scrollToAll(productSection)}
       className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'>
       <img className=' w-6 h-5 mx-4 ' src={producticon} alt='Noicon'/> ምርቶች</button></li>
- <li className='mx-6 py-2 font-serif uppercase font-medium text-xl '>
-      <button onClick={()=> scrollToAll(vacancieSection)}
-      className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'>
-      <img className=' w-6 h-5 mx-4 ' src={vacancy} alt='Noicon'/>  የስራ ማስታዎቂያ</button></li>
-<li className='mx-6 py-2 font-serif uppercase font-medium text-xl '>
+      <li className='mx-6 py-2 font-serif uppercase font-medium text-xl '>
      <button onClick={()=> scrollToAll(biddingSection)}
       className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex' 
         >   
         <img className=' w-6 h-5 mx-4 ' src={bidding} alt='Noicon'/> የጨረታ ማስታዎቂያ </button></li>
+ <li className='mx-6 py-2 font-serif uppercase font-medium text-xl '>
+      <button onClick={()=> scrollToAll(vacancieSection)}
+      className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'>
+      <img className=' w-6 h-5 mx-4 ' src={vacancy} alt='Noicon'/>  የስራ ማስታዎቂያ</button></li>
     {/* <li><button className=' transition duration-700 transform hover:-translate-y-1 hover:scale-110 ml-12 flex' 
         >  ግብት </button></li> */}
    <li className='mx-6 py-2 font-serif uppercase font-medium  text-xl '>
@@ -224,10 +226,10 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
           <div
             className=" w-1/2 md:mr-36 h-full flex md:ml-10 ml-5 flex-col p-20 justify-center items-center">
                <h1 className="text-4xl md:text-4xl xl:text-5xl text-[#F49F08] font-bold font-display tracking-tight leading-tight italic">
-                  {`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.name}`}
+                  {`${org?.org?.name}`} 
                   </h1>
                   <p className="text-2xl md:text-2xl xl:text-3xl text-[#F49F08] font-bold font-display tracking-tight leading-tight">
-                  {`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.businessSector}`}
+                  {`${org?.org?.description}`}
 
                 </p>
          </div>
@@ -239,8 +241,8 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
           <img 
           className="w-full h-3/4 rounded-lg "
           //src={`/img/Eplusapp1.png`} 
-          src={`/img/bossweb.png`} 
-        //  src={`${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`}
+          // src={`/img/bossweb.png`}  
+          src={`${AddressBaseUrl}/images/${org?.org?.logo}`}
           alt=""
           />
          </div>
@@ -270,12 +272,195 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
   </>
 )} */}
 
+ {/* product list */}
+ { 
+     (org?.promotedProducts?.promotedProducts?.length)>0
+      ?(
+        <div className="items-center py-3 mb-4 border-t border-gray-500 mt-7" ref={productSection}>
+         <button className=" text-lg font-display text-black font-medium hover:text-[#0397FF]">
+          <span className="mr-2 underline decoration-pink-800 decoration-4 underline-offset-8"> ምርቶች </span>
+         </button>
+        </div>
+      ):(null)
+    }
+      <div class="grid lg:grid-cols-3 xl:gap-10 md:gap-6 xl:gap-x-4">
+      {
+        (org?.promotedProducts?.promotedProducts?.length)>0
+          ?(
+            data[0]?.Products?.slice(0, 3).map((products, index) => (
+       <div key={index} className="mb-6 lg:mb-0">
+        <div class="relative group block bg-white rounded-lg shadow-inner shadow-blue-950/40 p-1">
+            <div className="flex pb-2">
+                  <div
+                    className="p-2 relative overflow-hidden bg-no-repeat bg-cover rounded-lg"
+                    data-mdb-ripple="true"
+                    data-mdb-ripple-color="light"
+                  >
+                    <img
+                      className="w-screen h-52 transition cursor-pointer duration-700"                     
+                     onClick={() => ProductsDetail(products) }
+                      //src={`/img/${products.featureImage}`}
+                      src={`${AddressBaseUrl}/images/${products.image}`}
+                      alt="product img not found"
+                    />
+                  </div>
+                </div>
+            <div className="bg-[#E3E6E6] m-auto">
+              <p className="text-sm font-bold">{products.title}</p>
+              <p className="mb-2 text-sm ">{products.description.substring(0, 30) + " ..."}</p>
+             </div>
+            </div>
+           </div>
+        )))
+      :(null)  
+      }
+     </div>
+     {productDel && (
+          <> 
+            <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none -mt-6 border border-grey-100">
+              <div className="relative w-auto my-6 mx-auto max-w-2xl">
+                {/*content*/}
+                <div className="rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                  {/*header*/}
+                  <div className="flex justify-end p-1">
+                    <button
+                       onClick={() => setProductDel(false) }
+                      type="button"
+                      className="text-red-600 bg-transparent hover:bg-gray-200 rounded-lg text-lg p-1 ml-auto inline-flex items-center"
+                      data-modal-toggle="log-in-model"
+                    >
+                      <HiOutlineX className="w-6 h-6" />
+                    </button>
+                  </div>
+                  <div className="w-full flex">
+                    <div className="p-4">
+                    <img
+                    className="w-48 h-32 transition cursor-pointer duration-700"
+                      //src={`${AddressBaseUrl}/images/${louberWorkDetail.image}`}
+                      src={`${AddressBaseUrl}/images/${louberWorkDetail.image}`}
+                      alt="product img not found"
+                    /> 
+                    </div>
+                   <div className="m-4">
+                   {/* <p className="text-lg font-bold">{louberWorkDetail?.name}</p>  */}
+                    <div class="bg-white rounded-md max-w-4xl mx-auto p-2 space-y-2 -mt-2 shadow-lg">
+                    <h3 class="border-t mb-2 pt-3 font-semibold underline">የድርጅቱ ስም: <span >{org?.org?.name}</span></h3> 
+                    <h3 className="flex"><h3 class="mb-1 font-semibold underline">የምርቱ መጠሪያ: </h3> <span >{louberWorkDetail?.title} ግልጽ ጨረታ ማስታወቂያ</span></h3>
+                    <h3 className="flex"><h3 class="mb-1 font-semibold underline">የምርቱ አይነት:</h3> <span >{louberWorkDetail?.type} </span></h3>
+                    <h3 className="flex"><h3 class="mb-1 font-semibold underline">የምርቱ የተናጠል ዋጋ:</h3><span >200 </span>የምርቱ የጀምላ ዋጋ:</h3>
+                    <h3 className="flex"><h3 class="mb-1 font-semibold underline">ቦታ: </h3><span>BD</span></h3>
+                        <div class="pt-2">
+                          <h3 class="font-semibold -ml-56 underline"> ማብራሪያ:</h3>
+                            <p class=" mt-2">{louberWorkDetail?.description}</p>
+                        </div>
+                        <h3 class="border-t mb-2 pt-3 font-semibold underline">Email: <span class="font-thin">EplusApp88@gmail.com</span></h3> 
+                     </div>
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+            </>
+          )} 
+
+
+           {/* bids */}
+ { 
+     (org?.bids?.bids?.length)>0
+      ?(
+        <div className="items-center py-3 mb-4 mt-6 border-t border-gray-500" ref= {biddingSection}>
+         <button className=" text-lg font-display text-black font-medium hover:text-[#0397FF]">
+          <span className="mr-2 underline decoration-pink-800 decoration-4 underline-offset-8">የጨረታ ማስታዎቂያ </span>
+         </button>
+        </div>
+       ):(null)
+     }
+   <div class="grid lg:grid-cols-3 xl:gap-10 md:gap-6 xl:gap-x-4">
+      {
+        (org?.bids?.bids?.length)>0
+          ?(
+            org?.bids?.bids?.slice(0, 3).map((bid, index) => (
+       <div key={index} className="mb-6 lg:mb-0">
+        <div class="relative group block bg-white rounded-lg shadow-inner shadow-blue-950/40 p-1">
+            <div className="flex pb-2">
+                  <div
+                    className="p-2  relative overflow-hidden bg-no-repeat bg-cover rounded-lg"
+                    data-mdb-ripple="true"
+                    data-mdb-ripple-color="light"
+                  >
+                    <img
+                      className="w-screen h-52 transition cursor-pointer duration-700"
+                     // src={`${AddressBaseUrl}/images/${bid.image}`}
+                     src={`${AddressBaseUrl}/images/${bid.image}`}
+                      alt="product img not found"
+                      onClick={() => BiddingDetail(bid) }
+                    />
+                  </div>
+                </div>
+            <div className="bg-[#E3E6E6] m-auto">
+              <p className="text-sm font-bold">{bid?.title}</p>
+              <p className="mb-2 text-sm ">{bid?.description.substring(0, 30) + " ..."}</p>
+             </div>
+            </div>
+           </div>
+        )))
+      :(null)  
+      }
+     </div>
+     {BiddingDel && (
+          <> 
+            <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none -mt-6 border border-grey-100">
+              <div className="relative w-auto my-6 mx-auto max-w-2xl">
+                {/*content*/}
+                <div className="rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                  {/*header*/}
+                  <div className="flex justify-end p-1">
+                    <button
+                       onClick={() => setbiddingDel(false) }
+                      type="button"
+                      className="text-red-600 bg-transparent hover:bg-gray-200 rounded-lg text-lg p-1 ml-auto inline-flex items-center"
+                      data-modal-toggle="log-in-model"
+                    >
+                      <HiOutlineX className="w-6 h-6" />
+                    </button>
+                  </div>
+                  <div className="w-full flex">
+                    <div className="p-4">
+                    <img
+                    className="w-48 h-32 transition cursor-pointer duration-700"
+                      //src={`${AddressBaseUrl}/images/${louberWorkDetail.image}`}
+                      src={`${AddressBaseUrl}/images/${louberWorkDetail.image}`}
+                      alt="product img not found"
+                    /> 
+                    </div>
+                   <div className="m-4">
+                   {/* <p className="text-lg font-bold">{louberWorkDetail?.name}</p>  */}
+                    <div class="bg-white rounded-md max-w-4xl mx-auto p-2 space-y-2 -mt-2 shadow-lg">
+                    <h3 class="border-t mb-2 pt-3 font-semibold underline">የድርጅቱ ስም: <span >{org?.org?.name}</span></h3> 
+                    <h3 className="flex"><h3 class="mb-1 font-semibold underline">የጨረታ መጠሪያ: </h3> <span >{louberWorkDetail?.title} ግልጽ ጨረታ ማስታወቂያ</span></h3>
+                    <h3 className="flex"><h3 class="mb-1 font-semibold underline">የጨረታ አይነት:</h3> <span >{louberWorkDetail?.type} </span></h3>
+                    <h3 className="flex"><h3 class="mb-1 font-semibold underline">የጨረታ ቁጥር:</h3> <span >{louberWorkDetail?.No}</span></h3>
+                    <h3 className="flex"><h3 class="mb-1 font-semibold underline">ቦታ: ማብቂያ ቀን: </h3><span>BD</span><h3 class="mb-1 ml-3 font-semibold underline"> ማብቂያ ቀን: </h3> <span >{louberWorkDetail?.closingDate?.split('T')[0]}-{louberWorkDetail?.closingDate?.split('T')[0]}</span></h3>
+                        <div class="pt-2">
+                          <h3 class="font-semibold -ml-56 underline"> ማብራሪያ:</h3>
+                            <p class=" mt-2">{louberWorkDetail?.description}</p>
+                        </div>
+                        <h3 class="border-t mb-2 pt-3 font-semibold underline">Email: <span class="font-thin">EplusApp88@gmail.com</span></h3> 
+                     </div>
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+            </>
+          )} 
+          {/* Vacancy */}
 <div className="w-11/12 xl:w-11/12 mx-auto md:mt-10 lg:mt-20 border-t border-gray-500 ">
     <section className="mb-12 text-gray-800 text-center ">
     {/* job_vacancies */}
     {/* (org?.job_vacancies?.length)>0 */}
     { 
-     (data[0]?.job_vacancies?.length)>0
+     (org?.job_vacancies?.job_vacancies.length)>0
       ?(
         <div className="items-center py-3 mb-4">
          <button className=" text-lg font-display text-black font-medium hover:text-[#0397FF]">
@@ -286,9 +471,9 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
     }
       <div class="grid lg:grid-cols-3 xl:gap-10 md:gap-6 xl:gap-x-4" ref={vacancieSection}>
       {
-        (data[0].job_vacancies.length)>0
+        (org?.job_vacancies?.job_vacancies.length)>0
           ?(
-            data[0].job_vacancies?.slice(0, 3).map((job, index) => (
+            org?.job_vacancies?.job_vacancies?.slice(0, 7).map((job, index) => (
        <div key={index} className="mb-6 lg:mb-0">
         <div class="relative group block bg-white rounded-lg shadow-inner shadow-blue-950/40 p-1">
             <div className="flex pb-2">
@@ -300,8 +485,8 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
                   {/*      src={`${AddressBaseUrl}/images/${job.image}`} */}
                     <img
                       className="w-screen h-52 transition cursor-pointer duration-700"
-                      // src={smartPhone} 
-                      src={`/img/${job.featureImage}`}
+                      //src={`/img/${job.featureImage}`}
+                      src={`${AddressBaseUrl}/images/${job.image}`}
                       alt="product img not found"
                       onClick={() => VacancieDetail(job) }
                     />
@@ -319,8 +504,8 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
      </div>
      {/* day-work */}
     {/* (org?.job_vacancies?.length)>0 */}
-    { 
-     (data[0]?.day_work?.length)>0
+    {/* { 
+     (org?.job_vacancies?.job_vacancies.length)>0
       ?(
         <div className="items-center py-3 mb-4 pt-6 mt-5 border-t border-gray-500 ">
          <button className=" text-lg font-display text-black font-medium hover:text-[#0397FF]">
@@ -328,7 +513,7 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
          </button>
         </div>
        ):(null)
-     }
+     } */}
 
      {vacancieDel && (
           <> 
@@ -354,7 +539,7 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
                     className="w-48 h-32 transition cursor-pointer duration-700"
                      
                       //src={`${AddressBaseUrl}/images/${detailInfo.image}`}
-                      src={`/img/${detailInfo.featureImage}`}
+                      src={`${AddressBaseUrl}/images/${detailInfo.image}`}
                       alt="product img not found"
                     /> 
                     </div>
@@ -382,9 +567,9 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
 
     <div class="grid lg:grid-cols-3 xl:gap-10 md:gap-6 xl:gap-x-4" ref={dayworkSection}>
        {
-         (data[0].day_work.length)>0
+         (org?.daily_works?.daily_works?.length)>0
            ?(
-            data[0].day_work?.slice(0, 3).map((job, index) => (
+            org?.daily_works?.daily_works?.slice(0, 7).map((job, index) => (
          <div key={index} className="mb-6 lg:mb-0">
          <div class="relative group block bg-white rounded-lg shadow-inner shadow-blue-950/40 p-1">
          <div className="flex pb-2">
@@ -396,8 +581,8 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
                   {/*      src={`${AddressBaseUrl}/images/${job.image}`} */}
                     <img
                       className="w-screen h-52 transition cursor-pointer duration-700"
-                      // src={smartPhone} 
-                      src={`/img/${job.featureImage}`}
+                      //src={`/img/${job.featureImage}`}
+                      src={`${AddressBaseUrl}/images/${job.image}`}
                       alt="product img not found"
                       onClick={() => LouberDetail(job) }
                     />
@@ -435,8 +620,7 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
                     <div className="p-4">
                     <img
                     className="w-48 h-32 transition cursor-pointer duration-700"
-                      //src={`${AddressBaseUrl}/images/${louberWorkDetail.image}`}
-                      src={`/img/${louberWorkDetail.featureImage}`}
+                      src={`${AddressBaseUrl}/images/${louberWorkDetail.image}`}
                       alt="product img not found"
                     /> 
                     </div>
@@ -463,189 +647,9 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
             </>
           )} 
 
- {/* product list */}
-     { 
-     (data[0]?.Products?.length)>0
-      ?(
-        <div className="items-center py-3 mb-4 border-t border-gray-500 mt-7" ref={productSection}>
-         <button className=" text-lg font-display text-black font-medium hover:text-[#0397FF]">
-          <span className="mr-2 underline decoration-pink-800 decoration-4 underline-offset-8"> ምርቶች </span>
-         </button>
-        </div>
-      ):(null)
-    }
-      <div class="grid lg:grid-cols-3 xl:gap-10 md:gap-6 xl:gap-x-4">
-      {
-        (data[0]?.Products?.length)>0
-          ?(
-            data[0]?.Products?.slice(0, 3).map((products, index) => (
-       <div key={index} className="mb-6 lg:mb-0">
-        <div class="relative group block bg-white rounded-lg shadow-inner shadow-blue-950/40 p-1">
-            <div className="flex pb-2">
-                  <div
-                    className="p-2 relative overflow-hidden bg-no-repeat bg-cover rounded-lg"
-                    data-mdb-ripple="true"
-                    data-mdb-ripple-color="light"
-                  >
-                    <img
-                      className="w-screen h-52 transition cursor-pointer duration-700"
-                     //  src={`${AddressBaseUrl}/images/${products.featureImage}`}
-                     
-                     onClick={() => ProductsDetail(products) }
-                      src={`/img/${products.featureImage}`}
-                      alt="product img not found"
-                    />
-                  </div>
-                </div>
-            <div className="bg-[#E3E6E6] m-auto">
-              <p className="text-sm font-bold">{products.title}</p>
-              <p className="mb-2 text-sm ">{products.description.substring(0, 30) + " ..."}</p>
-             </div>
-            </div>
-           </div>
-        )))
-      :(null)  
-      }
-     </div>
-     {productDel && (
-          <> 
-            <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none -mt-6 border border-grey-100">
-              <div className="relative w-auto my-6 mx-auto max-w-2xl">
-                {/*content*/}
-                <div className="rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                  {/*header*/}
-                  <div className="flex justify-end p-1">
-                    <button
-                       onClick={() => setProductDel(false) }
-                      type="button"
-                      className="text-red-600 bg-transparent hover:bg-gray-200 rounded-lg text-lg p-1 ml-auto inline-flex items-center"
-                      data-modal-toggle="log-in-model"
-                    >
-                      <HiOutlineX className="w-6 h-6" />
-                    </button>
-                  </div>
-                  <div className="w-full flex">
-                    <div className="p-4">
-                    <img
-                    className="w-48 h-32 transition cursor-pointer duration-700"
-                      //src={`${AddressBaseUrl}/images/${louberWorkDetail.image}`}
-                      src={`/img/${louberWorkDetail.featureImage}`}
-                      alt="product img not found"
-                    /> 
-                    </div>
-                   <div className="m-4">
-                   {/* <p className="text-lg font-bold">{louberWorkDetail?.name}</p>  */}
-                    <div class="bg-white rounded-md max-w-4xl mx-auto p-2 space-y-2 -mt-2 shadow-lg">
-                    <h3 class="border-t mb-2 pt-3 font-semibold underline">የድርጅቱ ስም: <span >{org?.org?.name}</span></h3> 
-                    <h3 className="flex"><h3 class="mb-1 font-semibold underline">የምርቱ መጠሪያ: </h3> <span >{louberWorkDetail?.title} ግልጽ ጨረታ ማስታወቂያ</span></h3>
-                    <h3 className="flex"><h3 class="mb-1 font-semibold underline">የምርቱ አይነት:</h3> <span >{louberWorkDetail?.type} </span></h3>
-                    <h3 className="flex"><h3 class="mb-1 font-semibold underline">የምርቱ የተናጠል ዋጋ:</h3><span >200 </span>የምርቱ የጀምላ ዋጋ:</h3>
-                    <h3 className="flex"><h3 class="mb-1 font-semibold underline">ቦታ: </h3><span>BD</span></h3>
-                        <div class="pt-2">
-                          <h3 class="font-semibold -ml-56 underline"> ማብራሪያ:</h3>
-                            <p class=" mt-2">{louberWorkDetail?.description}</p>
-                        </div>
-                        <h3 class="border-t mb-2 pt-3 font-semibold underline">Email: <span class="font-thin">EplusApp88@gmail.com</span></h3> 
-                     </div>
-                    </div>
-                   </div>
-                  </div>
-                 </div>
-                </div>
-            </>
-          )} 
 
- {/* bids */}
- { 
-     (data[0]?.bids?.length)>0
-      ?(
-        <div className="items-center py-3 mb-4 mt-6 border-t border-gray-500" ref= {biddingSection}>
-         <button className=" text-lg font-display text-black font-medium hover:text-[#0397FF]">
-          <span className="mr-2 underline decoration-pink-800 decoration-4 underline-offset-8">የጨረታ ማስታዎቂያ </span>
-         </button>
-        </div>
-       ):(null)
-     }
-   <div class="grid lg:grid-cols-3 xl:gap-10 md:gap-6 xl:gap-x-4">
-      {
-        (data[0]?.bids?.length)>0
-          ?(
-            data[0]?.bids?.slice(0, 3).map((bid, index) => (
-       <div key={index} className="mb-6 lg:mb-0">
-        <div class="relative group block bg-white rounded-lg shadow-inner shadow-blue-950/40 p-1">
-            <div className="flex pb-2">
-                  <div
-                    className="p-2  relative overflow-hidden bg-no-repeat bg-cover rounded-lg"
-                    data-mdb-ripple="true"
-                    data-mdb-ripple-color="light"
-                  >
-                    <img
-                      className="w-screen h-52 transition cursor-pointer duration-700"
-                     // src={`${AddressBaseUrl}/images/${bid.image}`}
-                      src={`/img/${bid.featureImage}`}
-                      alt="product img not found"
-                      onClick={() => BiddingDetail(bid) }
-                    />
-                  </div>
-                </div>
-            <div className="bg-[#E3E6E6] m-auto">
-              <p className="text-sm font-bold">{bid?.title}</p>
-              <p className="mb-2 text-sm ">{bid?.description.substring(0, 30) + " ..."}</p>
-             </div>
-            </div>
-           </div>
-        )))
-      :(null)  
-      }
-     </div>
 
-     {BiddingDel && (
-          <> 
-            <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none -mt-6 border border-grey-100">
-              <div className="relative w-auto my-6 mx-auto max-w-2xl">
-                {/*content*/}
-                <div className="rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                  {/*header*/}
-                  <div className="flex justify-end p-1">
-                    <button
-                       onClick={() => setbiddingDel(false) }
-                      type="button"
-                      className="text-red-600 bg-transparent hover:bg-gray-200 rounded-lg text-lg p-1 ml-auto inline-flex items-center"
-                      data-modal-toggle="log-in-model"
-                    >
-                      <HiOutlineX className="w-6 h-6" />
-                    </button>
-                  </div>
-                  <div className="w-full flex">
-                    <div className="p-4">
-                    <img
-                    className="w-48 h-32 transition cursor-pointer duration-700"
-                      //src={`${AddressBaseUrl}/images/${louberWorkDetail.image}`}
-                      src={`/img/${louberWorkDetail.featureImage}`}
-                      alt="product img not found"
-                    /> 
-                    </div>
-                   <div className="m-4">
-                   {/* <p className="text-lg font-bold">{louberWorkDetail?.name}</p>  */}
-                    <div class="bg-white rounded-md max-w-4xl mx-auto p-2 space-y-2 -mt-2 shadow-lg">
-                    <h3 class="border-t mb-2 pt-3 font-semibold underline">የድርጅቱ ስም: <span >{org?.org?.name}</span></h3> 
-                    <h3 className="flex"><h3 class="mb-1 font-semibold underline">የጨረታ መጠሪያ: </h3> <span >{louberWorkDetail?.title} ግልጽ ጨረታ ማስታወቂያ</span></h3>
-                    <h3 className="flex"><h3 class="mb-1 font-semibold underline">የጨረታ አይነት:</h3> <span >{louberWorkDetail?.type} </span></h3>
-                    <h3 className="flex"><h3 class="mb-1 font-semibold underline">የጨረታ ቁጥር:</h3> <span >{louberWorkDetail?.No}</span></h3>
-                    <h3 className="flex"><h3 class="mb-1 font-semibold underline">ቦታ: ማብቂያ ቀን: </h3><span>BD</span><h3 class="mb-1 ml-3 font-semibold underline"> ማብቂያ ቀን: </h3> <span >{louberWorkDetail?.closingDate?.split('T')[0]}-{louberWorkDetail?.closingDate?.split('T')[0]}</span></h3>
-                        <div class="pt-2">
-                          <h3 class="font-semibold -ml-56 underline"> ማብራሪያ:</h3>
-                            <p class=" mt-2">{louberWorkDetail?.description}</p>
-                        </div>
-                        <h3 class="border-t mb-2 pt-3 font-semibold underline">Email: <span class="font-thin">EplusApp88@gmail.com</span></h3> 
-                     </div>
-                    </div>
-                   </div>
-                  </div>
-                 </div>
-                </div>
-            </>
-          )} 
+
    </section>
   </div>
       <div className="w-11/12 mx-auto border-t border-gray-500" ref={firstSection}>
@@ -654,7 +658,7 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
          <NavLink onClick={() => setOpen(true)} className="text-xl text-[#F49F08]" style={navLinkStyles}> ለበለጠ መረጃ </NavLink>
          </div>
           <div>
-           <button onClick={() => setOpen(false)} className="text-xl text-black"> {org?.org?.name} ok </button>
+           <button onClick={() => setOpen(false)} className="text-xl text-black"> {org?.org?.name}</button>
           </div>
         </div>
       </div>
@@ -679,14 +683,14 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
             <div data-aos="fade-up" className="grow-0 shrink-0 basis-auto w-full  md:w-6/12 xl:w-6/12" >
               <div className="pl-5 xl:pl-10 mt-4 select-none">
                 <p className="text-textColor font-display xl:text-lg md:text-lg leading-8 text-left tracking-tight pb-2">
-                {org?.promotedOrgs?.name}
+                {org?.org?.name}
                 </p>
                 <p className="text-textColor font-display xl:text-lg md:text-lg leading-8 text-left tracking-tight pb-2">
                   {/* ኢጵላሣጵ ንግድ ስራዎች አክሲዮን ማህበር በኢትዮጵያ አዲሱ የንግድ ፈቃድ መስጫ መደብ መሠረት ረቂቅ
                   መረጃ ወይም ሶፍትዌር ፍብርክ (ንድፍ፣ ምርት፣ ብልጽግ፣ ትግብር፣ ድር ንድፍና ዝርግት አካቶ) እና
                   መረጃ የማቀነባበርና የመረጃ ቋት የማደራጀት ስራዎች ረቂቅ የመረጃ ምጥቀቶችን ማዘጋጀት፣ የመረጃ
                   ቋት ማዘጋጀት፣ በቀላሉ እንዲፈለጉ ማድረግ፣ ወቅቱን ጠብቆ የማሻሻል፣ የሶፍትዌር ዲዛይን፣ ልማት፣ */}
-                  {org?.promotedOrgs?.description}
+                  {org?.org?.description}
 
                 </p>
               </div>

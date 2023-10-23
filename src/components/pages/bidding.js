@@ -95,15 +95,15 @@ const Bidding = (props) =>{
   <div className="w-11/12 mx-auto h-4/5">
    <section className="mb-6 text-gray-800 text-center group">
     <div className=" md:flex block flex-wrap justify-between items-center mx-auto md:px-6 lg:px-6 px-1">
-      <div className="flex items-center py-3 mb-4 ">
-        <button
-          className=" text-lg font-display text-black font-medium hover:text-[#0397FF]" 
+      <div className="flex items-center py-3 mb-4 md:ml-0 ml-3">
+       <button
+          className=" text-lg font-display text-black bg-[#E3E6E6] h-10 pl-3 pb-5 pr-3 -ml-5 rounded-md font-medium hover:text-[#0397FF]"
          >
-          <span className="mr-2 md:ml-0 ml-10 underline decoration-pink-800 decoration-4 underline-offset-8">የጫራታ</span>ማስታዎቂያ
+         <span className=" mt-10 md:ml-0  underline decoration-pink-800 decoration-4 underline-offset-8">የጫራታ</span>ማስታዎቂያ
          </button>
          <form onSubmit={submitHandler}>
-         <div class=" mb-4 flex flex-wrap items-stretch absolute md:mt-0 mt-6 md:right-16 right-10">
-          <input className="bg-[#E3E6E6] p-3 rounded-md md:-mt-5 ml mt-0 z-20 " 
+         <div class=" mb-4 flex flex-wrap items-stretch absolute md:mt-0 mt-6 md:ml-0 ml-5 md:right-16 right-10">
+         <input className="bg-[#E3E6E6] p-3 rounded-md md:-mt-5 ml mt-0 z-20 " 
              type="date"
              aria-label="Search"
              aria-describedby="button-addon1"
@@ -138,15 +138,15 @@ const Bidding = (props) =>{
      </form>
     </div>
   </div>
-  <div className='relative p-7 bg-white md:flex lg:flex pb-20 -mt-7'>    
-    <div class="relative mr-2 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 xl:gap-20 md:gap-20 gap-12 my-3 xl:gap-x-6 md:gap-x-10">
+  <div className='relative bg-white md:flex lg:flex pb-20 md:-mt-7 mt-10 md:ml-4 ml-5'>    
+    <div class="relative grid xl:grid-cols-3 md:grid-cols-3 grid-cols-1 xl:gap-20 md:gap-20 gap-12 my-3 xl:gap-x-10 md:gap-x-7 gap-x-5">
       {
        (bidding?.vacancies?.length)>0
          ?(
           bidding?.vacancies?.slice(0, 4).map((bidding,index) =>{
            return(
               <>
-              <div key={index} className=" h-40 md:h-56 xl:h-s6 xl:w-96 md:w-80 sm:w-60 relative md:ml-2 -ml-7 my-14 mb-24 md:mb-0">
+              <div key={index} className=" h-40 md:h-56 xl:h-s6 xl:w-96 md:w-80 sm:w-60 relative md:ml-2 -ml-7 my-10 mb-24 md:mb-0">
                 <div className="w-full h-full relative border-gray-600 
                  shadow-lg shadow-neutral-900 bg-cover bg-no-repeat "> 
                  <div className="relative flex justify-center items-center h-full">

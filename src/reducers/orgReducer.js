@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { viewOrganization, getOrganization } from "../actions/orgAction";
+import { getOrganization } from "../actions/orgAction";
 
 //initail state
 const initialState = {
     loading: false,
-    organization:[],
+    org:[],
     error: false,
     success: false,
     message: null,
@@ -15,19 +15,19 @@ const initialState = {
     reducers: {},
     extraReducers: {
 
-        [viewOrganization.pending]: (state) =>{
-            state.loading = true
-            state.error = false
-        },
-        [viewOrganization.fulfilled]: (state, {payload}) =>{
-            state.error = false
-            state.success = true
-            state.org = payload
-        },
-        [viewOrganization.rejected]: (state, {payload}) =>{
-            state.error = payload
-            state.loading = false
-        },
+        // [viewOrganization.pending]: (state) =>{
+        //     state.loading = true
+        //     state.error = false
+        // },
+        // [viewOrganization.fulfilled]: (state, {payload}) =>{
+        //     state.error = false
+        //     state.success = true
+        //     state.org = payload
+        // },
+        // [viewOrganization.rejected]: (state, {payload}) =>{
+        //     state.error = payload
+        //     state.loading = false
+        // },
         [getOrganization.pending]: (state) =>{
             state.loading = true
             state.error = false
@@ -36,6 +36,7 @@ const initialState = {
             state.error = false
             state.success = true
             state.org = payload
+            console.log("oooo",payload)
         },
         [getOrganization.rejected]: (state, {payload}) =>{
             state.error = payload

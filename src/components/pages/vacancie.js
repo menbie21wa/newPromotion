@@ -91,12 +91,12 @@ useEffect(()=>{
   };
   
 //new pagination 
-const [vacancie, setProducts] = useState([])
+// const [vacancie, setProducts] = useState([])
 console.log("view vacancies2 : ",vacancies?.vacancies?.length);
 
 useEffect(() =>{
   dispatch(viewVacancies());
-  setProducts(vacancies?.vacancies)
+  // setProducts(vacancies?.vacancies)
 },[]);
 const orgHandler=()=>{
     // navigate("org/"+id)
@@ -107,14 +107,14 @@ const [page, setPage] = useState(1)
 const selectPageHandler = (selectedPage) => {
   // alert(data.length+","+selectedPage)
   console.log("next button cliked : ",selectedPage);
-  if (selectedPage >= 1 && (selectedPage * 12)-12 <= vacancie?.vacancie?.length  && selectedPage !== page) {
+  if (selectedPage >= 1 && (selectedPage * 12)-12 <= vacancies?.vacancies?.length  && selectedPage !== page) {
     setPage(selectedPage)
   }
 }
 
 return(
   <>
-   <div className=" bg-white pb-10">
+   <div className=" bg-[#E3E6E6] pb-10 h-full">
     <div className="w-11/12 mx-auto">
      <section className="mb-6 text-gray-800 text-center group">
       <div className=" md:flex block flex-wrap justify-between items-center mx-auto md:px-6 lg:px-6 px-1">
@@ -126,7 +126,7 @@ return(
          </button>
          <form onSubmit={submitHandler}>
          <div class=" mb-4 flex flex-wrap items-stretch absolute md:mt-0 mt-6 md:right-16 right-10">
-          <input className="bg-[#E3E6E6] p-3 rounded-md md:-mt-5 ml mt-0 z-20 " 
+          <input className="bg-[#E3E6E6] p-3 rounded-md md:-mt-5 mt-0 z-20 " 
              type="date"
              aria-label="Search"
              aria-describedby="button-addon1"
