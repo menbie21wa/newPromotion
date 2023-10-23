@@ -58,15 +58,15 @@ useEffect(() =>{
         );
         // console.log("all products are1 ", product);
 
-const [data, setData] =useState(dataVacancy || '');
+// const [data, setData] =useState(dataVacancy || '');
+// useEffect(() => {
+//   setData(dataVacancy);
+// }, [dataVacancy])
 // console.log("all vacancies are : ", data[0]);
 useEffect(()=>{
     dispatch(viewProducts());
   },[]);
-//change useselector data to useState states with react js
-  useEffect(() => {
-    setData(dataVacancy);
-  }, [dataVacancy])
+
 
   const VacancieDetail = (data) =>{
     dispatch(addToDetail(data));
@@ -92,7 +92,6 @@ useEffect(()=>{
   
 //new pagination 
 const [vacancie, setProducts] = useState([])
-const [page, setPage] = useState(1)
 console.log("view vacancies2 : ",vacancies?.vacancies?.length);
 
 useEffect(() =>{
@@ -103,9 +102,12 @@ const orgHandler=()=>{
     // navigate("org/"+id)
     navigate("org")
 }
+
+const [page, setPage] = useState(1)
 const selectPageHandler = (selectedPage) => {
+  // alert(data.length+","+selectedPage)
   console.log("next button cliked : ",selectedPage);
-  if (selectedPage >= 1 && selectedPage <= vacancies?.vacancies?.length / 1 && selectedPage !== page) {
+  if (selectedPage >= 1 && (selectedPage * 12)-12 <= vacancie?.vacancie?.length  && selectedPage !== page) {
     setPage(selectedPage)
   }
 }
@@ -165,12 +167,9 @@ return(
    <div class="grid lg:grid-cols-3 xl:gap-5 md:gap-6 xl:gap-x-14">
     {(vacancies?.vacancies?.length > 0)
       ?(
-       
-        vacancies?.vacancies?.slice(page * 3 - 3, page * 3).map((vacancie,index) => { 
-
+        vacancies?.vacancies?.slice(page * 12 - 12, page * 12).map((vacancie,index) => { 
           return(
            <>
-           
             <div key={index} className=" relative md:my-10 my-12 md:ml-0 -ml-1">
             <div className=" products">
                    <div
@@ -187,8 +186,8 @@ return(
             className="transition cursor-pointer duration-700 rounded-xl border-2 border-b-2 border-gray-600"
             alt="product img not found"
            src={`${AddressBaseUrl}/images/${vacancie.image}`} 
-            //${AddressBaseUrl}/images/${vacancie.image}
-            onError={event => {
+            //src={`/img/${vacancie.featureImage}`} 
+             onError={event => {
             event.target.src = `${AddressBaseUrl}/images/${org?.promotedOrgs && 
             org?.promotedOrgs[currentIndex]?.logo}`
             event.onerror = null
@@ -229,19 +228,84 @@ return(
      </div>
     </>
     )})):(<><div><Loading/></div></>) }
-
-     {vacancies?.vacancies?.length > 0 && 
+    </div>
+     {/* {data?.length > 0 && 
      <div className="pagination">
         <span onClick={() => selectPageHandler(page - 1)}
-           className={page > 1 ? "" : "pagination__disable"}>◀</span>
-        {[...Array(vacancies?.vacancies?.length / 2)].map((_, i) => {
+          > ◀ </span>
+        {[...Array(data?.length / 2)].map((_, i) => {
              return <span key={i} className={page === i + 1 ? "pagination__selected" : ""} 
              onClick={() => selectPageHandler(i + 1)}>{i + 1}</span>
         })}
-      <span onClick={() => selectPageHandler(page + 1)}
-         className={page < vacancies?.vacancies?.length / 3? "" : "pagination__disable"}>▶</span>
-      </div>}
+        <span onClick={() => selectPageHandler(page * 12)}
+        > 
+         ▶ </span>
+      </div>} */}  
+      <br />
+      {vacancies?.vacancies?.length > 0 && 
+       <div className=" justify-center ml-10 mt-10">
+        {(vacancies?.vacancies?.length >=page * 12)?(
+           <p className='text-sm text-gray-700 mb-7'>
+            ክጠቅላላ <span className='font-medium ml-2 mr-2'> {vacancies?.vacancies?.length} </span>
+             የስራ ማስታወቂያዎች ዝርዝር ውስጥ ከቁጥር <span className='font-medium ml-2 mr-2'>{page * 12 - 12}</span>
+             እስከ ቁጥር <span className='font-medium ml-2 mr-2'> {page * 12} </span> የሚገኙ የስራ ማስታወቂያዎች ዝርዝር  
+             </p>
+          ):<p className='text-sm text-gray-700 mb-7'>
+              <p className="mr-2">(መጨረሻው ነው)</p> ጠቅላላ <span className='font-medium ml-2 mr-2'> {vacancies?.vacancies?.length} </span>
+               የስራ ማስታወቂያዎች ብቻ ይገኛሉ::  
+            </p>
+          }
+        <nav
+          className='relative z-0  inline-flex rounded-md shadow-sm -space-x-px'
+          aria-label='Pagination'
+        >
+          <button
+          onClick={() => selectPageHandler(page - 1)}
+            className='relative inline-flex items-center px-2 py-2 rounded-l-md border
+             bg-slate-700 border-gray-300  text-sm font-medium text-gray-500 hover:bg-gray-50'
+          >
+            <span className="font-bold">ምልስ</span>
+          </button>
+          <button
+          onClick={() => selectPageHandler(page + 1)}
+            className='relative inline-flex items-center px-2 py-2 rounded-r-md border
+             border-gray-300 bg-slate-700 text-sm font-medium text-gray-500 hover:bg-gray-50'
+          >
+            <span className=" font-bold">ቅጣይ</span>
+          </button>
+        </nav>
+      </div>
+      }
+      
+      {/* {data?.length > 0 && 
+      <div className=" justify-center ml-10 mt-10">
+      <p className='text-sm text-gray-700 mb-7'>
+      ክጠቅላላ <span className='font-medium'> {data?.length} </span>
+      የስራ ማስታወቂያዎች ዝርዝር ውስጥ ከቁጥር <span className='font-medium'>{page * 12 - 12}</span>
+        እስከ ቁጥር <span className='font-medium'> {page * 12} </span> የሚገኙ ምርቶች ዝርዝር  
+        </p>
+        <nav
+          className='relative z-0  inline-flex rounded-md shadow-sm -space-x-px'
+          aria-label='Pagination'
+        >
+          <button
+          onClick={() => selectPageHandler(page - 1)}
+            className='relative inline-flex items-center px-2 py-2 rounded-l-md border
+             bg-slate-700 border-gray-300  text-sm font-medium text-gray-500 hover:bg-gray-50'
+          >
+            <span className="font-bold">ምልስ</span>
+          </button>
 
+          <button
+          onClick={() => selectPageHandler(page + 1)}
+            className='relative inline-flex items-center px-2 py-2 rounded-r-md border
+             border-gray-300 bg-slate-700 text-sm font-medium text-gray-500 hover:bg-gray-50'
+          >
+            <span className=" font-bold">ቅጣይ</span>
+          </button>
+        </nav>
+      </div>}
+ */}
       {vacancieDel && (
           <> 
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none -mt-6 border border-grey-100">
@@ -290,7 +354,6 @@ return(
                </div>
               </>
              )} 
-          </div>
       </section>
      </div>
    </div> 

@@ -33,8 +33,9 @@ export const viewOrganization = createAsyncThunk(
     async (id,thunkAPI) => {
       // alert(id)
       try {
-        // let URL = `${BaseUrl}/addressapi/organizations/orginformation/${id}`;
-        let URL = `${BaseUrl}/addressapi/organizations/${id}`;        // let response = await createContact(message);
+        let URL = `${BaseUrl}/addressapi/organizations/orginformation/${id}`;
+        // let URL = `${BaseUrl}/addressapi/organizations/${id}`;      
+          // let response = await createContact(message);
         let response = await axios.get(URL);
   
         // console.log("single organization : ",response);

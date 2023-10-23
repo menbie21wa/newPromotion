@@ -77,6 +77,18 @@ const [data, setData] =useState(dataVacancy || '');
     //console.log("term : ",term);
     //setTerm("");
   };
+
+  const [currentPage, setPage] = useState(1)
+
+  const selectPageHandler = (selectedPage) => {
+
+    // alert(data.length+","+selectedPage)
+    console.log("next button cliked : ",selectedPage);
+    if (selectedPage >= 1 && (selectedPage * 6)-6 <= loubers?.vacancies?.length  && selectedPage !== currentPage) {
+      setPage(selectedPage)
+    }
+  }
+
 return(
   <>
    <div className="bg-[rgb(227,230,230)]">
@@ -122,7 +134,7 @@ return(
         {
           (loubers?.vacancies?.length)>0
             ?(
-              loubers?.vacancies?.slice(0, 4).map((values,index) =>{
+              loubers?.vacancies?.slice(currentPage * 6 - 6, currentPage * 6).map((values,index)=>{
              return(
                <>
                 <div key={index} className="md:my-10 my-12 md:ml-0 ml-0">
@@ -135,8 +147,8 @@ return(
                   >
                     <img
                       className=" w-screen h-52 transition cursor-pointer duration-700 rounded-xl"
-                     // src={`/img/${values.featureImage}`} 
-                     src={`${AddressBaseUrl}/images/${values.image}`} 
+                      src={`/img/${values.featureImage}`} 
+                     //src={`${AddressBaseUrl}/images/${values.image}`} 
                       alt="product img not found"
                       onError={event => {
                       event.target.src = `${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`
@@ -169,10 +181,49 @@ return(
                {/* <div className="p-0">
                 <p className="text-sm font-bold  mt-4 text-center">{values?.title.substring(0,24)}</p>      
                </div> */}
-            </div>
-          </>
-         )})):
-       (<><div><Loading/></div></>) }
+              </div>
+             </>
+            )})):
+           (<><div><Loading/></div></>) }
+          <br /><br />
+         </div>
+      <div>
+       {loubers?.vacancies?.length > 0 && 
+       <div className=" justify-center ml-10 mt-10">
+        {(loubers?.vacancies?.length >=currentPage * 6)?(
+           <p className='text-sm text-gray-700 mb-7'>
+            ክጠቅላላ <span className='font-medium ml-2 mr-2'> {loubers?.vacancies?.length} </span>
+            የቀንስራ ማስታወቂያዎች ዝርዝር ውስጥ ከቁጥር <span className='font-medium ml-2 mr-2'>{currentPage * 6 - 6}</span>
+             እስከ ቁጥር <span className='font-medium ml-2 mr-2'> {currentPage * 6} </span> የሚገኙ የቀንስራ ማስታወቂያዎች ዝርዝር  
+             </p>
+          ):<p className='text-sm text-gray-700 mb-7'>
+              <p className="mr-2">(መጨረሻው ነው)</p> ጠቅላላ <span className='font-medium ml-2 mr-2'> {loubers?.vacancies?.length} </span>
+              የቀንስራ ማስታወቂያዎች ብቻ ይገኛሉ::  
+            </p>
+          }
+      
+        <nav
+          className='relative z-0  inline-flex rounded-md shadow-sm -space-x-px'
+          aria-label='Pagination'
+        >
+          <button
+          onClick={() => selectPageHandler(currentPage - 1)}
+            className='relative inline-flex items-center px-2 py-2 rounded-l-md border
+             bg-slate-700 border-gray-300  text-sm font-medium text-gray-500 hover:bg-gray-50'
+          >
+            <span className="font-bold">ምልስ</span>
+          </button>
+
+          <button
+          onClick={() => selectPageHandler(currentPage + 1)}
+            className='relative inline-flex items-center px-2 py-2 rounded-r-md border
+             border-gray-300 bg-slate-700 text-sm font-medium text-gray-500 hover:bg-gray-50'
+          >
+            <span className=" font-bold">ቅጣይ</span>
+          </button>
+        </nav>
+      </div>}
+    </div>
         {vacancieDel && (
           <> 
             <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none -mt-6 border border-grey-100">
@@ -186,7 +237,7 @@ return(
                       type="button"
                       className="text-red-600 bg-transparent hover:bg-gray-200 rounded-lg text-lg p-1 ml-auto inline-flex items-center"
                       data-modal-toggle="log-in-model"
-                    >
+                      >
                       <HiOutlineX className="w-6 h-6" />
                     </button>
                   </div>
@@ -222,7 +273,7 @@ return(
             </>
           )} 
 
-    { seeMore && (
+    {/* { seeMore && (
         <>
           {
           (loubers?.vacancies?.length)>0
@@ -260,18 +311,15 @@ return(
                            src={`${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`}
                            alt='Noimage'/>
                       </ul>
-                       {/* src={`${AddressBaseUrl}/images/${vacancie.image}`}  */}
+                   
                        <div className="p-0">
                    <p className="text-sm font-bold  mt-4 text-center">{values?.title.substring(0,24)}</p>      
-                    {/* <p className="text-lg font-bold">{values?.description.substring(0,50)+"..."}</p>   */}
                     </div>
                       <span className="mt-1 ml-2">
                       <p className=" font-thin border text-sm">{`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.name}`}
                       </p></span><br />
                     </div>
-                  {/* <div className="mt-4 float-right flex">
-                  <span onClick={() => likeProduct(values) }>Like</span>
-                 </div> */}
+        
                  </div>
                 </div>
             </div>
@@ -280,7 +328,6 @@ return(
      (<><div><Loading/></div></>) } 
   </>
  )}
-</div>
    {seeMore? (
       <button
         className=" text-lg font-display text-[#F49F08] mt-10 font-medium hover:text-[#0397FF] absolute right-20"
@@ -296,12 +343,12 @@ return(
       >
         ሁሉም ማስታወቂያዎች
       </button>
-    )}
+    )} */}
     {/* <button onClick={nextSlide}>perv_page</button>
     <button>next_page</button> */}
   </section>
  </div>
-</div> 
+</div>  
 </>
 );}
 export default LouberWork;

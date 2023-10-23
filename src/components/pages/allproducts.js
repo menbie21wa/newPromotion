@@ -24,7 +24,7 @@ const Allproducts = () => {
     register,
     formState: { errors },
   } = useForm();
- // const [product, setData] =useState(dataProducts || '');
+//  const [product, setData] =useState(dataProducts || '');
   const [term, setTerm] = useState("");
   const submitHandler = (e) => {
     e.preventDefault();
@@ -53,6 +53,14 @@ useEffect(() =>{
   const {product} = useSelector(
     (state)=> state.product
   );
+  const [page, setPage] = useState(1)
+const selectPageHandler = (selectedPage) => {
+  // alert(data.length+","+selectedPage)
+  console.log("next button cliked : ",selectedPage);
+  if (selectedPage >= 1 && (selectedPage * 12)-12 <= product?.length  && selectedPage !== page) {
+    setPage(selectedPage)
+  }
+}
 // console.log("all products are : ", product);
   const VacancieDetail = (data) =>{
     dispatch(addToDetail(data));
@@ -113,7 +121,7 @@ useEffect(() =>{
       {
       (product?.length)>0
         ?(
-          product?.slice(0, 4).map((item, index) => (
+        product?.slice(page * 12 - 12, page * 12).map((item, index) => (
            <div className=" md:ml-0 ml-5">
             {/* <div  className="  lg:mb-0 md:pt-4 lg:pt-4 pt-2 flex bg-slate-600"> */}
               <div key={index} className=" products md:my-10 my-9 lg:ml-14 md:ml-12 -ml-6 relative  ">
@@ -168,6 +176,42 @@ useEffect(() =>{
     </div>
     </div>
   ))):(<></>)}
+  </div>
+   <br /> <br />
+      {product?.length > 0 && 
+       <div className=" justify-center ml-10 mt-10">
+        {(product?.length >=page * 12)?(
+           <p className='text-sm text-gray-700 mb-7'>
+            ክጠቅላላ <span className='font-medium ml-2 mr-2'> {product?.length} </span>
+            ምርቶች  ዝርዝር ውስጥ ከቁጥር <span className='font-medium ml-2 mr-2'>{page * 12 - 12}</span>
+             እስከ ቁጥር <span className='font-medium ml-2 mr-2'> {page * 12} </span> የሚገኙ ምርቶች  ዝርዝር  
+             </p>
+          ):<p className='text-sm text-gray-700 mb-7'>
+              <p className="mr-2">(መጨረሻው ነው)</p> ጠቅላላ <span className='font-medium ml-2 mr-2'> {product?.length} </span>
+              ምርቶች ብቻ ይገኛሉ::  
+            </p>
+          }
+        <nav
+          className='relative z-0  inline-flex rounded-md shadow-sm -space-x-px'
+          aria-label='Pagination'
+        >
+          <button
+          onClick={() => selectPageHandler(page - 1)}
+            className='relative inline-flex items-center px-2 py-2 rounded-l-md border
+             bg-slate-700 border-gray-300  text-sm font-medium text-gray-500 hover:bg-gray-50'
+          >
+            <span className="font-bold">ምልስ</span>
+          </button>
+          <button
+          onClick={() => selectPageHandler(page + 1)}
+            className='relative inline-flex items-center px-2 py-2 rounded-r-md border
+             border-gray-300 bg-slate-700 text-sm font-medium text-gray-500 hover:bg-gray-50'
+          >
+         <span className=" font-bold">ቅጣይ</span>
+       </button>
+       </nav>
+       </div>
+      }
         {vacancieDel && (
           <> 
             <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none -mt-6 border border-grey-100">
@@ -206,7 +250,8 @@ useEffect(() =>{
                </div>
               </>
           )}
-    { seeMore && (
+
+    {/* { seeMore && (
       <>
         {
           (product?.length)>0
@@ -214,34 +259,23 @@ useEffect(() =>{
             product?.slice(3, 100).map((item,index) =>{
              return(
               <div className=" ">
-            {/* <div  className="  lg:mb-0 md:pt-4 lg:pt-4 pt-2 flex bg-slate-600"> */}
               <div key={index} className=" products lg:ml-14 md:ml-12 ml-6 relative group block ">
                   <div className=" products__single p-2 relative overflow-hidden bg-no-repeat bg-cover rounded-lg"
                        data-mdb-ripple="true"
                        data-mdb-ripple-color="light"
                         >
-                  {/* src={`${AddressBaseUrl}/images/${item.featureImage}`}  */}
                     <img
                       className="w-full h-full transition cursor-pointer duration-700 rounded-lg hover:scale-125"
                        src={`/img/${item.featureImage}`} 
                       onClick={ () => VacancieDetail(item)}
-                     // src={smartPhone}
+                     // src={`${AddressBaseUrl}/images/${item.featureImage}`}
                       alt="product img not found"
                     />
                  </div>
                 </div>
-       {/* <div className="mt-[1%] ml-7 float-left">
-        <div className="float-left">
-          <p className="text-sm">{item.name.substring(0,6)}</p>  
-         </div>
-         <div className="float-left ml-3">
-          <p className="text-sm">{item.description.substring(0,48)+"..."}</p>
-         </div>
-        </div> */}
-
-          <div className="mt-3 m-16 float-left flex">
-          <ul className='  mt-3 flex'>
-              <img className=' w-8 h-6 rounded-2xl' 
+               <div className="mt-3 m-16 float-left flex">
+              <ul className='  mt-3 flex'>
+            <img className=' w-8 h-6 rounded-2xl' 
               src={`/img/${item.featureImage}`}
                alt='Noimage'/>
           </ul>
@@ -260,7 +294,6 @@ useEffect(() =>{
     }  
   </>
  )}
-</div>
       { seeMore? (
       <button
         className=" text-lg font-display text-[#F49F08] font-medium hover:text-[#0397FF] absolute right-20"
@@ -275,12 +308,11 @@ useEffect(() =>{
       >
         ሁሉም ምርቶች
       </button>
-    )}
-      </section>
-      </div>
-      </div>
-    </>
-  );
-}
+    )} */}
+     </section>
+    </div>
+   </div>
+  </>
+);}
 
 export default Allproducts;

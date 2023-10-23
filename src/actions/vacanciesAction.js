@@ -5,11 +5,14 @@ import  BaseUrl from "../utils/BaseUrl";
 
 export const viewVacancies = createAsyncThunk(
   "vacancies",
-  async (thunkAPI) => {
+  async (page,thunkAPI) => {
       let query ="job_vacancy";
-     // console.log("page is : ", page);
+     // console.log("page is : ", page);  
     try {
-      let URL = `${BaseUrl}/addressapi/vacancies/all?key=${query}`
+      // let URL = `${BaseUrl}/addressapi/vacancies/all?key=${query}`
+      // let URL = `${BaseUrl}/addressapi/vacancies/all?key=${query}`
+      let URL = `${BaseUrl}/addressapi/vacancies/all?key=${query}&per_page=3&page=${page}`
+
       // {params:{key:"job_vacancy"}};
       let response = await axios.get(URL);
      // console.log("vacancies action", response);

@@ -22,6 +22,7 @@
   }, [dataVacancy])
  //console.log("organization list : ", org)
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [count,setCount]=useState(0) 
   const prevSlide = () => {
     const isFirstSlide = currentIndex === 0;
     const newIndex = isFirstSlide ? org?.promotedOrgs?.length - 1 : currentIndex - 1;
@@ -81,21 +82,61 @@
         <img src={`${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`} className='h-52 md:h-96 lg:h-96 w-full' alt='images not found'
         onClick={() => orgHandler(`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.id}`)}
         /> 
-        <div className='flex mb-0 justify-center py-2'>
+    <div className='flex mb-0 justify-center py-2 pb-8'>
       {
-        (org?.promotedOrgs?.length)>0
+      (org?.promotedOrgs?.length)>0
         ?(
-        org?.promotedOrgs?.map((slide, slideIndex) => (
+         org?.promotedOrgs?.map((slide, slideIndex) => (
           <div
             key={slideIndex}
             onClick={() => goToSlide(slideIndex)}
             className='text-2xl cursor-pointer'
           >
-            <RxDotFilled/>
-          </div>
+          {(org?.promotedOrgs?.length)<=6
+          ?(
+            <button className=' bg-white border-2 w-9 h-9 rounded-xl pb-3 m-1'>
+          {slideIndex+1}
+            {/* <RxDotFilled/> */}
+          </button>
+          ):""
+        }
+       </div>
         ))):(null)
-      }
+       }
+
+       {(org?.promotedOrgs?.length)>6
+          ?(
+         <> 
+        <button className=' bg-white border-2 w-9 h-9 rounded-xl font-semibold  m-1'>
+         1
+        </button>
+          <button className=' bg-white border-2 w-9 h-9 rounded-2xl font-semibold m-1'>
+          2 
+          </button>
+          <button className=' bg-white border-2 w-9 h-9 font-semibold rounded-xl m-1'>
+          3
+          </button>
+          <button className='flex pt-3'>
+          <RxDotFilled className=' font-bold'/> 
+          <RxDotFilled className=' font-bold'/> 
+          <RxDotFilled className=' font-bold'/> 
+          </button>
+          <button className=' bg-white border-2 w-9 h-9 rounded-xl pb-3 m-1'>
+           {org?.promotedOrgs?.length}
+           </button>
+           </>
+          ):""
+        }
      </div>
+     {
+      (org?.promotedOrgs?.length)>0
+        ?(
+          <>
+       <p className=" float-right p-3 -mt-10 mr-4">ጠቅላላ <span className='font-bold -mt-4'>
+         {org?.promotedOrgs?.length} </span>
+         ድርጅቶች ብቻ ይገኛሉ::  
+        </p>
+        </>):("ምንም ድርጅት የለም")}
     </div>
   </div>
 </div>

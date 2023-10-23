@@ -76,8 +76,8 @@ useEffect(() => {
           >
           <img 
           className="w-full h-5/6 rounded-lg "
-          src={`/img/Eplusapp1.png`} 
-       // src={`${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`}
+         // src={`/img/Eplusapp1.png`} 
+          src={`${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`}
           alt=""
           />
          </div>

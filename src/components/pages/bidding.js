@@ -48,7 +48,17 @@ const Bidding = (props) =>{
       const newIndex = isFirstSlide ? org.length - 1 : currentIndex - 1;
       setCurrentIndex(newIndex);
     };
-  
+    const [currentPage, setPage] = useState(1)
+
+  const selectPageHandler = (selectedPage) => {
+
+    // alert(data.length+","+selectedPage)
+    console.log("next button cliked : ",selectedPage);
+    if (selectedPage >= 1 && (selectedPage * 10)-10 <= bidding?.vacancies?.length  && selectedPage !== currentPage) {
+      setPage(selectedPage)
+    }
+  }
+
     const nextSlide = () => {
       const isLastSlide = currentIndex === org.length - 1;
       const newIndex = isLastSlide ? 0 : currentIndex + 1;
@@ -89,7 +99,7 @@ const Bidding = (props) =>{
         <button
           className=" text-lg font-display text-black font-medium hover:text-[#0397FF]" 
          >
-          <span className="mr-2 md:ml-0 ml-5 underline decoration-pink-800 decoration-4 underline-offset-8">የጫራታ</span>ማስታዎቂያ
+          <span className="mr-2 md:ml-0 ml-10 underline decoration-pink-800 decoration-4 underline-offset-8">የጫራታ</span>ማስታዎቂያ
          </button>
          <form onSubmit={submitHandler}>
          <div class=" mb-4 flex flex-wrap items-stretch absolute md:mt-0 mt-6 md:right-16 right-10">
@@ -128,7 +138,7 @@ const Bidding = (props) =>{
      </form>
     </div>
   </div>
-  <div className='relative p-7 bg-white md:flex lg:flex pb-20'>    
+  <div className='relative p-7 bg-white md:flex lg:flex pb-20 -mt-7'>    
     <div class="relative mr-2 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 xl:gap-20 md:gap-20 gap-12 my-3 xl:gap-x-6 md:gap-x-10">
       {
        (bidding?.vacancies?.length)>0
@@ -136,7 +146,7 @@ const Bidding = (props) =>{
           bidding?.vacancies?.slice(0, 4).map((bidding,index) =>{
            return(
               <>
-              <div key={index} className=" h-40 md:h-56 xl:h-s6 xl:w-96 md:w-80 sm:w-60 relative md:ml-2 -ml-7 mb-24 md:mb-0">
+              <div key={index} className=" h-40 md:h-56 xl:h-s6 xl:w-96 md:w-80 sm:w-60 relative md:ml-2 -ml-7 my-14 mb-24 md:mb-0">
                 <div className="w-full h-full relative border-gray-600 
                  shadow-lg shadow-neutral-900 bg-cover bg-no-repeat "> 
                  <div className="relative flex justify-center items-center h-full">
@@ -174,29 +184,87 @@ const Bidding = (props) =>{
              <p className=" font-thin text-sm">{`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.name}`}</p>             
              </span><br />
              </button>
-          </a>  
+            </a>  
+           </div>
+          </div>
+         </div>
+        </>
+       )})):(<><div><Loading/></div></>) 
+        }
+       </div>
       </div>
-                  {/* <div className="mt-5 float-right w-7.5 flex">
-                  <span ><img className=' w-6 h-5 mx-4 ' src={show} alt='Noicon'/></span>
-                </div> */}
-                  {/* </div> */}
-                </div>
-              </div>
-                  </>
-                )})):(<><div><Loading/></div></>) 
-                }
-                </div>
+     {/* 
+     <div>
+      {data?.length > 0 && 
+       <div className=" justify-center ml-10 mt-10">
+        <p className='text-sm text-gray-700 mb-7'>
+         ክጠቅላላ <span className='font-medium'> {data?.length} </span>
+         የጫራታ ማስታወቂያዎች ዝርዝር ውስጥ ከቁጥር <span className='font-medium'>{currentPage * 10 - 10}</span>
+        እስከ ቁጥር <span className='font-medium'> {currentPage * 10} </span> የሚገኙ ምርቶች ዝርዝር  
+        </p>
+        <nav
+          className='relative z-0  inline-flex rounded-md shadow-sm -space-x-px'
+          aria-label='Pagination'
+        >
+          <button
+          onClick={() => selectPageHandler(currentPage - 1)}
+            className='relative inline-flex items-center px-2 py-2 rounded-l-md border
+             bg-slate-700 border-gray-300  text-sm font-medium text-gray-500 hover:bg-gray-50'
+          >
+            <span className="font-bold">ምልስ</span>
+          </button>
 
-              {vacancieDel && (
-             <> 
-            <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none -mt-6 border border-grey-100">
-              <div className="relative w-auto my-6 mx-auto max-w-2xl">
-                {/*content*/}
-                <div className="rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                  {/*header*/}
-                  <div className="flex justify-end p-1">
-                    <button
-                       onClick={() => setVacancieDel(false) }
+          <button
+          onClick={() => selectPageHandler(currentPage + 1)}
+            className='relative inline-flex items-center px-2 py-2 rounded-r-md border
+             border-gray-300 bg-slate-700 text-sm font-medium text-gray-500 hover:bg-gray-50'
+          > */}
+      <br /> <br />
+      <div>
+     {bidding?.vacancies?.length > 0 && 
+     <div className=" justify-center ml-10 mt-10">       
+      {(bidding?.vacancies?.length >=currentPage * 10)?(
+          <p className='text-sm text-gray-700 mb-7'>
+            ክጠቅላላ <span className='font-medium ml-2 mr-2'> {bidding?.vacancies?.length} </span>
+            የጫራታ ማስታወቂያዎች  ዝርዝር ውስጥ ከቁጥር <span className='font-medium ml-2 mr-2'>{currentPage * 10 - 10}</span>
+             እስከ ቁጥር <span className='font-medium ml-2 mr-2'> {currentPage * 10} </span> የሚገኙ የጫራታ ማስታወቂያዎች  ዝርዝር  
+             </p>
+           ):<p className='text-sm text-gray-700 mb-7'>
+               <p className="mr-2">(መጨረሻው ነው)</p> ጠቅላላ <span className='font-medium ml-2 mr-2'> {bidding?.vacancies?.length} </span>
+               የጫራታ ማስታወቂያዎች ብቻ ይገኛሉ::  
+              </p>
+            }
+          <nav
+           className='relative z-0  inline-flex rounded-md shadow-sm -space-x-px'
+           aria-label='Pagination'
+          >
+           <button
+            onClick={() => selectPageHandler(currentPage - 1)}
+            className='relative inline-flex items-center px-2 py-2 rounded-l-md border
+             bg-slate-700 border-gray-300  text-sm font-medium text-gray-500 hover:bg-gray-50'
+            >
+            <span className="font-bold">ምልስ</span>
+           </button>
+          <button
+          onClick={() => selectPageHandler(currentPage + 1)}
+            className='relative inline-flex items-center px-2 py-2 rounded-r-md border
+             border-gray-300 bg-slate-700 text-sm font-medium text-gray-500 hover:bg-gray-50'
+          >
+          <span className=" font-bold">ቅጣይ</span>
+            </button>
+           </nav>
+         </div>}
+       </div>
+     {vacancieDel && (
+      <> 
+       <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none -mt-6 border border-grey-100">
+         <div className="relative w-auto my-6 mx-auto max-w-2xl">
+           {/*content*/}
+             <div className="rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+               {/*header*/}
+                <div className="flex justify-end p-1">
+                  <button
+                     onClick={() => setVacancieDel(false) }
                       type="button"
                       className="text-red-600 bg-transparent hover:bg-gray-200 rounded-lg text-lg p-1 ml-auto inline-flex items-center"
                       data-modal-toggle="log-in-model"
@@ -229,7 +297,6 @@ const Bidding = (props) =>{
                </div>
             </>
           )} 
-
       {/* <div
         className='md:w-1/4 ml-10 h-full rounded-2xl bg-center bg-cover duration-500 pt-2'>
         <div className="flex justify-center items-center h-full">
@@ -249,7 +316,6 @@ const Bidding = (props) =>{
         </div>
        </div>
       </div> */}
-     </div>
     </section>
      </div>
    </div> 
