@@ -6,7 +6,6 @@ import { searchVacancies } from "../actions/vacanciesAction";
 const initialState = {
     loading: false,
     loubers:[],
-    loubers: {},
     filter:[],
     error: false,
     success: false,

@@ -28,19 +28,18 @@ import  AddressBaseUrl from "../../utils/BaseUrl";
   );
   console.log("daily work are : ", loubers);
   console.log("page No. : ", loubers.pages);
- const page = 1;
  useEffect(() =>{
   dispatch(getOrganization());
   },[])
 useEffect(() =>{
-      dispatch(Daily_Labourer(page));
+      dispatch(Daily_Labourer());
   },[]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const nextSlide = () => {
-    const isLastSlide = currentIndex === loubers.pages - 1;
-    const newIndex = isLastSlide ? 0 : currentIndex + 1;
-    dispatch(Daily_Labourer(newIndex));
-  };
+  // const nextSlide = () => {
+  //   const isLastSlide = currentIndex === loubers.pages - 1;
+  //   const newIndex = isLastSlide ? 0 : currentIndex + 1;
+  //   dispatch(Daily_Labourer(newIndex));
+  // };
 
     // const { product } = useSelector(
     //     (state) =>state.product
@@ -91,11 +90,11 @@ const [data, setData] =useState(dataVacancy || '');
 
 return(
   <>
-   <div className="bg-[rgb(227,230,230)]">
-    <div className="w-11/12 xl:w-11/12 mx-auto pb-6">
+   <div className="bg-[rgb(227,230,230)] w-full">
+    <div className="w-full mx-auto pb-6">
      <section className="mb-6 text-gray-800 text-center ">
       <div className=" md:flex flex-wrap justify-between items-center mx-auto md:px-6 lg:px-6 px-1">
-        <div className="flex items-center py-3 mt-8 mb-4 ">
+        <div className="flex items-center py-3 mt-8 mb-4 md:-ml-1 ml-0 ">
          <button
           className=" text-lg font-display text-black font-medium hover:text-[#0397FF]"
          >
@@ -150,10 +149,10 @@ return(
                       src={`/img/${values.featureImage}`} 
                      //src={`${AddressBaseUrl}/images/${values.image}`} 
                       alt="product img not found"
-                      onError={event => {
-                      event.target.src = `${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`
-                        event.onerror = null
-                      }}
+                     // onError={event => {
+                      //event.target.src = `${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`
+                       // event.onerror = null
+                      //}}
                     />
                     <div class="absolute bottom-0 left-0 right-0 top-0 h-full w-full rounded-xl 
                     justify-center overflow-hidden bg-gradient-to-r from-green-500 via-amber-300

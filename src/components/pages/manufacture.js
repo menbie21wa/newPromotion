@@ -61,7 +61,7 @@ const  {org}  = useSelector(
 )
  console.log("yibe",org?.job_vacancies
  )
-console.log("organization detail now : ", org?.job_vacancies?.job_vacancies[0].title);
+console.log("organization detail now : ", org?.job_vacancies?.job_vacancies[0]?.title);
 const firstSection = useRef();
 const productSection = useRef();
 const vacancieSection = useRef();
@@ -139,6 +139,23 @@ const detailInfo = localStorage.getItem("detailInfo")
       color: isActive ? "#F3AE33" :  "#2b2b2b" ,
     };
   };
+
+
+  const [descrip, setDescrip] = useState("");
+  useEffect(() =>{
+    setDescrip(`መለያ ካርታን መሰርት አድርጎ በተሰራው ገጽ ላይ ፍልግ ነው። ኢጵላሣጵ አድራሻ ልዩ እና ትክክለኛ የሆነ የግለሰብ የመንግስት 
+    መስሪያ ቤቶችን የንግድ ተቋማትን፡እንዲሁም የተለያዪ በከተማው ውስጥ የሚገኙ የግለሰብ ቦታወችን መገኛ በቀላሉ ካርታ ላይ ለይቶ ለማወቅ:
+    ይህ ኢጵላሣጵ ዌብ ሳይት ነው ኢጵላሣጵ የራሱ የሆነ ዌብሳይት አልምቶ አሁን ደሞ ለግለሰቦች እና ለድርጅቶች የየራሳቸው የሆነ ዌብሳይት ለማልማት 
+    ሙሉ ዝግጅቱን ጨርሷል። እርሶም እድሉን ይጠቀሙ። ኢኮሜርስ ዌብ ሳይት በበይነመረቡ ላይ የእርስዎ ዲጂታል የመደብር ፊት ነው። በገዢ እና በሻጭ መካከል ያለውን ግብይት ያመቻቻል ያፋጥናል. 
+    የመስመር ላይ ደንበኞችዎ ምርጫቸውን አድርገው መጠቀም ይችላሉ።
+    መለያ ካርታን መሰርት አድርጎ በተሰራው ገጽ ላይ ፍልግ ነው። ኢጵላሣጵ አድራሻ ልዩ እና ትክክለኛ የሆነ የግለሰብ የመንግስት 
+    መስሪያ ቤቶችን የንግድ ተቋማትን፡እንዲሁም የተለያዪ በከተማው ውስጥ የሚገኙ የግለሰብ ቦታወችን መገኛ በቀላሉ ካርታ ላይ ለይቶ ለማወቅ:
+    ይህ ኢጵላሣጵ ዌብ ሳይት ነው ኢጵላሣጵ የራሱ የሆነ ዌብሳይት አልምቶ አሁን ደሞ ለግለሰቦች እና ለድርጅቶች የየራሳቸው የሆነ ዌብሳይት ለማልማት 
+    ሙሉ ዝግጅቱን ጨርሷል። እርሶም እድሉን ይጠቀሙ። ኢኮሜርስ ዌብ ሳይት በበይነመረቡ ላይ የእርስዎ ዲጂታል የመደብር ፊት ነው። በገዢ እና በሻጭ መካከል ያለውን ግብይት ያመቻቻል ያፋጥናል. 
+    የመስመር ላይ ደንበኞችዎ ምርጫቸውን አድርገው መጠቀም ይችላሉ።
+    `)
+  },[]);
+
     return(
         <Layout>
  <div className="md:pt-0 lg:pt-0 ">
@@ -146,13 +163,17 @@ const detailInfo = localStorage.getItem("detailInfo")
   {/* <div className='w-full h-10 text-center bg-slate-400 mt-2 text-white p-2'>
    This is my try from nave bar
   </div> */}
- <nav className=' z-50 fixed  top-0 overflow-hidden justify-between list-none font-serif uppercase font-medium xl:text-xl 
+ <nav className=' z-50 fixed pr-7  top-0 overflow-hidden justify-between list-none font-serif uppercase font-medium xl:text-xl 
  md:text-xl xs:text-xs text-justify-center w-full lg:h-24 md:h-28 sm:h-20 shadow-xl sm:flex bg-white items-center '>
 <div>
 <button className='ml-1 w-96 p-5 md:flex block '  
 to ="/"> 
-<img className=' md:w-32 md:h-20 w-20 h-10  -mt-3 lg:ml-12 sm:ml-5 rounded-2xl' src={Logue} alt='Noimage'/>
-<h2 className="md:-ml-1 -ml-32 ">EplusApp Promotion website</h2>
+<img className=' md:w-32 md:h-20 w-20 h-10  -mt-3 lg:ml-12 sm:ml-5 rounded-2xl' 
+//src={Logue} alt='Noimage'
+src={`${AddressBaseUrl}/images/${org?.org?.logo}`}
+alt="NoLogue"
+/>
+<h2 className="md:-ml-1 -ml-32 ">Promotion </h2>
 </button>
 </div>
 <div className='text-3xl absolute right-8 top-3 cursor-pointer md:hidden'>
@@ -179,9 +200,6 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
  የስራ ማስታዎቂያ</button></li>
  {/* <li><button className=' transition duration-700 transform hover:-translate-y-1 hover:scale-110 ml-12 flex' 
     >  ግብት </button></li> */}
- <li className='mx-8'><button onClick={()=> getHome()}
-   className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'
-  to ="/About"> መግቢያ</button></li>
 </ul>
 </nav>
 {/* Mobile Navigation */}
@@ -213,64 +231,38 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
       <img className=' w-6 h-5 mx-4 ' src={vacancy} alt='Noicon'/>  የስራ ማስታዎቂያ</button></li>
     {/* <li><button className=' transition duration-700 transform hover:-translate-y-1 hover:scale-110 ml-12 flex' 
         >  ግብት </button></li> */}
-   <li className='mx-6 py-2 font-serif uppercase font-medium  text-xl '>
-       <button onClick={()=> getHome()}
-        className='transition duration-700 bg-red-400 rounded py-1 px-3 transform hover:-translate-y-1 hover:scale-110 flex'
-     to ="/About"> መግቢያ</button></li>
     </ul>
    </>    
   </div>
-   <div className="bg-[#E3E6E6] mt-24">
-        <div className="md:pt-24 lg:pt-24  pt-24 h-screen md:h-screen w-full border-b mb-10">
-          <div className='h-52 md:flex block md:h-screen w-full -mt-20 rounded p-10'> 
+  <div className="bg-[#E3E6E6] mt-24">
+        <div className=" md:flex-row flex-col md:pt-24 lg:pt-24 md:mb-2 mb-44 pt-24 h-screen md:h-screen w-full border-b  group">
+          <div className='h-11/12 md:flex block md:h-screen w-full -mt-40 rounded p-5'> 
           <div
-            className=" w-1/2 md:mr-36 h-full flex md:ml-10 ml-5 flex-col p-20 justify-center items-center">
+            className=" md:w-1/2 w-full md:mb-0 mb-16  md:mr-28 h-full md:mt-10 mt-5  flex md:ml-1 ml-2 flex-col md:p-5 p-3 justify-center items-center">
                <h1 className="text-4xl md:text-4xl xl:text-5xl text-[#F49F08] font-bold font-display tracking-tight leading-tight italic">
-                  {`${org?.org?.name}`} 
+               {`${org?.org?.name}`} 
                   </h1>
-                  <p className="text-2xl md:text-2xl xl:text-3xl text-[#F49F08] font-bold font-display tracking-tight leading-tight">
-                  {`${org?.org?.description}`}
-
-                </p>
+                  <p className="text-2xl md:text-2xl mt-4 xl:text-3xl text-[#F49F08] font-bold font-display tracking-tight leading-tight">
+                  {`${org?.org?.description}`}</p>
+                 {/* {descrip} */}
+                  <p className='mt-7'>
+                  {/* { org?.promotedOrgs[currentIndex]?.description?.substring(0,300)} . . . */}
+                  </p>
          </div>
-        
         <div
+
           // style={{ backgroundImage: `url(${org && org[currentIndex]?.url})` }}
-          className=' md:ml-10 rounded-2xl w-1/3 h-5/6 bg-center duration-700 relative bg-cover bg-no-repeat'
+          className=' md:-ml-2 ml-5 md:mt-20 -mt-24 mr-5 rounded-2xl md:w-2/3 w-40 md:h-screen h-60 bg-center duration-700 relative bg-cover bg-no-repeat'
           >
           <img 
-          className="w-full h-3/4 rounded-lg "
+          className="w-full h-5/6 rounded-lg"
           //src={`/img/Eplusapp1.png`} 
-          // src={`/img/bossweb.png`}  
-          src={`${AddressBaseUrl}/images/${org?.org?.logo}`}
+         src={`${AddressBaseUrl}/images/${org?.org?.logo}`}
           alt=""
           />
          </div>
        </div>
      </div>
- {/* home page end */}
-{/* menuBar */}
-  {/* <div className='fixed top-3 -translate-x-0 translate-y-[50%] left-2 text-2xl bg-white/20 hover:bg-white/40 text-black cursor-pointer duration-300'>
-      <RiMenuLine size={24} onClick={setmenu}/>
-  </div>
-  {menu && (
-    <>
-    <div className='fixed bg-[#E4E4E4] w-52 h-48 top-10 -translate-x-2 translate-y-[10%] left-2 opacity-100 duration-300 inset-0 text-xl text-[#F49F08] font-semibold italic space-y-2 z-10'>
-     <div className='motion-safe:hover:translate-x-2 duration-700'>
-      <button>ድርጅቶች</button>
-     </div>
-     <div className='motion-safe:hover:translate-x-2 duration-700'>
-      <button>ምርቶች</button>
-     </div>
-     <div className='motion-safe:hover:translate-x-2 duration-700'>
-      <button>የስራ ማስታዎቂያ</button>
-     </div>
-     <div className='motion-safe:hover:translate-x-2 duration-700'>
-      <button>የጨረታ ማስታዎቂያ</button>
-     </div>
-   </div>
-  </>
-)} */}
 
  {/* product list */}
  { 
@@ -369,13 +361,13 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
      (org?.bids?.bids?.length)>0
       ?(
         <div className="items-center py-3 mb-4 mt-6 border-t border-gray-500" ref= {biddingSection}>
-         <button className=" text-lg font-display text-black font-medium hover:text-[#0397FF]">
+         <button className=" ml-10 text-lg font-display text-black font-medium hover:text-[#0397FF]">
           <span className="mr-2 underline decoration-pink-800 decoration-4 underline-offset-8">የጨረታ ማስታዎቂያ </span>
          </button>
         </div>
        ):(null)
      }
-   <div class="grid lg:grid-cols-3 xl:gap-10 md:gap-6 xl:gap-x-4">
+   <div class="grid lg:grid-cols-3 xl:gap-10 md:gap-6 xl:gap-x-4 ml-7">
       {
         (org?.bids?.bids?.length)>0
           ?(
@@ -441,9 +433,9 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
                     <h3 className="flex"><h3 class="mb-1 font-semibold underline">የጨረታ አይነት:</h3> <span >{louberWorkDetail?.type} </span></h3>
                     <h3 className="flex"><h3 class="mb-1 font-semibold underline">የጨረታ ቁጥር:</h3> <span >{louberWorkDetail?.No}</span></h3>
                     <h3 className="flex"><h3 class="mb-1 font-semibold underline">ቦታ: ማብቂያ ቀን: </h3><span>BD</span><h3 class="mb-1 ml-3 font-semibold underline"> ማብቂያ ቀን: </h3> <span >{louberWorkDetail?.closingDate?.split('T')[0]}-{louberWorkDetail?.closingDate?.split('T')[0]}</span></h3>
-                        <div class="pt-2">
-                          <h3 class="font-semibold -ml-56 underline"> ማብራሪያ:</h3>
-                            <p class=" mt-2">{louberWorkDetail?.description}</p>
+                        <div class="pt-1">
+                          <h3 class="font-semibold ml-3 underline"> ማብራሪያ:</h3>
+                            <p class="">{louberWorkDetail?.description}</p>
                         </div>
                         <h3 class="border-t mb-2 pt-3 font-semibold underline">Email: <span class="font-thin">EplusApp88@gmail.com</span></h3> 
                      </div>

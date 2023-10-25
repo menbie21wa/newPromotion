@@ -7,7 +7,7 @@ import { viewOrganization } from '../../actions/orgAction';
 import  AddressBaseUrl from "../../utils/BaseUrl";
 import Loading1 from './loading';
 import { RxDotFilled } from 'react-icons/rx';
-import { viewVacancie2 } from '../../actions/biddingAction';
+import { viewVacancie2,searchVacancies} from '../../actions/biddingAction';
 import { addToDetail } from '../../actions/detail';
 import Loading from './loading'; 
 import { HiOutlineX } from "react-icons/hi";
@@ -22,6 +22,7 @@ const Bidding = (props) =>{
   const { org } = useSelector(
    (state)=> state.org
  );
+
  // dispatch(getProduct(id));
  useEffect(()=>{
    dispatch(viewOrganization());
@@ -81,7 +82,7 @@ const Bidding = (props) =>{
       const submitHandler = (e) => {
         e.preventDefault();
          if (term === "") return alert("Please enter search term!");
-        // dispatch(searchVacancies(term));
+         dispatch(searchVacancies(term));
         console.log("term : ",term);
         //setTerm("");
       };
@@ -91,15 +92,15 @@ const Bidding = (props) =>{
 
  return(
 <>
-<div className=" bg-white ">
-  <div className="w-11/12 mx-auto h-4/5">
+<div className=" w-full bg-[#E3E6E6] md:ml-0 -ml-3  ">
+  <div className=" mx-auto h-4/5">
    <section className="mb-6 text-gray-800 text-center group">
     <div className=" md:flex block flex-wrap justify-between items-center mx-auto md:px-6 lg:px-6 px-1">
       <div className="flex items-center py-3 mb-4 md:ml-0 ml-3">
        <button
-          className=" text-lg font-display text-black bg-[#E3E6E6] h-10 pl-3 pb-5 pr-3 -ml-5 rounded-md font-medium hover:text-[#0397FF]"
+          className=" text-lg font-display text-black bg-[#E3E6E6] h-10 pl-3 pb-5 pr-3 ml-1 rounded-md font-medium hover:text-[#0397FF]"
          >
-         <span className=" mt-10 md:ml-0  underline decoration-pink-800 decoration-4 underline-offset-8">የጫራታ</span>ማስታዎቂያ
+         <span className=" mt-10 md:-ml-3  underline decoration-pink-800 decoration-4 underline-offset-8">የጫራታ</span>ማስታዎቂያ
          </button>
          <form onSubmit={submitHandler}>
          <div class=" mb-4 flex flex-wrap items-stretch absolute md:mt-0 mt-6 md:ml-0 ml-5 md:right-16 right-10">
@@ -138,15 +139,15 @@ const Bidding = (props) =>{
      </form>
     </div>
   </div>
-  <div className='relative bg-white md:flex lg:flex pb-20 md:-mt-7 mt-10 md:ml-4 ml-5'>    
+  <div className=' bg-white  md:flex lg:flex pb-20 md:-mt-1 mt-3 md:pl-5 pl-0 md:ml-5 md:mr-0 ml-10 mr-5'>    
     <div class="relative grid xl:grid-cols-3 md:grid-cols-3 grid-cols-1 xl:gap-20 md:gap-20 gap-12 my-3 xl:gap-x-10 md:gap-x-7 gap-x-5">
       {
        (bidding?.vacancies?.length)>0
          ?(
-          bidding?.vacancies?.slice(0, 4).map((bidding,index) =>{
+          bidding?.vacancies?.slice(currentPage * 10 - 10, currentPage * 10).map((bidding,index) =>{
            return(
               <>
-              <div key={index} className=" h-40 md:h-56 xl:h-s6 xl:w-96 md:w-80 sm:w-60 relative md:ml-2 -ml-7 my-10 mb-24 md:mb-0">
+              <div key={index} className=" h-40 md:h-56 xl:h-s6 xl:w-96 md:w-80 sm:w-60 relative md:ml-2 ml-2 mr-2 my-10 mb-24 md:mb-0">
                 <div className="w-full h-full relative border-gray-600 
                  shadow-lg shadow-neutral-900 bg-cover bg-no-repeat "> 
                  <div className="relative flex justify-center items-center h-full">
@@ -193,36 +194,10 @@ const Bidding = (props) =>{
         }
        </div>
       </div>
-     {/* 
-     <div>
-      {data?.length > 0 && 
-       <div className=" justify-center ml-10 mt-10">
-        <p className='text-sm text-gray-700 mb-7'>
-         ክጠቅላላ <span className='font-medium'> {data?.length} </span>
-         የጫራታ ማስታወቂያዎች ዝርዝር ውስጥ ከቁጥር <span className='font-medium'>{currentPage * 10 - 10}</span>
-        እስከ ቁጥር <span className='font-medium'> {currentPage * 10} </span> የሚገኙ ምርቶች ዝርዝር  
-        </p>
-        <nav
-          className='relative z-0  inline-flex rounded-md shadow-sm -space-x-px'
-          aria-label='Pagination'
-        >
-          <button
-          onClick={() => selectPageHandler(currentPage - 1)}
-            className='relative inline-flex items-center px-2 py-2 rounded-l-md border
-             bg-slate-700 border-gray-300  text-sm font-medium text-gray-500 hover:bg-gray-50'
-          >
-            <span className="font-bold">ምልስ</span>
-          </button>
-
-          <button
-          onClick={() => selectPageHandler(currentPage + 1)}
-            className='relative inline-flex items-center px-2 py-2 rounded-r-md border
-             border-gray-300 bg-slate-700 text-sm font-medium text-gray-500 hover:bg-gray-50'
-          > */}
       <br /> <br />
       <div>
      {bidding?.vacancies?.length > 0 && 
-     <div className=" justify-center ml-10 mt-10">       
+     <div className=" justify-center md:ml-10 ml-10 md:mt-10 -mt-9">       
       {(bidding?.vacancies?.length >=currentPage * 10)?(
           <p className='text-sm text-gray-700 mb-7'>
             ክጠቅላላ <span className='font-medium ml-2 mr-2'> {bidding?.vacancies?.length} </span>

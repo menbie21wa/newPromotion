@@ -5,11 +5,10 @@ import  BaseUrl from "../utils/BaseUrl";
 //Labour work 
 export const Daily_Labourer = createAsyncThunk(
     "loubers",
-    async (page, thunkAPI) => {
+    async (thunkAPI) => {
         let query ="daily_work";
-        console.log("page iss : ", page);
       try {
-        let URL = `${BaseUrl}/addressapi/vacancies/all?key=${query}&per_page=3&page=${page}`
+        let URL = `${BaseUrl}/addressapi/vacancies/all?key=${query}`
         // {params:{key:"job_vacancy"}};
         let response = await axios.get(URL);
         console.log("louber action", response);
@@ -27,7 +26,7 @@ export const Daily_Labourer = createAsyncThunk(
       }
     });
   export const searchVacancies = createAsyncThunk(
-    "vacancies",
+    "loubers",
     async (term, thunkAPI) => {
       try {
         console.log("action term : ",term);

@@ -38,25 +38,20 @@ useEffect(() =>{
   const [currentIndex, setCurrentIndex] = useState(1);
 
   const nextSlide = () => {
-   // const  currentIndex =2 - 1;
     const isLastSlide = currentIndex === (vacancies.total +1 ) - 1;
     const newIndex = isLastSlide ? 1 : currentIndex + 1;
-   // console.log("isLastSlide : ", isLastSlide)
-    //console.log("currentIndex : ", newIndex)
     setCurrentIndex(newIndex);
     dispatch(viewVacancies(newIndex));
   };
     const prevSlide = () => {
       const isFirstSlide = currentIndex === 0;
       const newIndex = isFirstSlide ? 3 - 1 : currentIndex - 1;
-     // console.log("newIndex : ", newIndex)
       setCurrentIndex(newIndex);
       dispatch(viewVacancies(newIndex));
     };
     const { product } = useSelector(
         (state) =>state.product
         );
-        // console.log("all products are1 ", product);
 
 // const [data, setData] =useState(dataVacancy || '');
 // useEffect(() => {
@@ -66,7 +61,6 @@ useEffect(() =>{
 useEffect(()=>{
     dispatch(viewProducts());
   },[]);
-
 
   const VacancieDetail = (data) =>{
     dispatch(addToDetail(data));
@@ -89,7 +83,6 @@ useEffect(()=>{
     //console.log("term : ",term);
     //setTerm("");
   };
-  
 //new pagination 
 // const [vacancie, setProducts] = useState([])
 console.log("view vacancies2 : ",vacancies?.vacancies?.length);
@@ -102,31 +95,29 @@ const orgHandler=()=>{
     // navigate("org/"+id)
     navigate("org")
 }
-
 const [page, setPage] = useState(1)
 const selectPageHandler = (selectedPage) => {
   // alert(data.length+","+selectedPage)
   console.log("next button cliked : ",selectedPage);
   if (selectedPage >= 1 && (selectedPage * 12)-12 <= vacancies?.vacancies?.length  && selectedPage !== page) {
     setPage(selectedPage)
-  }
-}
-
+  }}
 return(
   <>
-   <div className=" bg-[#E3E6E6] pb-10 h-full">
-    <div className="w-11/12 mx-auto">
-     <section className="mb-6 text-gray-800 text-center group">
-      <div className=" md:flex block flex-wrap justify-between items-center mx-auto md:px-6 lg:px-6 px-1">
-        <div className="flex items-center py-3 mb-4 ">
+   <div className=" w-full bg-[#E3E6E6] md:mt-0 mt-20 ">
+  <div className=" mx-auto h-4/5">
+   <section className="mb-6 text-gray-800 text-center group">
+    <div className=" md:flex block flex-wrap justify-between items-center mx-auto md:px-6 lg:px-6 px-1">
+      <div className="flex items-center py-3 mb-4 md:ml-0 ml-3">
          <button
           className=" text-lg font-display text-black font-medium hover:text-[#0397FF]"
          >
           <span className="mr-2 md:ml-0 ml-5 underline decoration-pink-800 decoration-4 underline-offset-8">የስራ</span>ማስታዎቂያ
          </button>
          <form onSubmit={submitHandler}>
-         <div class=" mb-4 flex flex-wrap items-stretch absolute md:mt-0 mt-6 md:right-16 right-10">
-          <input className="bg-[#E3E6E6] p-3 rounded-md md:-mt-5 mt-0 z-20 " 
+         <div class=" mb-4 flex flex-wrap items-stretch absolute md:mt-10 mt-10 md:right-24 right-10">
+          <input
+           className="bg-[#E3E6E6]  p-3 relative rounded-md z-20  " 
              type="date"
              aria-label="Search"
              aria-describedby="button-addon1"
@@ -142,7 +133,7 @@ return(
         value={term}
         onChange={(e) => setTerm(e.target.value)}/> */}
       <button
-        class="relative bg-[#E3E6E6] rounded-md md:-mt-5 mt-0 z-20 flex items-center rounded-r bg-secondary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
+        class="relative bg-[#E3E6E6] rounded-md z-20 flex items-center rounded-r bg-secondary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
         type="submit"
         data-te-ripple-init
         data-te-ripple-color="light">
@@ -161,38 +152,24 @@ return(
      </form>
     </div>
   </div>
-   {/*  {vacancies?.vacancies?.length > 0 && <div className="products">
-        data?.slice(page * 3 - 3, page * 3).map((vacancie,index) => {  
-   */}
-   <div class="grid lg:grid-cols-3 xl:gap-5 md:gap-6 xl:gap-x-14">
+
+ <div className=' bg-white  md:flex lg:flex pb-20 md:-mt-1 mt-3 md:ml-5 md:mr-0 ml-5 mr-5'>    
+  <div class="relative grid xl:grid-cols-3 ml-5 md:grid-cols-3 grid-cols-1 xl:gap-20 md:gap-20 gap-7 my-3 xl:gap-x-10 md:gap-x-7 gap-x-5">
     {(vacancies?.vacancies?.length > 0)
       ?(
         vacancies?.vacancies?.slice(page * 12 - 12, page * 12).map((vacancie,index) => { 
           return(
            <>
-            <div key={index} className=" relative md:my-10 my-12 md:ml-0 -ml-1">
-            <div className=" products">
-                   <div
-                    className=" products__single relative border-gray-600 
-                                shadow-lg shadow-neutral-900 bg-cover bg-no-repeat"
-                    data-mdb-ripple="true"
-                    data-mdb-ripple-color="light"
-                  >
-          
-           {/* <div className="products__single relative border-gray-600 
-             shadow-lg shadow-neutral-900 bg-cover bg-no-repeat "  key={index}> */}
-            {/*             ${AddressBaseUrl}/images/${vacancie.image} */}
+            <div key={index} className=" h-40 md:h-56 xl:h-s6 md:mt-16 mt-16 xl:w-96 md:w-80 sm:w-60 relative md:ml-2 md:mr-0 mr-2 -ml-3 mb-7 md:mb-0">
+                <div className="w-full h-full relative border-gray-600 
+                 shadow-lg shadow-neutral-900 bg-cover bg-no-repeat "> 
+                 <div className="relative flex justify-center items-center h-full">
             <img 
-            className="transition cursor-pointer duration-700 rounded-xl border-2 border-b-2 border-gray-600"
+            className="transition relative w-full h-full cursor-pointer duration-700 rounded-xl border-2 border-b-2 border-gray-600"
             alt="product img not found"
            src={`${AddressBaseUrl}/images/${vacancie.image}`} 
-            //src={`/img/${vacancie.featureImage}`} 
-             onError={event => {
-            event.target.src = `${AddressBaseUrl}/images/${org?.promotedOrgs && 
-            org?.promotedOrgs[currentIndex]?.logo}`
-            event.onerror = null
-           }}
             />
+         </div>
       <div class="absolute bottom-0 left-0 right-0 top-0 h-full w-full rounded-xl 
           justify-center overflow-hidden bg-gradient-to-r from-green-500 via-amber-300
            to-pink-600 opacity-0 transition duration-300 ease-in-out hover:opacity-70"
@@ -218,16 +195,15 @@ return(
              </span><br />
              </button>
           </a>  
-
-        </div>
        {/* <div className="mt-4 float-right flex">
         <span onClick={() => likeProduct(vacancie) }>Like</span>
       </div> */}
-     </div>
-     </div>
-     </div>
-    </>
-    )})):(<><div><Loading/></div></>) }
+         </div>
+        </div>
+       </div>
+      </>
+     )})):(<><div><Loading/></div></>) }
+    </div>
     </div>
      {/* {data?.length > 0 && 
      <div className="pagination">
@@ -277,35 +253,6 @@ return(
       </div>
       }
       
-      {/* {data?.length > 0 && 
-      <div className=" justify-center ml-10 mt-10">
-      <p className='text-sm text-gray-700 mb-7'>
-      ክጠቅላላ <span className='font-medium'> {data?.length} </span>
-      የስራ ማስታወቂያዎች ዝርዝር ውስጥ ከቁጥር <span className='font-medium'>{page * 12 - 12}</span>
-        እስከ ቁጥር <span className='font-medium'> {page * 12} </span> የሚገኙ ምርቶች ዝርዝር  
-        </p>
-        <nav
-          className='relative z-0  inline-flex rounded-md shadow-sm -space-x-px'
-          aria-label='Pagination'
-        >
-          <button
-          onClick={() => selectPageHandler(page - 1)}
-            className='relative inline-flex items-center px-2 py-2 rounded-l-md border
-             bg-slate-700 border-gray-300  text-sm font-medium text-gray-500 hover:bg-gray-50'
-          >
-            <span className="font-bold">ምልስ</span>
-          </button>
-
-          <button
-          onClick={() => selectPageHandler(page + 1)}
-            className='relative inline-flex items-center px-2 py-2 rounded-r-md border
-             border-gray-300 bg-slate-700 text-sm font-medium text-gray-500 hover:bg-gray-50'
-          >
-            <span className=" font-bold">ቅጣይ</span>
-          </button>
-        </nav>
-      </div>}
- */}
       {vacancieDel && (
           <> 
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none -mt-6 border border-grey-100">

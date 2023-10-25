@@ -75,15 +75,15 @@ const selectPageHandler = (selectedPage) => {
 
   return (
     <>
-   <div className="bg-[#E3E6E6]">
-    <div className="w-11/12 xl:w-11/12">
+   <div className="bg-[#E3E6E6] w-full">
+    <div className="w-full">
      <section className="mb-6 text-gray-800 text-center ">
      <div style={{
             }} className=" md:flex flex-wrap justify-between items-center ml-20">
     <div className="flex items-center py-3 mt-8 mb-4 ">
         <button
-        className=" text-lg font-display text-black font-medium hover:text-[#0397FF]">
-          <span className="mr-2 md:ml-0 -ml-4 underline decoration-pink-800 decoration-4 underline-offset-8">ሁሉም</span> ምርቶች
+        className=" text-lg font-display text-black md:-ml-14 -mt-3 font-medium hover:text-[#0397FF]">
+          <span className="mr-2 md:ml-50 -ml-4 underline decoration-pink-800 decoration-4 underline-offset-8">ሁሉም</span> ምርቶች
         </button>
         <form onSubmit={submitHandler}>
         <div class=" mb-4 flex flex-wrap items-stretch absolute md:mt-0 mt-6 md:right-16 right-4">
@@ -112,12 +112,11 @@ const selectPageHandler = (selectedPage) => {
             clip-rule="evenodd" />
         </svg>
        </button>
-
-        </div>
-      </form>
       </div>
-      </div>
-    <div className="grid lg:grid-cols-3 xl:gap-5 md:gap-6 xl:gap-x-14">
+     </form>
+    </div>
+   </div>
+    <div className="grid lg:grid-cols-3 xl:gap-5 md:gap-6 xl:gap-x-14 ">
       {
       (product?.length)>0
         ?(
