@@ -335,14 +335,14 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
  { 
      (org?.promotedProducts?.promotedProducts?.length)>0
       ?(
-        <div className="items-center py-3 mb-4 border-t border-gray-500 mt-7" ref={productSection}>
+        <div className="items-center py-3 ml-16 mr-12 mb-4 border-t border-gray-500 mt-7" ref={productSection}>
          <button className=" text-lg font-display text-black font-medium hover:text-[#0397FF]">
           <span className="mr-2 underline decoration-pink-800 decoration-4 underline-offset-8"> ምርቶች </span>
          </button>
         </div>
       ):(null)
     }
-      <div class="grid lg:grid-cols-3 xl:gap-10 md:gap-6 xl:gap-x-4">
+    <div class="grid lg:grid-cols-3 xl:gap-10 md:gap-6 xl:gap-x-4 ml-16 mr-12">
       {
         (org?.promotedProducts?.promotedProducts?.length)>0
           ?(
@@ -425,19 +425,19 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
     { 
      (org?.bids?.bids?.length)>0
       ?(
-        <div className="items-center py-3 mb-4 mt-6 border-t border-gray-500" ref= {biddingSection}>
-         <button className=" ml-10 text-lg font-display text-black font-medium hover:text-[#0397FF]">
+        <div className="items-center py-3 mb-4 ml-16 mr-12 mt-6 border-t border-gray-500" ref= {biddingSection}>
+         <button className="  text-lg font-display text-black font-medium hover:text-[#0397FF]">
           <span className="mr-2 underline decoration-pink-800 decoration-4 underline-offset-8">የጨረታ ማስታዎቂያ </span>
          </button>
         </div>
        ):(null)
      }
-   <div class="grid lg:grid-cols-3 xl:gap-10 md:gap-6 xl:gap-x-4 ml-7">
+     <div class="grid lg:grid-cols-3 xl:gap-10 md:gap-6 xl:gap-x-4 ml-16 mr-12">
       {
         (org?.bids?.bids?.length)>0
           ?(
             org?.bids?.bids?.slice(0, 3).map((bid, index) => (
-       <div key={index} className="mb-6 lg:mb-0">
+       <div key={index} className="mb-6 lg:mb-0 ">
         <div class="relative group block bg-white rounded-lg shadow-inner shadow-blue-950/40 p-1">
             <div className="flex pb-2">
                   <div
