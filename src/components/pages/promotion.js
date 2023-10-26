@@ -189,7 +189,7 @@ const orgHandler =(id)=>{
      <div className="md:pt-24 lg:pt-24  pt-18 -ml-7 border-b mb-10 border-t border-gray-400" ref={firstSection}>
      <Fristpage />
      </div>
-     <div className="-ml-14 mb-7 md:pl-7 pl-0 p-5 -mt-10" ref={orgSection}>
+     <div className="mb-7 md:pl-8 pl-0 p-5 -mt-10 mr-5" ref={orgSection}>
         <Orgdetail />
      </div>
      <div className="pt-2  md:pl-8 pl-0 border-t border-b border-gray-400 mb-7 p-5" ref= {productSection}>

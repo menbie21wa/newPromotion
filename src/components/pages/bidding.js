@@ -22,7 +22,6 @@ const Bidding = (props) =>{
   const { org } = useSelector(
    (state)=> state.org
  );
-
  // dispatch(getProduct(id));
  useEffect(()=>{
    dispatch(viewOrganization());
@@ -37,13 +36,11 @@ const Bidding = (props) =>{
     const detailInfo = localStorage.getItem("detailInfo")
     ? JSON.parse(localStorage.getItem("detailInfo"))
     : null;
-
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate()
-  const orgHandler=()=>{
-    // navigate("org/"+id)
-    navigate("org")
-}
+  const orgHandler=(id)=>{
+    navigate("org/"+id)
+    }
     const prevSlide = () => {
       const isFirstSlide = currentIndex === 0;
       const newIndex = isFirstSlide ? org.length - 1 : currentIndex - 1;
@@ -59,13 +56,11 @@ const Bidding = (props) =>{
       setPage(selectedPage)
     }
   }
-
     const nextSlide = () => {
       const isLastSlide = currentIndex === org.length - 1;
       const newIndex = isLastSlide ? 0 : currentIndex + 1;
       setCurrentIndex(newIndex);
     };
-  
     const goToSlide = (slideIndex) => {
       setCurrentIndex(slideIndex);
     };
@@ -110,21 +105,12 @@ const Bidding = (props) =>{
              aria-describedby="button-addon1"
              value={term}
              onChange={(e) => setTerm(e.target.value)}/>
-
-      {/* <input
-        type="search"
-        class="relative m-0 -mr-px block w-[1%] min-w-0 flex-auto rounded-l border border-solid border-neutral-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-neutral-700 outline-none transition duration-300 ease-in-out focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:text-neutral-200 dark:placeholder:text-neutral-200 z-50"
-        
-        aria-label="Search"
-        aria-describedby="button-addon1" 
-        value={term}
-        onChange={(e) => setTerm(e.target.value)}/> */}
-      <button
-        class="relative bg-[#E3E6E6] rounded-md md:-mt-5 mt-0 z-20 flex items-center rounded-r bg-secondary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
-        type="submit"
-        data-te-ripple-init
-        data-te-ripple-color="light">
-        <svg
+        <button
+          class="relative bg-[#E3E6E6] rounded-md md:-mt-5 mt-0 z-20 flex items-center rounded-r bg-secondary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
+         type="submit"
+         data-te-ripple-init
+         data-te-ripple-color="light">
+         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
@@ -139,7 +125,7 @@ const Bidding = (props) =>{
      </form>
     </div>
   </div>
-  <div className=' bg-white  md:flex lg:flex pb-20 md:-mt-1 mt-3 md:pl-5 pl-0 md:ml-5 md:mr-0 ml-10 mr-5'>    
+  <div className=' bg-white  md:flex lg:flex pb-20 md:-mt-1 mt-3 md:pl-16 pl-0 md:ml-3 md:mr-0 ml-10 mr-5'>    
     <div class="relative grid xl:grid-cols-3 md:grid-cols-3 grid-cols-1 xl:gap-20 md:gap-20 gap-12 my-3 xl:gap-x-10 md:gap-x-7 gap-x-5">
       {
        (bidding?.vacancies?.length)>0
@@ -167,27 +153,41 @@ const Bidding = (props) =>{
                     <button className=" h-12 w-28 rounded-3xl mt-20 text-slate-100 border border-none
                     bg-black">View Detail</button>
                     </div>
-                    <div className="mt-4 float-left flex">
-                    <ul className=' mt-1 flex'>
-                        <img className=' w-7 h-6 rounded-2xl' 
-                       // src={`/img/${bidding.featureImage}`} 
-                      // src={`${AddressBaseUrl}/images/${bidding.image}`} 
-                      src={`${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`}
-                        alt='Noimage'/>
-                    </ul>                 
-                    <a>
-            <button 
-             onClick={() => orgHandler()}
-            // onClick={() => orgHandler(`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.id}`)}
+          <div className="mt-4 float-left flex">
+          <ul  className='  mt-3 flex'>
+          {(org?.promotedOrgs?.length > 0)
+         ?(
+          org?.promotedOrgs?.map((orgs,index) => 
+        (
+          (orgs.id)==(bidding.orgId)?(
+               <button 
+             onClick={() => orgHandler(`${orgs.id}`)}
              >
-             <span className="mt-1 ml-2">
-              <p className=" float-left  text-sm ">{bidding.title.substring(0,6)}<br />
-             {bidding.description.substring(0,48)+"..."}</p><br />
-             <p className=" font-thin text-sm">{`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.name}`}</p>             
-             </span><br />
+             <img className=' w-7 h-6 rounded-2xl' 
+               src={`${AddressBaseUrl}/images/${orgs?.logo}`}
+               alt='Noimage'/>
+             </button>)
+            :("")))):("")}
+          </ul>
+           {/* src={`${AddressBaseUrl}/images/${vacancie.image}`}  */}
+          <a>
+        <span className="mt-1 ml-2">{bidding.title.substring(0,80)} . . .<br />
+       {(org?.promotedOrgs?.length > 0)
+         ?(
+          org?.promotedOrgs?.map((orgs,index) => 
+        (
+          (orgs.id)==(bidding.orgId)?(
+            <button 
+             className='ml-2  text-amber-400'
+             onClick={() => orgHandler(`${orgs.id}`)}
+             >
+             {orgs.name.substring(0,75)}
              </button>
-            </a>  
-           </div>
+            ):(""))))
+        :("")}
+        </span><br />
+          </a>  
+         </div>
           </div>
          </div>
         </>
@@ -234,10 +234,10 @@ const Bidding = (props) =>{
        </div>
      {vacancieDel && (
       <> 
-       <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none -mt-6 border border-grey-100">
-         <div className="relative w-auto my-6 mx-auto max-w-2xl">
+       <div className="justify-center items-center flex overflow-x-hidden  border-grey-100 shadow-lg overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none -mt-6 border border-grey-100">
+         <div className="relative w-auto my-6 mx-auto bg-slate-500 max-w-7xl border border-grey-100 shadow-lg">
            {/*content*/}
-             <div className="rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+             <div className="rounded-lg shadow-lg relative border border-grey-100 flex flex-col w-full bg-orange-400 outline-none focus:outline-none">
                {/*header*/}
                 <div className="flex justify-end p-1">
                   <button
@@ -249,24 +249,32 @@ const Bidding = (props) =>{
                       <HiOutlineX className="w-6 h-6" />
                     </button>
                   </div>
-                  <div className="w-full flex">
-                    <div className="p-4">
+                  <div className=" bg-white w-full flex flex-row">
+                    <div className="p-4 w-1/2">
                     <img
-                      className="w-48 h-32 transition cursor-pointer duration-700"
+                      className="w-full h-96 transition cursor-pointer duration-700"
                       src={`${AddressBaseUrl}/images/${detailInfo.image}`}
                      // src={samrtPc} 
                       alt="product img not found"
                       /> 
                       </div>
-                     <div className="m-4">
+                     <div className="m-4 w-1/2 border border-grey-100 shadow-lg">
                      <p className="text-lg font-bold">{detailInfo?.title}</p> 
                      <div class="pt-2">
                      <p className="text-sm font-bold  mt-4 text-center">{detailInfo?.description}</p>  
                      </div>
-                     <h3 class="border-t mb-2 pt-3 font-semibold underline">phone: <span class="font-thin">0984008445</span>
-                     <br />
-                     Email: <span class="font-thin">EplusApp88@gmail.com</span>
-                    </h3> 
+                     {(org?.promotedOrgs?.length > 0)
+                      ?(
+                        org?.promotedOrgs?.map((orgs,index) => 
+                      (
+                        (orgs.id)==(detailInfo.orgId)?(
+                            <>
+                            <h3 class="border-t mb-2 pt-3 font-semibold underline">
+                              phone: <span class="font-thin">{orgs?.phone}</span></h3>
+                              <h3 class="border-t mb-2 pt-3 font-semibold underline">Email: <span class="font-thin">{orgs?.email}</span></h3> 
+                          </>)
+                          :("")  
+                      ))):("")} 
                    </div>
                   </div>
                  </div>

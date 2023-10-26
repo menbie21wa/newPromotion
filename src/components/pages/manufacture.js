@@ -28,7 +28,9 @@ import building from "../../icons/office-building.png";
 import producticon from "../../icons/new-product.png";
 import bidding from "../../icons/bidding.png";
 import { louberDetail} from "../../actions/louberDetail";
-
+import classNames from 'classnames';
+import icon1 from '../../img/download.jpeg'
+import icon3 from '../../img/download.png'
 const Manufacture = () =>{
  // window.scrollTo(0, 0);
  const dispatch = useDispatch();
@@ -167,9 +169,16 @@ const detailInfo = localStorage.getItem("detailInfo")
   መስሪያ ቤቶችን የንግድ ተቋማትን፡እንዲሁም የተለያዪ በከተማው ውስጥ የሚገኙ የግለሰብ ቦታወችን መገኛ በቀላሉ ካርታ ላይ ለይቶ ለማወቅ:
   ይህ ኢጵላሣጵ ዌብ ሳይት ነው ኢጵላሣጵ የራሱ የሆነ ዌብሳይት አልምቶ አሁን ደሞ ለግለሰቦች እና ለድርጅቶች የየራሳቸው የሆነ ዌብሳይት ለማልማት 
   ሙሉ ዝግጅቱን ጨርሷል። እርሶም እድሉን ይጠቀሙ። ኢኮሜርስ ዌብ ሳይት በበይነመረቡ ላይ የእርስዎ ዲጂታል የመደብር ፊት ነው። በገዢ እና በሻጭ መካከል ያለውን ግብይት ያመቻቻል ያፋጥናል. 
-  የመስመር ላይ ደንበኞችዎ ምርጫቸውን አድርገው መጠቀም ይችላሉ።
+  የመስመር ላይ ደንበኞችዎ ምርጫቸውን አድርገው መጠቀም ይችላሉ።`);
 
-  `);
+  const [expanded, setExpanded] = useState(false); 
+  const toggleExpanded = () => { 
+    setExpanded(!expanded); 
+  }; 
+  const paragraphClass = classNames('line-clamp-5', { 
+    'line-clamp-none': expanded, 
+  }); 
+
   const [description, setDescription] = useState(descrip.substring(0,700)+'   . . .');
 
   var hidden=''
@@ -203,7 +212,7 @@ onClick={() => backNavigate()}>
 </button>
 <button className=' w-96 p-5 md:flex block '  
 onClick={() => backNavigate()}> 
-<img className=' md:w-32 md:h-20 w-20 h-10  -mt-3 lg:ml-12 sm:ml-5 rounded-2xl' 
+<img className=' md:w-32 md:h-20 w-20 h-10  -mt-3 lg:ml-5 sm:ml-5 rounded-2xl' 
 //src={Logue} 
 src={`${AddressBaseUrl}/images/${org?.org?.logo}`}
 alt="NoLogue"
@@ -270,30 +279,51 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
    </>    
   </div>
   <div className=" mt-20 bg-[#E3E6E6] ">
-        <div className=" bg-[#E3E6E6] md:flex-row p-2 flex-col md:pt-0 lg:pt-0 md:mb-24 mb-44 pt-24 h-full md:h-full w-full border-b  group">
+        <div className=" bg-[#E3E6E6] md:flex-row pb-20 flex-col md:pt-0 lg:pt-0 md:mb-24 mb-44 pt-24 h-full md:h-full w-full border-b  group">
           <div className='h-full -mb-44 md:flex block md:h-full w-full md:mt-20 -mt-0 rounded p-2'> 
           <div
-            className=" md:w-10/12 md:mb-0 mb-16  md:mr-5 h-full md:mt-9 -mt-10 flex md:ml-5 ml-2 flex-col md:p-2 p-3 justify-center items-center">
+            className=" md:w-10/12 md:mb-0 mb-16  md:mr-8 h-full md:mt-5 -mt-10 flex md:ml-5 ml-2 flex-col md:p-2 p-3 justify-center items-center">
                <h1 className="text-4xl md:text-4xl xl:text-5xl text-[#F49F08] font-bold font-display tracking-tight leading-tight italic">
-                  {`${org?.org?.name}`}
+                  {`${org?.promotedOrgs && org?.org?.name}`}
                   </h1>
                   <p className="text-2xl md:text-2xl mt-4 xl:text-3xl text-[#F49F08] font-bold font-display tracking-tight leading-tight">
-                  {`${org?.org?.businessSector}`}</p>
+                  {`${ org?.promotedOrgs && org?.org?.businessSector}`}</p>
                   <p className='mt-7'>
-                  {/* { org?.promotedOrgs[currentIndex]?.description} */}
-                  {description}
-                  <button className=''></button>
-                  </p>
-                  <button onClick={getDescription} className={`${hidden} ${background} mt-1 ml-0 text-sky-600 font-semibold`}>
-                  More
-                 </button>
+                  {org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.description}
+
+
+
+                  <div> 
+          {/* Description Page */}
+      <p className={paragraphClass}> 
+      {descrip}
+      </p> 
+      {!expanded && ( 
+
+            <button 
+          className="text-blue-500 hover:underline w-32 pl-3 rounded-lg h-10 bg-amber-500 " 
+          onClick={toggleExpanded} 
+        >  Read More
+        <img className='w-6 h-6 -ml-2 -mt-6 rounded-full' alt='' src={icon3}/> 
+         </button> 
+                )} 
+        {expanded && ( 
+          <button 
+          className="text-blue-500 hover:underline w-32 pl-3 rounded-lg h-10 bg-amber-500 " 
+          onClick={toggleExpanded} 
+        >  Read less
+        <img className='w-6 h-6 -ml-2 -mt-6 rounded-full' alt='' src={icon3}/> 
+         </button>
+         )} 
+       </div> 
+      </p>
          </div>
         <div
           // style={{ backgroundImage: `url(${org && org[currentIndex]?.url})` }}
-          className=' md:-ml-5 ml-5 md:mt-7 -mt-20  rounded-2xl md:w-2/3 w-40 md:h-full h-60 bg-center duration-700 relative bg-cover bg-no-repeat'
+          className=' md:-ml-5 ml-5 md:mt-7 -mt-16 md:pr-3 pr-0 rounded-2xl md:w-2/3 w-40 md:h-full h-60 bg-center duration-700 relative bg-cover bg-no-repeat'
           >
           <img 
-          className="w-11/12 h-3/4 rounded-lg"
+          className="md:w-full md:h-96 w-11/12 h-3/4  rounded-lg"
          // src={`/img/Eplusapp1.png`} 
           src={`${AddressBaseUrl}/images/${org?.org?.logo}`}
           alt=""
@@ -301,7 +331,6 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
         </div>
        </div>
      </div>
-
  {/* product list */}
  { 
      (org?.promotedProducts?.promotedProducts?.length)>0
@@ -335,8 +364,8 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
                     />
                   </div>
                 </div>
-            <div className="bg-[#E3E6E6] m-auto">
-              <p className="text-sm font-bold">{products.title}</p>
+            <div className="ml-5 m-auto">
+              <p className="text-sm font-bold">{products.name}</p>
               <p className="mb-2 text-sm ">{products.description.substring(0, 30) + " ..."}</p>
              </div>
             </div>
@@ -348,9 +377,9 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
      {productDel && (
           <> 
             <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none -mt-6 border border-grey-100">
-              <div className="relative w-auto my-6 mx-auto max-w-2xl">
+              <div className="relative w-auto my-6 mx-auto max-w-7xl">
                 {/*content*/}
-                <div className="rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                <div className="rounded-lg shadow-lg relative flex flex-col w-full bg-orange-400 outline-none focus:outline-none">
                   {/*header*/}
                   <div className="flex justify-end p-1">
                     <button
@@ -362,10 +391,10 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
                       <HiOutlineX className="w-6 h-6" />
                     </button>
                   </div>
-                  <div className="w-full flex">
-                    <div className="p-4">
+                  <div className="w-full flex bg-white">
+                    <div className="p-3 w-1/2 border border-grey-100 shadow-lg">
                     <img
-                    className="w-48 h-32 transition cursor-pointer duration-700"
+                    className="w-full h-96 transition cursor-pointer duration-700"
                       //src={`${AddressBaseUrl}/images/${louberWorkDetail.image}`}
                       src={`${AddressBaseUrl}/images/${louberWorkDetail.image}`}
                       alt="product img not found"
@@ -392,10 +421,8 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
                 </div>
             </>
           )} 
-
-
            {/* bids */}
- { 
+    { 
      (org?.bids?.bids?.length)>0
       ?(
         <div className="items-center py-3 mb-4 mt-6 border-t border-gray-500" ref= {biddingSection}>
@@ -427,7 +454,7 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
                     />
                   </div>
                 </div>
-            <div className="bg-[#E3E6E6] m-auto">
+            <div className=" ml-5 m-auto">
               <p className="text-sm font-bold">{bid?.title}</p>
               <p className="mb-2 text-sm ">{bid?.description.substring(0, 30) + " ..."}</p>
              </div>
@@ -439,14 +466,14 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
      </div>
      {BiddingDel && (
           <> 
-            <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none -mt-6 border border-grey-100">
-              <div className="relative w-auto my-6 mx-auto max-w-2xl">
-                {/*content*/}
-                <div className="rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                  {/*header*/}
-                  <div className="flex justify-end p-1">
-                    <button
-                       onClick={() => setbiddingDel(false) }
+          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none -mt-6 border border-grey-100">
+         <div className="relative w-auto my-6 mx-auto max-w-7xl">
+           {/*content*/}
+             <div className="rounded-lg shadow-lg relative flex flex-col w-full bg-orange-400 outline-none focus:outline-none">
+               {/*header*/}
+                <div className="flex justify-end p-1">
+                  <button
+                    onClick={() => setbiddingDel(false) }
                       type="button"
                       className="text-red-600 bg-transparent hover:bg-gray-200 rounded-lg text-lg p-1 ml-auto inline-flex items-center"
                       data-modal-toggle="log-in-model"
@@ -454,34 +481,37 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
                       <HiOutlineX className="w-6 h-6" />
                     </button>
                   </div>
-                  <div className="w-full flex">
-                    <div className="p-4">
+                  <div className="w-full flex bg-white">
+                    <div className="p-3 w-1/2 border border-grey-100 shadow-lg">
                     <img
-                    className="w-48 h-32 transition cursor-pointer duration-700"
-                      //src={`${AddressBaseUrl}/images/${louberWorkDetail.image}`}
-                      src={`${AddressBaseUrl}/images/${louberWorkDetail.image}`}
+                      className="w-full h-96 transition cursor-pointer duration-700"
+                      src={`${AddressBaseUrl}/images/${detailInfo.image}`}
+                     // src={samrtPc} 
                       alt="product img not found"
-                    /> 
-                    </div>
-                   <div className="m-4">
-                   {/* <p className="text-lg font-bold">{louberWorkDetail?.name}</p>  */}
-                    <div class="bg-white rounded-md max-w-4xl mx-auto p-2 space-y-2 -mt-2 shadow-lg">
-                    <h3 class="border-t mb-2 pt-3 font-semibold underline">የድርጅቱ ስም: <span >{org?.org?.name}</span></h3> 
-                    <h3 className="flex"><h3 class="mb-1 font-semibold underline">የጨረታ መጠሪያ: </h3> <span >{louberWorkDetail?.title} ግልጽ ጨረታ ማስታወቂያ</span></h3>
-                    <h3 className="flex"><h3 class="mb-1 font-semibold underline">የጨረታ አይነት:</h3> <span >{louberWorkDetail?.type} </span></h3>
-                    <h3 className="flex"><h3 class="mb-1 font-semibold underline">የጨረታ ቁጥር:</h3> <span >{louberWorkDetail?.No}</span></h3>
-                    <h3 className="flex"><h3 class="mb-1 font-semibold underline">ቦታ: ማብቂያ ቀን: </h3><span>BD</span><h3 class="mb-1 ml-3 font-semibold underline"> ማብቂያ ቀን: </h3> <span >{louberWorkDetail?.closingDate?.split('T')[0]}-{louberWorkDetail?.closingDate?.split('T')[0]}</span></h3>
-                        <div class="pt-1">
-                          <h3 class="font-semibold ml-3 underline"> ማብራሪያ:</h3>
-                            <p class="">{louberWorkDetail?.description}</p>
-                        </div>
-                        <h3 class="border-t mb-2 pt-3 font-semibold underline">Email: <span class="font-thin">EplusApp88@gmail.com</span></h3> 
+                      /> 
+                      </div>
+                     <div className="m-4">
+                     <p className="text-lg font-bold">{detailInfo?.title}</p> 
+                     <div class="pt-2">
+                     <p className="text-sm font-bold  mt-4 text-center">{detailInfo?.description}</p>  
                      </div>
-                    </div>
+                     {(org?.promotedOrgs?.length > 0)
+                      ?(
+                        org?.promotedOrgs?.map((orgs,index) => 
+                      (
+                        (orgs.id)==(detailInfo.orgId)?(
+                            <>
+                            <h3 class="border-t mb-2 pt-3 font-semibold underline">
+                              phone: <span class="font-thin">{orgs?.phone}</span></h3>
+                              <h3 class="border-t mb-2 pt-3 font-semibold underline">Email: <span class="font-thin">{orgs?.email}</span></h3> 
+                          </>)
+                          :("")  
+                      ))):("")} 
                    </div>
                   </div>
                  </div>
                 </div>
+               </div>
             </>
           )} 
           {/* Vacancy */}
@@ -490,7 +520,7 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
     {/* job_vacancies */}
     {/* (org?.job_vacancies?.length)>0 */}
     { 
-     (org?.job_vacancies?.job_vacancies.length)>0
+     ((org?.job_vacancies?.job_vacancies.length )>0||(org?.daily_works?.daily_works?.length)>0)
       ?(
         <div className="items-center py-3 mb-4">
          <button className=" text-lg font-display text-black font-medium hover:text-[#0397FF]">
@@ -523,7 +553,7 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
                   </div>
                 </div>
             <div className="m-auto">
-              <p className="text-sm font-bold">{job?.name}</p>
+              <p className="text-sm font-bold">{job?.title}</p>
               <p className="mb-2 text-sm ">{job?.description.substring(0, 30) + " ..."}</p>
              </div>
             </div>
@@ -532,25 +562,12 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
       :(null)  
       }
      </div>
-     {/* day-work */}
-    {/* (org?.job_vacancies?.length)>0 */}
-    {/* { 
-     (org?.job_vacancies?.job_vacancies.length)>0
-      ?(
-        <div className="items-center py-3 mb-4 pt-6 mt-5 border-t border-gray-500 ">
-         <button className=" text-lg font-display text-black font-medium hover:text-[#0397FF]">
-          <span className="mr-2 underline decoration-pink-800 decoration-4 underline-offset-8">የቀን ስራ ማስታዎቂያ</span>
-         </button>
-        </div>
-       ):(null)
-     } */}
-
      {vacancieDel && (
           <> 
-          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none -mt-6 border border-grey-100">
-              <div className="relative w-auto my-6 mx-auto max-w-2xl">
+          <div className="justify-center items-center  flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none -mt-6 border border-grey-100">
+              <div className="relative w-auto my-6  mx-auto max-w-7xl">
                 {/*content*/}
-                <div className="rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                <div className="rounded-lg shadow-lg bg-orange-400 relative flex flex-col w-full  outline-none focus:outline-none">
                   {/*header*/}               
                    <div className="flex justify-end p-1">
                     <button
@@ -562,11 +579,11 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
                       <HiOutlineX className="w-6 h-6" />
                     </button>
                   </div>
-                  <div className="w-full flex">
-                    <div className="p-4">
+                  <div className="w-full flex bg-white">
+                    <div className="p-2 w-1/2 border border-grey-100 shadow-lg">
                     {/* src={`/img/${detailInfo.featureImage}`} */}
                     <img
-                    className="w-48 h-32 transition cursor-pointer duration-700"
+                    className="w-full h-96 rounded-md transition cursor-pointer duration-700"
                      
                       //src={`${AddressBaseUrl}/images/${detailInfo.image}`}
                       src={`${AddressBaseUrl}/images/${detailInfo.image}`}
@@ -594,8 +611,7 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
                </div>
               </>
              )} 
-
-    <div class="grid lg:grid-cols-3 xl:gap-10 md:gap-6 xl:gap-x-4" ref={dayworkSection}>
+     <div class="grid lg:grid-cols-3 xl:gap-10 md:gap-6 xl:gap-x-4" ref={dayworkSection}>
        {
          (org?.daily_works?.daily_works?.length)>0
            ?(
@@ -603,7 +619,7 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
          <div key={index} className="mb-6 lg:mb-0">
          <div class="relative group block bg-white rounded-lg shadow-inner shadow-blue-950/40 p-1">
          <div className="flex pb-2">
-        <div
+         <div
             className="p-2 relative overflow-hidden bg-no-repeat bg-cover rounded-lg"
             data-mdb-ripple="true"
             data-mdb-ripple-color="light"
@@ -617,9 +633,9 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
                       onClick={() => LouberDetail(job) }
                     />
                   </div>
-                </div>
-            <div className="m-auto">
-              <p className="text-sm font-bold">{job?.name}</p>
+                 </div>
+                <div className="m-auto">
+              <p className="text-sm font-bold">{job?.title}</p>
               <p className="mb-2 text-sm ">{job?.description.substring(0, 30) + " ..."}</p>
              </div>
             </div>
@@ -632,9 +648,9 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
      {louberDel && (
           <> 
             <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none -mt-6 border border-grey-100">
-              <div className="relative w-auto my-6 mx-auto max-w-2xl">
+              <div className="relative w-auto my-6 mx-auto max-w-7xl">
                 {/*content*/}
-                <div className="rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                <div className="rounded-lg shadow-lg relative flex flex-col w-full bg-orange-400 outline-none focus:outline-none">
                   {/*header*/}
                   <div className="flex justify-end p-1">
                     <button
@@ -646,10 +662,10 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
                       <HiOutlineX className="w-6 h-6" />
                     </button>
                   </div>
-                  <div className="w-full flex">
-                    <div className="p-4">
+                  <div className="w-full flex bg-white">
+                    <div className="p-3 w-1/2 border border-grey-100 shadow-lg">
                     <img
-                    className="w-48 h-32 transition cursor-pointer duration-700"
+                    className="w-full h-96 transition cursor-pointer duration-700"
                       src={`${AddressBaseUrl}/images/${louberWorkDetail.image}`}
                       alt="product img not found"
                     /> 
@@ -676,9 +692,6 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
                 </div>
             </>
           )} 
-
-
-
 
    </section>
   </div>

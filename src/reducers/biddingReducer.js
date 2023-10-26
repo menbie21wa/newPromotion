@@ -32,23 +32,23 @@ const initialState = {
             state.loading = false
             state.error = payload
         },
-        // [searchVacancies.pending]: (state) =>{
-        //     state.loading = true
-        //     state.error = false
-        //    // console.log("search pending")
-        // },
-        // [searchVacancies.fulfilled]: (state, {payload}) =>{
-        //     state.success = true
-        //     state.bidding = payload
-        //     state.error = false
-        //     state.filter = payload
-        //     console.log("search fulfilled",payload)
-        // },
-        // [searchVacancies.rejected]: (state, {payload}) =>{
-        //     state.error = payload
-        //     state.success = false
-        //    // console.log("search rejected")
-        // },
+        [searchVacancies.pending]: (state) =>{
+            state.loading = true
+            state.error = false
+           // console.log("search pending")
+        },
+        [searchVacancies.fulfilled]: (state, {payload}) =>{
+            state.success = true
+            state.bidding = payload
+            state.error = false
+            state.filter = payload
+            console.log("search fulfilled",payload)
+        },
+        [searchVacancies.rejected]: (state, {payload}) =>{
+            state.error = payload
+            state.success = false
+           // console.log("search rejected")
+        },
         
     },
 })

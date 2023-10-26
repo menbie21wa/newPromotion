@@ -44,7 +44,7 @@
     //  navigate("org")
   }
   return (
-   <div className='w-11/12  m-auto'>
+   <div className='bg-[#E3E6E6] md:mt-0 mt-20'>
     <div className="hidden md:flex items-center py-3 mb-4 ">
       <button
         className=" text-lg font-display text-black font-medium hover:text-[#0397FF]">

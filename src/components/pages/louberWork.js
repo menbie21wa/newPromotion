@@ -8,8 +8,8 @@ import {dataVacancy} from '../vacaData';
 import samrtPc from '../../img/promotion-lg.png';
 import { HiOutlineX } from "react-icons/hi";
 import { louberDetail} from "../../actions/louberDetail";
-import { Daily_Labourer ,searchVacancies} from "../../actions/louberWorkAction";
-import { getOrganization } from '../../actions/orgAction';
+import { Daily_Labourer ,searchDayWork} from "../../actions/louberWorkAction";
+import { viewOrganization } from '../../actions/orgAction';
 import  AddressBaseUrl from "../../utils/BaseUrl";
   const LouberWork = () =>{
     const dispatch = useDispatch();
@@ -29,8 +29,11 @@ import  AddressBaseUrl from "../../utils/BaseUrl";
   console.log("daily work are : ", loubers);
   console.log("page No. : ", loubers.pages);
  useEffect(() =>{
-  dispatch(getOrganization());
+  dispatch(viewOrganization());
   },[])
+  const orgHandler=(id)=>{
+    navigate("org/"+id)
+}
 useEffect(() =>{
       dispatch(Daily_Labourer());
   },[]);
@@ -71,7 +74,7 @@ const [data, setData] =useState(dataVacancy || '');
   const submitHandler = (e) => {
     e.preventDefault();
      if (term === "") return alert("Please enter search term!");
-    dispatch(searchVacancies(term));
+    dispatch(searchDayWork(term));
     console.log("term : ",term);
     setTerm("");
   };
@@ -128,7 +131,7 @@ return(
       </form>
      </div>
     </div>
-   <div className=' bg-white  md:flex lg:flex pb-20 md:-mt-1 mt-3 md:ml-5 md:mr-0 ml-5 mr-5'>    
+   <div className=' bg-white  md:flex lg:flex pb-20 md:-mt-1 mt-3 md:pl-14 pl-0 md:ml-3 md:mr-0 ml-5 mr-5'>    
     <div class="relative grid xl:grid-cols-3 ml-5 md:grid-cols-3 grid-cols-1 xl:gap-20 md:gap-20 gap-7 my-3 xl:gap-x-10 md:gap-x-7 gap-x-5">
         {
           (loubers?.vacancies?.length)>0
@@ -156,23 +159,47 @@ return(
                       bg-black">View Detail</button>
                     </div>
                     <div className="mt-4 float-left flex">
-                        <ul  className='  mt-3 flex'>
-                         <img className=' w-7 h-6 rounded-2xl' 
-                              src={`${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`}
-                              alt='Noimage'/>
-                         </ul>
-                           {/* src={`${AddressBaseUrl}/images/${vacancie.image}`}  */}
-                        <span className="mt-1 ml-2">{values.title}<br />
-                       <p className=" font-thin border text-sm">{`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.name}`}
-                      </p></span><br />
-                    </div>
-                  {/* <div className="mt-4 float-right flex">
-                  <span onClick={() => likeProduct(values) }>Like</span>
-                 </div> */}
+          <ul  className='  mt-3 flex'>
+          {(org?.promotedOrgs?.length > 0)
+         ?(
+          org?.promotedOrgs?.map((orgs,index) => 
+        (
+          (orgs.id)==(values.orgId)?(
+               <button 
+             onClick={() => orgHandler(`${orgs.id}`)}
+             >
+             <img className=' w-7 h-6 rounded-2xl' 
+               src={`${AddressBaseUrl}/images/${orgs?.logo}`}
+               alt='Noimage'/>
+             </button>)
+            :("")  
+        ))):("")}
+
+          </ul>
+           {/* src={`${AddressBaseUrl}/images/${vacancie.image}`}  */}
+          <a>
+
+
+       <span className="mt-1 ml-2">{values.title.substring(0,80)}<br />
+           {(org?.promotedOrgs?.length > 0)
+         ?(
+          org?.promotedOrgs?.map((orgs,index) => 
+        (
+          (orgs.id)==(values.orgId)?(
+            <button 
+             className='ml-2 text-amber-400'
+             onClick={() => orgHandler(`${orgs.id}`)}
+             >
+             {orgs.name.substring(0,75)}
+             </button>
+            ):("")  
+        ))):("")}
+        </span><br />
+          </a>  
+         </div>
+ 
                 </div>
-               {/* <div className="p-0">
-                <p className="text-sm font-bold  mt-4 text-center">{values?.title.substring(0,24)}</p>      
-               </div> */}
+
               </div>
              </>
             )})):
@@ -221,9 +248,9 @@ return(
         {vacancieDel && (
           <> 
             <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none -mt-6 border border-grey-100">
-              <div className="relative w-auto my-6 mx-auto max-w-2xl">
+              <div className="relative w-auto my-6 mx-auto max-w-7xl">
                 {/*content*/}
-                <div className="rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                <div className="rounded-lg shadow-lg relative border border-grey-100 flex flex-col w-full bg-orange-400 outline-none focus:outline-none">
                   {/*header*/}
                   <div className="flex justify-end p-1">
                     <button
@@ -235,10 +262,10 @@ return(
                       <HiOutlineX className="w-6 h-6" />
                     </button>
                   </div>
-                  <div className="w-full flex">
-                    <div className="p-4">
+                  <div className=" bg-white w-full flex flex-row">
+                    <div className="p-4 w-1/2">
                     <img
-                    className="w-48 h-32 transition cursor-pointer duration-700"
+                      className="w-full h-96 transition cursor-pointer duration-700"
                       src={`${AddressBaseUrl}/images/${louberWorkDetail.image}`}
                      // src={samrtPc} 
                       alt="product img not found"
@@ -257,8 +284,19 @@ return(
                      <h3 class="font-semibold -ml-56 underline"> ማብራሪያ:</h3>
                      <p class=" mt-2">{louberWorkDetail?.description}</p>
                     </div>
-                     <h3 class="border-t mb-2 pt-3 font-semibold underline">Email: <span class="font-thin">EplusApp88@gmail.com</span></h3> 
-                     </div>
+                    {(org?.promotedOrgs?.length > 0)
+                      ?(
+                        org?.promotedOrgs?.map((orgs,index) => 
+                      (
+                        (orgs.id)==(louberWorkDetail.orgId)?(
+                            <>
+                            <h3 class="border-t mb-2 pt-3 font-semibold underline">
+                              phone: <span class="font-thin">{orgs?.phone}</span></h3>
+                              <h3 class="border-t mb-2 pt-3 font-semibold underline">Email: <span class="font-thin">{orgs?.email}</span></h3> 
+                          </>)
+                          :("")  
+                      ))):("")}                     
+                      </div>
                     </div>
                    </div>
                   </div>
@@ -266,11 +304,10 @@ return(
                 </div>
             </>
           )} 
-
-    {/* { seeMore && (
-        <>
-          {
-          (loubers?.vacancies?.length)>0
+       {/* { seeMore && (
+         <>
+           {
+           (loubers?.vacancies?.length)>0
             ?(
               loubers?.vacancies?.map((values,index) =>{
              return(

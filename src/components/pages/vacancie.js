@@ -10,7 +10,7 @@ import {HiOutlineX } from "react-icons/hi";
 import {addToDetail} from "../../actions/detail";
 import {viewVacancies, searchVacancies } from "../../actions/vacanciesAction";
 import  AddressBaseUrl from "../../utils/BaseUrl";
-import {getOrganization } from '../../actions/orgAction';
+import {getOrganization,viewOrganization } from '../../actions/orgAction';
 import {dataVacancy} from '../vacaData';
 import '../../App.css'
 
@@ -27,16 +27,23 @@ import '../../App.css'
 
     const { vacancies } = useSelector(
       (state) => state.vacancies
-  );
+   );
+
   const { org } = useSelector(
     (state) => state.org )
-  //console.log("all vacancies are : ", vacancies);
-// const pages = 1;
-useEffect(() =>{
-  dispatch(getOrganization());
-},[]);
-  const [currentIndex, setCurrentIndex] = useState(1);
+  // console.log("all organization yyyyyyyyyy are : ", org?.promotedOrgs[0].id);
+  // console.log("all organization VVVVVVVVV are : ", vacancies?.vacancies[0].orgId);
 
+  // const pages = 1;
+    useEffect(() =>{
+    dispatch(getOrganization());
+    },[]);
+    useEffect(()=>{
+      dispatch(viewOrganization());
+    },[]);
+
+
+   const [currentIndex, setCurrentIndex] = useState(1);
   const nextSlide = () => {
     const isLastSlide = currentIndex === (vacancies.total +1 ) - 1;
     const newIndex = isLastSlide ? 1 : currentIndex + 1;
@@ -61,7 +68,6 @@ useEffect(() =>{
 useEffect(()=>{
     dispatch(viewProducts());
   },[]);
-
   const VacancieDetail = (data) =>{
     dispatch(addToDetail(data));
     setVacancieDel(true);
@@ -91,9 +97,8 @@ useEffect(() =>{
   dispatch(viewVacancies());
   // setProducts(vacancies?.vacancies)
 },[]);
-const orgHandler=()=>{
-    // navigate("org/"+id)
-    navigate("org")
+const orgHandler=(id)=>{
+    navigate("org/"+id)
 }
 const [page, setPage] = useState(1)
 const selectPageHandler = (selectedPage) => {
@@ -151,7 +156,7 @@ return(
      </form>
     </div>
   </div>
- <div className=' bg-white  md:flex lg:flex pb-20 md:-mt-1 mt-3 md:ml-5 md:mr-0 ml-5 mr-5'>    
+ <div className=' bg-white  md:flex lg:flex pb-20 md:-mt-1 mt-3 md:pl-14 pl-0 md:ml-3 md:mr-0 ml-5 mr-5'>    
   <div class="relative grid xl:grid-cols-3 ml-5 md:grid-cols-3 grid-cols-1 xl:gap-20 md:gap-20 gap-7 my-3 xl:gap-x-10 md:gap-x-7 gap-x-5">
     {(vacancies?.vacancies?.length > 0)
       ?(
@@ -176,27 +181,44 @@ return(
           <button className=" h-12 w-28 rounded-3xl mt-20 text-slate-100 border border-none
                   bg-black">View Detail</button>
           </div>
-          <div className="mt-4 float-left flex">
+        <div className="mt-4 float-left flex">
           <ul  className='  mt-3 flex'>
-              <img className=' w-7 h-6 rounded-2xl' 
-               src={`${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`}
+          {(org?.promotedOrgs?.length > 0)
+         ?(
+          org?.promotedOrgs?.map((orgs,index) => 
+        (
+          (orgs.id)==(vacancie.orgId)?(
+               <button 
+             onClick={() => orgHandler(`${orgs.id}`)}
+             >
+             <img className=' w-7 h-6 rounded-2xl' 
+               src={`${AddressBaseUrl}/images/${orgs?.logo}`}
                alt='Noimage'/>
+             </button>)
+            :("")  
+        ))):("")}
+
           </ul>
            {/* src={`${AddressBaseUrl}/images/${vacancie.image}`}  */}
           <a>
 
+
+       <span className="mt-1 ml-2">{vacancie.title.substring(0.80)}<br />
+           {(org?.promotedOrgs?.length > 0)
+         ?(
+          org?.promotedOrgs?.map((orgs,index) => 
+        (
+          (orgs.id)==(vacancie.orgId)?(
             <button 
-             onClick={() => orgHandler()}
-            // onClick={() => orgHandler(`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.id}`)}
+             className='ml-2 text-amber-400'
+             onClick={() => orgHandler(`${orgs.id}`)}
              >
-             <span className="mt-1 ml-2">{vacancie.title}<br />
-             <p className=" font-thin text-sm">{`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.name}`}</p>             
-             </span><br />
+             {orgs.name.substring(0,75)}
              </button>
+            ):("")  
+        ))):("")}
+        </span><br />
           </a>  
-       {/* <div className="mt-4 float-right flex">
-        <span onClick={() => likeProduct(vacancie) }>Like</span>
-      </div> */}
          </div>
         </div>
        </div>
@@ -204,18 +226,6 @@ return(
      )})):(<><div className="text-xl font-semibold flex justify-center mt-5 ml-32">------ ምንም ሥራ  የለም! ------</div></>) }
     </div>
     </div>
-     {/* {data?.length > 0 && 
-     <div className="pagination">
-        <span onClick={() => selectPageHandler(page - 1)}
-          > ◀ </span>
-        {[...Array(data?.length / 2)].map((_, i) => {
-             return <span key={i} className={page === i + 1 ? "pagination__selected" : ""} 
-             onClick={() => selectPageHandler(i + 1)}>{i + 1}</span>
-        })}
-        <span onClick={() => selectPageHandler(page * 12)}
-        > 
-         ▶ </span>
-      </div>} */}  
       <br />
       {vacancies?.vacancies?.length > 0 && 
        <div className=" justify-center ml-10 mt-10">
@@ -255,9 +265,9 @@ return(
       {vacancieDel && (
           <> 
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none -mt-6 border border-grey-100">
-              <div className="relative w-auto my-6 mx-auto max-w-2xl">
+              <div className="relative w-auto my-6 mx-auto max-w-8xl">
                 {/*content*/}
-                <div className="rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                <div className="rounded-lg shadow-lg relative border border-grey-100 flex flex-col w-full bg-orange-400 outline-none focus:outline-none">
                   {/*header*/}               
                    <div className="flex justify-end p-1">
                     <button
@@ -269,12 +279,10 @@ return(
                       <HiOutlineX className="w-6 h-6" />
                     </button>
                   </div>
-                  <div className="w-full flex">
-                    <div className="p-4">
-                    {/* src={`/img/${detailInfo.featureImage}`} */}
+                  <div className=" bg-white w-full flex flex-row">
+                    <div className="p-4 w-1/2">
                     <img
-                    className="w-48 h-32 transition cursor-pointer duration-700"
-                     
+                      className="w-full h-96 transition cursor-pointer duration-700"                     
                       src={`${AddressBaseUrl}/images/${detailInfo.image}`}
                       alt="product img not found"
                     /> 
@@ -290,8 +298,19 @@ return(
                     <h3 class="font-semibold -ml-56 underline"> ማብራሪያ:</h3>
                     <p class=" mt-2">{detailInfo?.description}</p>
                     </div>
-                    <h3 class="border-t mb-2 pt-3 font-semibold underline">phone: <span class="font-thin">0984008445</span></h3> 
-                    <h3 class="border-t mb-2 pt-3 font-semibold underline">Email: <span class="font-thin">EplusApp88@gmail.com</span></h3> 
+                     {(org?.promotedOrgs?.length > 0)
+                      ?(
+                        org?.promotedOrgs?.map((orgs,index) => 
+                      (
+                        (orgs.id)==(detailInfo.orgId)?(
+                            <>
+                            <h3 class="border-t mb-2 pt-3 font-semibold underline">
+                              phone: <span class="font-thin">{orgs?.phone}</span></h3>
+                              <h3 class="border-t mb-2 pt-3 font-semibold underline">Email: <span class="font-thin">{orgs?.email}</span></h3> 
+
+                          </>)
+                          :("")  
+                      ))):("")}
                     </div>
                     </div>
                   </div>
