@@ -14,6 +14,7 @@ import { HiOutlineX } from "react-icons/hi";
 import AddressBaseUrl from "../../utils/BaseUrl";
 import like from '../../icons/like.png';
 import {getOrganization } from '../../actions/orgAction';
+import { getProduct,searchProduct,viewProducts,productCategory} from "../../actions/productAction";
 const Allproducts = () => {
   const [seeMore, setSeeMore] = useState(false);
   const [vacancieDel, setVacancieDel] = useState(false);
@@ -49,10 +50,15 @@ const orgHandler=()=>{
 useEffect(() =>{
   dispatch(getOrganization());
 },[]);
+useEffect(() =>{
+  dispatch(viewProducts());
+},[]);
+
   const [currentIndex, setCurrentIndex] = useState(1);
   const {product} = useSelector(
     (state)=> state.product
   );
+  console.log("qq==",product?.promotedProducts?.length  )
   const [page, setPage] = useState(1)
 const selectPageHandler = (selectedPage) => {
   // alert(data.length+","+selectedPage)
@@ -75,29 +81,28 @@ const selectPageHandler = (selectedPage) => {
 
   return (
     <>
-   <div className="bg-[#E3E6E6] w-full">
-    <div className="w-full">
-     <section className="mb-6 text-gray-800 text-center ">
-     <div style={{
-            }} className=" md:flex flex-wrap justify-between items-center ml-20">
-    <div className="flex items-center py-3 mt-8 mb-4 ">
+   <div className=" w-full bg-[#E3E6E6] md:mt-0 mt-20 ">
+  <div className=" mx-auto h-4/5">
+   <section className="mb-6 text-gray-800 text-center group">
+    <div className=" md:flex block flex-wrap justify-between items-center mx-auto md:px-6 lg:px-6 px-1">
+      <div className="flex items-center py-3 mb-4 md:ml-0 ml-3">
         <button
-        className=" text-lg font-display text-black md:-ml-14 -mt-3 font-medium hover:text-[#0397FF]">
-          <span className="mr-2 md:ml-50 -ml-4 underline decoration-pink-800 decoration-4 underline-offset-8">ሁሉም</span> ምርቶች
+        className=" text-lg font-display text-black font-medium hover:text-[#0397FF]">
+          <span className="mt-10 md:-ml-3  underline decoration-pink-800 decoration-4 underline-offset-8">ሁሉም</span> ምርቶች
         </button>
         <form onSubmit={submitHandler}>
-        <div class=" mb-4 flex flex-wrap items-stretch absolute md:mt-0 mt-6 md:right-16 right-4">
-          <input className="bg-[#E3E6E6] z-20"  
+        <div class=" mb-4 flex flex-wrap items-stretch absolute md:mt-0 mt-6 md:ml-0 ml-5 md:right-16 right-10">
+         <input className="bg-[#E3E6E6] p-3 rounded-md md:-mt-5 ml mt-0 z-20 " 
              type="date"
              aria-label="Search"
              aria-describedby="button-addon1"
              value={term}
              onChange={(e) => setTerm(e.target.value)}/>
              <button
-             class="relative z-20 flex items-center rounded-r bg-secondary px-6 py-2.5 text-xs 
-             font-medium uppercase leading-tight text-white shadow-md transition duration-150 
-             ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg
-              focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
+             class="relative bg-[#E3E6E6] rounded-md md:-mt-5 mt-0 z-20 flex items-center rounded-r bg-secondary px-6
+              py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 
+              ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none 
+              focus:ring-0 active:bg-primary-800 active:shadow-lg"
         type="submit"
         data-te-ripple-init
         data-te-ripple-color="light">
@@ -116,45 +121,37 @@ const selectPageHandler = (selectedPage) => {
      </form>
     </div>
    </div>
-    <div className="grid lg:grid-cols-3 xl:gap-5 md:gap-6 xl:gap-x-14 ">
+   <div className=' bg-white  md:flex lg:flex pb-20 md:-mt-1 mt-3 md:pl-5 pl-0 md:ml-5 md:mr-0 ml-10 mr-5'>    
+    <div class="relative grid xl:grid-cols-3 md:grid-cols-3 grid-cols-1 xl:gap-20 md:gap-20 gap-12 my-3 xl:gap-x-10 md:gap-x-7 gap-x-5">
       {
-      (product?.length)>0
+      (product?.promotedProducts?.length)>0
         ?(
-        product?.slice(page * 12 - 12, page * 12).map((item, index) => (
-           <div className=" md:ml-0 ml-5">
-            {/* <div  className="  lg:mb-0 md:pt-4 lg:pt-4 pt-2 flex bg-slate-600"> */}
-              <div key={index} className=" products md:my-10 my-9 lg:ml-14 md:ml-12 -ml-6 relative  ">
-                  <div className=" products__single  relative overflow-hidden bg-no-repeat bg-cover rounded-lg"
-                       data-mdb-ripple="true"
-                       data-mdb-ripple-color="light"
-                        >
+          product?.promotedProducts?.slice(page * 12 - 12, page * 12).map((item, index) => {
+            return(
+              <>
+             <div key={index} className=" h-40 md:h-56 xl:h-s6 xl:w-96 md:w-80 sm:w-60 relative md:ml-2 ml-2 mr-2 my-10 mb-24 md:mb-0">
+             <div className="w-full h-full relative border-gray-600 
+                 shadow-lg shadow-neutral-900 bg-cover bg-no-repeat "> 
+                 <div className="relative flex justify-center items-center h-full">
                     <img
-                      className="w-full h-full transition cursor-pointer duration-700 rounded-lg hover:scale-125"
+                    className="transition relative w-full h-full cursor-pointer duration-700 rounded-xl border-2 border-b-2 border-gray-600"
                     //  src={`/img/${item.featureImage}`} 
-                    src={`${AddressBaseUrl}/images/${item.image}`}
+                    src={`${AddressBaseUrl}/images/${item.featureImage}`}
                       onClick={ () => VacancieDetail(item)}
                      // src={smartPhone}
                       alt="product img not found"
                     />
-                 </div>
-                </div>
-       {/* <div className="mt-[1%] ml-7 float-left">
-        <div className="float-left">
-          <p className="text-sm">{item.name.substring(0,6)}</p>  
-         </div>
-         <div className="float-left ml-3">
-          <p className="text-sm">{item.description.substring(0,48)+"..."}</p>
-         </div>
-        </div> */}
+             </div>
+            </div>
          <div className=" flex-row">         
            <div className="md:-mt-3 mt-0 w-72 -pl-2 md:ml-14 ml-0 float-left flex">
-          <ul className='   md:ml-0 -ml-3 md:mb-0 '>
+           <ul className='   md:ml-0 -ml-3 md:mb-0 '>
               <img className=' w-10 h-6 rounded-2xl' 
              // src={`${AddressBaseUrl}/images/${item.image}`} 
              src={`${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`}
               alt='Noimage'/> 
-          </ul>
-          <a>
+           </ul>
+           <a>
             <button 
              onClick={() => orgHandler()}
             // onClick={() => orgHandler(`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.id}`)}
@@ -167,26 +164,23 @@ const selectPageHandler = (selectedPage) => {
              </button>
           </a>  
         </div>
-         {/* <div className="md:mt-0 mt-0 float-right md:mr-1 mr-9 flex w-7">
-     
-         <span onClick={() => likeProduct(item) }>
-         <img className=' w-4 h-4 md:ml-0   cursor-pointer' src={like} alt='Noicon'/></span>
-      </div> */}
     </div>
     </div>
-  ))):(<></>)}
+   </>)})):(<><div className=" text-xl font-semibold flex justify-center mt-5 ml-32">
+    ------ ምንም ምርት የለም ! ------</div></>)}
+  </div>
   </div>
    <br /> <br />
-      {product?.length > 0 && 
+      {(product?.promotedProducts?.length) > 0 && 
        <div className=" justify-center ml-10 mt-10">
-        {(product?.length >=page * 12)?(
+        {(product?.promotedProducts?.length >=page * 12)?(
            <p className='text-sm text-gray-700 mb-7'>
-            ክጠቅላላ <span className='font-medium ml-2 mr-2'> {product?.length} </span>
+            ክጠቅላላ <span className='font-medium ml-2 mr-2'> {product?.promotedProducts?.length} </span>
             ምርቶች  ዝርዝር ውስጥ ከቁጥር <span className='font-medium ml-2 mr-2'>{page * 12 - 12}</span>
              እስከ ቁጥር <span className='font-medium ml-2 mr-2'> {page * 12} </span> የሚገኙ ምርቶች  ዝርዝር  
              </p>
           ):<p className='text-sm text-gray-700 mb-7'>
-              <p className="mr-2">(መጨረሻው ነው)</p> ጠቅላላ <span className='font-medium ml-2 mr-2'> {product?.length} </span>
+              <p className="mr-2">(መጨረሻው ነው)</p> ጠቅላላ <span className='font-medium ml-2 mr-2'> {product?.promotedProducts?.length} </span>
               ምርቶች ብቻ ይገኛሉ::  
             </p>
           }

@@ -147,14 +147,15 @@ const Bidding = (props) =>{
           bidding?.vacancies?.slice(currentPage * 10 - 10, currentPage * 10).map((bidding,index) =>{
            return(
               <>
-              <div key={index} className=" h-40 md:h-56 xl:h-s6 xl:w-96 md:w-80 sm:w-60 relative md:ml-2 ml-2 mr-2 my-10 mb-24 md:mb-0">
+              <div key={index}
+               className=" h-40 md:h-56 xl:h-s6 xl:w-96 md:w-80 sm:w-60 relative md:ml-2 ml-2 mr-2 my-10 mb-24 md:mb-0">
                 <div className="w-full h-full relative border-gray-600 
                  shadow-lg shadow-neutral-900 bg-cover bg-no-repeat "> 
                  <div className="relative flex justify-center items-center h-full">
                   <img
                    onClick={() => VacancieDetail(bidding)}
-                   src={`img/${bidding.featureImage}`} 
-                  // src={`${AddressBaseUrl}/images/${bidding.image}`} 
+                 //  src={`img/${bidding.featureImage}`} 
+                  src={`${AddressBaseUrl}/images/${bidding.image}`} 
                    className="transition relative w-full h-full cursor-pointer duration-700 rounded-xl border-2 border-b-2 border-gray-600"
                     alt='images not found'/> 
                 </div>
@@ -190,7 +191,8 @@ const Bidding = (props) =>{
           </div>
          </div>
         </>
-       )})):(<><div><Loading/></div></>) 
+       )})):(<><div className=" text-xl font-semibold flex justify-center mt-5 ml-32">------ ምንም ጫራታ  የለም ! ------
+       </div></>) 
         }
        </div>
       </div>
@@ -271,26 +273,7 @@ const Bidding = (props) =>{
                 </div>
                </div>
             </>
-          )} 
-      {/* <div
-        className='md:w-1/4 ml-10 h-full rounded-2xl bg-center bg-cover duration-500 pt-2'>
-        <div className="flex justify-center items-center h-full">
-        <img src={`${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`} className='h-32 md:h-48 lg:h-52 w-32 md:w-48 lg:w-52 rounded-lg' alt='images not found'
-        /> 
-        </div>
-       <div className="flex justify-center items-center h-full">
-        <div className="text-center text-black">
-          <h1 className="text-2xl md:text-2xl xl:text-3xl text-[#F49F08] font-bold font-display tracking-tight leading-tight">
-            {`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.name}`}
-          </h1>
-          <p className="text-sm md:text-md xl:text-lg  font-display tracking-tight leading-tight">
-             ኢጵላሣጵ አድራሻ ዘመናዊ የሆኑ የካርታ ላይ አድራሻዎችን ልዩ ቦታዎችን መንገዶችን እና የአደባባዮችን 
-             ስያሜ በመጠቀም የእያንዳንዱን ቦታ በቀላሉ በተሰጠው መለያ ካርታን መሰርት አድርጎ በተሰራው ገጽ ላይ ፍልግ ነው። ኢጵላሣጵ አድራሻ ልዩ እና ትክክለኛ የሆነ የግለሰብ 
-             የመንግስት መስሪያ ቤቶችን የንግድ ተቋማትን፡እንዲሁም የተለያዪ በከተማው ውስጥ የሚገኙ የግለሰብ ቦታወችን መገኛ
-           </p>
-        </div>
-       </div>
-      </div> */}
+           )} 
     </section>
      </div>
    </div> 

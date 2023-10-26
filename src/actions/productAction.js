@@ -109,7 +109,6 @@ export const productCategory = createAsyncThunk(
     try {
       // base url
       // console.log("product action page", Pname);
-
       let baseUrl = `${BaseUrl}/addressapi/products/search?key=${Cname}`;
       // response
       let response = await axios.get(baseUrl);

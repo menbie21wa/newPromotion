@@ -7,7 +7,6 @@ import { productCategory } from '../actions/productAction';
 const initialState = {
   loading: false,
   product:[],
-  product: {},
   error: false,
   success: false,
   message: null,

@@ -16,7 +16,6 @@ const initialState = {
     initialState,
     reducers: {},
     extraReducers: {
-
       //Labourer work
         [Daily_Labourer.pending]: (state) =>{
             //console.log("vacancies reducer pending");
@@ -24,10 +23,9 @@ const initialState = {
             state.error = false
         },
         [Daily_Labourer.fulfilled]: (state, {payload}) =>{
-            state.error = false
-            state.success = true
             state.loubers = payload
-            console.log("louber reducer fulfilled",payload);
+            state.success = true
+            // console.log("search AAAAAAAAAAAAAAAAAAAAAAAAA louber==",payload)
         },
         [Daily_Labourer.rejected]: (state, {payload}) =>{
             state.error = payload

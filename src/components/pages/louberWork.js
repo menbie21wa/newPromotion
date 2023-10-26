@@ -8,7 +8,7 @@ import {dataVacancy} from '../vacaData';
 import samrtPc from '../../img/promotion-lg.png';
 import { HiOutlineX } from "react-icons/hi";
 import { louberDetail} from "../../actions/louberDetail";
-import { Daily_Labourer } from "../../actions/louberWorkAction";
+import { Daily_Labourer ,searchVacancies} from "../../actions/louberWorkAction";
 import { getOrganization } from '../../actions/orgAction';
 import  AddressBaseUrl from "../../utils/BaseUrl";
   const LouberWork = () =>{
@@ -66,15 +66,14 @@ const [data, setData] =useState(dataVacancy || '');
   ? JSON.parse(localStorage.getItem("louberWorkDetail"))
   : null;
 
-
   const [term, setTerm] = useState("");
   // const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
      if (term === "") return alert("Please enter search term!");
-    // dispatch(searchVacancies(term));
-    //console.log("term : ",term);
-    //setTerm("");
+    dispatch(searchVacancies(term));
+    console.log("term : ",term);
+    setTerm("");
   };
 
   const [currentPage, setPage] = useState(1)
@@ -90,26 +89,27 @@ const [data, setData] =useState(dataVacancy || '');
 
 return(
   <>
-   <div className="bg-[rgb(227,230,230)] w-full">
-    <div className="w-full mx-auto pb-6">
-     <section className="mb-6 text-gray-800 text-center ">
-      <div className=" md:flex flex-wrap justify-between items-center mx-auto md:px-6 lg:px-6 px-1">
-        <div className="flex items-center py-3 mt-8 mb-4 md:-ml-1 ml-0 ">
+   <div className=" w-full bg-[#E3E6E6] md:mt-0 mt-20 ">
+  <div className=" mx-auto h-4/5">
+   <section className="mb-6 text-gray-800 text-center group">
+    <div className=" md:flex block flex-wrap justify-between items-center mx-auto md:px-6 lg:px-6 px-1">
+      <div className="flex items-center py-3 mb-4 md:ml-0 ml-3">
          <button
           className=" text-lg font-display text-black font-medium hover:text-[#0397FF]"
          >
-          <span className="mr-2 md:ml-0 ml-5 underline decoration-pink-800 decoration-4 underline-offset-8">የቀን ስራ</span>ማስታዎቂያ
+         <span className="mr-2 md:ml-0 ml-5 underline decoration-pink-800 decoration-4 underline-offset-8">የቀን ስራ</span>ማስታዎቂያ
          </button>
          <form onSubmit={submitHandler}>
-         <div class=" mb-4 flex flex-wrap items-stretch absolute md:mt-0 mt-6 md:right-16 right-5">
-          <input className="bg-[#E3E6E6] z-20" 
-             type="date"
+         <div class=" mb-4 flex flex-wrap items-stretch absolute md:mt-10 mt-10 md:right-24 right-10">
+          <input 
+          className="bg-[#E3E6E6]  p-3 relative rounded-md z-20 " 
+            type="date"
              aria-label="Search"
              aria-describedby="button-addon1"
              value={term}
              onChange={(e) => setTerm(e.target.value)}/>
       <button
-        class="relative z-20 flex items-center rounded-r bg-secondary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
+      className="relative bg-[#E3E6E6] rounded-md z-20 flex items-center rounded-r bg-secondary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
         type="submit"
         data-te-ripple-init
         data-te-ripple-color="light">
@@ -117,7 +117,7 @@ return(
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
-          class="h-5 w-5">
+          className="h-5 w-5">
           <path
             fill-rule="evenodd"
             d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
@@ -128,38 +128,32 @@ return(
       </form>
      </div>
     </div>
-
-  <div class="grid lg:grid-cols-3 xl:gap-5 md:gap-6 xl:gap-x-14">
+   <div className=' bg-white  md:flex lg:flex pb-20 md:-mt-1 mt-3 md:ml-5 md:mr-0 ml-5 mr-5'>    
+    <div class="relative grid xl:grid-cols-3 ml-5 md:grid-cols-3 grid-cols-1 xl:gap-20 md:gap-20 gap-7 my-3 xl:gap-x-10 md:gap-x-7 gap-x-5">
         {
           (loubers?.vacancies?.length)>0
             ?(
               loubers?.vacancies?.slice(currentPage * 6 - 6, currentPage * 6).map((values,index)=>{
              return(
                <>
-                <div key={index} className="md:my-10 my-12 md:ml-0 ml-0">
-                  <div className=" products">
-                   <div
-                    className=" products__single relative border-gray-600 
-                                shadow-lg shadow-neutral-900 bg-cover bg-no-repeat"
-                    data-mdb-ripple="true"
-                    data-mdb-ripple-color="light"
-                  >
+               <div key={index}
+                className=" h-40 md:h-56 xl:h-s6 md:mt-16 mt-16 xl:w-96 md:w-80 sm:w-60 relative md:ml-2 md:mr-0 mr-2 -ml-3 mb-7 md:mb-0">
+                <div className="w-full h-full relative border-gray-600 
+                 shadow-lg shadow-neutral-900 bg-cover bg-no-repeat "> 
+                 <div className="relative flex justify-center items-center h-full">
                     <img
-                      className=" w-screen h-52 transition cursor-pointer duration-700 rounded-xl"
-                      src={`/img/${values.featureImage}`} 
-                     //src={`${AddressBaseUrl}/images/${values.image}`} 
+                    className="transition relative w-full h-full cursor-pointer duration-700 rounded-xl border-2 border-b-2 border-gray-600"
+                     // src={`/img/${values.featureImage}`} 
+                    src={`${AddressBaseUrl}/images/${values.image}`} 
                       alt="product img not found"
-                     // onError={event => {
-                      //event.target.src = `${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`
-                       // event.onerror = null
-                      //}}
                     />
+                    </div>
                     <div class="absolute bottom-0 left-0 right-0 top-0 h-full w-full rounded-xl 
-                    justify-center overflow-hidden bg-gradient-to-r from-green-500 via-amber-300
-                    to-pink-600 opacity-0 transition duration-300 ease-in-out hover:opacity-70"
-                    onClick={() => VacancieDetail(values) }>
-                    <button className=" h-12 w-28 rounded-3xl mt-20 text-slate-100 border border-none
-                    bg-black">View Detail</button>
+                     justify-center overflow-hidden bg-gradient-to-r from-green-500 via-amber-300
+                   to-pink-600 opacity-0 transition duration-300 ease-in-out hover:opacity-70"
+                     onClick={() => VacancieDetail(values) }>
+                     <button className=" h-12 w-28 rounded-3xl mt-20 text-slate-100 border border-none
+                      bg-black">View Detail</button>
                     </div>
                     <div className="mt-4 float-left flex">
                         <ul  className='  mt-3 flex'>
@@ -175,7 +169,6 @@ return(
                   {/* <div className="mt-4 float-right flex">
                   <span onClick={() => likeProduct(values) }>Like</span>
                  </div> */}
-                 </div>
                 </div>
                {/* <div className="p-0">
                 <p className="text-sm font-bold  mt-4 text-center">{values?.title.substring(0,24)}</p>      
@@ -183,9 +176,11 @@ return(
               </div>
              </>
             )})):
-           (<><div><Loading/></div></>) }
+           (<><div className=" text-xl font-semibold flex justify-center mt-5 ml-32">------ የቀን ሥራ  የለም! ------</div></>)
+            }
           <br /><br />
          </div>
+        </div> 
       <div>
        {loubers?.vacancies?.length > 0 && 
        <div className=" justify-center ml-10 mt-10">

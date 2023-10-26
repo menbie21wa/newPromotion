@@ -117,32 +117,31 @@ return(
          <form onSubmit={submitHandler}>
          <div class=" mb-4 flex flex-wrap items-stretch absolute md:mt-10 mt-10 md:right-24 right-10">
           <input
-           className="bg-[#E3E6E6]  p-3 relative rounded-md z-20  " 
+           className="bg-[#E3E6E6]  p-3 relative rounded-md z-20" 
              type="date"
              aria-label="Search"
              aria-describedby="button-addon1"
              value={term}
              onChange={(e) => setTerm(e.target.value)}/>
-
-      {/* <input
-        type="search"
-        class="relative m-0 -mr-px block w-[1%] min-w-0 flex-auto rounded-l border border-solid border-neutral-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-neutral-700 outline-none transition duration-300 ease-in-out focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:text-neutral-200 dark:placeholder:text-neutral-200 z-50"
-        
-        aria-label="Search"
-        aria-describedby="button-addon1" 
-        value={term}
-        onChange={(e) => setTerm(e.target.value)}/> */}
-      <button
-        class="relative bg-[#E3E6E6] rounded-md z-20 flex items-center rounded-r bg-secondary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
-        type="submit"
-        data-te-ripple-init
-        data-te-ripple-color="light">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-          class="h-5 w-5">
-          <path
+          {/* <input
+            type="search"
+            class="relative m-0 -mr-px block w-[1%] min-w-0 flex-auto rounded-l border border-solid border-neutral-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-neutral-700 outline-none transition duration-300 ease-in-out focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:text-neutral-200 dark:placeholder:text-neutral-200 z-50"
+            
+            aria-label="Search"
+            aria-describedby="button-addon1" 
+            value={term}
+            onChange={(e) => setTerm(e.target.value)}/> */}
+        <button
+          className="relative bg-[#E3E6E6] rounded-md z-20 flex items-center rounded-r bg-secondary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
+          type="submit"
+          data-te-ripple-init
+          data-te-ripple-color="light">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            className="h-5 w-5">
+            <path
             fill-rule="evenodd"
             d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
             clip-rule="evenodd" />
@@ -152,7 +151,6 @@ return(
      </form>
     </div>
   </div>
-
  <div className=' bg-white  md:flex lg:flex pb-20 md:-mt-1 mt-3 md:ml-5 md:mr-0 ml-5 mr-5'>    
   <div class="relative grid xl:grid-cols-3 ml-5 md:grid-cols-3 grid-cols-1 xl:gap-20 md:gap-20 gap-7 my-3 xl:gap-x-10 md:gap-x-7 gap-x-5">
     {(vacancies?.vacancies?.length > 0)
@@ -160,22 +158,23 @@ return(
         vacancies?.vacancies?.slice(page * 12 - 12, page * 12).map((vacancie,index) => { 
           return(
            <>
-            <div key={index} className=" h-40 md:h-56 xl:h-s6 md:mt-16 mt-16 xl:w-96 md:w-80 sm:w-60 relative md:ml-2 md:mr-0 mr-2 -ml-3 mb-7 md:mb-0">
-                <div className="w-full h-full relative border-gray-600 
+            <div key={index} 
+                 className=" h-40 md:h-56 xl:h-s6 md:mt-16 mt-16 xl:w-96 md:w-80 sm:w-60 relative md:ml-2 md:mr-0 mr-2 -ml-3 mb-7 md:mb-0">
+             <div className="w-full h-full relative border-gray-600 
                  shadow-lg shadow-neutral-900 bg-cover bg-no-repeat "> 
-                 <div className="relative flex justify-center items-center h-full">
-            <img 
-            className="transition relative w-full h-full cursor-pointer duration-700 rounded-xl border-2 border-b-2 border-gray-600"
-            alt="product img not found"
-           src={`${AddressBaseUrl}/images/${vacancie.image}`} 
-            />
-         </div>
-      <div class="absolute bottom-0 left-0 right-0 top-0 h-full w-full rounded-xl 
-          justify-center overflow-hidden bg-gradient-to-r from-green-500 via-amber-300
-           to-pink-600 opacity-0 transition duration-300 ease-in-out hover:opacity-70"
-           onClick={() => VacancieDetail(vacancie) }>
+              <div className="relative flex justify-center items-center h-full">
+              <img 
+               className="transition relative w-full h-full cursor-pointer duration-700 rounded-xl border-2 border-b-2 border-gray-600"
+               alt="product img not found"
+               src={`${AddressBaseUrl}/images/${vacancie.image}`} 
+              />
+              </div>
+           <div className="absolute bottom-0 left-0 right-0 top-0 h-full w-full rounded-xl 
+                 justify-center overflow-hidden bg-gradient-to-r from-green-500 via-amber-300
+                 to-pink-600 opacity-0 transition duration-300 ease-in-out hover:opacity-70"
+                 onClick={() => VacancieDetail(vacancie) }>
           <button className=" h-12 w-28 rounded-3xl mt-20 text-slate-100 border border-none
-            bg-black">View Detail</button>
+                  bg-black">View Detail</button>
           </div>
           <div className="mt-4 float-left flex">
           <ul  className='  mt-3 flex'>
@@ -202,7 +201,7 @@ return(
         </div>
        </div>
       </>
-     )})):(<><div><Loading/></div></>) }
+     )})):(<><div className="text-xl font-semibold flex justify-center mt-5 ml-32">------ ምንም ሥራ  የለም! ------</div></>) }
     </div>
     </div>
      {/* {data?.length > 0 && 

@@ -2,6 +2,7 @@ import React, {useEffect,useRef, useState} from "react";
 import Layout from "../layout/layout";
 import Contact from "./contactus";
 import Loading from "./loading";
+import { FaArrowLeft } from "react-icons/fa";
 import defualtImg from '../../img/img1.jpg'
 import  { organizationdata } from "../organizationdata";
 import Fristpage from "./fristpage";
@@ -10,6 +11,7 @@ import education from '../../img/sun_icon3.jpeg';
 import healthcare from '../../img/hero.jpeg';
 import { RiMenuLine } from "react-icons/ri";
 import { BsChevronCompactLeft, BsChevronCompactRight, } from 'react-icons/bs';
+import { button, useNavigate } from "react-router-dom";
 import AddressBaseUrl from "../../utils/BaseUrl";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,6 +32,7 @@ import { louberDetail} from "../../actions/louberDetail";
 const Manufacture = () =>{
  // window.scrollTo(0, 0);
  const dispatch = useDispatch();
+ const navigate = useNavigate();
  const [data, setData] =useState(organizationdata || '');
  useEffect(() => {
   setData(organizationdata);
@@ -90,7 +93,6 @@ const scrollToAll = (elmRef) =>{
       behavior: "smooth"
   })
 }
-
 const louberWorkDetail = localStorage.getItem("louberWorkDetail")
 ? JSON.parse(localStorage.getItem("louberWorkDetail"))
 : null;
@@ -110,7 +112,6 @@ const ProductsDetail = (data) =>{
   dispatch(addToDetail(data));
   setProductDel(true);
 }
-
 const detailInfo = localStorage.getItem("detailInfo")
 ? JSON.parse(localStorage.getItem("detailInfo"))
 : null;
@@ -140,21 +141,50 @@ const detailInfo = localStorage.getItem("detailInfo")
     };
   };
 
+  const backNavigate =(id)=>{
+    navigate("/")
+    // navigate("org")
+  }
+  
+  const [descrip, setDescrip] = useState(
+  `መለያ ካርታን መሰርት አድርጎ በተሰራው ገጽ ላይ ፍልግ ነው። ኢጵላሣጵ አድራሻ ልዩ እና ትክክለኛ የሆነ የግለሰብ የመንግስት 
+  መስሪያ ቤቶችን የንግድ ተቋማትን፡እንዲሁም የተለያዪ በከተማው ውስጥ የሚገኙ የግለሰብ ቦታወችን መገኛ በቀላሉ ካርታ ላይ ለይቶ ለማወቅ:
+  ይህ ኢጵላሣጵ ዌብ ሳይት ነው ኢጵላሣጵ የራሱ የሆነ ዌብሳይት አልምቶ አሁን ደሞ ለግለሰቦች እና ለድርጅቶች የየራሳቸው የሆነ ዌብሳይት ለማልማት 
+  ሙሉ ዝግጅቱን ጨርሷል። እርሶም እድሉን ይጠቀሙ። ኢኮሜርስ ዌብ ሳይት በበይነመረቡ ላይ የእርስዎ ዲጂታል የመደብር ፊት ነው። በገዢ እና በሻጭ መካከል ያለውን ግብይት ያመቻቻል ያፋጥናል. 
+  የመስመር ላይ ደንበኞችዎ ምርጫቸውን አድርገው መጠቀም ይችላሉ።
+  መለያ ካርታን መሰርት አድርጎ በተሰራው ገጽ ላይ ፍልግ ነው። ኢጵላሣጵ አድራሻ ልዩ እና ትክክለኛ የሆነ የግለሰብ የመንግስት 
+  መስሪያ ቤቶችን የንግድ ተቋማትን፡እንዲሁም የተለያዪ በከተማው ውስጥ የሚገኙ የግለሰብ ቦታወችን መገኛ በቀላሉ ካርታ ላይ ለይቶ ለማወቅ:
+  ይህ ኢጵላሣጵ ዌብ ሳይት ነው ኢጵላሣጵ የራሱ የሆነ ዌብሳይት አልምቶ አሁን ደሞ ለግለሰቦች እና ለድርጅቶች የየራሳቸው የሆነ ዌብሳይት ለማልማት 
+  ሙሉ ዝግጅቱን ጨርሷል። እርሶም እድሉን ይጠቀሙ። ኢኮሜርስ ዌብ ሳይት በበይነመረቡ ላይ የእርስዎ ዲጂታል የመደብር ፊት ነው። በገዢ እና በሻጭ መካከል ያለውን ግብይት ያመቻቻል ያፋጥናል. 
+  የመስመር ላይ ደንበኞችዎ ምርጫቸውን አድርገው መጠቀም ይችላሉ።
 
-  const [descrip, setDescrip] = useState("");
-  useEffect(() =>{
-    setDescrip(`መለያ ካርታን መሰርት አድርጎ በተሰራው ገጽ ላይ ፍልግ ነው። ኢጵላሣጵ አድራሻ ልዩ እና ትክክለኛ የሆነ የግለሰብ የመንግስት 
-    መስሪያ ቤቶችን የንግድ ተቋማትን፡እንዲሁም የተለያዪ በከተማው ውስጥ የሚገኙ የግለሰብ ቦታወችን መገኛ በቀላሉ ካርታ ላይ ለይቶ ለማወቅ:
-    ይህ ኢጵላሣጵ ዌብ ሳይት ነው ኢጵላሣጵ የራሱ የሆነ ዌብሳይት አልምቶ አሁን ደሞ ለግለሰቦች እና ለድርጅቶች የየራሳቸው የሆነ ዌብሳይት ለማልማት 
-    ሙሉ ዝግጅቱን ጨርሷል። እርሶም እድሉን ይጠቀሙ። ኢኮሜርስ ዌብ ሳይት በበይነመረቡ ላይ የእርስዎ ዲጂታል የመደብር ፊት ነው። በገዢ እና በሻጭ መካከል ያለውን ግብይት ያመቻቻል ያፋጥናል. 
-    የመስመር ላይ ደንበኞችዎ ምርጫቸውን አድርገው መጠቀም ይችላሉ።
-    መለያ ካርታን መሰርት አድርጎ በተሰራው ገጽ ላይ ፍልግ ነው። ኢጵላሣጵ አድራሻ ልዩ እና ትክክለኛ የሆነ የግለሰብ የመንግስት 
-    መስሪያ ቤቶችን የንግድ ተቋማትን፡እንዲሁም የተለያዪ በከተማው ውስጥ የሚገኙ የግለሰብ ቦታወችን መገኛ በቀላሉ ካርታ ላይ ለይቶ ለማወቅ:
-    ይህ ኢጵላሣጵ ዌብ ሳይት ነው ኢጵላሣጵ የራሱ የሆነ ዌብሳይት አልምቶ አሁን ደሞ ለግለሰቦች እና ለድርጅቶች የየራሳቸው የሆነ ዌብሳይት ለማልማት 
-    ሙሉ ዝግጅቱን ጨርሷል። እርሶም እድሉን ይጠቀሙ። ኢኮሜርስ ዌብ ሳይት በበይነመረቡ ላይ የእርስዎ ዲጂታል የመደብር ፊት ነው። በገዢ እና በሻጭ መካከል ያለውን ግብይት ያመቻቻል ያፋጥናል. 
-    የመስመር ላይ ደንበኞችዎ ምርጫቸውን አድርገው መጠቀም ይችላሉ።
-    `)
-  },[]);
+  መለያ ካርታን መሰርት አድርጎ በተሰራው ገጽ ላይ ፍልግ ነው። ኢጵላሣጵ አድራሻ ልዩ እና ትክክለኛ የሆነ የግለሰብ የመንግስት 
+  መስሪያ ቤቶችን የንግድ ተቋማትን፡እንዲሁም የተለያዪ በከተማው ውስጥ የሚገኙ የግለሰብ ቦታወችን መገኛ በቀላሉ ካርታ ላይ ለይቶ ለማወቅ:
+  ይህ ኢጵላሣጵ ዌብ ሳይት ነው ኢጵላሣጵ የራሱ የሆነ ዌብሳይት አልምቶ አሁን ደሞ ለግለሰቦች እና ለድርጅቶች የየራሳቸው የሆነ ዌብሳይት ለማልማት 
+  ሙሉ ዝግጅቱን ጨርሷል። እርሶም እድሉን ይጠቀሙ። ኢኮሜርስ ዌብ ሳይት በበይነመረቡ ላይ የእርስዎ ዲጂታል የመደብር ፊት ነው። በገዢ እና በሻጭ መካከል ያለውን ግብይት ያመቻቻል ያፋጥናል. 
+  የመስመር ላይ ደንበኞችዎ ምርጫቸውን አድርገው መጠቀም ይችላሉ።
+  መለያ ካርታን መሰርት አድርጎ በተሰራው ገጽ ላይ ፍልግ ነው። ኢጵላሣጵ አድራሻ ልዩ እና ትክክለኛ የሆነ የግለሰብ የመንግስት 
+  መስሪያ ቤቶችን የንግድ ተቋማትን፡እንዲሁም የተለያዪ በከተማው ውስጥ የሚገኙ የግለሰብ ቦታወችን መገኛ በቀላሉ ካርታ ላይ ለይቶ ለማወቅ:
+  ይህ ኢጵላሣጵ ዌብ ሳይት ነው ኢጵላሣጵ የራሱ የሆነ ዌብሳይት አልምቶ አሁን ደሞ ለግለሰቦች እና ለድርጅቶች የየራሳቸው የሆነ ዌብሳይት ለማልማት 
+  ሙሉ ዝግጅቱን ጨርሷል። እርሶም እድሉን ይጠቀሙ። ኢኮሜርስ ዌብ ሳይት በበይነመረቡ ላይ የእርስዎ ዲጂታል የመደብር ፊት ነው። በገዢ እና በሻጭ መካከል ያለውን ግብይት ያመቻቻል ያፋጥናል. 
+  የመስመር ላይ ደንበኞችዎ ምርጫቸውን አድርገው መጠቀም ይችላሉ።
+
+  `);
+  const [description, setDescription] = useState(descrip.substring(0,700)+'   . . .');
+
+  var hidden=''
+  if (descrip.length > 700 ) {
+    hidden='visible'
+  }
+  else{
+    hidden='hidden' 
+  }
+  const [background, setBackground] = useState('');
+
+  const getDescription=()=>{
+    setDescription(descrip)
+    setBackground('bg-[#E3E6E6] text-[#E3E6E6]')
+  }
 
     return(
         <Layout>
@@ -165,22 +195,27 @@ const detailInfo = localStorage.getItem("detailInfo")
   </div> */}
  <nav className=' z-50 fixed pr-7  top-0 overflow-hidden justify-between list-none font-serif uppercase font-medium xl:text-xl 
  md:text-xl xs:text-xs text-justify-center w-full lg:h-24 md:h-28 sm:h-20 shadow-xl sm:flex bg-white items-center '>
-<div>
-<button className='ml-1 w-96 p-5 md:flex block '  
-to ="/"> 
+<div className="flex">
+<button className=" left mt-10 ml-5 -mr-3 h-6 w-6 z-100 bg-amber-400 items-center rounded-full"
+onClick={() => backNavigate()}>
+             {/* <button className="fixed bottom-10 right-5 h-6 w-6 z-100 bg-white text-2xl" onClick={scrollTop}>^</button> */}
+             <FaArrowLeft className=" text-white items-center m-1"  />
+</button>
+<button className=' w-96 p-5 md:flex block '  
+onClick={() => backNavigate()}> 
 <img className=' md:w-32 md:h-20 w-20 h-10  -mt-3 lg:ml-12 sm:ml-5 rounded-2xl' 
-//src={Logue} alt='Noimage'
+//src={Logue} 
 src={`${AddressBaseUrl}/images/${org?.org?.logo}`}
 alt="NoLogue"
 />
-<h2 className="md:-ml-1 -ml-32 ">Promotion </h2>
+<h2 className="md:-ml-1 -ml-32 ">{org?.org?.name} </h2>
 </button>
 </div>
 <div className='text-3xl absolute right-8 top-3 cursor-pointer md:hidden'>
           <RiMenuLine size={24} onClick={setmenu}/>
           {/* <ion-icon name={!menu?'close':'menu'}></ion-icon> */}
 </div>
-<ul className=' mt-3 lg:flex md:flex bg-white  left-0 w-full md:w-auto
+<ul className=' mr-8 mt-3 lg:flex md:flex bg-white  left-0 w-full md:w-auto
  sm:hidden absolute md:static justify-end items-center flex-1 list-none z-20 '>
 <li className='mx-6'><button  onClick={()=> getHome()}
 className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'
@@ -234,33 +269,36 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
     </ul>
    </>    
   </div>
-  <div className="bg-[#E3E6E6] mt-24">
-        <div className=" md:flex-row flex-col md:pt-24 lg:pt-24 md:mb-2 mb-44 pt-24 h-screen md:h-screen w-full border-b  group">
-          <div className='h-11/12 md:flex block md:h-screen w-full -mt-40 rounded p-5'> 
+  <div className=" mt-20 bg-[#E3E6E6] ">
+        <div className=" bg-[#E3E6E6] md:flex-row p-2 flex-col md:pt-0 lg:pt-0 md:mb-24 mb-44 pt-24 h-full md:h-full w-full border-b  group">
+          <div className='h-full -mb-44 md:flex block md:h-full w-full md:mt-20 -mt-0 rounded p-2'> 
           <div
-            className=" md:w-1/2 w-full md:mb-0 mb-16  md:mr-28 h-full md:mt-10 mt-5  flex md:ml-1 ml-2 flex-col md:p-5 p-3 justify-center items-center">
+            className=" md:w-10/12 md:mb-0 mb-16  md:mr-5 h-full md:mt-9 -mt-10 flex md:ml-5 ml-2 flex-col md:p-2 p-3 justify-center items-center">
                <h1 className="text-4xl md:text-4xl xl:text-5xl text-[#F49F08] font-bold font-display tracking-tight leading-tight italic">
-               {`${org?.org?.name}`} 
+                  {`${org?.org?.name}`}
                   </h1>
                   <p className="text-2xl md:text-2xl mt-4 xl:text-3xl text-[#F49F08] font-bold font-display tracking-tight leading-tight">
-                  {`${org?.org?.description}`}</p>
-                 {/* {descrip} */}
+                  {`${org?.org?.businessSector}`}</p>
                   <p className='mt-7'>
-                  {/* { org?.promotedOrgs[currentIndex]?.description?.substring(0,300)} . . . */}
+                  {/* { org?.promotedOrgs[currentIndex]?.description} */}
+                  {description}
+                  <button className=''></button>
                   </p>
+                  <button onClick={getDescription} className={`${hidden} ${background} mt-1 ml-0 text-sky-600 font-semibold`}>
+                  More
+                 </button>
          </div>
         <div
-
           // style={{ backgroundImage: `url(${org && org[currentIndex]?.url})` }}
-          className=' md:-ml-2 ml-5 md:mt-20 -mt-24 mr-5 rounded-2xl md:w-2/3 w-40 md:h-screen h-60 bg-center duration-700 relative bg-cover bg-no-repeat'
+          className=' md:-ml-5 ml-5 md:mt-7 -mt-20  rounded-2xl md:w-2/3 w-40 md:h-full h-60 bg-center duration-700 relative bg-cover bg-no-repeat'
           >
           <img 
-          className="w-full h-5/6 rounded-lg"
-          //src={`/img/Eplusapp1.png`} 
-         src={`${AddressBaseUrl}/images/${org?.org?.logo}`}
+          className="w-11/12 h-3/4 rounded-lg"
+         // src={`/img/Eplusapp1.png`} 
+          src={`${AddressBaseUrl}/images/${org?.org?.logo}`}
           alt=""
           />
-         </div>
+        </div>
        </div>
      </div>
 

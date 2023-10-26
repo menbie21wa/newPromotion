@@ -3,28 +3,30 @@ import axios from "axios";
 import { handleError } from "../utils/toast";
 import  BaseUrl from "../utils/BaseUrl";
 //Labour work 
-export const Daily_Labourer = createAsyncThunk(
-    "loubers",
-    async (thunkAPI) => {
-        let query ="daily_work";
-      try {
-        let URL = `${BaseUrl}/addressapi/vacancies/all?key=${query}`
-        // {params:{key:"job_vacancy"}};
-        let response = await axios.get(URL);
-        console.log("louber action", response);
-        if (response.status === 200) {
-          return response.data;
-        } 
-        else {
-          handleError(response.message);
-          return thunkAPI.rejectWithValue(response.data);
+    export const Daily_Labourer = createAsyncThunk(
+      "loubers",
+      async (thunkAPI) => {
+          let query ="daily_work";
+         // console.log("page is : ", page);
+        try {
+          let URL = `${BaseUrl}/addressapi/vacancies/all?key=${query}`
+          // {params:{key:"job_vacancy"}};
+          let response = await axios.get(URL);
+          //  console.log("uuuuuuuuuuuuuuuuuuuuuu louber action", response);
+          if (response.status === 200) {
+            return response.data;
+          } else {
+            handleError(response.message);
+            return thunkAPI.rejectWithValue(response.data);
+          }
+        } catch (e) {
+          console.log("Error", e.response.data);
+          handleError("loading...");
+          return thunkAPI.rejectWithValue(e.response.data);
         }
-      } catch (e) {
-        console.log("Error", e.response.data);
-        handleError("loading...");
-        return thunkAPI.rejectWithValue(e.response.data);
       }
-    });
+    );
+
   export const searchVacancies = createAsyncThunk(
     "loubers",
     async (term, thunkAPI) => {

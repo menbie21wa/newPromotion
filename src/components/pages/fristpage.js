@@ -27,15 +27,46 @@ useEffect(() => {
 }, [dataVacancy])
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [descrip, setDescrip] = useState("");
-  useEffect(() =>{
-    setDescrip(`መለያ ካርታን መሰርት አድርጎ በተሰራው ገጽ ላይ ፍልግ ነው። ኢጵላሣጵ አድራሻ ልዩ እና ትክክለኛ የሆነ የግለሰብ የመንግስት 
+  const [descrip, setDescrip] = useState(
+    `መለያ ካርታን መሰርት አድርጎ በተሰራው ገጽ ላይ ፍልግ ነው። ኢጵላሣጵ አድራሻ ልዩ እና ትክክለኛ የሆነ የግለሰብ የመንግስት 
     መስሪያ ቤቶችን የንግድ ተቋማትን፡እንዲሁም የተለያዪ በከተማው ውስጥ የሚገኙ የግለሰብ ቦታወችን መገኛ በቀላሉ ካርታ ላይ ለይቶ ለማወቅ:
     ይህ ኢጵላሣጵ ዌብ ሳይት ነው ኢጵላሣጵ የራሱ የሆነ ዌብሳይት አልምቶ አሁን ደሞ ለግለሰቦች እና ለድርጅቶች የየራሳቸው የሆነ ዌብሳይት ለማልማት 
     ሙሉ ዝግጅቱን ጨርሷል። እርሶም እድሉን ይጠቀሙ። ኢኮሜርስ ዌብ ሳይት በበይነመረቡ ላይ የእርስዎ ዲጂታል የመደብር ፊት ነው። በገዢ እና በሻጭ መካከል ያለውን ግብይት ያመቻቻል ያፋጥናል. 
     የመስመር ላይ ደንበኞችዎ ምርጫቸውን አድርገው መጠቀም ይችላሉ።
-    `)
-  },[]);
+    መለያ ካርታን መሰርት አድርጎ በተሰራው ገጽ ላይ ፍልግ ነው። ኢጵላሣጵ አድራሻ ልዩ እና ትክክለኛ የሆነ የግለሰብ የመንግስት 
+    መስሪያ ቤቶችን የንግድ ተቋማትን፡እንዲሁም የተለያዪ በከተማው ውስጥ የሚገኙ የግለሰብ ቦታወችን መገኛ በቀላሉ ካርታ ላይ ለይቶ ለማወቅ:
+    ይህ ኢጵላሣጵ ዌብ ሳይት ነው ኢጵላሣጵ የራሱ የሆነ ዌብሳይት አልምቶ አሁን ደሞ ለግለሰቦች እና ለድርጅቶች የየራሳቸው የሆነ ዌብሳይት ለማልማት 
+    ሙሉ ዝግጅቱን ጨርሷል። እርሶም እድሉን ይጠቀሙ። ኢኮሜርስ ዌብ ሳይት በበይነመረቡ ላይ የእርስዎ ዲጂታል የመደብር ፊት ነው። በገዢ እና በሻጭ መካከል ያለውን ግብይት ያመቻቻል ያፋጥናል. 
+    የመስመር ላይ ደንበኞችዎ ምርጫቸውን አድርገው መጠቀም ይችላሉ።
+  
+    መለያ ካርታን መሰርት አድርጎ በተሰራው ገጽ ላይ ፍልግ ነው። ኢጵላሣጵ አድራሻ ልዩ እና ትክክለኛ የሆነ የግለሰብ የመንግስት 
+    መስሪያ ቤቶችን የንግድ ተቋማትን፡እንዲሁም የተለያዪ በከተማው ውስጥ የሚገኙ የግለሰብ ቦታወችን መገኛ በቀላሉ ካርታ ላይ ለይቶ ለማወቅ:
+    ይህ ኢጵላሣጵ ዌብ ሳይት ነው ኢጵላሣጵ የራሱ የሆነ ዌብሳይት አልምቶ አሁን ደሞ ለግለሰቦች እና ለድርጅቶች የየራሳቸው የሆነ ዌብሳይት ለማልማት 
+    ሙሉ ዝግጅቱን ጨርሷል። እርሶም እድሉን ይጠቀሙ። ኢኮሜርስ ዌብ ሳይት በበይነመረቡ ላይ የእርስዎ ዲጂታል የመደብር ፊት ነው። በገዢ እና በሻጭ መካከል ያለውን ግብይት ያመቻቻል ያፋጥናል. 
+    የመስመር ላይ ደንበኞችዎ ምርጫቸውን አድርገው መጠቀም ይችላሉ።
+    መለያ ካርታን መሰርት አድርጎ በተሰራው ገጽ ላይ ፍልግ ነው። ኢጵላሣጵ አድራሻ ልዩ እና ትክክለኛ የሆነ የግለሰብ የመንግስት 
+    መስሪያ ቤቶችን የንግድ ተቋማትን፡እንዲሁም የተለያዪ በከተማው ውስጥ የሚገኙ የግለሰብ ቦታወችን መገኛ በቀላሉ ካርታ ላይ ለይቶ ለማወቅ:
+    ይህ ኢጵላሣጵ ዌብ ሳይት ነው ኢጵላሣጵ የራሱ የሆነ ዌብሳይት አልምቶ አሁን ደሞ ለግለሰቦች እና ለድርጅቶች የየራሳቸው የሆነ ዌብሳይት ለማልማት 
+    ሙሉ ዝግጅቱን ጨርሷል። እርሶም እድሉን ይጠቀሙ። ኢኮሜርስ ዌብ ሳይት በበይነመረቡ ላይ የእርስዎ ዲጂታል የመደብር ፊት ነው። በገዢ እና በሻጭ መካከል ያለውን ግብይት ያመቻቻል ያፋጥናል. 
+    የመስመር ላይ ደንበኞችዎ ምርጫቸውን አድርገው መጠቀም ይችላሉ።
+  
+    `);
+    const [description, setDescription] = useState(descrip.substring(0,700)+'   . . .');
+  
+    var hidden=''
+    if (descrip.length > 700 ) {
+      hidden='visible'
+    }
+    else{
+      hidden='hidden' 
+    }
+    const [background, setBackground] = useState('');
+  
+    const getDescription=()=>{
+      setDescription(descrip)
+      setBackground('bg-[#E3E6E6] text-[#E3E6E6]')
+    }
+  const shorten = descrip ? descrip.substring(0, 100) : ''
     const prevSlide = () => {
       const isFirstSlide = currentIndex === 0;
       const newIndex = isFirstSlide ? org.length - 1 : currentIndex - 1;
@@ -54,45 +85,52 @@ useEffect(() => {
 
  return(
     <>
-     <div className="bg-[#E3E6E6] mt-24">
-        <div className=" md:flex-row flex-col md:pt-24 lg:pt-24 md:mb-2 mb-44 pt-24 h-screen md:h-screen w-full border-b  group">
-        <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-0 text-2xl hover:border-2 py-2 md:py-12 lg:py-12 bg-white/40 rounded-sm hover:bg-black/20 border-black text-black cursor-pointer z-10'>
-           <BsChevronCompactRight onClick={nextSlide} className='h-12 w-12' />
-         </div>
-          <div className='h-11/12 md:flex block md:h-screen w-full -mt-40 rounded p-5'> 
+{/* bg-[#E3E6E6] */}
+<div className=" md:mt-20 -mt-10 bg-[#E3E6E6] ">
+        <div className="  bg-[#E3E6E6] md:flex-row p-2 flex-col md:pt-0 lg:pt-0 md:mb-2 mb-44 pt-24 h-full md:h-full w-full border-b  group">
+          <div className='h-full -mb-36 md:flex block md:h-full w-full md:-mt-32 -mt-0 rounded p-2'> 
           <div
-            className=" md:w-1/2 w-full md:mb-0 mb-16  md:mr-36 h-full md:-mt-28 mt-5  flex md:ml-5 ml-2 flex-col md:p-20 p-3 justify-center items-center">
+            className=" md:w-11/12 md:mb-0 mb-16  md:mr-2 h-full md:mt-5 mt-16  flex md:ml-5 ml-2 flex-col md:p-20 p-3 justify-center items-center">
                <h1 className="text-4xl md:text-4xl xl:text-5xl text-[#F49F08] font-bold font-display tracking-tight leading-tight italic">
                   {`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.name}`}
                   </h1>
                   <p className="text-2xl md:text-2xl mt-4 xl:text-3xl text-[#F49F08] font-bold font-display tracking-tight leading-tight">
                   {`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.businessSector}`}</p>
+  
                   <p className='mt-7'>
-                  {/* { org?.promotedOrgs[currentIndex]?.description?.substring(0,300)} . . . */}
-                  </p>
-         </div>
-        <div
+                  {/* { org?.promotedOrgs[currentIndex]?.description} */}
+                 {description}
+                <button className=''></button>
+               </p>
+              <button onClick={getDescription} className={`${hidden} ${background} mt-1 ml-0 text-sky-600 font-semibold`}>
+                 More
+             </button>
+          </div>
+         <div
           // style={{ backgroundImage: `url(${org && org[currentIndex]?.url})` }}
-          className=' md:-ml-2 ml-5 md:-mt-0 -mt-20 mr-5 rounded-2xl md:w-2/3 w-40 md:h-screen h-60 bg-center duration-700 relative bg-cover bg-no-repeat'
+          className='md:ml-2 ml-5 md:mt-16 -mt-20 mr-2 rounded-2xl md:w-2/3 w-40 md:h-full h-60 bg-center duration-700 relative bg-cover bg-no-repeat'
           >
           <img 
-          className="w-full h-5/6 rounded-lg "
+          className="w-3/4 h-2/4 rounded-lg "
          // src={`/img/Eplusapp1.png`} 
           src={`${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`}
           alt=""
           />
         </div>
        </div>
-      <div className=' md:text-lg text-xs md:ml-20 ml-9 -mt-16 z-30 '>
+       <div className='hidden -mt-20 group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-0 text-2xl hover:border-2 py-2 md:py-12 lg:py-12 bg-white/40 rounded-sm hover:bg-black/20 border-black text-black cursor-pointer z-10'>
+           <BsChevronCompactRight onClick={nextSlide} className='h-12 w-12' />
+         </div>
+      <div className=' md:text-lg text-xs md:ml-20 ml-9 md:mt-14 mt-20 md:mb-0 -mb-20 z-30 '>
         <a ><button 
        onClick={() => orgHandler(`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.id}`)}
       className='animate-pulse font-semibold text-sky-500'>
         {/* <i>{ org?.promotedOrgs[currentIndex]?.description?.substring(0,100)} .  .  .</i> */}
-        {/* {descrip} */}
+        {shorten}  . . .
           </button></a>
        </div>
      </div>
-   </div>
+   </div>  
  </>
 )}
 export default Fristpage;

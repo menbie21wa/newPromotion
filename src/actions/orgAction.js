@@ -9,7 +9,7 @@ export const viewOrganization = createAsyncThunk(
         let URL = `${BaseUrl}/addressapi/organizations/all?for_promotion=true`;
         // let response = await createContact(message);
         let response = await axios.get(URL);
-         console.log("organization list : ",response);
+        //  console.log("organization list : ",response);
         if (response.status === 200) {
           return response.data;
         } else {

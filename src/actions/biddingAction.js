@@ -35,7 +35,7 @@ export const searchVacancies = createAsyncThunk(
         let URL = `${BaseUrl}/addressapi/vacancies/all?key=${query}`
         // {params:{key:"job_vacancy"}};
         let response = await axios.get(URL);
-        console.log("uuuuuuuuuuuuuuuuuuuuuu bidding action", response);
+        // console.`log("uuuuuuuuuuuuuuuuuuuuuu bidding action", response);
         if (response.status === 200) {
           return response.data;
         } else {

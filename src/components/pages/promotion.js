@@ -1,9 +1,10 @@
 import React, {useEffect, useState, useRef} from "react";
 import Layout from "../layout/layout";
 import Allproducts from "./allproducts";
-import Fristpage from "./fristpage";
+import { BsChevronCompactLeft, BsChevronCompactRight, } from 'react-icons/bs';
 import Vacancie from "./vacancie";
 import LouberWork from "./louberWork";
+import Fristpage from "./fristpage"
 import {getProduct, viewProducts} from "../../actions/productAction";
 import { useDispatch, useSelector } from "react-redux";
 import  AddressBaseUrl from "../../utils/BaseUrl";
@@ -15,7 +16,7 @@ import Orgdetail from "./orgdetail";
 import Bidding from "./bidding";
 import { RiMenuLine } from "react-icons/ri";
 import BackTotop from "./backTOtop";
-import Logue from '../../img/logobg2.png';
+import Logue from '../../img/Promotion.jpg';
 import '../../App.css';
 import img1 from "../../icons/office.png";
 import vacancy from "../../icons/vacancy.png";
@@ -75,49 +76,91 @@ const user = localStorage.getItem("userInfo")
         behavior: "smooth"
     })
   }
+
+const orgHandler =(id)=>{
+  navigate("org/"+id)
+  // navigate("org")
+}
+
+  useEffect(()=>{
+    dispatch(viewOrganization());
+     },[]);
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [descrip, setDescrip] = useState("");
+  useEffect(() =>{
+    setDescrip(`መለያ ካርታን መሰርት አድርጎ በተሰራው ገጽ ላይ ፍልግ ነው። ኢጵላሣጵ አድራሻ ልዩ እና ትክክለኛ የሆነ የግለሰብ የመንግስት 
+    መስሪያ ቤቶችን የንግድ ተቋማትን፡እንዲሁም የተለያዪ በከተማው ውስጥ የሚገኙ የግለሰብ ቦታወችን መገኛ በቀላሉ ካርታ ላይ ለይቶ ለማወቅ:
+    ይህ ኢጵላሣጵ ዌብ ሳይት ነው ኢጵላሣጵ የራሱ የሆነ ዌብሳይት አልምቶ አሁን ደሞ ለግለሰቦች እና ለድርጅቶች የየራሳቸው የሆነ ዌብሳይት ለማልማት 
+    ሙሉ ዝግጅቱን ጨርሷል። እርሶም እድሉን ይጠቀሙ። ኢኮሜርስ ዌብ ሳይት በበይነመረቡ ላይ የእርስዎ ዲጂታል የመደብር ፊት ነው። በገዢ እና በሻጭ መካከል ያለውን ግብይት ያመቻቻል ያፋጥናል. 
+    የመስመር ላይ ደንበኞችዎ ምርጫቸውን አድርገው መጠቀም ይችላሉ።
+    `)
+  },[]);
+    const prevSlide = () => {
+      const isFirstSlide = currentIndex === 0;
+      const newIndex = isFirstSlide ? org.length - 1 : currentIndex - 1;
+      setCurrentIndex(newIndex);
+    };
+  
+    const nextSlide = () => {
+      const isLastSlide = currentIndex === org?.promotedOrgs?.length - 1;
+      const newIndex = isLastSlide ? 0 : currentIndex + 1;
+      setCurrentIndex(newIndex);
+    };
+
+    const goToSlide = (slideIndex) => {
+      setCurrentIndex(slideIndex);
+    };
+  const scrollToTop=()=>{
+    window.scroll({
+      top : 0,
+      behavior: "auto"
+  })
+  }
  return(
   <Layout>
-   <div className="bg-[#E3E6E6]">
-   <div className="md:pt-0 lg:pt-0 ">
+<div className="bg-[#E3E6E6]">
+ <div className="md:pt-0 lg:pt-0 ">
    <>
-<nav className=' z-50 fixed top-0 pr-10 overflow-hidden justify-between list-none font-serif uppercase font-medium xl:text-xl 
-md:text-xl xs:text-xs text-justify-center w-full lg:h-24 md:h-28 sm:h-20 shadow-xl sm:flex bg-white items-center '>
-<div>
-<button className='ml-1 w-96 p-5 md:flex block '  
-to ="/"> 
-<img className=' md:w-32 md:h-20 w-20 h-10  -mt-3 lg:ml-12 sm:ml-5 rounded-2xl' 
-//src={Logue} alt='Noimage'
-src={`${AddressBaseUrl}/images/${org?.org?.logo}`}
-alt="NoLogue"
-/>
-<h2 className="md:-ml-1 -ml-32 ">Promotion </h2>
-</button>
-</div>
-<div className='text-3xl absolute right-8 top-3 cursor-pointer md:hidden'>
-          <RiMenuLine size={24} onClick={setmenu}/>
-          {/* <ion-icon name={!menu?'close':'menu'}></ion-icon> */}
-</div>
+      <nav className=' z-50 fixed top-0 pr-10 overflow-hidden justify-between list-none font-serif uppercase font-medium xl:text-xl 
+      md:text-xl xs:text-xs text-justify-center w-full lg:h-24 md:h-28 sm:h-20 shadow-xl sm:flex bg-white items-center '>
+      <div>
+      <button className='ml-1 w-96 p-5 md:flex block ' 
+      onClick={scrollToTop} 
+     > 
+      <img className=' md:w-32 md:h-20 w-20 h-10  -mt-3 lg:ml-12 sm:ml-5 rounded-2xl' 
+      src={Logue} 
+      //src={`${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`}
+      alt="NoLogue"
+      />
+      <h2 className="md:-ml-1 -ml-32 ">All Promotions </h2>
+      </button>
+      </div>
+      <div className='text-3xl absolute right-8 top-3 cursor-pointer md:hidden'>
+              <RiMenuLine size={24} onClick={setmenu}/>
+              {/* <ion-icon name={!menu?'close':'menu'}></ion-icon> */}
+      </div>
 
-<ul className=' mt-3 lg:flex md:flex bg-white  left-0 w-full md:w-auto
- sm:hidden absolute md:static justify-end items-center flex-1 list-none z-20 '>
-<li className='mx-6'><button onClick={()=> scrollToAll(orgSection)}
-className='  transition duration-700 transform hover:-translate-y-1 hover:scale-110' 
-    > ድርጅቶች </button></li>
-<li className='mx-6'><button onClick={()=> scrollToAll(productSection)}
-className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'>
-ምርቶች</button></li>
- <li className='mx-6'><button onClick={()=> scrollToAll(vacancieSection)}
- className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'>
- የስራ ማስታዎቂያ</button></li>
- <li className='mx-6'><button onClick={()=> scrollToAll(biddingSection)}
-  className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex' 
-    >   
-    የጨረታ ማስታዎቂያ </button></li>
-</ul>
-</nav>
+      <ul className=' mr-8 mt-3 lg:flex md:flex bg-white  left-0 w-full md:w-auto
+      sm:hidden absolute md:static justify-end items-center flex-1 list-none z-20 '>
+      <li className='mx-6'><button onClick={()=> scrollToAll(orgSection)}
+      className='  transition duration-700 transform hover:-translate-y-1 hover:scale-110' 
+        > ድርጅቶች </button></li>
+      <li className='mx-6'><button onClick={()=> scrollToAll(productSection)}
+        className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'>
+          ምርቶች</button></li>
+      <li className='mx-6'><button onClick={()=> scrollToAll(biddingSection)}
+        className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex' 
+        >   
+        የጨረታ ማስታዎቂያ </button></li>
+      <li className='mx-6'><button onClick={()=> scrollToAll(vacancieSection)}
+      className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'>
+      የስራ ማስታዎቂያ</button></li>
+      </ul>
+      </nav>
 
-{/* Mobile Navigation */}
-<ul className={` ${menu ? "left-0 opacity-100" :"left-[-750px] md:opacity-0"}
+      {/* Mobile Navigation */}
+      <ul className={` ${menu ? "left-0 opacity-100" :"left-[-750px] md:opacity-0"}
                     sm:flex lg:hidden flex-1  list-none flex flex-col
                     p-6 bg-black-gradient fixed w-full right-0  ml-0 my-2 top-14
                     sidebar bg-white transition-all duration-500 ease-in z-50
@@ -130,20 +173,21 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
           <button onClick={()=> scrollToAll(productSection)}
           className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'>
           <img className=' w-6 h-5 mx-4 ' src={producticon} alt='Noicon'/> ምርቶች</button></li>
-    <li className='mx-6 py-2 font-serif uppercase font-medium text-xl '>
-          <button onClick={()=> scrollToAll(vacancieSection)}
-          className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'>
-          <img className=' w-6 h-5 mx-4 ' src={vacancy} alt='Noicon'/>  የስራ ማስታዎቂያ</button></li>
-    <li className='mx-6 py-2 font-serif uppercase font-medium text-xl '>
+          <li className='mx-6 py-2 font-serif uppercase font-medium text-xl '>
         <button onClick={()=> scrollToAll(biddingSection)}
           className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex' 
             >   
           <img className=' w-6 h-5 mx-4 ' src={bidding} alt='Noicon'/> የጨረታ ማስታዎቂያ </button></li>
+    <li className='mx-6 py-2 font-serif uppercase font-medium text-xl '>
+          <button onClick={()=> scrollToAll(vacancieSection)}
+          className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'>
+          <img className=' w-6 h-5 mx-4 ' src={vacancy} alt='Noicon'/>  የስራ ማስታዎቂያ</button></li>
+
     </ul>
    </>    
   </div>
      <div className="md:pt-24 lg:pt-24  pt-18 -ml-7 border-b mb-10 border-t border-gray-400" ref={firstSection}>
-        <Fristpage />
+     <Fristpage />
      </div>
      <div className="-ml-14 mb-7 md:pl-7 pl-0 p-5 -mt-10" ref={orgSection}>
         <Orgdetail />
@@ -157,7 +201,7 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
       <div className="md:pt-6  md:pl-7 pl-0 pt-7 md:mr-7 mr-0 md:mt-5 mt-10 pb-10 border-t border-gray-400 mb-1 " ref={vacancieSection}>
         <Vacancie />
       </div>
-      <div className="md:pt-6 lg:pt-6 pt-2  md:pl-8 pl-0  border-t border-b border-gray-400 pb-10" ref={dayworkSection}>
+      <div className="md:pt-6 pt-2 md:pl-8 pl-0 md:mr-7 mr-0 md:mt-5 mt-10 border-t border-b border-gray-400 pb-10" ref={dayworkSection}>
        <LouberWork />
       </div>
       <div>
