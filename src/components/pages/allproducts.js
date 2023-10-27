@@ -175,6 +175,8 @@ const selectPageHandler = (selectedPage) => {
              </button>
             ):(""))))
         :("")}
+        <br />
+        {item.createdAt.split('T')[0]}
         </span><br />
           </a>  
          </div>

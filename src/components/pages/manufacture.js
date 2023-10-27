@@ -356,7 +356,7 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
                     data-mdb-ripple-color="light"
                   >
                     <img
-                      className="w-screen h-52 transition cursor-pointer duration-700"                     
+                      className="w-screen h-72 transition cursor-pointer duration-700"                     
                      onClick={() => ProductsDetail(products) }
                       //src={`/img/${products.featureImage}`}
                       src={`${AddressBaseUrl}/images/${products.image}`}
@@ -367,6 +367,7 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
             <div className="ml-5 m-auto">
               <p className="text-sm font-bold">{products.name}</p>
               <p className="mb-2 text-sm ">{products.description.substring(0, 30) + " ..."}</p>
+              <p className="mb-2 text-sm ">  {products?.createdAt.split('T')[0]}</p>
              </div>
             </div>
            </div>
@@ -438,7 +439,7 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
           ?(
             org?.bids?.bids?.slice(0, 3).map((bid, index) => (
        <div key={index} className="mb-6 lg:mb-0 ">
-        <div class="relative group block bg-white rounded-lg shadow-inner shadow-blue-950/40 p-1">
+        <div class="relative group block bg-white rounded-lg justify-center shadow-inner shadow-blue-950/40 p-1">
             <div className="flex pb-2">
                   <div
                     className="p-2  relative overflow-hidden bg-no-repeat bg-cover rounded-lg"
@@ -446,7 +447,7 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
                     data-mdb-ripple-color="light"
                   >
                     <img
-                      className="w-screen h-52 transition cursor-pointer duration-700"
+                      className="w-screen h-72 transition cursor-pointer duration-700"
                      // src={`${AddressBaseUrl}/images/${bid.image}`}
                      src={`${AddressBaseUrl}/images/${bid.image}`}
                       alt="product img not found"
@@ -457,6 +458,7 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
             <div className=" ml-5 m-auto">
               <p className="text-sm font-bold">{bid?.title}</p>
               <p className="mb-2 text-sm ">{bid?.description.substring(0, 30) + " ..."}</p>
+              <p className="mb-2 text-sm ">  {bid?.createdAt.split('T')[0]}</p>
              </div>
             </div>
            </div>
@@ -544,7 +546,7 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
                   >
                   {/*      src={`${AddressBaseUrl}/images/${job.image}`} */}
                     <img
-                      className="w-screen h-52 transition cursor-pointer duration-700"
+                      className="w-screen h-72 transition cursor-pointer duration-700"
                       //src={`/img/${job.featureImage}`}
                       src={`${AddressBaseUrl}/images/${job.image}`}
                       alt="product img not found"
@@ -555,6 +557,7 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
             <div className="m-auto">
               <p className="text-sm font-bold">{job?.title}</p>
               <p className="mb-2 text-sm ">{job?.description.substring(0, 30) + " ..."}</p>
+              <p className="mb-2 text-sm ">  {job?.createdAt.split('T')[0]}</p>
              </div>
             </div>
            </div>
@@ -626,7 +629,7 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
           >
                   {/*      src={`${AddressBaseUrl}/images/${job.image}`} */}
                     <img
-                      className="w-screen h-52 transition cursor-pointer duration-700"
+                      className="w-screen h-72 transition cursor-pointer duration-700"
                       //src={`/img/${job.featureImage}`}
                       src={`${AddressBaseUrl}/images/${job.image}`}
                       alt="product img not found"
@@ -637,6 +640,7 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
                 <div className="m-auto">
               <p className="text-sm font-bold">{job?.title}</p>
               <p className="mb-2 text-sm ">{job?.description.substring(0, 30) + " ..."}</p>
+              <p className="mb-2 text-sm ">  {job?.createdAt.split('T')[0]}</p>
              </div>
             </div>
            </div>

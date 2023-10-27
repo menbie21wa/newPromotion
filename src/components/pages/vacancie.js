@@ -217,7 +217,9 @@ return(
              </button>
             ):("")  
         ))):("")}
-        </span><br />
+        <br />
+        {vacancie.createdAt.split('T')[0]}
+        </span>
           </a>  
          </div>
         </div>
@@ -261,7 +263,6 @@ return(
         </nav>
       </div>
       }
-      
       {vacancieDel && (
           <> 
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none -mt-6 border border-grey-100">

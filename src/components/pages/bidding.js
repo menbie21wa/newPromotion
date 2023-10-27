@@ -185,6 +185,8 @@ const Bidding = (props) =>{
              </button>
             ):(""))))
         :("")}
+        <br />
+        {bidding.createdAt.split('T')[0]}
         </span><br />
           </a>  
          </div>
