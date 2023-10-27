@@ -439,7 +439,7 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
           ?(
             org?.bids?.bids?.slice(0, 3).map((bid, index) => (
        <div key={index} className="mb-6 lg:mb-0 ">
-        <div class="relative group block bg-white rounded-lg justify-center shadow-inner shadow-blue-950/40 p-1">
+        <div class="relative group block bg-white rounded-lg shadow-inner shadow-blue-950/40 p-1">
             <div className="flex pb-2">
                   <div
                     className="p-2  relative overflow-hidden bg-no-repeat bg-cover rounded-lg"
