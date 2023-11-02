@@ -44,14 +44,14 @@
     //  navigate("org")
   }
   return (
-   <div className='bg-[#E3E6E6] md:mt-0 mt-20'>
+   <div className='bg-[white] md:mt-0 mt-20 w-full'>
     <div className="hidden md:flex items-center py-3 mb-4 ">
       <button
-        className=" text-lg font-display text-black font-medium hover:text-[#0397FF]">
+        className=" text-lg font-display text-black font-medium hover:text-[#0099ff]">
         <span className="mr-2 ml-7 underline decoration-pink-800 decoration-4 underline-offset-8">ድርጅቶች</span>
       </button>
     </div>
-    <div className='relative bg-white w-full ml-5 h-full md:flex lg:flex pb-8'>    
+    <div className='relative bg-white w-full  h-full md:flex lg:flex pb-8'>    
        <div className='relative m-8 md:w-6/12'>
          <h1 className='md:text-3xl text-lg italic'>{`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.name}`}</h1>
          <h1 className='md:flex pt-0 md:pt-6 lg:pt-6'  onClick={() => orgHandler(`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.id}`)}>
@@ -59,7 +59,7 @@
          </h1>
         <div className='pt-0 md:pt-4 lg:pt-4'>
           <a>
-            <button className='bg-[#0397FF] text-white font-semibold md:py-1 lg:py-1 lg:px-12 md:px-12 px-2 h-full'  onClick={() => orgHandler(`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.id}`)}>ዝርዝር መረጃ</button>
+            <button className='bg-[#0099ff] text-white font-semibold md:py-1 lg:py-1 lg:px-12 md:px-12 px-2 h-full' onClick={() => orgHandler(`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.id}`)}>ዝርዝር መረጃ</button>
           </a>           
           {/* <a>
             <button className='bg-[#0397FF] text-white font-semibold md:py-1 lg:py-1 lg:px-12 md:px-12 px-2 h-full'  onClick={() => orgHandler()}>ዝርዝር መረጃ</button>

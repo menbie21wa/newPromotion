@@ -6,7 +6,6 @@ import Sidebar from "../navigation/sidebar";
 const title="promotion"
 const Layout = ({ children, description, keywords, author }) => {
   const location = useLocation();
-
   const protectedFooter = () => {
     switch (location.pathname) {
       case "/sign-in":

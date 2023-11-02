@@ -41,7 +41,10 @@
   gap: 14px;
   grid-template-columns: 0fr 0fr 0fr;
 }
-
+.active{
+  color: white;
+  background-color: red;
+}
 .products__single {
   height: 220px;
   width: 350px;

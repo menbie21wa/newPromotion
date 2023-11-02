@@ -1,20 +1,14 @@
 import React, {useState } from 'react';
 import {useEffect} from "react";
-import { BsChevronCompactLeft, BsChevronCompactRight, } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
-import { RiMenuLine } from "react-icons/ri";
 import { viewOrganization } from '../../actions/orgAction';
 import  AddressBaseUrl from "../../utils/BaseUrl";
-import Loading1 from './loading';
-import { RxDotFilled } from 'react-icons/rx';
 import { viewVacancie2,searchVacancies} from '../../actions/biddingAction';
 import { addToDetail } from '../../actions/detail';
-import Loading from './loading'; 
 import { HiOutlineX } from "react-icons/hi";
 import { dataProducts } from '../data';
-import show from '../../icons/show.png';
 import { useNavigate } from 'react-router-dom';
-const Bidding = (props) =>{
+const Bidding = () =>{
     const [data, setData] =useState(dataProducts || '');
   const dispatch = useDispatch();
   const [vacancieDel, setVacancieDel] = useState(false);
@@ -49,10 +43,9 @@ const Bidding = (props) =>{
     const [currentPage, setPage] = useState(1)
 
   const selectPageHandler = (selectedPage) => {
-
     // alert(data.length+","+selectedPage)
-    console.log("next button cliked : ",selectedPage);
-    if (selectedPage >= 1 && (selectedPage * 10)-10 <= bidding?.vacancies?.length  && selectedPage !== currentPage) {
+    console.log("next button cliked : ",selectedPage,currentPage);
+    if (selectedPage >= 1 && (selectedPage * 12)-12 < bidding?.vacancies?.length  && selectedPage !== currentPage) {
       setPage(selectedPage)
     }
   }
@@ -87,7 +80,7 @@ const Bidding = (props) =>{
 
  return(
 <>
-<div className=" w-full bg-[#E3E6E6] md:ml-0 -ml-3  ">
+<div className=" w-full bg-[white] md:ml-0 -ml-3 pb-5">
   <div className=" mx-auto h-4/5">
    <section className="mb-6 text-gray-800 text-center group">
     <div className=" md:flex block flex-wrap justify-between items-center mx-auto md:px-6 lg:px-6 px-1">
@@ -125,18 +118,18 @@ const Bidding = (props) =>{
      </form>
     </div>
   </div>
-  <div className=' bg-white  md:flex lg:flex pb-20 md:-mt-1 mt-3 md:pl-16 pl-0 md:ml-3 md:mr-0 ml-10 mr-5'>    
+  <div className=' bg-white  md:flex lg:flex pb-32 md:-mt-1 mt-3 md:pl-16 pl-0 md:ml-3 md:mr-0 ml-10 mr-5'>    
     <div class="relative grid xl:grid-cols-3 md:grid-cols-3 grid-cols-1 xl:gap-20 md:gap-20 gap-12 my-3 xl:gap-x-10 md:gap-x-7 gap-x-5">
       {
        (bidding?.vacancies?.length)>0
          ?(
-          bidding?.vacancies?.slice(currentPage * 10 - 10, currentPage * 10).map((bidding,index) =>{
+          bidding?.vacancies?.slice(currentPage * 12 - 12, currentPage * 12).map((bidding,index) =>{
            return(
               <>
               <div key={index}
                className=" h-40 md:h-56 xl:h-s6 xl:w-96 md:w-80 sm:w-60 relative md:ml-2 ml-2 mr-2 my-10 mb-24 md:mb-0">
                 <div className="w-full h-full relative border-gray-600 
-                 shadow-lg shadow-neutral-900 bg-cover bg-no-repeat "> 
+                shadow-md shadow-neutral-400 bg-cover bg-no-repeat "> 
                  <div className="relative flex justify-center items-center h-full">
                   <img
                    onClick={() => VacancieDetail(bidding)}
@@ -178,7 +171,7 @@ const Bidding = (props) =>{
         (
           (orgs.id)==(bidding.orgId)?(
             <button 
-             className='ml-2  text-amber-400'
+             className='ml-2  text-[#0099ff]'
              onClick={() => orgHandler(`${orgs.id}`)}
              >
              {orgs.name.substring(0,75)}
@@ -202,11 +195,11 @@ const Bidding = (props) =>{
       <div>
      {bidding?.vacancies?.length > 0 && 
      <div className=" justify-center md:ml-10 ml-10 md:mt-10 -mt-9">       
-      {(bidding?.vacancies?.length >=currentPage * 10)?(
+      {(bidding?.vacancies?.length >currentPage * 12)?(
           <p className='text-sm text-gray-700 mb-7'>
             ክጠቅላላ <span className='font-medium ml-2 mr-2'> {bidding?.vacancies?.length} </span>
-            የጫራታ ማስታወቂያዎች  ዝርዝር ውስጥ ከቁጥር <span className='font-medium ml-2 mr-2'>{currentPage * 10 - 10}</span>
-             እስከ ቁጥር <span className='font-medium ml-2 mr-2'> {currentPage * 10} </span> የሚገኙ የጫራታ ማስታወቂያዎች  ዝርዝር  
+            የጫራታ ማስታወቂያዎች  ዝርዝር ውስጥ ከቁጥር <span className='font-medium ml-2 mr-2'>{currentPage * 12 - 12}</span>
+             እስከ ቁጥር <span className='font-medium ml-2 mr-2'> {currentPage * 12} </span> የሚገኙ የጫራታ ማስታወቂያዎች  ዝርዝር  
              </p>
            ):<p className='text-sm text-gray-700 mb-7'>
                <p className="mr-2">(መጨረሻው ነው)</p> ጠቅላላ <span className='font-medium ml-2 mr-2'> {bidding?.vacancies?.length} </span>
@@ -220,14 +213,14 @@ const Bidding = (props) =>{
            <button
             onClick={() => selectPageHandler(currentPage - 1)}
             className='relative inline-flex items-center px-2 py-2 rounded-l-md border
-             bg-slate-700 border-gray-300  text-sm font-medium text-gray-500 hover:bg-gray-50'
+            bg-[#fe9900] border-gray-300  text-sm font-medium text-gray-500 hover:bg-gray-50'
             >
             <span className="font-bold">ምልስ</span>
            </button>
           <button
           onClick={() => selectPageHandler(currentPage + 1)}
             className='relative inline-flex items-center px-2 py-2 rounded-r-md border
-             border-gray-300 bg-slate-700 text-sm font-medium text-gray-500 hover:bg-gray-50'
+             border-gray-300 bg-[#fe9900] text-sm font-medium text-gray-500 hover:bg-gray-50'
           >
           <span className=" font-bold">ቅጣይ</span>
             </button>

@@ -104,12 +104,12 @@ const [page, setPage] = useState(1)
 const selectPageHandler = (selectedPage) => {
   // alert(data.length+","+selectedPage)
   console.log("next button cliked : ",selectedPage);
-  if (selectedPage >= 1 && (selectedPage * 12)-12 <= vacancies?.vacancies?.length  && selectedPage !== page) {
+  if (selectedPage >= 1 && (selectedPage * 12)-12 < vacancies?.vacancies?.length  && selectedPage !== page) {
     setPage(selectedPage)
   }}
 return(
   <>
-   <div className=" w-full bg-[#E3E6E6] md:mt-0 mt-20 ">
+<div className=" w-full bg-[white] md:mt-0 mt-20 pb-7">
   <div className=" mx-auto h-4/5">
    <section className="mb-6 text-gray-800 text-center group">
     <div className=" md:flex block flex-wrap justify-between items-center mx-auto md:px-6 lg:px-6 px-1">
@@ -156,17 +156,17 @@ return(
      </form>
     </div>
   </div>
- <div className=' bg-white  md:flex lg:flex pb-20 md:-mt-1 mt-3 md:pl-14 pl-0 md:ml-3 md:mr-0 ml-5 mr-5'>    
+ <div className=' bg-white  md:flex lg:flex pb-32 md:-mt-1 mt-3 md:pl-14 pl-0 md:ml-3 md:mr-0 ml-5 mr-5'>    
   <div class="relative grid xl:grid-cols-3 ml-5 md:grid-cols-3 grid-cols-1 xl:gap-20 md:gap-20 gap-7 my-3 xl:gap-x-10 md:gap-x-7 gap-x-5">
     {(vacancies?.vacancies?.length > 0)
       ?(
-        vacancies?.vacancies?.slice(page * 12 - 12, page * 12).map((vacancie,index) => { 
+        vacancies?.vacancies?.slice(page *12 - 12, page * 12).map((vacancie,index) => { 
           return(
            <>
             <div key={index} 
                  className=" h-40 md:h-56 xl:h-s6 md:mt-16 mt-16 xl:w-96 md:w-80 sm:w-60 relative md:ml-2 md:mr-0 mr-2 -ml-3 mb-7 md:mb-0">
              <div className="w-full h-full relative border-gray-600 
-                 shadow-lg shadow-neutral-900 bg-cover bg-no-repeat "> 
+             shadow-md shadow-neutral-400 bg-cover bg-no-repeat "> 
               <div className="relative flex justify-center items-center h-full">
               <img 
                className="transition relative w-full h-full cursor-pointer duration-700 rounded-xl border-2 border-b-2 border-gray-600"
@@ -210,7 +210,7 @@ return(
         (
           (orgs.id)==(vacancie.orgId)?(
             <button 
-             className='ml-2 text-amber-400'
+             className='ml-2 text-[#0099ff]'
              onClick={() => orgHandler(`${orgs.id}`)}
              >
              {orgs.name.substring(0,75)}
@@ -231,7 +231,7 @@ return(
       <br />
       {vacancies?.vacancies?.length > 0 && 
        <div className=" justify-center ml-10 mt-10">
-        {(vacancies?.vacancies?.length >=page * 12)?(
+        {(vacancies?.vacancies?.length > page * 12)?(
            <p className='text-sm text-gray-700 mb-7'>
             ክጠቅላላ <span className='font-medium ml-2 mr-2'> {vacancies?.vacancies?.length} </span>
              የስራ ማስታወቂያዎች ዝርዝር ውስጥ ከቁጥር <span className='font-medium ml-2 mr-2'>{page * 12 - 12}</span>
@@ -249,16 +249,16 @@ return(
           <button
           onClick={() => selectPageHandler(page - 1)}
             className='relative inline-flex items-center px-2 py-2 rounded-l-md border
-             bg-slate-700 border-gray-300  text-sm font-medium text-gray-500 hover:bg-gray-50'
+            bg-[#fe9900] border-gray-300  text-sm font-medium text-gray-500 hover:bg-gray-50'
           >
             <span className="font-bold">ምልስ</span>
           </button>
           <button
           onClick={() => selectPageHandler(page + 1)}
             className='relative inline-flex items-center px-2 py-2 rounded-r-md border
-             border-gray-300 bg-slate-700 text-sm font-medium text-gray-500 hover:bg-gray-50'
+             border-gray-300 bg-[#fe9900] text-sm font-medium text-gray-500 hover:bg-gray-50'
           >
-            <span className=" font-bold">ቅጣይ</span>
+            <span className=" font-bold">ቀጣይ</span>
           </button>
         </nav>
       </div>

@@ -59,13 +59,12 @@ useEffect(() =>{
   );
   console.log("qq==",product?.promotedProducts?.length  )
   const [page, setPage] = useState(1)
-const selectPageHandler = (selectedPage) => {
-  // alert(data.length+","+selectedPage)
-  console.log("next button cliked : ",selectedPage);
-  if (selectedPage >= 1 && (selectedPage * 12)-12 <= product?.length  && selectedPage !== page) {
-    setPage(selectedPage)
-  }
-}
+  const selectPageHandler = (selectedPage) => {
+    // alert(data.length+","+selectedPage)
+    console.log("next button cliked : ",selectedPage);
+    if (selectedPage >= 1 && (selectedPage * 12)-12 <product?.promotedProducts?.length  && selectedPage !== page) {
+      setPage(selectedPage)
+    }}
 // console.log("all products are : ", product);
   const VacancieDetail = (data) =>{
     dispatch(addToDetail(data));
@@ -77,10 +76,9 @@ const selectPageHandler = (selectedPage) => {
   const detailInfo = localStorage.getItem("detailInfo")
   ? JSON.parse(localStorage.getItem("detailInfo"))
   : null;
-
   return (
     <>
-   <div className=" w-full bg-[#E3E6E6] md:mt-0 mt-20 ">
+   <div className=" w-full bg-[white] md:mt-14 mt-20 pb-7">
   <div className=" mx-auto h-4/5">
    <section className="mb-6 text-gray-800 text-center group">
     <div className=" md:flex block flex-wrap justify-between items-center mx-auto md:px-6 lg:px-6 px-1">
@@ -91,14 +89,14 @@ const selectPageHandler = (selectedPage) => {
         </button>
         <form onSubmit={submitHandler}>
         <div class=" mb-4 flex flex-wrap items-stretch absolute md:mt-0 mt-6 md:ml-0 ml-5 md:right-16 right-10">
-         <input className="bg-[#E3E6E6] p-3 rounded-md md:-mt-5 ml mt-0 z-20 " 
+         <input className="bg-[white] p-3 rounded-md md:-mt-5 ml mt-0 z-20 " 
              type="date"
              aria-label="Search"
              aria-describedby="button-addon1"
              value={term}
              onChange={(e) => setTerm(e.target.value)}/>
              <button
-             class="relative bg-[#E3E6E6] rounded-md md:-mt-5 mt-0 z-20 flex items-center rounded-r bg-secondary px-6
+             class="relative bg-[white] rounded-md md:-mt-5 mt-0 z-20 flex items-center rounded-r bg-secondary px-6
               py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 
               ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none 
               focus:ring-0 active:bg-primary-800 active:shadow-lg"
@@ -120,7 +118,7 @@ const selectPageHandler = (selectedPage) => {
      </form>
     </div>
    </div>
-   <div className=' bg-white  md:flex lg:flex pb-20 md:-mt-1 mt-3 md:pl-16 pl-0 md:ml-3 md:mr-0 ml-10 mr-5'>    
+   <div className=' bg-white  md:flex lg:flex pb-32 md:-mt-1 mt-3 md:pl-16 pl-0 md:ml-3 md:mr-0 ml-10 mr-5'>    
     <div class="relative grid xl:grid-cols-3 md:grid-cols-3 grid-cols-1 xl:gap-20 md:gap-20 gap-12 my-3 xl:gap-x-10 md:gap-x-7 gap-x-5">
       {
       (product?.promotedProducts?.length)>0
@@ -130,10 +128,10 @@ const selectPageHandler = (selectedPage) => {
               <>
              <div key={index} className=" h-40 md:h-56 xl:h-s6 xl:w-96 md:w-80 sm:w-60 relative md:ml-2 ml-2 mr-2 my-10 mb-24 md:mb-0">
              <div className="w-full h-full relative border-gray-600 
-                 shadow-lg shadow-neutral-900 bg-cover bg-no-repeat "> 
+                 shadow-md shadow-neutral-400 bg-cover bg-no-repeat "> 
                  <div className="relative flex justify-center items-center h-full">
                     <img
-                    className="relative transition hover:scale-125 w-full h-full cursor-pointer duration-700 rounded-xl border-2 border-b-2 border-gray-600"
+                    className="relative transition hover:scale-125 w-full h-full cursor-pointer duration-700 rounded-xl border-2 border-b-1 border-gray-600"
                     //  src={`/img/${item.featureImage}`} 
                     src={`${AddressBaseUrl}/images/${item.featureImage}`}
                       onClick={ () => VacancieDetail(item)}
@@ -157,7 +155,6 @@ const selectPageHandler = (selectedPage) => {
                alt='Noimage'/>
              </button>)
             :("")))):("")}
-
           </ul>
            {/* src={`${AddressBaseUrl}/images/${vacancie.image}`}  */}
           <a>
@@ -168,7 +165,7 @@ const selectPageHandler = (selectedPage) => {
         (
           (orgs.id)==(item.orgId)?(
             <button 
-             className='ml-2 text-amber-400'
+             className='ml-2 text-[#0099ff]'
              onClick={() => orgHandler(`${orgs.id}`)}
              >
              {orgs.name.substring(0,75)}
@@ -181,18 +178,18 @@ const selectPageHandler = (selectedPage) => {
           </a>  
          </div>
     </div>
-   </>)})):(<><div className=" text-xl font-semibold flex justify-center mt-5 ml-32">
-    ------ ምንም ምርት የለም ! ------</div></>)}
-  </div>
+    </>)})):(<><div className=" text-xl font-semibold flex justify-center mt-5 ml-32">
+                            ------ ምንም ምርት የለም ! ------</div></>)}
+   </div>
   </div>
    <br /> <br />
       {(product?.promotedProducts?.length) > 0 && 
-       <div className=" justify-center ml-10 mt-10">
-        {(product?.promotedProducts?.length >=page * 12)?(
+       <div className=" justify-center ml-10">
+       {(product?.promotedProducts?.length >page * 12)?(
            <p className='text-sm text-gray-700 mb-7'>
             ክጠቅላላ <span className='font-medium ml-2 mr-2'> {product?.promotedProducts?.length} </span>
-            ምርቶች  ዝርዝር ውስጥ ከቁጥር <span className='font-medium ml-2 mr-2'>{page * 12 - 12}</span>
-             እስከ ቁጥር <span className='font-medium ml-2 mr-2'> {page * 12} </span> የሚገኙ ምርቶች  ዝርዝር  
+            ምርቶች ዝርዝር ውስጥ ከቁጥር <span className='font-medium ml-2 mr-2'>{page * 12 - 12}</span>
+             እስከ ቁጥር <span className='font-medium ml-2 mr-2'> {page * 12} </span> የሚገኙ ምርቶች ዝርዝር  
              </p>
           ):<p className='text-sm text-gray-700 mb-7'>
               <p className="mr-2">(መጨረሻው ነው)</p> ጠቅላላ <span className='font-medium ml-2 mr-2'> {product?.promotedProducts?.length} </span>
@@ -203,28 +200,27 @@ const selectPageHandler = (selectedPage) => {
           className='relative z-0  inline-flex rounded-md shadow-sm -space-x-px'
           aria-label='Pagination'
         >
-          <button
+        <button
           onClick={() => selectPageHandler(page - 1)}
             className='relative inline-flex items-center px-2 py-2 rounded-l-md border
-             bg-slate-700 border-gray-300  text-sm font-medium text-gray-500 hover:bg-gray-50'
+             bg-[#fe9900] border-gray-300  text-sm font-medium text-gray-500 hover:bg-gray-50'
           >
             <span className="font-bold">ምልስ</span>
           </button>
           <button
           onClick={() => selectPageHandler(page + 1)}
             className='relative inline-flex items-center px-2 py-2 rounded-r-md border
-             border-gray-300 bg-slate-700 text-sm font-medium text-gray-500 hover:bg-gray-50'
+             border-gray-300 bg-[#fe9900] text-sm font-medium text-gray-700 hover:bg-gray-50'
           >
-         <span className=" font-bold">ቅጣይ</span>
-       </button>
+            <span className=" font-bold">ቅጣይ</span>
+          </button>
        </nav>
        </div>
       }
         {vacancieDel && (
-          <> 
-
+         <> 
           <div className="justify-center items-center flex overflow-x-hidden  border-grey-100 shadow-lg overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none -mt-6 border border-grey-100">
-         <div className="relative w-auto my-6 mx-auto bg-slate-500 max-w-7xl border border-grey-100 shadow-lg">
+           <div className="relative w-auto my-6 mx-auto bg-slate-500 max-w-7xl border border-grey-100 shadow-lg">
            {/*content*/}
              <div className="rounded-lg shadow-lg relative border border-grey-100 flex flex-col w-full bg-orange-400 outline-none focus:outline-none">
                {/*header*/}
@@ -271,49 +267,6 @@ const selectPageHandler = (selectedPage) => {
                  </div>
                 </div>
                </div>
-
-
-            {/* <div className="  w-11/12 h-11/12 bg-orange-500 mr-2 items-center m-5 overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none  border border-gray-500">
-                   <div className="flex p-3 float-right -mt-5 ">
-                    <button
-                       onClick={() => setVacancieDel(false) }
-                      type="button"
-                      className="text-red-600 bg-transparent hover:bg-gray-200 rounded-lg text-lg p-1 ml-auto inline-flex items-center"
-                      data-modal-toggle="log-in-model"
-                    >
-                      <HiOutlineX className="w-6 h-6" />
-                    </button>
-                  </div>                  
-                  <div className=" flex w-full bg-white h-full">
-                  <img
-                    className="  w-1/2 h-96 transition cursor-pointer duration-700"
-                    src={`${AddressBaseUrl}/images/${detailInfo.featureImage}`}
-                      //src={smartPhone} 
-                      alt="product img not found"
-                    /> 
-                    <div className="w-1/2 h-8/9 ">
-                    <div className="m-4 w-full h-full bg-white">
-                   <p className="text-lg font-bold">{detailInfo?.name}</p> 
-                    <p className="text-sm font-bold  mt-4 text-center">{detailInfo?.description}</p>
-                    <p className="text-sm font-bold  mt-4 text-center">{detailInfo?.price} ብር</p>    
-                    {(org?.promotedOrgs?.length > 0)
-                      ?(
-                        org?.promotedOrgs?.map((orgs,index) => 
-                      (
-                        (orgs.id)==(detailInfo.orgId)?(
-                            <>
-                            <h3 class="border-t mb-2 ml-8 mr-6 pt-3 font-semibold underline">
-                              phone: <span class="font-thin">{orgs?.phone}</span></h3>
-                              <h3 class="border-t ml-8 mr-6 mb-2 pt-3 font-semibold underline">Email: <span class="font-thin">{orgs?.email}</span></h3> 
-
-                          </>)
-                          :("")  
-                      ))):("")} 
-                   </div>
-                    </div>
-                   </div>  
-                   </div> */}
- 
               </>
           )}
      </section>

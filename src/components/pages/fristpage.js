@@ -3,8 +3,8 @@ import {useEffect} from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight, } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { viewOrganization } from '../../actions/orgAction';
+import Loading from "./loading";
 import  AddressBaseUrl from "../../utils/BaseUrl";
-import Loading1 from './loading';
 import { RxDotFilled } from 'react-icons/rx';
 import {dataVacancy} from '../vacaData';
 import { useNavigate } from 'react-router-dom';
@@ -82,22 +82,19 @@ useEffect(() => {
       const newIndex = isFirstSlide ? org.length - 1 : currentIndex - 1;
       setCurrentIndex(newIndex);
     };
-  
     const nextSlide = () => {
       const isLastSlide = currentIndex === org?.promotedOrgs?.length - 1;
       const newIndex = isLastSlide ? 0 : currentIndex + 1;
       setCurrentIndex(newIndex);
     };
-
     const goToSlide = (slideIndex) => {
       setCurrentIndex(slideIndex);
     };
-
  return(
     <>
 {/* bg-[#E3E6E6] */}
-<div className=" md:mt-20 -mt-10 bg-[#E3E6E6] ">
-        <div className="  bg-[#E3E6E6] md:flex-row p-2 pb-5 flex-col md:pt-0 lg:pt-0 md:mb-2 mb-44 pt-24 h-full md:h-full w-full border-b  group">
+<div className=" md:mt-20 -mt-10 bg-[white] ">
+        <div className="  bg-[white] md:flex-row p-2 pb-5 flex-col md:pt-0 lg:pt-0 md:mb-2 mb-44 pt-24 h-full md:h-full w-full border-b  group">
           <div className='h-full -mb-36 md:flex block md:h-full w-full md:-mt-32 -mt-0 rounded p-2'>           
           <div
             className=" md:w-11/12 md:mb-0 mb-16 h-full md:mt-0 mt-16  flex md:ml-5 ml-2 flex-col md:p-14 p-3 justify-center items-center">
@@ -114,9 +111,8 @@ useEffect(() => {
       {descrip}
       </p> 
       {!expanded && ( 
-
             <button 
-          className="text-blue-500 hover:underline w-32 pl-2 rounded-lg h-10 bg-amber-500 " 
+          className="text-blue-500 hover:underline w-32 pl-2 rounded-lg h-10 bg-[#fe9900] " 
           onClick={toggleExpanded} 
         >  Read More
         <img className='w-6 h-6 -ml-1 -mt-6 rounded-full' alt='' src={icon3}/> 
@@ -124,7 +120,7 @@ useEffect(() => {
                 )} 
         {expanded && ( 
           <button 
-          className="text-blue-500 hover:underline w-32 pl-2 rounded-lg h-10 bg-amber-500 " 
+          className="text-blue-500 hover:underline w-32 pl-2 rounded-lg h-10 bg-[#fe9900]" 
           onClick={toggleExpanded} 
         >  Read less
         <img className='w-6 h-6 -ml-1 -mt-6 rounded-full' alt='' src={icon3}/> 
@@ -140,12 +136,14 @@ useEffect(() => {
           // style={{ backgroundImage: `url(${org && org[currentIndex]?.url})` }}
           className='md:ml-2 ml-5 md:mt-16 md:mr-7 -mt-20 mr-2 rounded-2xl md:w-2/3 w-40 md:h-full h-60 bg-center duration-700 relative bg-cover bg-no-repeat'
           >
+          {(org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo)!==''
+          ?(
           <img 
           className="md:w-full md:h-96 w-11/12 h-3/4 rounded-lg "
-         // src={`/img/Eplusapp1.png`} 
           src={`${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`}
           alt=""
-          />
+          />):("")
+          }
         </div>
        </div>
        <div className='hidden -mt-20 group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-0 text-2xl hover:border-2 py-2 md:py-12 lg:py-12 bg-white/40 rounded-sm hover:bg-black/20 border-black text-black cursor-pointer z-10'>

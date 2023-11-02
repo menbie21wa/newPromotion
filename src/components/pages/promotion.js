@@ -70,11 +70,53 @@ const user = localStorage.getItem("userInfo")
   const dayworkSection = useRef();
   const biddingSection = useRef();
 
-  const scrollToAll = (elmRef) =>{
-    window.scrollTo({
-        top : elmRef.current.offsetTop,
-        behavior: "smooth"
+  // const scrollToAll = (elmRef) =>{
+  //   window.scrollTo({
+  //       top : elmRef.current.offsetTop,
+  //       behavior: "smooth"
+  //   })
+  // }
+const [isActive,setIsActive]=useState('b0')
+const scrollToAllOrg = (elmRef,btn0) =>{
+  // if(org?.org?.length >0)
+  // {
+  window.scrollTo({
+      top : elmRef.current.offsetTop,
+      behavior: "smooth"
+   })
+  //}
+   setIsActive(btn0)
+  }
+const scrollToAllProduct = (elmRef,btn2) =>{
+  // if((org?.promotedProducts?.promotedProducts?.length)>0)
+  // {
+  window.scrollTo({
+      top : elmRef.current.offsetTop,
+      behavior: "smooth"
     })
+  //}
+    setIsActive(btn2)
+  }
+const scrollToAllBids = (elmRef,btn3) =>{
+  // if(org?.bids?.bids?.length>0)
+  // {
+  window.scrollTo({
+      top : elmRef.current.offsetTop,
+      behavior: "smooth"
+   })
+  //}
+   setIsActive(btn3)
+  }
+
+const scrollToAllVacancy = (elmRef,btn4) =>{
+  // if((org?.job_vacancies?.job_vacancies.length )>0||(org?.daily_works?.daily_works?.length)>0)
+  // {
+  window.scrollTo({
+      top : elmRef.current.offsetTop,
+      behavior: "smooth"
+    })
+  //}
+    setIsActive(btn4)
   }
 
 const orgHandler =(id)=>{
@@ -119,7 +161,7 @@ const orgHandler =(id)=>{
   }
  return(
   <Layout>
-<div className="bg-[#E3E6E6]">
+<div className="bg-[white]">
  <div className="md:pt-0 lg:pt-0 ">
    <>
       <nav className=' z-50 fixed top-0 pr-10 overflow-hidden justify-between list-none font-serif uppercase font-medium xl:text-xl 
@@ -128,7 +170,7 @@ const orgHandler =(id)=>{
       <button className='ml-1 w-96 p-5 md:flex block ' 
       onClick={scrollToTop} 
      > 
-      <img className=' md:w-32 md:h-20 w-20 h-10  -mt-3 lg:ml-12 sm:ml-5 rounded-2xl' 
+      <img className=' md:w-32 md:h-20 w-20 h-10 -mt-3 lg:ml-12 sm:ml-5 rounded-2xl' 
       src={Logue} 
       //src={`${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`}
       alt="NoLogue"
@@ -143,20 +185,23 @@ const orgHandler =(id)=>{
 
       <ul className=' mr-8 mt-3 lg:flex md:flex bg-white  left-0 w-full md:w-auto
       sm:hidden absolute md:static justify-end items-center flex-1 list-none z-20 '>
-      <li className='mx-6'><button onClick={()=> scrollToAll(orgSection)}
-      className='  transition duration-700 transform hover:-translate-y-1 hover:scale-110' 
-        > ድርጅቶች </button></li>
-      <li className='mx-6'><button onClick={()=> scrollToAll(productSection)}
-        className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'>
-          ምርቶች</button></li>
-      <li className='mx-6'><button onClick={()=> scrollToAll(biddingSection)}
-        className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex' 
-        >   
-        የጨረታ ማስታዎቂያ </button></li>
-      <li className='mx-6'><button onClick={()=> scrollToAll(vacancieSection)}
-      className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'>
-      የስራ ማስታዎቂያ</button></li>
-      </ul>
+      <li className='mx-6'><button className={`transition duration-700 transform hover:-translate-y-1 hover:scale-110 hover:text-[#0099ff]
+                                    ${isActive === 'b0' ? 'text-[#0099ff]' : ''}`}
+                                    onClick={()=> scrollToAllOrg(orgSection,'b0')}
+                                    > ድርጅቶች </button></li>
+      <li className='mx-6'><button className={`transition duration-700 transform hover:-translate-y-1 hover:scale-110 hover:text-[#0099ff]
+                                    ${isActive === 'b1' ? 'text-[#0099ff]' : ''}`}
+                                    onClick={()=> scrollToAllProduct(productSection,'b1')}>
+                                    ምርቶች</button></li>
+      <li className='mx-6'><button className={`transition duration-700 transform hover:-translate-y-1 hover:scale-110 hover:text-[#0099ff]
+                                    ${isActive === 'b2' ? 'text-[#0099ff]' : ''}`}
+                                    onClick={()=> scrollToAllBids(biddingSection,'b2')}>   
+                                      የጨረታ ማስታዎቂያ </button></li>
+      <li className='mx-6'><button  className={`transition duration-700 transform hover:-translate-y-1 hover:scale-110 hover:text-[#0099ff]
+                                    ${isActive === 'b3' ? 'text-[#0099ff]' : ''}`}
+                                    onClick={()=> scrollToAllVacancy(vacancieSection,'b3')}>
+                                    የስራ ማስታዎቂያ</button></li>
+       </ul>
       </nav>
 
       {/* Mobile Navigation */}
@@ -166,33 +211,32 @@ const orgHandler =(id)=>{
                     sidebar bg-white transition-all duration-500 ease-in z-50
                     `}>
     <li className='mx-6 py-3 font-serif uppercase font-medium text-xl '>
-          <button onClick={()=> scrollToAll(orgSection)}
-          className='transition duration-700 transform hover:-translate-y-1 hover:scale-110 flex' 
+          <button onClick={()=> scrollToAllOrg(orgSection)}
+          className='transition duration-700 transform hover:-translate-y-1 hover:text-[#0099ff] hover:scale-110 flex' 
             > <img className=' w-6 h-5 mx-4 ' src={building} alt='Noicon'/> ድርጅቶች </button></li>
     <li className='mx-6 py-2 font-serif uppercase font-medium text-xl '>
-          <button onClick={()=> scrollToAll(productSection)}
-          className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'>
+          <button onClick={()=> scrollToAllProduct(productSection)}
+          className='transition duration-700 transform hover:-translate-y-1 hover:text-[#0099ff] hover:scale-110  flex'>
           <img className=' w-6 h-5 mx-4 ' src={producticon} alt='Noicon'/> ምርቶች</button></li>
           <li className='mx-6 py-2 font-serif uppercase font-medium text-xl '>
-        <button onClick={()=> scrollToAll(biddingSection)}
-          className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex' 
+        <button onClick={()=> scrollToAllBids(biddingSection)}
+          className='transition duration-700 transform hover:-translate-y-1 hover:text-[#0099ff] hover:scale-110  flex' 
             >   
           <img className=' w-6 h-5 mx-4 ' src={bidding} alt='Noicon'/> የጨረታ ማስታዎቂያ </button></li>
     <li className='mx-6 py-2 font-serif uppercase font-medium text-xl '>
-          <button onClick={()=> scrollToAll(vacancieSection)}
-          className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'>
-          <img className=' w-6 h-5 mx-4 ' src={vacancy} alt='Noicon'/>  የስራ ማስታዎቂያ</button></li>
-
+          <button onClick={()=> scrollToAllVacancy(vacancieSection)}
+          className='transition duration-700 transform hover:-translate-y-1 hover:text-[#0099ff] hover:scale-110  flex'>
+          <img className=' w-6 h-5 mx-4' src={vacancy} alt='Noicon'/>  የስራ ማስታዎቂያ</button></li>
     </ul>
    </>    
   </div>
      <div className="md:pt-24 lg:pt-24  pt-18 -ml-7 border-b mb-10 border-t border-gray-400" ref={firstSection}>
      <Fristpage />
      </div>
-     <div className="mb-7 md:pl-8 pl-0 p-5 -mt-10 mr-5" ref={orgSection}>
+     <div className="mb-7 md:pl-8 pl-0 p-5 md:mt-5 -mt-10 mr-2" ref={orgSection}>
         <Orgdetail />
      </div>
-     <div className="pt-2  md:pl-8 pl-0 border-t border-b border-gray-400 mb-7 p-5" ref= {productSection}>
+     <div className="pt-2  md:pl-8 pl-0 border-t mr-2 border-b border-gray-400 mb-7 p-5" ref= {productSection}>
        <Allproducts />
      </div>
      <div className="md:pt-6  md:pl-7 pl-0 lg:pt-6 md:mr-7 mr-0" ref= {biddingSection}>

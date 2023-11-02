@@ -1,11 +1,8 @@
 import React, {useEffect,useRef, useState} from "react";
 import Layout from "../layout/layout";
 import Contact from "./contactus";
-import Loading from "./loading";
 import { FaArrowLeft } from "react-icons/fa";
-import defualtImg from '../../img/img1.jpg'
 import  { organizationdata } from "../organizationdata";
-import Fristpage from "./fristpage";
 import logos from '../../img/img1.jpg'
 import education from '../../img/sun_icon3.jpeg';
 import healthcare from '../../img/hero.jpeg';
@@ -18,18 +15,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { getOrganization } from "../../actions/orgAction";
 import { addToDetail } from "../../actions/detail";
 import { HiOutlineX } from "react-icons/hi";
-import smartPhone from '../../img/computerimge/smartPc.jpg';
-import smartDesktop from '../../img/computerimge/desctops.jpg';
-import { NavLink, useLocation } from "react-router-dom";
-import Logue from '../../img/logobg2.png';
+import { NavLink } from "react-router-dom";
 import img1 from "../../icons/office.png";
+import ImgCont from "../../icons/contact.jpeg";
 import vacancy from "../../icons/vacancy.png";
-import building from "../../icons/office-building.png";
 import producticon from "../../icons/new-product.png";
 import bidding from "../../icons/bidding.png";
 import { louberDetail} from "../../actions/louberDetail";
 import classNames from 'classnames';
-import icon1 from '../../img/download.jpeg'
 import icon3 from '../../img/download.png'
 const Manufacture = () =>{
  // window.scrollTo(0, 0);
@@ -74,13 +67,7 @@ const dayworkSection = useRef();
 const biddingSection = useRef();
 // const [start, setStart] = useState(false);
 // const secRef = useRef();
- const getHome=()=>{
-  window.scrollTo({top: 0, 
-    left: 0, 
-    behavior: 'auto'
-   // behavior: 'smooth'
-  });
-    }
+
     const getFooter=()=>{
       window.scrollTo({
         top: document.documentElement.scrollHeight,  
@@ -89,15 +76,55 @@ const biddingSection = useRef();
         //behavior: 'smooth'
          });
         }
-const scrollToAll = (elmRef) =>{
+const [isActive,setIsActive]=useState('b0')
+const scrollToAllOrg=(btn0)=>{
+  window.scrollTo({top: 0, 
+    left: 0, 
+    behavior: 'auto'
+   // behavior: 'smooth'
+  });
+  setIsActive(btn0)
+    }
+const contactus = (elmRef,btn1) =>{
   window.scrollTo({
       top : elmRef.current.offsetTop,
       behavior: "smooth"
-  })
-}
+   })
+   setIsActive(btn1)
+  }
+const scrollToAllProduct = (elmRef,btn2) =>{
+  if((org?.promotedProducts?.promotedProducts?.length)>0)
+  {
+  window.scrollTo({
+      top : elmRef.current.offsetTop,
+      behavior: "smooth"
+    })}
+    setIsActive(btn2)
+  }
+const scrollToAllBids = (elmRef,btn3) =>{
+  if(org?.bids?.bids?.length>0)
+  {
+  window.scrollTo({
+      top : elmRef.current.offsetTop,
+      behavior: "smooth"
+   })}
+   setIsActive(btn3)
+  }
+
+const scrollToAllVacancy = (elmRef,btn4) =>{
+  if((org?.job_vacancies?.job_vacancies.length )>0||(org?.daily_works?.daily_works?.length)>0)
+  {
+  window.scrollTo({
+      top : elmRef.current.offsetTop,
+      behavior: "smooth"
+    })}
+    setIsActive(btn4)
+  }
+   
 const louberWorkDetail = localStorage.getItem("louberWorkDetail")
 ? JSON.parse(localStorage.getItem("louberWorkDetail"))
 : null;
+
 const VacancieDetail = (data) =>{
   dispatch(addToDetail(data));
   setVacancieDel(true);
@@ -114,6 +141,12 @@ const ProductsDetail = (data) =>{
   dispatch(addToDetail(data));
   setProductDel(true);
 }
+// const navLinkStyles=({isActive})=>{
+//   return{
+//    color:isActive ?'green':'black',
+//    fontWeight:isActive?'bolder':'unset',
+//    fontSize:isActive? '20px':'unset'
+//   }}
 const detailInfo = localStorage.getItem("detailInfo")
 ? JSON.parse(localStorage.getItem("detailInfo"))
 : null;
@@ -142,7 +175,9 @@ const detailInfo = localStorage.getItem("detailInfo")
       color: isActive ? "#F3AE33" :  "#2b2b2b" ,
     };
   };
-
+  const isCurrentPage = (href) => {
+    // return true if `href` is the current path, many ways you could do this
+ }
   const backNavigate =(id)=>{
     navigate("/")
     // navigate("org")
@@ -226,21 +261,27 @@ alt="NoLogue"
 </div>
 <ul className=' mr-8 mt-3 lg:flex md:flex bg-white  left-0 w-full md:w-auto
  sm:hidden absolute md:static justify-end items-center flex-1 list-none z-20 '>
-<li className='mx-6'><button  onClick={()=> getHome()}
-className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'
-to ="/">ስለ ድርጅቱ</button></li>
-<li className='mx-6'><button  onClick={()=> scrollToAll(firstSection)}
-className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'
-to ="/">አግኙን</button></li>
-<li className='mx-6'><button onClick={()=> scrollToAll(productSection)}
-className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'>
+<li className='mx-6'><button className={`transition duration-700 transform hover:-translate-y-1 hover:text-[#0099ff] hover:scale-110  flex
+          ${isActive === 'b0' ? 'text-[rgb(0,153,255)]' : ''}`}
+          onClick={()=> scrollToAllOrg('b0')}>ስለ ድርጅቱ</button></li>
+<li className='mx-6'>
+          <button onClick={()=> contactus(firstSection,'b1')}
+                  className={`transition duration-700 transform hover:-translate-y-1 hover:text-[#0099ff] hover:scale-110  flex
+                  ${isActive === 'b1' ? 'text-[#0099ff]' : ''}`} >
+                 አግኙን
+               </button></li>
+<li className='mx-6'><button  className={`transition duration-700 transform hover:-translate-y-1 hover:text-[#0099ff] hover:scale-110  flex
+                                           ${isActive === 'b2' ? 'text-[#0099ff]' : ''}`}
+ onClick={()=> scrollToAllProduct(productSection,'b2')}>
 ምርቶች</button></li>
-<li className='mx-6'><button onClick={()=> scrollToAll(biddingSection)}
-  className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex' 
+<li className='mx-6'><button onClick={()=> scrollToAllBids(biddingSection,'b3')}
+  className={`transition duration-700 transform hover:-translate-y-1 hover:text-[#0099ff] hover:scale-110  flex
+             ${isActive === 'b3' ? 'text-[#0099ff]' : ''}`} 
     >   
     የጨረታ ማስታዎቂያ </button></li>
- <li className='mx-6'><button onClick={()=> scrollToAll(vacancieSection)}
- className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'>
+ <li className='mx-6'><button onClick={()=> scrollToAllVacancy(vacancieSection,'b4')}
+ className={`transition duration-700 transform hover:-translate-y-1 hover:text-[#0099ff] hover:scale-110  flex
+            ${isActive === 'b4' ? 'text-[#0099ff]' : ''}`}>
  የስራ ማስታዎቂያ</button></li>
  {/* <li><button className=' transition duration-700 transform hover:-translate-y-1 hover:scale-110 ml-12 flex' 
     >  ግብት </button></li> */}
@@ -253,70 +294,73 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
                     sidebar bg-white transition-all duration-500 ease-in z-50
                     `}>
   <li className='mx-6 font-serif uppercase font-medium text-xl'>
-                <button onClick={()=> getHome()}
-                 className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'
+                <button onClick={()=> scrollToAllOrg()}
+                 className='transition duration-700 transform hover:-translate-y-1 hover:text-[#0099ff] hover:scale-110  flex'
                 to ="/"> <img className=' w-6 h-5 mx-4 ' src={img1} alt='Noicon'/>ስለ ድርጅቱ</button></li>
                 <li className='mx-6 font-serif uppercase font-medium text-xl'>
-                <button onClick={()=> getFooter()}
-                 className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'
-                to ="/"> <img className=' w-6 h-5 mx-4 ' src={img1} alt='Noicon'/>አግኙን</button></li>
+                <button onClick={()=> contactus()}
+                 className='transition duration-700 transform hover:-translate-y-1 hover:text-[#0099ff] hover:scale-110  flex'
+                to ="/"> <img className=' w-6 h-5 mx-4 ' src={ImgCont} alt='Noicon'/>አግኙን</button></li>
  <li className='mx-6 py-2 font-serif uppercase font-medium text-xl '>
-      <button onClick={()=> scrollToAll(productSection)}
-      className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'>
+      <button onClick={()=> scrollToAllProduct(productSection)}
+      className='transition duration-700 transform hover:-translate-y-1 hover:text-[#0099ff] hover:scale-110  flex'>
       <img className=' w-6 h-5 mx-4 ' src={producticon} alt='Noicon'/> ምርቶች</button></li>
       <li className='mx-6 py-2 font-serif uppercase font-medium text-xl '>
-     <button onClick={()=> scrollToAll(biddingSection)}
-      className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex' 
+     <button onClick={()=> scrollToAllBids(biddingSection)}
+      className='transition duration-700 transform hover:-translate-y-1 hover:text-[#0099ff] hover:scale-110  flex' 
         >   
         <img className=' w-6 h-5 mx-4 ' src={bidding} alt='Noicon'/> የጨረታ ማስታዎቂያ </button></li>
  <li className='mx-6 py-2 font-serif uppercase font-medium text-xl '>
-      <button onClick={()=> scrollToAll(vacancieSection)}
-      className='transition duration-700 transform hover:-translate-y-1 hover:scale-110  flex'>
+      <button onClick={()=> scrollToAllVacancy(vacancieSection)}
+      className='transition duration-700 transform hover:-translate-y-1 hover:text-[#0099ff] hover:scale-110  flex'>
       <img className=' w-6 h-5 mx-4 ' src={vacancy} alt='Noicon'/>  የስራ ማስታዎቂያ</button></li>
     {/* <li><button className=' transition duration-700 transform hover:-translate-y-1 hover:scale-110 ml-12 flex' 
         >  ግብት </button></li> */}
     </ul>
    </>    
   </div>
-  <div className=" mt-20 bg-[#E3E6E6] ">
-        <div className=" bg-[#E3E6E6] md:flex-row pb-20 flex-col md:pt-0 lg:pt-0 md:mb-24 mb-44 pt-24 h-full md:h-full w-full border-b  group">
+  <div className=" mt-20 bg-[white] ">
+        <div className=" bg-[white] md:flex-row pb-20 flex-col md:pt-0 lg:pt-0 md:mb-24 mb-44 pt-24 h-full md:h-full w-full border-b  group">
           <div className='h-full -mb-44 md:flex block md:h-full w-full md:mt-20 -mt-0 rounded p-2'> 
           <div
             className=" md:w-10/12 md:mb-0 mb-16  md:mr-8 h-full md:mt-5 -mt-10 flex md:ml-5 ml-2 flex-col md:p-2 p-3 justify-center items-center">
-               <h1 className="text-4xl md:text-4xl xl:text-5xl text-[#F49F08] font-bold font-display tracking-tight leading-tight italic">
-                  {`${org?.promotedOrgs && org?.org?.name}`}
+             {(org?.org)
+             ?(<>
+              <h1 className="text-4xl md:text-4xl xl:text-5xl text-[#F49F08] font-bold font-display tracking-tight leading-tight italic">
+                  {`${org?.org?.name}`}
                   </h1>
                   <p className="text-2xl md:text-2xl mt-4 xl:text-3xl text-[#F49F08] font-bold font-display tracking-tight leading-tight">
-                  {`${ org?.promotedOrgs && org?.org?.businessSector}`}</p>
+                  {`${ org?.org?.businessSector}`}</p>
                   <p className='mt-7'>
-                  {org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.description}
-
-
-
-                  <div> 
-          {/* Description Page */}
-      <p className={paragraphClass}> 
-      {descrip}
-      </p> 
-      {!expanded && ( 
-
+                  {org?.org?.description}
+                  </p>
+             </>):(<p className="text-2xl md:text-2xl mt-4 xl:text-3xl text-[#F49F08] font-bold font-display tracking-tight leading-tight">
+                    NOT promoted </p>)
+             }
+              
+                  
+    <div> 
+         {/* Description Page */}
+       <p className={paragraphClass}> 
+       {descrip}
+       </p> 
+       {!expanded && ( 
             <button 
-          className="text-blue-500 hover:underline w-32 pl-3 rounded-lg h-10 bg-amber-500 " 
+          className="text-blue-500 hover:underline w-32 pl-3 rounded-lg h-10 bg-[#fe9900]" 
           onClick={toggleExpanded} 
         >  Read More
         <img className='w-6 h-6 -ml-2 -mt-6 rounded-full' alt='' src={icon3}/> 
          </button> 
                 )} 
         {expanded && ( 
-          <button 
-          className="text-blue-500 hover:underline w-32 pl-3 rounded-lg h-10 bg-amber-500 " 
+          <button  style={{backgroundColor:"#fe9900"}}
+          className="text-blue-500 hover:underline w-32 pl-3 rounded-lg h-10 " 
           onClick={toggleExpanded} 
         >  Read less
         <img className='w-6 h-6 -ml-2 -mt-6 rounded-full' alt='' src={icon3}/> 
          </button>
          )} 
        </div> 
-      </p>
          </div>
         <div
           // style={{ backgroundImage: `url(${org && org[currentIndex]?.url})` }}
@@ -645,10 +689,8 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
             </div>
            </div>
         )))
-      :(null)  
-      }
+      :(null) }
      </div>
-
      {louberDel && (
           <> 
             <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none -mt-6 border border-grey-100">
@@ -696,13 +738,12 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
                 </div>
             </>
           )} 
-
    </section>
   </div>
-      <div className="w-11/12 mx-auto border-t border-gray-500" ref={firstSection}>
+      <div className="w-11/12 mx-auto border-t border-gray-500 " ref={firstSection}>
        <div class="grid lg:grid-cols-2 xl:gap-10 md:gap-6 xl:gap-x-4">
-        <div className="flex items-center justify-center md:justify-start">
-         <NavLink onClick={() => setOpen(true)} className="text-xl text-[#F49F08]" style={navLinkStyles}> ለበለጠ መረጃ </NavLink>
+        <div className="flex items-center pt-5 justify-center md:justify-start">
+         <NavLink onClick={() => setOpen(true)} className="text-xl text-[#F49F08] hover:text-sky-400" > ለበለጠ መረጃ </NavLink>
          </div>
           <div>
            <button onClick={() => setOpen(false)} className="text-xl text-black"> {org?.org?.name}</button>
@@ -738,7 +779,6 @@ className='transition duration-700 transform hover:-translate-y-1 hover:scale-11
                   መረጃ የማቀነባበርና የመረጃ ቋት የማደራጀት ስራዎች ረቂቅ የመረጃ ምጥቀቶችን ማዘጋጀት፣ የመረጃ
                   ቋት ማዘጋጀት፣ በቀላሉ እንዲፈለጉ ማድረግ፣ ወቅቱን ጠብቆ የማሻሻል፣ የሶፍትዌር ዲዛይን፣ ልማት፣ */}
                   {org?.org?.description}
-
                 </p>
               </div>
             </div>
