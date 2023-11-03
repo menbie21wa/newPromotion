@@ -99,10 +99,10 @@ useEffect(() => {
           <div
             className=" md:w-11/12 md:mb-0 mb-16 h-full md:mt-0 mt-16  flex md:ml-5 ml-2 flex-col md:p-14 p-3 justify-center items-center">
                <h1 className="text-4xl md:text-4xl xl:text-5xl text-[#F49F08] font-bold font-display tracking-tight leading-tight italic">
-                  {`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.name}`}
+                  {org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.name}
                   </h1>
                   <p className="text-2xl md:text-2xl mt-4 xl:text-3xl text-[#F49F08] font-bold font-display tracking-tight leading-tight">
-                  {`${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.businessSector}`}</p>
+                  {org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.businessSector}</p>
                   <p className='mt-7'>
                   {org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.description}
                   <div> 
@@ -114,7 +114,7 @@ useEffect(() => {
             <button 
           className="text-blue-500 hover:underline w-32 pl-2 rounded-lg h-10 bg-[#fe9900] " 
           onClick={toggleExpanded} 
-        >  Read More
+        >  Read More 
         <img className='w-6 h-6 -ml-1 -mt-6 rounded-full' alt='' src={icon3}/> 
          </button> 
                 )} 

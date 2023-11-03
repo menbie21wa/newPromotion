@@ -298,7 +298,7 @@ alt="NoLogue"
                  className='transition duration-700 transform hover:-translate-y-1 hover:text-[#0099ff] hover:scale-110  flex'
                 to ="/"> <img className=' w-6 h-5 mx-4 ' src={img1} alt='Noicon'/>ስለ ድርጅቱ</button></li>
                 <li className='mx-6 font-serif uppercase font-medium text-xl'>
-                <button onClick={()=> contactus()}
+                <button onClick={()=> contactus(firstSection)}
                  className='transition duration-700 transform hover:-translate-y-1 hover:text-[#0099ff] hover:scale-110  flex'
                 to ="/"> <img className=' w-6 h-5 mx-4 ' src={ImgCont} alt='Noicon'/>አግኙን</button></li>
  <li className='mx-6 py-2 font-serif uppercase font-medium text-xl '>
@@ -320,8 +320,8 @@ alt="NoLogue"
    </>    
   </div>
   <div className=" mt-20 bg-[white] ">
-        <div className=" bg-[white] md:flex-row pb-20 flex-col md:pt-0 lg:pt-0 md:mb-24 mb-44 pt-24 h-full md:h-full w-full border-b  group">
-          <div className='h-full -mb-44 md:flex block md:h-full w-full md:mt-20 -mt-0 rounded p-2'> 
+        <div className=" bg-[white] md:flex-row pb-20 flex-col md:pt-0 lg:pt-0 md:mb-0 mb-44 pt-24  md:h-full w-full  group">
+          <div className='h-full  md:flex block md:h-full w-full md:mt-20 -mt-0 rounded p-2'> 
           <div
             className=" md:w-10/12 md:mb-0 mb-16  md:mr-8 h-full md:mt-5 -mt-10 flex md:ml-5 ml-2 flex-col md:p-2 p-3 justify-center items-center">
              {(org?.org)
@@ -337,9 +337,7 @@ alt="NoLogue"
              </>):(<p className="text-2xl md:text-2xl mt-4 xl:text-3xl text-[#F49F08] font-bold font-display tracking-tight leading-tight">
                     NOT promoted </p>)
              }
-              
-                  
-    <div> 
+      <div> 
          {/* Description Page */}
        <p className={paragraphClass}> 
        {descrip}
@@ -379,7 +377,7 @@ alt="NoLogue"
  { 
      (org?.promotedProducts?.promotedProducts?.length)>0
       ?(
-        <div className="items-center py-3 ml-16 mr-12 mb-4 border-t border-gray-500 mt-7" ref={productSection}>
+        <div className="items-center py-3 ml-16 mr-12 mb-4 border-t border-gray-500 mt-1" ref={productSection}>
          <button className=" text-lg font-display text-black font-medium hover:text-[#0397FF]">
           <span className="mr-2 underline decoration-pink-800 decoration-4 underline-offset-8"> ምርቶች </span>
          </button>
@@ -561,7 +559,7 @@ alt="NoLogue"
             </>
           )} 
           {/* Vacancy */}
-<div className="w-11/12 xl:w-11/12 mx-auto md:mt-10 lg:mt-20 border-t border-gray-500 ">
+<div className="w-11/12 xl:w-11/12 mx-auto md:mt-10 lg:mt-10 border-t border-gray-500 ">
     <section className="mb-12 text-gray-800 text-center ">
     {/* job_vacancies */}
     {/* (org?.job_vacancies?.length)>0 */}
