@@ -131,7 +131,7 @@ useEffect(() =>{
                  shadow-md shadow-neutral-400 bg-cover bg-no-repeat "> 
                  <div className="relative flex justify-center items-center h-full">
                     <img
-                    className="relative transition hover:scale-125 w-full h-full cursor-pointer duration-700 rounded-xl border-2 border-b-1 border-gray-600"
+                    className="relative transition hover:scale-125 duration-700 w-full h-full cursor-pointer  rounded-xl border-2 border-b-1 border-gray-600"
                     //  src={`/img/${item.featureImage}`} 
                     src={`${AddressBaseUrl}/images/${item.featureImage}`}
                       onClick={ () => VacancieDetail(item)}
@@ -258,7 +258,6 @@ useEffect(() =>{
                             <h3 class="border-t mb-2 ml-8 mr-6 pt-3 font-semibold underline">
                               phone: <span class="font-thin">{orgs?.phone}</span></h3>
                               <h3 class="border-t ml-8 mr-6 mb-2 pt-3 font-semibold underline">Email: <span class="font-thin">{orgs?.email}</span></h3> 
-
                           </>)
                           :("")  
                       ))):("")} 
@@ -267,12 +266,10 @@ useEffect(() =>{
                  </div>
                 </div>
                </div>
-              </>
-          )}
+              </>)}
      </section>
     </div>
    </div>
   </>
 );}
-
 export default Allproducts;

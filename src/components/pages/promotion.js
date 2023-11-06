@@ -6,6 +6,7 @@ import Vacancie from "./vacancie";
 import LouberWork from "./louberWork";
 import Fristpage from "./fristpage"
 import {getProduct, viewProducts} from "../../actions/productAction";
+import classNames from 'classnames';
 import { useDispatch, useSelector } from "react-redux";
 import  AddressBaseUrl from "../../utils/BaseUrl";
 import { button, useNavigate } from "react-router-dom";
@@ -159,14 +160,35 @@ const orgHandler =(id)=>{
       behavior: "auto"
   })
   }
+
+      //stiky header
+      const [isScrolled, setIsScrolled] = useState(true);
+      const [prevScrollPos, setPrevScrollPos] = useState(0);
+    
+      useEffect(() => {
+        const handleScroll = () => {
+          const currentScrollPos = window.pageYOffset;
+          setIsScrolled(currentScrollPos < prevScrollPos);
+          setPrevScrollPos(currentScrollPos);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+          window.removeEventListener('scroll', handleScroll);
+        };
+      }, [prevScrollPos]);
+      const navbarClasses = classNames('fixed', 'top-0', 'w-full', {
+        'opacity-0': !isScrolled,
+        'opacity-100': isScrolled,
+        'transition-transform duration-700 ease-in-out': true,
+      });             
  return(
   <Layout>
-<div className="bg-[white]">
- <div className="md:pt-0 lg:pt-0 ">
-   <>
-      <nav className=' z-50 fixed top-0 pr-10 overflow-hidden justify-between list-none font-serif uppercase font-medium xl:text-xl 
-      md:text-xl xs:text-xs text-justify-center w-full lg:h-24 md:h-28 sm:h-20 shadow-xl sm:flex bg-white items-center '>
-      <div>
+    <div className="bg-[white]">
+     <div className="md:pt-0 lg:pt-0 ">
+      <>
+       <nav className={`${navbarClasses} z-50  top-0 pr-10 overflow-hidden justify-between list-none font-serif uppercase font-medium xl:text-xl 
+         md:text-xl xs:text-xs text-justify-center w-full lg:h-24 md:h-28 sm:h-20 shadow-xl sm:flex bg-white items-center`}>
+     <div>
       <button className='ml-1 w-96 p-5 md:flex block ' 
       onClick={scrollToTop} 
      > 
@@ -203,7 +225,9 @@ const orgHandler =(id)=>{
                                     የስራ ማስታዎቂያ</button></li>
        </ul>
       </nav>
-
+      {/* <div className='sticky top-0 w-full h-7 text-center  bg-green-800 text-white p-2 z-50'>
+     <i> General Promotion for several services </i>
+    </div>  */}
       {/* Mobile Navigation */}
       <ul className={` ${menu ? "left-0 opacity-100" :"left-[-750px] md:opacity-0"}
                     sm:flex lg:hidden flex-1  list-none flex flex-col
@@ -229,7 +253,7 @@ const orgHandler =(id)=>{
           <img className=' w-6 h-5 mx-4' src={vacancy} alt='Noicon'/>  የስራ ማስታዎቂያ</button></li>
     </ul>
    </>    
-  </div>
+  </div> 
      <div className="md:pt-24 lg:pt-24  pt-18 -ml-7  mb-10 border-gray-400" ref={firstSection}>
      <Fristpage />
      </div>
@@ -253,6 +277,5 @@ const orgHandler =(id)=>{
      </div>
     </div>
     </Layout>
- )
-}
+ )}
 export default Promotion;

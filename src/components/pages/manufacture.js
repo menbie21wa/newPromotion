@@ -1,5 +1,6 @@
 import React, {useEffect,useRef, useState} from "react";
 import Layout from "../layout/layout";
+import "../../App.css";
 import Contact from "./contactus";
 import { FaArrowLeft } from "react-icons/fa";
 import  { organizationdata } from "../organizationdata";
@@ -23,7 +24,8 @@ import producticon from "../../icons/new-product.png";
 import bidding from "../../icons/bidding.png";
 import { louberDetail} from "../../actions/louberDetail";
 import classNames from 'classnames';
-import icon3 from '../../img/download.png'
+import icon3 from '../../img/download.png';
+
 const Manufacture = () =>{
  // window.scrollTo(0, 0);
  const dispatch = useDispatch();
@@ -229,32 +231,81 @@ const detailInfo = localStorage.getItem("detailInfo")
     setDescription(descrip)
     setBackground('bg-[#E3E6E6] text-[#E3E6E6]')
   }
+      
+  //Fixed header after scroll
+      const [isScrolled, setIsScrolled] = useState(true);
+      const [prevScrollPos, setPrevScrollPos] = useState(0);
+  
+      useEffect(() => {
+        const handleScroll = () => {
+          const currentScrollPos = window.pageYOffset;
+          setIsScrolled(currentScrollPos < prevScrollPos);
+          setPrevScrollPos(currentScrollPos);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+          window.removeEventListener('scroll', handleScroll);
+        };
+      }, [prevScrollPos]);
+      const navbarClasses = classNames('fixed', 'top-0', 'w-full', {
+        'opacity-0': !isScrolled,
+        'opacity-100': isScrolled,
+        'transition-transform duration-300 ease-in-out': true,
+      });
+         // //Stiky navbar in scroll
+      //     let prevScrollPosed = window.pageYOffset;
 
+      // window.addEventListener('scroll', function() {
+      //   const currentScrollPos = window.pageYOffset;
+      
+      //   if (prevScrollPosed > currentScrollPos) {
+      //     document.querySelector('.sticky-navbar').classList.remove('translate-y-[-100%]');
+      //   } else {
+      //     document.querySelector('.sticky-navbar').classList.add('translate-y-[-100%]');
+      //   }
+      
+      //   prevScrollPosed = currentScrollPos;
+      // });
+
+      const [isSticky, setIsSticky] = useState(false);
+      const scrollDistance = 100; // Adjust this value to define the scroll distance threshold
+    
+      useEffect(() => {
+        const handleScroll = () => {
+          const currentScrollPos = window.pageYOffset;
+          setIsSticky(currentScrollPos > scrollDistance);
+        };
+    
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+          window.removeEventListener('scroll', handleScroll);
+        };
+      }, []);
     return(
-        <Layout>
- <div className="md:pt-0 lg:pt-0 ">
-   <>
-  {/* <div className='w-full h-10 text-center bg-slate-400 mt-2 text-white p-2'>
-   This is my try from nave bar
-  </div> */}
- <nav className=' z-50 fixed pr-7  top-0 overflow-hidden justify-between list-none font-serif uppercase font-medium xl:text-xl 
- md:text-xl xs:text-xs text-justify-center w-full lg:h-24 md:h-28 sm:h-20 shadow-xl sm:flex bg-white items-center '>
-<div className="flex">
-<button className=" left mt-10 ml-5 -mr-3 h-6 w-6 z-100 bg-amber-400 items-center rounded-full"
-onClick={() => backNavigate()}>
+     <Layout>
+   <div className="md:pt-0 lg:pt-0 ">
+    <>
+   <div className='w-full h-7 text-center  bg-green-800 mt-2 text-white p-2'>
+     <i>{org?.org?.name} Promotional for several services </i>
+   </div> 
+   <nav className={`navbar ${isSticky ? 'sticky' : ''} z-50 pr-7  top-0 overflow-hidden justify-between list-none font-serif uppercase font-medium xl:text-xl 
+   md:text-xl xs:text-xs text-justify-center w-full lg:h-24 md:h-28 sm:h-20 shadow-xl sm:flex bg-white items-center `}>
+   <div className="flex">
+   <button className=" left mt-10 ml-5 -mr-3 h-6 w-6 z-100 bg-amber-400 items-center rounded-full"
+   onClick={() => backNavigate()}>
              {/* <button className="fixed bottom-10 right-5 h-6 w-6 z-100 bg-white text-2xl" onClick={scrollTop}>^</button> */}
              <FaArrowLeft className=" text-white items-center m-1"  />
-</button>
-<button className=' w-96 p-5 md:flex block '  
-onClick={() => backNavigate()}> 
-<img className=' md:w-32 md:h-20 w-20 h-10  -mt-3 lg:ml-5 sm:ml-5 rounded-2xl' 
-//src={Logue} 
-src={`${AddressBaseUrl}/images/${org?.org?.logo}`}
-alt="NoLogue"
-/>
-<h2 className="md:-ml-1 -ml-32 ">{org?.org?.name} </h2>
-</button>
-</div>
+   </button>
+   <button className=' w-96 p-5 md:flex block '  
+   onClick={() => backNavigate()}> 
+  <img className=' md:w-32 md:h-20 w-20 h-10  -mt-3 lg:ml-5 sm:ml-5 rounded-2xl' 
+  //src={Logue} 
+  src={`${AddressBaseUrl}/images/${org?.org?.logo}`}
+  alt="NoLogue"
+  />
+   <h2 className="md:-ml-1 -ml-32 ">{org?.org?.name} </h2>
+  </button>
+ </div>
 <div className='text-3xl absolute right-8 top-3 cursor-pointer md:hidden'>
           <RiMenuLine size={24} onClick={setmenu}/>
           {/* <ion-icon name={!menu?'close':'menu'}></ion-icon> */}
@@ -343,12 +394,12 @@ alt="NoLogue"
        {descrip}
        </p> 
        {!expanded && ( 
-            <button 
+        <button 
           className="text-blue-500 hover:underline w-32 pl-3 rounded-lg h-10 bg-[#fe9900]" 
           onClick={toggleExpanded} 
         >  Read More
         <img className='w-6 h-6 -ml-2 -mt-6 rounded-full' alt='' src={icon3}/> 
-         </button> 
+        </button> 
                 )} 
         {expanded && ( 
           <button  style={{backgroundColor:"#fe9900"}}
@@ -398,7 +449,7 @@ alt="NoLogue"
                     data-mdb-ripple-color="light"
                   >
                     <img
-                      className="w-screen h-72 transition cursor-pointer duration-700"                     
+                      className="w-screen h-72 transition hover:scale-125 duration-700 rounded-md cursor-pointer"                     
                      onClick={() => ProductsDetail(products) }
                       //src={`/img/${products.featureImage}`}
                       src={`${AddressBaseUrl}/images/${products.image}`}
@@ -489,7 +540,7 @@ alt="NoLogue"
                     data-mdb-ripple-color="light"
                   >
                     <img
-                      className="w-screen h-72 transition cursor-pointer duration-700"
+                      className="w-screen h-72 transition hover:scale-125 duration-700 rounded-md cursor-pointer"
                      // src={`${AddressBaseUrl}/images/${bid.image}`}
                      src={`${AddressBaseUrl}/images/${bid.image}`}
                       alt="product img not found"
@@ -588,7 +639,7 @@ alt="NoLogue"
                   >
                   {/*      src={`${AddressBaseUrl}/images/${job.image}`} */}
                     <img
-                      className="w-screen h-72 transition cursor-pointer duration-700"
+                      className="w-screen h-72 transition hover:scale-125 duration-700 rounded-md cursor-pointer"
                       //src={`/img/${job.featureImage}`}
                       src={`${AddressBaseUrl}/images/${job.image}`}
                       alt="product img not found"
@@ -628,7 +679,7 @@ alt="NoLogue"
                     <div className="p-2 w-1/2 border border-grey-100 shadow-lg">
                     {/* src={`/img/${detailInfo.featureImage}`} */}
                     <img
-                    className="w-full h-96 rounded-md transition cursor-pointer duration-700"
+                    className="w-full h-96 transition hover:scale-125 duration-700 rounded-md cursor-pointer "
                      
                       //src={`${AddressBaseUrl}/images/${detailInfo.image}`}
                       src={`${AddressBaseUrl}/images/${detailInfo.image}`}
