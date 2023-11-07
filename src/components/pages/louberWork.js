@@ -96,19 +96,21 @@ return(
          <button
           className=" text-lg font-display text-black font-medium hover:text-[#0397FF]"
          >
-         <span className="mr-2 md:ml-0 ml-5 underline decoration-pink-800 decoration-4 underline-offset-8">የቀን ስራ</span>ማስታዎቂያ
+         <span className="mr-2 md:ml-16 ml-5 underline decoration-pink-800 decoration-4 underline-offset-8">የቀን ስራ</span>ማስታዎቂያ
          </button>
          <form onSubmit={submitHandler}>
-         <div class=" mb-4 flex flex-wrap items-stretch absolute md:mt-10 mt-10 md:right-24 right-10">
+         <div class=" mb-4 flex flex-wrap items-stretch absolute md:-mt-4 mt-6 md:ml-0 ml-5 md:right-28 right-10">
           <input 
-          className="bg-[#E3E6E6]  p-3 relative rounded-md z-20 " 
+          className="bg-[#E3E6E6]  p-3 mr-2 relative rounded-md z-20 " 
             type="date"
              aria-label="Search"
              aria-describedby="button-addon1"
              value={term}
              onChange={(e) => setTerm(e.target.value)}/>
       <button
-      className="relative bg-[#E3E6E6] rounded-md z-20 flex items-center rounded-r bg-secondary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
+      className="relative bg-sky-500 rounded-md z-20 flex items-center rounded-r bg-secondary px-6 py-2.5 text-xs font-medium uppercase leading-tight
+                 text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg 
+                 focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
         type="submit"
         data-te-ripple-init
         data-te-ripple-color="light">
@@ -127,7 +129,7 @@ return(
       </form>
      </div>
     </div>
-   <div className=' bg-white md:flex lg:flex pb-20 md:-mt-1 mt-3 md:pl-14 pl-0 md:ml-3 md:mr-0 ml-5 mr-5'>    
+   <div className=' bg-white md:flex lg:flex pb-20 md:-mt-10 mt-3 md:pl-14 pl-0 md:ml-3 md:mr-0 ml-5 mr-5'>    
     <div class="relative grid xl:grid-cols-3 ml-5 md:grid-cols-3 grid-cols-1 xl:gap-20 md:gap-20 gap-7 my-3 xl:gap-x-10 md:gap-x-7 gap-x-5">
         {
           (loubers?.vacancies?.length)>0

@@ -82,21 +82,21 @@ useEffect(() =>{
   <div className=" mx-auto h-4/5">
    <section className="mb-6 text-gray-800 text-center group">
     <div className=" md:flex block flex-wrap justify-between items-center mx-auto md:px-6 lg:px-6 px-1">
-      <div className="flex items-center py-3 mb-4 md:ml-0 ml-3">
-        <button
+     <div className="flex items-center py-3 mb-4 md:ml-0 ml-3">
+      <button
         className=" text-lg font-display text-black font-medium hover:text-[#0397FF]">
-          <span className="mt-10 md:-ml-3  underline decoration-pink-800 decoration-4 underline-offset-8">ሁሉም</span> ምርቶች
+          <span className="mt-10 md:ml-12  underline decoration-pink-800 decoration-4 underline-offset-8">ሁሉም</span> ምርቶች
         </button>
         <form onSubmit={submitHandler}>
-        <div class=" mb-4 flex flex-wrap items-stretch absolute md:mt-0 mt-6 md:ml-0 ml-5 md:right-16 right-10">
-         <input className="bg-[white] p-3 rounded-md md:-mt-5 ml mt-0 z-20 " 
+        <div class=" mb-4 flex flex-wrap items-stretch absolute md:mt-0 mt-6 md:ml-0 ml-5 md:right-28 right-10">
+         <input className="bg-[#E3E6E6] mr-2 p-3 rounded-md md:-mt-5 mt-0 z-20 " 
              type="date"
              aria-label="Search"
              aria-describedby="button-addon1"
              value={term}
              onChange={(e) => setTerm(e.target.value)}/>
              <button
-             class="relative bg-sky-600 rounded-md md:-mt-5 mt-0 z-20 flex items-center rounded-r bg-secondary px-6
+             class="relative bg-sky-500 rounded-md md:-mt-5 mt-0 z-20 flex  h-11/12 items-center rounded-r bg-secondary px-6
               py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 
               ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none 
               focus:ring-0 active:bg-primary-800 active:shadow-lg"
@@ -118,7 +118,7 @@ useEffect(() =>{
      </form>
     </div>
    </div>
-   <div className=' bg-white  md:flex lg:flex pb-32 md:-mt-1 mt-3 md:pl-16 pl-0 md:ml-3 md:mr-0 ml-10 mr-5'>    
+   <div className=' bg-white  md:flex lg:flex pb-32 md:-mt-5 mt-3 md:pl-14 pl-0 md:ml-3 md:mr-0 ml-10 mr-5'>    
     <div class="relative grid xl:grid-cols-3 md:grid-cols-3 grid-cols-1 xl:gap-20 md:gap-20 gap-12 my-3 xl:gap-x-10 md:gap-x-7 gap-x-5">
       {
       (product?.promotedProducts?.length)>0

@@ -86,20 +86,22 @@ const Bidding = () =>{
     <div className=" md:flex block flex-wrap justify-between items-center mx-auto md:px-6 lg:px-6 px-1">
       <div className="flex items-center py-3 mb-4 md:ml-0 ml-3">
        <button
-          className=" text-lg font-display text-black bg-[#E3E6E6] h-10 pl-3 pb-5 pr-3 ml-1 rounded-md font-medium hover:text-[#0397FF]"
+          className=" text-lg font-display text-black bg-[white] h-10 pl-3 pb-5 pr-3 ml-1 rounded-md font-medium hover:text-[#0397FF]"
          >
-         <span className=" mt-10 md:-ml-3  underline decoration-pink-800 decoration-4 underline-offset-8">የጫራታ</span>ማስታዎቂያ
+         <span className=" mt-10 md:ml-12  underline decoration-pink-800 decoration-4 underline-offset-8">የጫራታ</span>ማስታዎቂያ
          </button>
          <form onSubmit={submitHandler}>
-         <div class=" mb-4 flex flex-wrap items-stretch absolute md:mt-0 mt-6 md:ml-0 ml-5 md:right-16 right-10">
-         <input className="bg-[#E3E6E6] p-3 rounded-md md:-mt-5 ml mt-0 z-20 " 
+         <div class=" mb-4 flex flex-wrap items-stretch absolute md:-mt-4 mt-6 md:ml-0 ml-5 md:right-28 right-10">
+         <input
+         className="bg-[#E3E6E6]  p-3 relative mr-2 rounded-md z-20" 
              type="date"
              aria-label="Search"
              aria-describedby="button-addon1"
              value={term}
              onChange={(e) => setTerm(e.target.value)}/>
         <button
-          class="relative bg-[#E3E6E6] rounded-md md:-mt-5 mt-0 z-20 flex items-center rounded-r bg-secondary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
+        className="relative bg-sky-500 rounded-md z-20 flex items-center rounded-r bg-secondary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg 
+          focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
          type="submit"
          data-te-ripple-init
          data-te-ripple-color="light">

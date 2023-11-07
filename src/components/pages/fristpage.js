@@ -136,6 +136,7 @@ useEffect(() => {
       <p className=" h-11/12 w-11/12 mt-5 shadow-lg bg-slate-200 p-5 justify-center rounded-md max-h-72 overflow-y-auto scrollbar-thumb-indigo-500 scrollbar-track-gray-200 "> 
       {/* {descrip} */}
        {org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.description}
+       {/* {descrip} */}
       </p> 
       {/* {!expanded && ( 
             <button 

@@ -427,7 +427,7 @@ const detailInfo = localStorage.getItem("detailInfo")
   </div>
   <div className=" mt-20 bg-[white] ">
         <div className=" bg-[white] md:flex-row pb-12 flex-col md:pt-0 lg:pt-0 md:mb-0 mb-44 pt-24  md:h-full w-full  group">
-          <div className='h-full  md:flex block md:h-full ml-10 w-11/12 md:mt-0 -mt-5 rounded p-2'> 
+          <div className='h-full  md:flex block md:h-full ml-10 w-11/12 md:-mt-10 -mt-5 rounded p-2'> 
           <div
             className=" md:w-10/12 md:mb-0 mb-16  md:mr-8 h-full md:-mt-5 -mt-10 flex md:ml-5 ml-2 flex-col md:p-2 p-3 justify-center items-center">
              {(org?.org)
@@ -437,18 +437,19 @@ const detailInfo = localStorage.getItem("detailInfo")
                   </h1>
                   <p className="text-2xl md:text-2xl mt-4 xl:text-3xl text-[#F49F08] font-bold font-display tracking-tight leading-tight">
                   {`${ org?.org?.businessSector}`}</p>
-                  <p className='mt-7'>
+                  <p className=" h-11/12 w-11/12 mt-5 shadow-lg bg-slate-200 p-5 justify-center rounded-md max-h-72 overflow-y-auto scrollbar-thumb-indigo-500 scrollbar-track-gray-200 "> 
                   {org?.org?.description}
+                  {/* {descrip} */}
                   </p>
              </>):(<p className="text-2xl md:text-2xl mt-4 xl:text-3xl text-[#F49F08] font-bold font-display tracking-tight leading-tight">
                     NOT promoted </p>)
              }
-      <div> 
+      {/* <div>  */}
          {/* Description Page */}
-         <p className=" h-11/12 w-11/12 shadow-lg max-h-64 overflow-y-auto scrollbar-thumb-indigo-500 scrollbar-track-gray-200 "> 
+         {/* <p className=" h-11/12 w-11/12 mt-5 shadow-lg bg-slate-200 p-5 justify-center rounded-md max-h-72 overflow-y-auto scrollbar-thumb-indigo-500 scrollbar-track-gray-200 ">  */}
        {/* {paragraphClass}>  */}
-       {descrip}
-       </p> 
+       {/* {descrip} */}
+       {/* </p>  */}
        {/* {!expanded && ( 
         <button 
           className="text-blue-500 hover:underline w-32 pl-3 rounded-lg h-10 bg-[#fe9900]" 
@@ -465,14 +466,14 @@ const detailInfo = localStorage.getItem("detailInfo")
         <img className='w-6 h-6 -ml-2 -mt-6 rounded-full' alt='' src={icon3}/> 
          </button>
          )}  */}
-       </div> 
+       {/* </div>  */}
          </div>
         <div
           // style={{ backgroundImage: `url(${org && org[currentIndex]?.url})` }}
-          className=' md:-ml-5 ml-5 md:mt-0 -mt-16 md:pr-3 pr-0 rounded-2xl md:w-2/3 w-40 md:h-full h-60 bg-center duration-700 relative bg-cover bg-no-repeat'
+          className='md:ml-2 ml-5 md:mt-2 bg-slate-200 border p-2 md:mr-7 -mt-20 mr-2 rounded-2xl md:w-2/3 w-40 md:h-full h-60 bg-center duration-700 relative bg-cover bg-no-repeat'
           >
           <img 
-          className="md:w-full md:h-96 w-11/12 h-3/4  rounded-lg"
+          className="md:w-full md:h-96 w-11/12 h-3/4 rounded-lg "
          // src={`/img/Eplusapp1.png`} 
           src={`${AddressBaseUrl}/images/${org?.org?.logo}`}
           alt=""
