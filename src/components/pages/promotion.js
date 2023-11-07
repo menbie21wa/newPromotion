@@ -2,6 +2,7 @@ import React, {useEffect, useState, useRef} from "react";
 import Layout from "../layout/layout";
 import Allproducts from "./allproducts";
 import { BsChevronCompactLeft, BsChevronCompactRight, } from 'react-icons/bs';
+import { Alert } from "@material-tailwind/react";
 import Vacancie from "./vacancie";
 import LouberWork from "./louberWork";
 import Fristpage from "./fristpage"
@@ -19,7 +20,7 @@ import { RiMenuLine } from "react-icons/ri";
 import BackTotop from "./backTOtop";
 import Logue from '../../img/Promotion.jpg';
 import '../../App.css';
-import img1 from "../../icons/office.png";
+import Notifi from "../../icons/notifi.png";
 import vacancy from "../../icons/vacancy.png";
 import building from "../../icons/office-building.png";
 import producticon from "../../icons/new-product.png";
@@ -180,46 +181,128 @@ const orgHandler =(id)=>{
         'opacity-0': !isScrolled,
         'opacity-100': isScrolled,
         'transition-transform duration-700 ease-in-out': true,
-      });             
+      });   
+      
+      const [isSticky, setIsSticky] = useState(false);
+      const scrollDistance = 100; // Adjust this value to define the scroll distance threshold
+    
+      useEffect(() => {
+        const handleScroll = () => {
+          const currentScrollPos = window.pageYOffset;
+          setIsSticky(currentScrollPos > scrollDistance);
+        };
+    
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+          window.removeEventListener('scroll', handleScroll);
+        };
+      }, []);
  return(
   <Layout>
     <div className="bg-[white]">
      <div className="md:pt-0 lg:pt-0 ">
       <>
-       <nav className={`${navbarClasses} z-50  top-0 pr-10 overflow-hidden justify-between list-none font-serif uppercase font-medium xl:text-xl 
-         md:text-xl xs:text-xs text-justify-center w-full lg:h-24 md:h-28 sm:h-20 shadow-xl sm:flex bg-white items-center`}>
-     <div>
+  <div className='w-full flex flex-row h-16 text-center pl-20 bg-white  text-white '>
+    {/* <div>
       <button className='ml-1 w-96 p-5 md:flex block ' 
       onClick={scrollToTop} 
      > 
-      <img className=' md:w-32 md:h-20 w-20 h-10 -mt-3 lg:ml-12 sm:ml-5 rounded-2xl' 
+      <img className=' md:w-32 md:h-24 w-20 h-10 -mt-7 lg:ml-12 sm:ml-5 rounded-2xl' 
       src={Logue} 
       //src={`${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`}
       alt="NoLogue"
       />
-      <h2 className="md:-ml-1 -ml-32 ">All Promotions </h2>
+      <h2 className="md:ml-0 -ml-28 text-black ">All Promotions </h2>
       </button>
-      </div>
+      </div> */}
+     {/* Organization */}
+    <div id="toast-notification" className="w-full m-2 max-w-xs pll-2 pr-2 h-10/12 text-center text-gray-900 bg-lime-500 rounded-lg shadow dark:bg-gray-800 dark:text-gray-300" role="alert">
+    <div className="flex items-center mb-3">
+    <button type="button" className=" left-1 -mt-0 font-semibold bg-orange-400   text-white justify-center items-center flex-shrink-0 hover:text-gray-900
+                   rounded-full focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex  max-w-80 overflow-x-auto dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-notification" aria-label="Close">
+        1999
+      </button>
+        <span className="mb-1 text-sm mt-1 font-semibold text-gray-900 ">አዲስ የጫራታ ማስታወቂያዎች በቀርብ ቀን ተለቃዋል</span>
+        <button type="button" className="ml-auto font-semibold text-orange-400 -mx-1 -my-1.5 bg-white justify-center items-center flex-shrink-0 hover:text-gray-900
+                   rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-notification" aria-label="Close">
+              !
+        </button>
+    </div>
+    </div>
+        {/* product */}
+    <div id="toast-notification" className="w-full m-2 h-10/12 max-w-xs pl-2 pr-2  text-center text-gray-900 bg-lime-500 rounded-lg shadow dark:bg-gray-800 dark:text-gray-300" role="alert">
+    <div className="flex items-center mb-3">
+    <button type="button" className=" left-1 -mt-0 font-semibold bg-orange-400   text-white justify-center items-center flex-shrink-0 hover:text-gray-900
+                   rounded-full focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex  max-w-80 overflow-x-auto dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-notification" aria-label="Close">
+        1999
+      </button>
+        <span className="mb-1 text-sm mt-1 font-semibold text-gray-900 ">አዲስ የጫራታ ማስታወቂያዎች በቀርብ ቀን ተለቃዋል</span>
+        <button type="button" className="ml-auto font-semibold text-orange-400 -mx-1 -my-1.5 bg-white justify-center items-center flex-shrink-0 hover:text-gray-900
+                   rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-notification" aria-label="Close">
+              !
+        </button>
+    </div>
+    </div>
+            {/* product */}
+    <div id="toast-notification" className="w-full m-2  h-10/12 max-w-xs pl-2 pr-2 text-center text-gray-900 bg-lime-500 rounded-lg shadow dark:bg-gray-800 dark:text-gray-300" role="alert">
+    <div className="flex items-center mb-3">
+    <button type="button" className=" left-1 -mt-0 font-semibold bg-orange-400   text-white justify-center items-center flex-shrink-0 hover:text-gray-900
+                   rounded-full focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex  max-w-80 overflow-x-auto dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-notification" aria-label="Close">
+        1999
+      </button>
+        <span className="mb-1 text-sm mt-1 font-semibold text-gray-900 ">አዲስ የጫራታ ማስታወቂያዎች በቀርብ ቀን ተለቃዋል</span>
+        <button type="button" className="ml-auto font-semibold text-orange-400 -mx-1 -my-1.5 bg-white justify-center items-center flex-shrink-0 hover:text-gray-900
+                   rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-notification" aria-label="Close">
+              !
+        </button>
+    </div>
+    </div>
+            {/* product */}
+    <div id="toast-notification" className="w-full m-2 h-10/12 max-w-xs pl-2 pr-2 text-center text-gray-900 bg-lime-500 rounded-lg shadow dark:bg-gray-800 dark:text-gray-300" role="alert">
+    <div className="flex items-center mb-3">
+    <button type="button" className=" left-1 -mt-0 font-semibold bg-orange-400   text-white justify-center items-center flex-shrink-0 hover:text-gray-900
+                   rounded-full focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex  max-w-80 overflow-x-auto dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-notification" aria-label="Close">
+        1999
+      </button>
+        <span className="mb-1 text-sm mt-1 font-semibold text-gray-900 ">አዲስ የጫራታ ማስታወቂያዎች በቀርብ ቀን ተለቃዋል</span>
+        <button type="button" className="ml-auto font-semibold text-orange-400 -mx-1 -my-1.5 bg-white justify-center items-center flex-shrink-0 hover:text-gray-900
+                   rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-notification" aria-label="Close">
+              !
+        </button>
+    </div>
+    </div>
+   </div> 
+       <nav className={`navbar ${isSticky ? 'sticky' : ''} z-50 pl-5 top-0 pr-20 overflow-hidden justify-between list-none font-serif uppercase font-medium xl:text-xl 
+         md:text-xl xs:text-xs text-justify-center w-full md:h-24 sm:h-20 shadow-xl sm:flex bg-white items-center`}>
+      <button className='ml-1 w-96 -mt-1 md:flex block ' 
+              onClick={scrollToTop} > 
+      <img className=' md:w-28 md:h-24 -mt-2 w-20 h-10 lg:ml-18 sm:ml-5 rounded-2xl' 
+      src={Logue} 
+      //src={`${AddressBaseUrl}/images/${org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo}`}
+      alt="NoLogue"
+      />
+      <h2 className="md:ml-0 -ml-24 mt-7 text-black ">All Promotions </h2>
+      </button>
       <div className='text-3xl absolute right-8 top-3 cursor-pointer md:hidden'>
               <RiMenuLine size={24} onClick={setmenu}/>
               {/* <ion-icon name={!menu?'close':'menu'}></ion-icon> */}
       </div>
 
-      <ul className=' mr-8 mt-3 lg:flex md:flex bg-white  left-0 w-full md:w-auto
-      sm:hidden absolute md:static justify-end items-center flex-1 list-none z-20 '>
-      <li className='mx-6'><button className={`transition duration-700 transform hover:-translate-y-1 hover:scale-110 hover:text-[#0099ff]
+      <ul className=' lg:flex md:flex bg-white  left-0 w-full md:w-auto
+      sm:hidden absolute md:static justify-end flex-1 list-none z-20 '>
+      <li className='mx-8'><button className={`transition duration-700 transform hover:-translate-y-1 hover:scale-110 hover:text-[#0099ff]
                                     ${isActive === 'b0' ? 'text-[#0099ff]' : ''}`}
                                     onClick={()=> scrollToAllOrg(orgSection,'b0')}
                                     > ድርጅቶች </button></li>
-      <li className='mx-6'><button className={`transition duration-700 transform hover:-translate-y-1 hover:scale-110 hover:text-[#0099ff]
+      <li className='mx-8'><button className={`transition duration-700 transform hover:-translate-y-1 hover:scale-110 hover:text-[#0099ff]
                                     ${isActive === 'b1' ? 'text-[#0099ff]' : ''}`}
                                     onClick={()=> scrollToAllProduct(productSection,'b1')}>
                                     ምርቶች</button></li>
-      <li className='mx-6'><button className={`transition duration-700 transform hover:-translate-y-1 hover:scale-110 hover:text-[#0099ff]
+      <li className='mx-8'><button className={`transition duration-700 transform hover:-translate-y-1 hover:scale-110 hover:text-[#0099ff]
                                     ${isActive === 'b2' ? 'text-[#0099ff]' : ''}`}
                                     onClick={()=> scrollToAllBids(biddingSection,'b2')}>   
                                       የጨረታ ማስታዎቂያ </button></li>
-      <li className='mx-6'><button  className={`transition duration-700 transform hover:-translate-y-1 hover:scale-110 hover:text-[#0099ff]
+      <li className='mx-8'><button  className={`transition duration-700 transform hover:-translate-y-1 hover:scale-110 hover:text-[#0099ff]
                                     ${isActive === 'b3' ? 'text-[#0099ff]' : ''}`}
                                     onClick={()=> scrollToAllVacancy(vacancieSection,'b3')}>
                                     የስራ ማስታዎቂያ</button></li>
@@ -229,7 +312,7 @@ const orgHandler =(id)=>{
      <i> General Promotion for several services </i>
     </div>  */}
       {/* Mobile Navigation */}
-      <ul className={` ${menu ? "left-0 opacity-100" :"left-[-750px] md:opacity-0"}
+      <ul className={`${menu ? "left-0 opacity-100" :"left-[-750px] md:opacity-0"}
                     sm:flex lg:hidden flex-1  list-none flex flex-col
                     p-6 bg-black-gradient fixed w-full right-0  ml-0 my-2 top-14
                     sidebar bg-white transition-all duration-500 ease-in z-50

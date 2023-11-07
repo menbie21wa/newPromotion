@@ -285,11 +285,66 @@ const detailInfo = localStorage.getItem("detailInfo")
      <Layout>
    <div className="md:pt-0 lg:pt-0 ">
     <>
-   <div className='w-full h-7 text-center  bg-green-800 mt-2 text-white p-2'>
-     <i>{org?.org?.name} Promotional for several services </i>
+    <div className='w-full flex flex-row h-16 text-center pl-20 bg-white  text-white '>
+           {/* <i>{org?.org?.name} Promotional for several services </i> */}
+     <div id="toast-notification" className="w-full m-2 ml-5 max-w-xs pl-2 pr-2 text-center text-gray-900 bg-lime-500 rounded-lg shadow dark:bg-gray-800 dark:text-gray-300" role="alert">
+     <div className="flex items-center mb-3">
+    <button type="button" className=" left-1 -mt-0 font-semibold bg-orange-400   text-white justify-center items-center flex-shrink-0 hover:text-gray-900
+                   rounded-full focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex  max-w-80 overflow-x-auto dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-notification" aria-label="Close">
+        1999
+      </button>
+        <span className="mb-1 text-sm mt-1 font-semibold text-gray-900 ">አዲስ የጫራታ ማስታወቂያዎች በቀርብ ቀን ተለቃዋል</span>
+        <button type="button" className="ml-auto font-semibold text-orange-400 -mx-1 -my-1.5 bg-white justify-center items-center flex-shrink-0 hover:text-gray-900
+                   rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-notification" aria-label="Close">
+              !
+        </button>
+    </div>
+    </div>
+        {/* product */}
+    <div id="toast-notification" className="w-full m-2 h-10/12 max-w-xs pl-2 pr-2 text-center text-gray-900 bg-lime-500 rounded-lg shadow dark:bg-gray-800 dark:text-gray-300" role="alert">
+    <div className="flex items-center mb-3">
+    <button type="button" className=" left-1 -mt-0 font-semibold bg-orange-400   text-white justify-center items-center flex-shrink-0 hover:text-gray-900
+                   rounded-full focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex  max-w-80 overflow-x-auto dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-notification" aria-label="Close">
+        1999
+      </button>
+        <span className="mb-1 text-sm mt-1 font-semibold text-gray-900 ">አዲስ የጫራታ ማስታወቂያዎች በቀርብ ቀን ተለቃዋል</span>
+        <button type="button" className="ml-auto font-semibold text-orange-400 -mx-1 -my-1.5 bg-white justify-center items-center flex-shrink-0 hover:text-gray-900
+                   rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-notification" aria-label="Close">
+              !
+        </button>
+    </div>
+    </div>
+            {/* product */}
+    <div id="toast-notification" className="w-full m-2 h-10/12 max-w-xs pl-2 pr-2 text-center text-gray-900 bg-lime-500 rounded-lg shadow dark:bg-gray-800 dark:text-gray-300" role="alert">
+    <div className="flex items-center mb-3">
+    <button type="button" className=" left-1 -mt-0 font-semibold bg-orange-400   text-white justify-center items-center flex-shrink-0 hover:text-gray-900
+                   rounded-full focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex  max-w-80 overflow-x-auto dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-notification" aria-label="Close">
+        1999
+      </button>
+        <span className="mb-1 text-sm mt-1 font-semibold text-gray-900 ">አዲስ የጫራታ ማስታወቂያዎች በቀርብ ቀን ተለቃዋል</span>
+        <button type="button" className="ml-auto font-semibold text-orange-400 -mx-1 -my-1.5 bg-white justify-center items-center flex-shrink-0 hover:text-gray-900
+                   rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-notification" aria-label="Close">
+              !
+        </button>
+    </div>
+    </div>
+            {/* product */}
+    <div id="toast-notification" className="w-full m-2 h-10/12 max-w-xs pl-2 pr-2 text-center text-gray-900 bg-lime-500 rounded-lg shadow dark:bg-gray-800 dark:text-gray-300" role="alert">
+    <div className="flex items-center mb-3">
+    <button type="button" className=" left-1 -mt-0 font-semibold bg-orange-400   text-white justify-center items-center flex-shrink-0 hover:text-gray-900
+                   rounded-full focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex  max-w-80 overflow-x-auto dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-notification" aria-label="Close">
+        1999
+      </button>
+        <span className="mb-1 text-sm mt-1 font-semibold text-gray-900 ">አዲስ የጫራታ ማስታወቂያዎች በቀርብ ቀን ተለቃዋል</span>
+        <button type="button" className="ml-auto font-semibold text-orange-400 -mx-1 -my-1.5 bg-white justify-center items-center flex-shrink-0 hover:text-gray-900
+                   rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-notification" aria-label="Close">
+              !
+        </button>
+    </div>
+    </div>
    </div> 
    <nav className={`navbar ${isSticky ? 'sticky' : ''} z-50 pr-7  top-0 overflow-hidden justify-between list-none font-serif uppercase font-medium xl:text-xl 
-   md:text-xl xs:text-xs text-justify-center w-full lg:h-24 md:h-28 sm:h-20 shadow-xl sm:flex bg-white items-center `}>
+   md:text-xl xs:text-xs text-justify-center w-full md:h-24 sm:h-20 shadow-xl sm:flex bg-white items-center `}>
    <div className="flex">
    <button className=" left mt-10 ml-5 -mr-3 h-6 w-6 z-100 bg-amber-400 items-center rounded-full"
    onClick={() => backNavigate()}>
@@ -310,7 +365,7 @@ const detailInfo = localStorage.getItem("detailInfo")
           <RiMenuLine size={24} onClick={setmenu}/>
           {/* <ion-icon name={!menu?'close':'menu'}></ion-icon> */}
 </div>
-<ul className=' mr-8 mt-3 lg:flex md:flex bg-white  left-0 w-full md:w-auto
+<ul className=' mr-8  lg:flex md:flex bg-white  left-0 w-full md:w-auto
  sm:hidden absolute md:static justify-end items-center flex-1 list-none z-20 '>
 <li className='mx-6'><button className={`transition duration-700 transform hover:-translate-y-1 hover:text-[#0099ff] hover:scale-110  flex
           ${isActive === 'b0' ? 'text-[rgb(0,153,255)]' : ''}`}
@@ -371,10 +426,10 @@ const detailInfo = localStorage.getItem("detailInfo")
    </>    
   </div>
   <div className=" mt-20 bg-[white] ">
-        <div className=" bg-[white] md:flex-row pb-20 flex-col md:pt-0 lg:pt-0 md:mb-0 mb-44 pt-24  md:h-full w-full  group">
-          <div className='h-full  md:flex block md:h-full w-full md:mt-20 -mt-0 rounded p-2'> 
+        <div className=" bg-[white] md:flex-row pb-12 flex-col md:pt-0 lg:pt-0 md:mb-0 mb-44 pt-24  md:h-full w-full  group">
+          <div className='h-full  md:flex block md:h-full ml-10 w-11/12 md:mt-0 -mt-5 rounded p-2'> 
           <div
-            className=" md:w-10/12 md:mb-0 mb-16  md:mr-8 h-full md:mt-5 -mt-10 flex md:ml-5 ml-2 flex-col md:p-2 p-3 justify-center items-center">
+            className=" md:w-10/12 md:mb-0 mb-16  md:mr-8 h-full md:-mt-5 -mt-10 flex md:ml-5 ml-2 flex-col md:p-2 p-3 justify-center items-center">
              {(org?.org)
              ?(<>
               <h1 className="text-4xl md:text-4xl xl:text-5xl text-[#F49F08] font-bold font-display tracking-tight leading-tight italic">
@@ -390,30 +445,31 @@ const detailInfo = localStorage.getItem("detailInfo")
              }
       <div> 
          {/* Description Page */}
-       <p className={paragraphClass}> 
+         <p className=" h-11/12 w-11/12 shadow-lg max-h-64 overflow-y-auto scrollbar-thumb-indigo-500 scrollbar-track-gray-200 "> 
+       {/* {paragraphClass}>  */}
        {descrip}
        </p> 
-       {!expanded && ( 
+       {/* {!expanded && ( 
         <button 
           className="text-blue-500 hover:underline w-32 pl-3 rounded-lg h-10 bg-[#fe9900]" 
           onClick={toggleExpanded} 
         >  Read More
         <img className='w-6 h-6 -ml-2 -mt-6 rounded-full' alt='' src={icon3}/> 
         </button> 
-                )} 
-        {expanded && ( 
+                )}  */}
+        {/* {expanded && ( 
           <button  style={{backgroundColor:"#fe9900"}}
           className="text-blue-500 hover:underline w-32 pl-3 rounded-lg h-10 " 
           onClick={toggleExpanded} 
         >  Read less
         <img className='w-6 h-6 -ml-2 -mt-6 rounded-full' alt='' src={icon3}/> 
          </button>
-         )} 
+         )}  */}
        </div> 
          </div>
         <div
           // style={{ backgroundImage: `url(${org && org[currentIndex]?.url})` }}
-          className=' md:-ml-5 ml-5 md:mt-7 -mt-16 md:pr-3 pr-0 rounded-2xl md:w-2/3 w-40 md:h-full h-60 bg-center duration-700 relative bg-cover bg-no-repeat'
+          className=' md:-ml-5 ml-5 md:mt-0 -mt-16 md:pr-3 pr-0 rounded-2xl md:w-2/3 w-40 md:h-full h-60 bg-center duration-700 relative bg-cover bg-no-repeat'
           >
           <img 
           className="md:w-full md:h-96 w-11/12 h-3/4  rounded-lg"

@@ -7,6 +7,10 @@ module.exports = {
   variants: {
     // backgroundColor: ['active']
   },
-  plugins: [],
+  plugins: [
+    // require('@tailwindcss/scrollbar'),
+    // require('@tailwindcss/scrollbar'),
+
+  ],
 }
 
