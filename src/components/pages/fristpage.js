@@ -38,7 +38,6 @@ useEffect(() => {
     const scrollPosition = window.scrollY;
     setIsUp(scrollPosition > 0);
   };
-
   window.addEventListener('scroll', handleScroll);
 
   return () => {
@@ -112,8 +111,8 @@ useEffect(() => {
     <>
 {/* bg-[#E3E6E6] */}
 <div className=" md:mt-20 -mt-10 h-full  bg-[white] ">
-        <div className="  bg-[white] md:flex-row p-2  pb-36 flex-col md:pt-0 lg:pt-0 md:mb-2 mb-20 pt-24 h-full md:h-full w-full border-b  group">
-          <div className='h-full -mb-36 md:flex block md:h-full w-full md:-mt-32 -mt-0 rounded p-2'>           
+        <div className="  bg-[white] md:flex-row p-2  pb-32 flex-col md:pt-0 lg:pt-0 md:mb-2 mb-20 pt-24 h-full md:h-full w-full border-b  group">
+          <div className='h-full -mb-36 md:flex block md:h-full w-full md:-mt-40 -mt-0 rounded p-3'>           
           <div
             className=" md:w-11/12 md:mb-0 mb-16 h-full md:-mt-16 mt-16  flex md:ml-5 ml-2 flex-col md:p-14 p-3 justify-center items-center">
                 
@@ -131,13 +130,12 @@ useEffect(() => {
                   </h1>
                   <p className="text-2xl md:text-2xl mt-4 xl:text-3xl text-[#F49F08] font-bold font-display tracking-tight leading-tight">
                   {org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.businessSector}</p>
-                  <p className='mt-7'>
-                  {org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.description}
+
                   <div className=' '> 
           {/* Description Page */}
-      <p className=" h-11/12 w-11/12 shadow-lg max-h-64 overflow-y-auto scrollbar-thumb-indigo-500 scrollbar-track-gray-200 "> 
-        {/* {`${paragraphClass}`} >  */}
-      {descrip}
+      <p className=" h-11/12 w-11/12 mt-5 shadow-lg bg-slate-200 p-5 justify-center rounded-md max-h-72 overflow-y-auto scrollbar-thumb-indigo-500 scrollbar-track-gray-200 "> 
+      {/* {descrip} */}
+       {org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.description}
       </p> 
       {/* {!expanded && ( 
             <button 
@@ -156,14 +154,14 @@ useEffect(() => {
          </button>
          )}  */}
        </div> 
-    </p>
+    
       {/* <button onClick={getDescription} className={`${hidden} ${background} -mt-1 ml-0 text-sky-600 font-semibold`}>
           More
       </button> */}
       </div>
       <div
           // style={{ backgroundImage: `url(${org && org[currentIndex]?.url})` }}
-          className='md:ml-2 ml-5 md:mt-0 md:mr-7 -mt-20 mr-2 rounded-2xl md:w-2/3 w-40 md:h-full h-60 bg-center duration-700 relative bg-cover bg-no-repeat'
+          className='md:ml-2 ml-5 md:mt-2 bg-slate-200 border p-2 md:mr-7 -mt-20 mr-2 rounded-2xl md:w-2/3 w-40 md:h-full h-60 bg-center duration-700 relative bg-cover bg-no-repeat'
           >
           {(org?.promotedOrgs && org?.promotedOrgs[currentIndex]?.logo)!==''
           ?(

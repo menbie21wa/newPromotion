@@ -96,7 +96,7 @@ useEffect(() =>{
              value={term}
              onChange={(e) => setTerm(e.target.value)}/>
              <button
-             class="relative bg-[white] rounded-md md:-mt-5 mt-0 z-20 flex items-center rounded-r bg-secondary px-6
+             class="relative bg-sky-600 rounded-md md:-mt-5 mt-0 z-20 flex items-center rounded-r bg-secondary px-6
               py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 
               ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none 
               focus:ring-0 active:bg-primary-800 active:shadow-lg"
@@ -139,6 +139,13 @@ useEffect(() =>{
                       alt="product img not found"
                     />
              </div>
+             <div className="absolute bottom-0 left-0 right-0 top-0 h-full w-full rounded-xl 
+                 justify-center overflow-hidden bg-gradient-to-r from-green-500 via-amber-300
+                 to-pink-600 opacity-0 transition duration-300 ease-in-out hover:opacity-70"
+                 onClick={() => VacancieDetail(item) }>
+          <button className=" h-12 w-28 rounded-3xl mt-20 text-slate-100 border border-none
+                  bg-black">View Detail</button>
+          </div>
             </div>
             <div className="mt-4 float-left flex">
           <ul  className='  mt-3 flex'>
