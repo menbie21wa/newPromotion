@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "./loading";
 // import { viewProducts } from "../../actions/productAction";
+import moment from 'moment';
 import { useForm } from "react-hook-form";
 import {dataVacancy} from '../vacaData';
 import samrtPc from '../../img/promotion-lg.png';
@@ -166,7 +167,7 @@ return(
                <button 
              onClick={() => orgHandler(`${orgs.id}`)}
              >
-             <img className=' w-7 h-6 rounded-2xl' 
+             <img className=' w-7 -mt-3 h-6 rounded-2xl' 
                src={`${AddressBaseUrl}/images/${orgs?.logo}`}
                alt='Noimage'/>
              </button>)
@@ -190,7 +191,9 @@ return(
             ):("")  
         ))):("")}
         <br />
-        {values.createdAt.split('T')[0]}
+       {/* <i className=" pl-5">{values.createdAt.split('T')[0]}</i>  */}
+       <i className="pl-5">{moment(values.createdAt).fromNow()} </i>
+
         </span><br />
           </a>  
          </div>

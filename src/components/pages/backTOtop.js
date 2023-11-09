@@ -12,6 +12,22 @@ const BackTotop = () =>{
       }
      })
     },[]);
+    const [isUp, setIsUp] = useState(false);
+// const handleClick = () => {
+//   setIsUp(!isUp);
+// };
+useEffect(() => {
+  const handleScroll = () => {
+    const scrollPosition = window.scrollY;
+    setIsUp(scrollPosition > 500);
+  };
+  window.addEventListener('scroll', handleScroll);
+
+  return () => {
+    window.removeEventListener('scroll', handleScroll);
+  };
+}, []);
+
     const scrollTop = () =>{
         window.scroll({
             top : 0,
@@ -21,10 +37,17 @@ const BackTotop = () =>{
     return(
         <>
           {backTotop && (
-             <div className="fixed bottom-10 right-5 h-6 w-6 z-100 bg-blue-500 items-center rounded-full">
-             {/* <button className="fixed bottom-10 right-5 h-6 w-6 z-100 bg-white text-2xl" onClick={scrollTop}>^</button> */}
-             <FaArrowUp className=" text-white items-center m-1" onClick={scrollTop} />
-             </div>
+            <>
+            {/* <div className="fixed bottom-10 right-5 h-6 w-6 z-100 bg-blue-500 items-center rounded-full">
+             </div> */}
+             <div className={` fixed  text-center justify-center bg-cyan-500 w-20 h-12 transition-transform
+              duration-1000 ease-in-out transform top-0 right-10 z-40 items-center rounded-full 
+              ${isUp ? 'translate-y-[600px]' : 'translate-y-0'}`}>
+              <button className=" h-full w-full" onClick={scrollTop}>
+              <FaArrowUp className="text-white ml-7" />
+              </button>
+              </div>
+              </>
            )}
         </>
     )

@@ -4,6 +4,7 @@ import {useParams,useNavigate } from "react-router-dom";
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import moment from 'moment';
 import imgGirl from '../../img/ecommerce.jpg';
 import { useDispatch, useSelector } from "react-redux";
 import { dataProducts } from "../data";
@@ -76,9 +77,31 @@ useEffect(() =>{
   const detailInfo = localStorage.getItem("detailInfo")
   ? JSON.parse(localStorage.getItem("detailInfo"))
   : null;
+
+   // Like count
+   const [likes, setLikes] = useState(0);
+   const [hasLiked, setHasLiked] = useState(false);
+ 
+   useEffect(() => {
+     // Check if the user has already liked the post
+     const liked = localStorage.getItem('postLiked');
+     if (liked === 'true') {
+       setHasLiked(true);
+     }
+   }, []);
+ 
+   const handleLike = () => {
+     if (!hasLiked) {
+       setLikes(likes + 1);
+       setHasLiked(true);
+       localStorage.setItem('postLiked', 'true');
+     }
+   };
+ 
   return (
     <>
-   <div className=" w-full bg-[white] md:mt-14 mt-20 pb-7">
+
+   <div className=" w-full bg-[white] md:mt-5 mt-20 pb-7">
   <div className=" mx-auto h-4/5">
    <section className="mb-6 text-gray-800 text-center group">
     <div className=" md:flex block flex-wrap justify-between items-center mx-auto md:px-6 lg:px-6 px-1">
@@ -147,7 +170,7 @@ useEffect(() =>{
                   bg-black">View Detail</button>
           </div>
             </div>
-            <div className="mt-4 float-left flex">
+            <div className="mt-4 float-left w-full flex">
           <ul  className='  mt-3 flex'>
           {(org?.promotedOrgs?.length > 0)
          ?(
@@ -157,36 +180,39 @@ useEffect(() =>{
                <button 
              onClick={() => orgHandler(`${orgs.id}`)}
              >
-             <img className=' w-7 h-6 rounded-2xl' 
+             <img className=' w-7 -mt-3 h-6 rounded-2xl' 
                src={`${AddressBaseUrl}/images/${orgs?.logo}`}
                alt='Noimage'/>
              </button>)
             :("")))):("")}
           </ul>
            {/* src={`${AddressBaseUrl}/images/${vacancie.image}`}  */}
-          <a>
-        <span className="mt-1 ml-2">{item.name.substring(0,80)}<br />
+        <span className="mt-1 flex flex-col w-11/12 ">{item.name.substring(0,80)}<br />
        {(org?.promotedOrgs?.length > 0)
          ?(
           org?.promotedOrgs?.map((orgs,index) => 
         (
           (orgs.id)==(item.orgId)?(
             <button 
-             className='ml-2 text-[#0099ff]'
+             className=' text-[#0099ff]'
              onClick={() => orgHandler(`${orgs.id}`)}
              >
              {orgs.name.substring(0,75)}
              </button>
             ):(""))))
         :("")}
-        <br />
-        {item.createdAt.split('T')[0]}
-        </span><br />
-          </a>  
-         </div>
+        <span><i className="">
+          {/* {item.createdAt.split('T')[0]} */}
+          <i className="">{moment(item.createdAt).fromNow()} </i>
+          </i></span>
+        </span>
+        <span className=" float-right mr-1 w-1/12 pt-3 "><i>{likes} </i> <button onClick={handleLike}> like</button></span>
+        
+                   
+     </div>
     </div>
     </>)})):(<><div className=" text-xl font-semibold flex justify-center mt-5 ml-32">
-                            ------ ምንም ምርት የለም ! ------</div></>)}
+                   ------ ምንም ምርት የለም ! ------</div></>)}
    </div>
   </div>
    <br /> <br />

@@ -13,7 +13,7 @@ import  AddressBaseUrl from "../../utils/BaseUrl";
 import {getOrganization,viewOrganization } from '../../actions/orgAction';
 import {dataVacancy} from '../vacaData';
 import '../../App.css'
-
+import moment from 'moment';
  const Vacancie = () =>{
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -107,6 +107,44 @@ const selectPageHandler = (selectedPage) => {
   if (selectedPage >= 1 && (selectedPage * 12)-12 < vacancies?.vacancies?.length  && selectedPage !== page) {
     setPage(selectedPage)
   }}
+  //       //  Count Number Of View              
+  // const [views, setViews] = useState(0);
+
+  // useEffect(() => {
+  //   // Function to increment the view count
+  //   const incrementViews = () => {
+  //     setViews((prevViews) => {
+  //       const newViews = prevViews + 1;
+  //       localStorage.setItem('viewCount', newViews.toString()); // Store the updated view count in local storage
+  //       return newViews;
+  //     });
+  //   };
+
+  //   // Read the view count from local storage on component mount
+  //   const storedViewCount = localStorage.getItem('viewCount');
+  //   if (storedViewCount) {
+  //     setViews(parseInt(storedViewCount, 10));
+  //   }
+
+  //   // Increment the view count every second
+  //   const interval = setInterval(incrementViews, 1000);
+  //   // Clean up the interval when the component unmounts
+  //   return () => {
+  //     clearInterval(interval);
+  //   };
+  // }, []); // Run the effect only on component mount
+
+  const [views, setViews] = useState(0);
+
+  useEffect(() => {
+    // Update the view count when the component mounts
+    setViews((prevViews) => prevViews + 1);
+  }, []);
+
+  useEffect(() => {
+    // Store the view count in local storage whenever it changes
+    localStorage.setItem('viewCount', views.toString());
+  }, [views]);
 return(
   <>
 <div className=" w-full bg-[white] md:mt-0 mt-20 pb-7">
@@ -182,7 +220,7 @@ return(
           <button className=" h-12 w-28 rounded-3xl mt-20 text-slate-100 border border-none
                   bg-black">View Detail</button>
           </div>
-        <div className="mt-4 float-left flex">
+        <div className="mt-4 float-left flex w-full">
           <ul  className='  mt-3 flex'>
           {(org?.promotedOrgs?.length > 0)
          ?(
@@ -192,7 +230,7 @@ return(
                <button 
              onClick={() => orgHandler(`${orgs.id}`)}
              >
-             <img className=' w-7 h-6 rounded-2xl' 
+             <img className=' w-7 -mt-3 h-6 rounded-2xl' 
                src={`${AddressBaseUrl}/images/${orgs?.logo}`}
                alt='Noimage'/>
              </button>)
@@ -201,15 +239,14 @@ return(
 
           </ul>
            {/* src={`${AddressBaseUrl}/images/${vacancie.image}`}  */}
-      <a>
-       <span className="mt-1 ml-2">{vacancie.title.substring(0.80)}<br />
+       <span className="mt-1float-left w-11/12  ">{vacancie.title.substring(0.80)}<br />
            {(org?.promotedOrgs?.length > 0)
          ?(
           org?.promotedOrgs?.map((orgs,index) => 
         (
           (orgs.id)==(vacancie.orgId)?(
             <button 
-             className='ml-2 text-[#0099ff]'
+             className=' text-[#0099ff]'
              onClick={() => orgHandler(`${orgs.id}`)}
              >
              {orgs.name.substring(0,75)}
@@ -217,9 +254,10 @@ return(
             ):("")  
         ))):("")}
         <br />
-        {vacancie.createdAt.split('T')[0]}
+        {/* <i className="pl-5">{vacancie.createdAt.split('T')[0]}</i> */}
+        <i className="pl-5">{moment(vacancie.createdAt).fromNow()} </i>
         </span>
-          </a>  
+        <span className=" float-right mr-1 w-1/12 pt-3 "><i>{views} V</i></span>
          </div>
         </div>
        </div>
@@ -307,7 +345,6 @@ return(
                             <h3 class="border-t mb-2 pt-3 font-semibold underline">
                               phone: <span class="font-thin">{orgs?.phone}</span></h3>
                               <h3 class="border-t mb-2 pt-3 font-semibold underline">Email: <span class="font-thin">{orgs?.email}</span></h3> 
-
                           </>)
                           :("")  
                       ))):("")}

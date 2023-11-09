@@ -8,6 +8,7 @@ import { addToDetail } from '../../actions/detail';
 import { HiOutlineX } from "react-icons/hi";
 import { dataProducts } from '../data';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 const Bidding = () =>{
     const [data, setData] =useState(dataProducts || '');
   const dispatch = useDispatch();
@@ -158,7 +159,7 @@ const Bidding = () =>{
                <button 
              onClick={() => orgHandler(`${orgs.id}`)}
              >
-             <img className=' w-7 h-6 rounded-2xl' 
+             <img className=' w-7 -mt-2 h-6 rounded-2xl' 
                src={`${AddressBaseUrl}/images/${orgs?.logo}`}
                alt='Noimage'/>
              </button>)
@@ -181,7 +182,8 @@ const Bidding = () =>{
             ):(""))))
         :("")}
         <br />
-        {bidding.createdAt.split('T')[0]}
+        <i className="pl-5">{moment(bidding.createdAt).fromNow()} </i>
+        {/* <i className='pl-3'>{bidding.createdAt.split('T')[0]}</i> */}
         </span><br />
           </a>  
          </div>
